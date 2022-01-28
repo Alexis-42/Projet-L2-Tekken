@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
     fprintf(stderr, "Erreur a la creation du renderer\n");
     exit(EXIT_FAILURE);
   }
-  if ((police = TTF_OpenFont("ChowFun.ttf", 20)) == NULL) {
+  if ((police = TTF_OpenFont("/usr/share/fonts/truetype/msttcorefonts/arialbd.ttf", 20)) == NULL) {
     fprintf(stderr, "erreur chargement font\n");
     exit(EXIT_FAILURE);
   }
@@ -60,7 +60,7 @@ int main(int argc, char ** argv) {
   txtDestRect.x = txtDestRect.y = 10;
   SDL_QueryTexture(texte_tex, NULL, NULL, & (txtDestRect.w), & (txtDestRect.h));
   // load sample.png into image
-  SDL_RWops * rwop = SDL_RWFromFile("affiche2018.png", "rb");
+  SDL_RWops * rwop = SDL_RWFromFile("../res/ouin.png", "rb");
   image = IMG_LoadPNG_RW(rwop);
   if (!image) {
     printf("IMG_LoadPNG_RW: %s\n", IMG_GetError());
