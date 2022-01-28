@@ -1,9 +1,6 @@
 #include <stdio.h>
-
 #include <SDL2/SDL.h>
-
 #include <SDL2/SDL_ttf.h>
-
 #include <SDL2/SDL_image.h>
 
 int main(int argc, char ** argv) {
@@ -13,7 +10,8 @@ int main(int argc, char ** argv) {
   SDL_Surface * texte = NULL, * image = NULL;
   SDL_Renderer * renderer = NULL;
   SDL_Rect txtDestRect, imgDestRect;
-  // Le pointeur vers notre policeTTF_Font *police = NULL;
+  // Le pointeur vers notre police
+  TTF_Font *police = NULL;
   // Une variable de couleur noire
   SDL_Color couleurNoire = {
     0,
