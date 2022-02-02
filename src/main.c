@@ -4,20 +4,21 @@
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
 
+#define LARGEUR_ECRAN 1280
+#define HAUTEUR_ECRAN 720
 
-int main(int argc, char ** argv)
-{
+int main(int argc, char ** argv){
 bool quit = false;
 SDL_Event event;
 
 SDL_Init(SDL_INIT_VIDEO);
 IMG_Init(IMG_INIT_PNG);
 
-SDL_Window * window = SDL_CreateWindow("SDL2 Sprite Sheets",
-SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1920, 1080, 0);
+SDL_Window * window = SDL_CreateWindow("SDL2 Tekken",
+SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, LARGEUR_ECRAN, HAUTEUR_ECRAN, 0);
 SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
-SDL_Surface * image_perso = IMG_Load("test.png");
-SDL_Surface * image_stage = IMG_Load("stage2.png");
+SDL_Surface * image_perso = IMG_Load("res/sprites/test.png");
+SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
 SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
 SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image_perso);
 
@@ -25,8 +26,7 @@ SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image_perso);
 // SDL_RenderClear(renderer);
 int x_destrec = 250;
 int y_destrec = 575;
-while (!quit)
-{
+while (!quit){
 Uint32 ticks = SDL_GetTicks();
 Uint32 seconds = ticks / 250;
 Uint32 sprite = seconds % 4;
@@ -37,14 +37,12 @@ SDL_Rect dstrect = { x_destrec, y_destrec, 204, 336 };
 
 // SDL_WaitEvent(&event);
 SDL_PollEvent(&event);
-switch (event.type)
-{
+switch (event.type){
 case SDL_QUIT:
 quit = true;
 break;
 case SDL_KEYDOWN:
-switch(event.key.keysym.sym)
-{
+switch(event.key.keysym.sym){
 case SDLK_q:
 x_destrec-=10;
 break;
