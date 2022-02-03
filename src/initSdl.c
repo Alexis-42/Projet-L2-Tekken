@@ -7,17 +7,28 @@
 #include "../include/deplacements.h"
 #include "../include/main.h"
 
+#define MODE BORDERLESS
+
 bool quit;
 int x_destrec, y_destrec;
 
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
-
+  SDL_Window * window;
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
 
-  SDL_Window * window = SDL_CreateWindow("SDL2 Tekken",
-    SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
+  switch(MODE){
+    case FULLSCREEN: window = SDL_CreateWindow("SDL2 Tekken",
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
+    break;
+    case BORDERLESS: window = SDL_CreateWindow("SDL2 Tekken",
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_BORDERLESS);
+    break;
+    default: window = SDL_CreateWindow("SDL2 Tekken",
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
+  }
+
   SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
   SDL_Surface * image_perso = IMG_Load("res/sprites/test.png");
   SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");

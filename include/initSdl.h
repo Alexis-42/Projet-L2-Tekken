@@ -1,4 +1,11 @@
+#ifndef INITSDL_H
+#define INITSDL_H
+
 #include <stdbool.h>
+
+#define FENETRE 0
+#define FULLSCREEN 1
+#define BORDERLESS 2
 
 void initSdl();
 
@@ -10,3 +17,4 @@ extern SDL_Surface * image_stage;
 extern SDL_Texture * texture_stage;
 extern SDL_Texture * texture;
 
+#endif
