@@ -5,13 +5,13 @@
 #include "../include/initSdl.h"
 #include "../include/deplacements.h"
 
-int main(int argc, char ** argv){
+int main(int argc, char ** argv) {
 
-initSdl();
+  initSdl();
 
-return 0;
+  return 0;
 }
 
-void actions(){ //Sert à initialiser toutes les actions possibles
-deplacementsInit();
+void actions() { //Sert à initialiser toutes les actions possibles
+  deplacementsInit();
 }
