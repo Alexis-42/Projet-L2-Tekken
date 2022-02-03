@@ -15,18 +15,21 @@ int x_destrec, y_destrec;
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Window * window;
+  SDL_DisplayMode ecran;
+
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
+  SDL_GetDesktopDisplayMode(0, &ecran);
 
   switch(MODE){
     case FULLSCREEN: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS); ///////////////////////////////////////////////////////////////
     break;
     case BORDERLESS: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_BORDERLESS);
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
     break;
     default: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
 
   SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
