@@ -9,7 +9,7 @@ INCS=-I${SDL_INC_DIR}
 PROG=jeu
 
 all: main.o initSdl.o deplacements.o
-	${CC} bin/main.o bin/initSdl.o bin/deplacements.o ${LIBS} ${INCS} ${FLAGS} -o bin/${PROG}
+	${CC} bin/main.o bin/initSdl.o bin/deplacements.o ${LIBS} ${INCS} ${FLAGS} -o ${PROG}
 main.o: src/main.c include/initSdl.h include/deplacements.h
 	${CC} -c src/main.c ${LIBS} ${INCS} ${FLAGS} -o bin/main.o
 initSdl.o: src/initSdl.c include/initSdl.h include/deplacements.h include/main.h
@@ -18,5 +18,5 @@ deplacements.o: src/deplacements.c include/initSdl.h include/deplacements.h
 	${CC} -c src/deplacements.c ${LIBS} ${INCS} ${FLAGS} -o bin/deplacements.o
 
 clean:
-	rm -f bin/${PROG}
+	rm -f ${PROG}
 	rm -f bin/*.o
