@@ -7,20 +7,20 @@
 #include "../include/deplacements.h"
 #include "../include/main.h"
 
-#define LARGEUR_ECRAN 1280
-#define HAUTEUR_ECRAN 720
-
 bool quit;
 int x_destrec, y_destrec;
 
-void initSdl(){ //Créé la fenêtre et l'environnement (pour l'instant)
+void initSdl(){ //Créer la fenêtre et l'environnement (pour l'instant)
 quit = false;
+
+largeur_ecran = SDL_GetVideoInfo()->current_w;
+hauteur_ecran = SDL_GetVideoInfo()->current_h;
 
 SDL_Init(SDL_INIT_VIDEO);
 IMG_Init(IMG_INIT_PNG);
 
 SDL_Window * window = SDL_CreateWindow("SDL2 Tekken",
-SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, LARGEUR_ECRAN, HAUTEUR_ECRAN, 0);
+SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, largeur_ecran, hauteur_ecran, 0);
 SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
 SDL_Surface * image_perso = IMG_Load("../res/sprites/test.png");
 SDL_Surface * image_stage = IMG_Load("../res/backgrounds/stage2.png");
@@ -39,7 +39,7 @@ Uint32 sprite = seconds % 4;
 SDL_Rect srcrect = { sprite * 68, 0, 68, 112 };
 SDL_Rect dstrect = { x_destrec, y_destrec, 204, 336 };
 
-actions();//Appeller la fonction dans le main pour que les actions s'actualisent
+actions();//Appelle la fonction dans le main pour que les actions s'actualisent
 
 SDL_RenderClear(renderer);
 SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
