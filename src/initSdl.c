@@ -19,8 +19,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Window * window = SDL_CreateWindow("SDL2 Tekken",
     SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
   SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
-  SDL_Surface * image_perso = IMG_Load("../res/sprites/test.png");
-  SDL_Surface * image_stage = IMG_Load("../res/backgrounds/stage2.png");
+  SDL_Surface * image_perso = IMG_Load("res/sprites/test.png");
+  SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
   SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
   SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image_perso);
 
