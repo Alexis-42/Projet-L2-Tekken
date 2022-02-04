@@ -6,18 +6,14 @@
 #include "../include/initSdl.h"
 #include "../include/deplacements.h"
 
-void menu_principal(){
-  SDL_Surface *texte=NULL , *image=NULL;
-  SDL_Rect txtDestRect ,imgDestRect;
+void ajouterTexte(char * txt, SDL_Color couleur, char * cheminPolice, int taillePolice, int posX, int posY, SDL_Renderer * renderer){
+  SDL_Surface *texte=NULL;
+  SDL_Rect txtDestRect;
   // Le pointeur vers notre police
+  TTF_Init();
   TTF_Font *police = NULL;
-  // Une variable de couleur noire
-  SDL_Color couleurNoire = {0, 0, 0};
-
-}
-
-void ajouterTexte(string txt, SDL_Color couleur, string police, int taillePolice, int posX, int posY, SDL_Renderer renderer){
-  if( (police = TTF_OpenFont(police, taillePolice)) == NULL){
+  
+  if((police = TTF_OpenFont(cheminPolice, taillePolice)) == NULL){
     fprintf(stderr , "erreur chargement font\n");
     exit(EXIT_FAILURE );
   }
@@ -35,4 +31,10 @@ void ajouterTexte(string txt, SDL_Color couleur, string police, int taillePolice
   SDL_FreeSurface(texte ); /* on a la texture , plus besoin du texte */
   /* Position ou sera mis le texte dans la fenetre */txtDestRect.x = txtDestRect.y = 10;
   SDL_QueryTexture(texte_tex , NULL , NULL , &( txtDestRect.w), &( txtDestRect.h));
+}
+
+void menu_principal(SDL_Renderer * renderer){
+  // Une variable de couleur noire
+  SDL_Color couleurNoire = {0, 0, 0};
+  ajouterTexte("test", couleurNoire, "res/fonts/WRESTLEMANIA.ttf", 20, 10, 10, renderer);
 }
