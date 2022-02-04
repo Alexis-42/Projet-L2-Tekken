@@ -6,6 +6,7 @@
 #include "../include/initSdl.h"
 #include "../include/deplacements.h"
 #include "../include/main.h"
+#include "../include/menu_principal.h"
 
 #define MODE BORDERLESS
 
@@ -37,7 +38,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
   SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
   SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image_perso);
-
+  menu_principal(renderer);
   // SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
   // SDL_RenderClear(renderer);
   x_destrec = 250;
