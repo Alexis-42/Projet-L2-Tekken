@@ -6,35 +6,29 @@
 #include "../include/initSdl.h"
 #include "../include/deplacements.h"
 
-void ajouterTexte(char * txt, SDL_Color couleur, char * cheminPolice, int taillePolice, int posX, int posY, SDL_Renderer * renderer){
-  SDL_Surface *texte=NULL;
-  SDL_Rect txtDestRect;
-  // Le pointeur vers notre police
-  TTF_Init();
-  TTF_Font *police = NULL;
-  
-  if((police = TTF_OpenFont(cheminPolice, taillePolice)) == NULL){
-    fprintf(stderr , "erreur chargement font\n");
-    exit(EXIT_FAILURE );
-  }
-  texte = TTF_RenderUTF8_Blended(police , txt, couleur);
-  if(!texte){
-    fprintf(stderr , "Erreur a la creation du texte : %s\n", SDL_GetError ());
-    exit(EXIT_FAILURE );
-  }
-  SDL_SetRenderDrawColor(renderer , 0, 0, 0, 255);
-  SDL_Texture *texte_tex = SDL_CreateTextureFromSurface(renderer , texte);
-  if(! texte_tex ){
-    fprintf(stderr , "Erreur a la creation du rendu du texte : %s\n", SDL_GetError ());
-    exit(EXIT_FAILURE );
-  }
-  SDL_FreeSurface(texte ); /* on a la texture , plus besoin du texte */
-  /* Position ou sera mis le texte dans la fenetre */txtDestRect.x = txtDestRect.y = 10;
-  SDL_QueryTexture(texte_tex , NULL , NULL , &( txtDestRect.w), &( txtDestRect.h));
+void ajouterTexte(SDL_Renderer *renderer, int x, int y, char *text, char * cheminPolice, int taille, SDL_Texture **texture, SDL_Rect *rect) {
+    int text_width;
+    int text_height;
+    SDL_Surface *surface;
+    SDL_Color textColor = {255, 255, 255, 0};
+
+    TTF_Font *font = TTF_OpenFont(cheminPolice, taille);
+    if (font == NULL) {
+          fprintf(stderr, "error: font not found\n");
+          exit(EXIT_FAILURE);
+    }
+
+    surface = TTF_RenderText_Solid(font, text, textColor);
+    *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    text_width = surface->w;
+    text_height = surface->h;
+    SDL_FreeSurface(surface);
+    rect->x = x;
+    rect->y = y;
+    rect->w = text_width;
+    rect->h = text_height;
 }
 
-void menu_principal(SDL_Renderer * renderer){
-  // Une variable de couleur noire
-  SDL_Color couleurNoire = {0, 0, 0};
-  ajouterTexte("test", couleurNoire, "res/fonts/WRESTLEMANIA.ttf", 20, 10, 10, renderer);
+void menu_principal(SDL_Renderer * renderer, SDL_DisplayMode * ecran, SDL_Texture ** texture, SDL_Rect * rect){
+  ajouterTexte(renderer, ecran->w/2, ecran->h/2, "Jouer", "res/fonts/WRESTLEMANIA.ttf", 24, texture, rect);
 }
