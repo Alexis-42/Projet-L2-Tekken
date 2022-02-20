@@ -6,6 +6,10 @@
 #include "../include/deplacements.h"
 #include "../include/initSdl.h"
 
+void sauter(){
+
+}
+
 void deplacementsInit() {
 
   SDL_Event event;
@@ -23,6 +27,9 @@ void deplacementsInit() {
       break;
     case SDLK_d:
       x_destrec += 10;
+      break;
+    case SDLK_z:
+      sauter();
       break;
     }
 

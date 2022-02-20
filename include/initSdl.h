@@ -2,6 +2,7 @@
 #define INITSDL_H
 
 #include <stdbool.h>
+#include <SDL2/SDL.h>
 
 #define FENETRE 0
 #define FULLSCREEN 1
@@ -10,11 +11,5 @@
 void initSdl();
 
 extern bool quit;
-extern SDL_Window * window;
-extern SDL_Renderer * renderer;
-extern SDL_Surface * image_perso;
-extern SDL_Surface * image_stage;
-extern SDL_Texture * texture_stage;
-extern SDL_Texture * texture;
 
 #endif
