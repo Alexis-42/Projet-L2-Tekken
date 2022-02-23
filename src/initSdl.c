@@ -9,16 +9,15 @@
 #include "../include/menu_principal.h"
 #include "../include/joueur.h"
 #include "../include/animations.h"
+#include "../include/jeu.h"
 
 #define MODE BORDERLESS
 
 bool quit;
-int x_destrec, y_destrec;
+SDL_DisplayMode ecran;
 
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
-  SDL_Window * window;
-  SDL_DisplayMode ecran;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Rect rect1;
   SDL_Init(SDL_INIT_VIDEO);
@@ -35,39 +34,43 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     default: window = SDL_CreateWindow("SDL2 Tekken",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
+  renderer = SDL_CreateRenderer(window, -1, 0);
+  SDL_Surface * perso1 = IMG_Load("res/sprites/Pingu.png");
+  SDL_Surface * perso2 = IMG_Load("res/sprites/Shrek.png");
 
-  SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
-  SDL_Surface * image_perso = IMG_Load("res/sprites/Pingu.png");
   SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
   SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
-  SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image_perso);
+
+  SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
+  SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
 
   // SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
   // SDL_RenderClear(renderer);
-  x_destrec = 128;
-  y_destrec = 680;
 
   TTF_Init();
   menu_principal(renderer, &ecran, &tex_menu_Principal, &rect1);
-  Joueur j;
-  initJoueur(&j);
+  Joueur j1, j2;
+  initJoueur(&j1, 128, texture_joueur1);
+  initJoueur(&j2, 680, texture_joueur2);
+  resetAnimation(&j1); //Spawn du joueur
+  resetAnimation(&j2);
 
   while (!quit) {
-    actions(); //Appelle la fonction dans le main pour que les actions s'actualisent
-    jouerAnimation(COURIR, &j);
-
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
     SDL_RenderCopy(renderer, tex_menu_Principal, NULL, &rect1);
-    SDL_RenderCopy(renderer, texture, j.srcrect, j.dstrect);
+    renderAnimation(&j1);
+    renderAnimation(&j2);
     SDL_RenderPresent(renderer);
+    deplacements(&j1);
   }
-
   SDL_DestroyTexture(texture_stage);
   SDL_DestroyTexture(tex_menu_Principal);
-  SDL_DestroyTexture(texture);
-  SDL_FreeSurface(image_perso);
+  SDL_DestroyTexture(texture_joueur1);
+  SDL_DestroyTexture(texture_joueur2);
+  SDL_FreeSurface(perso1);
+  SDL_FreeSurface(perso2);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   TTF_Quit();

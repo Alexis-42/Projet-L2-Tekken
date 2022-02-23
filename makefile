@@ -12,15 +12,15 @@ all: main.o initSdl.o deplacements.o menu_principal.o animations.o joueur.o
 	${CC} bin/main.o bin/initSdl.o bin/deplacements.o bin/menu_principal.o bin/animations.o bin/joueur.o ${LIBS} ${INCS} ${FLAGS} -o ${PROG}
 main.o: src/main.c include/initSdl.h include/deplacements.h
 	${CC} -c src/main.c ${LIBS} ${INCS} ${FLAGS} -o bin/main.o
-initSdl.o: src/initSdl.c include/initSdl.h include/deplacements.h include/main.h include/menu_principal.h include/joueur.h include/animations.h
+initSdl.o: src/initSdl.c include/initSdl.h include/deplacements.h include/main.h include/menu_principal.h include/joueur.h include/animations.h include/jeu.h
 	${CC} -c src/initSdl.c ${LIBS} ${INCS} ${FLAGS} -o bin/initSdl.o
-deplacements.o: src/deplacements.c include/initSdl.h include/deplacements.h
+deplacements.o: src/deplacements.c include/initSdl.h include/deplacements.h include/joueur.h include/animations.h include/jeu.h
 	${CC} -c src/deplacements.c ${LIBS} ${INCS} ${FLAGS} -o bin/deplacements.o
 menu_principal.o: src/menu_principal.c include/initSdl.h include/deplacements.h
 	${CC} -c src/menu_principal.c ${LIBS} ${INCS} ${FLAGS} -o bin/menu_principal.o
-animations.o: src/animations.c include/animations.h include/joueur.h
+animations.o: src/animations.c include/animations.h include/joueur.h include/jeu.h
 	${CC} -c src/animations.c ${LIBS} ${INCS} ${FLAGS} -o bin/animations.o
-joueur.o: src/joueur.c include/joueur.h
+joueur.o: src/joueur.c include/joueur.h include/jeu.h
 	${CC} -c src/joueur.c ${LIBS} ${INCS} ${FLAGS} -o bin/joueur.o
 test: test.o
 	${CC} bin/test.o ${LIBS} ${INCS} ${FLAGS} -o test1

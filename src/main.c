@@ -9,7 +9,3 @@ int main(int argc, char ** argv) {
   initSdl();
   return 0;
 }
-
-void actions() { //Sert à initialiser toutes les actions possibles
-  deplacementsInit();
-}
