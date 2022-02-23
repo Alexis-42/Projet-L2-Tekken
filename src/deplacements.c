@@ -5,17 +5,20 @@
 #include <stdbool.h>
 #include "../include/deplacements.h"
 #include "../include/initSdl.h"
+#include "../include/joueur.h"
+#include "../include/animations.h"
+#include "../include/jeu.h"
 
-void sauter(){
+#define VITESSE 10
+
+void sauter(Joueur * joueur){
 
 }
 
-void deplacementsInit() {
-
+void deplacements(Joueur * joueur) {
   SDL_Event event;
+  SDL_PollEvent(&event);
 
-  // SDL_WaitEvent(&event);
-  SDL_PollEvent( & event);
   switch (event.type) {
   case SDL_QUIT:
     quit = true;
@@ -23,15 +26,34 @@ void deplacementsInit() {
   case SDL_KEYDOWN:
     switch (event.key.keysym.sym) {
     case SDLK_q:
-      x_destrec -= 10;
+      joueur->posX -= VITESSE;
+      jouerAnimation(COURIR, joueur);
       break;
     case SDLK_d:
-      x_destrec += 10;
+      joueur->posX += VITESSE;
+      jouerAnimation(COURIR, joueur);
       break;
     case SDLK_z:
-      sauter();
+      sauter(joueur);
+      break;
+    case SDLK_SPACE:
+      jouerAnimation(PARER, joueur);
       break;
     }
-
+  /*case SDL_KEYUP:
+    switch (event.key.keysym.sym) {
+      case SDLK_q:
+        resetAnimation(joueur);
+        break;
+      case SDLK_d:
+        resetAnimation(joueur);
+        break;
+      case SDLK_z:
+        sauter(joueur);
+        break;
+      case SDLK_SPACE:
+        resetAnimation(joueur);
+        break;
+    }*/
   }
 }

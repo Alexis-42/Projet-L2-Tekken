@@ -4,11 +4,13 @@
 #include <SDL2/SDL.h>
 
 typedef struct {
+  int posX, posY;
   int vie;
   char * nom;
-  SDL_Rect * srcrect;
-  SDL_Rect * dstrect;
+  SDL_Texture * texture;
+  SDL_Rect srcrect;
+  SDL_Rect dstrect;
 } Joueur;
 
-void initJoueur(Joueur * joueur);
+void initJoueur(Joueur * joueur, int posX, SDL_Texture * texture);
 #endif

@@ -1,4 +1,3 @@
-void deplacementsInit();
+#include "../include/joueur.h"
 
-extern int x_destrec;
-extern int y_destrec;
+void deplacements(Joueur * joueur);
