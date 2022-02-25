@@ -1,6 +1,11 @@
-***Charly***
-Ameliorrer le fonctionnement des animations
-Déplacements
+***Charly.P***
+- Ameliorrer le fonctionnement des animations
+- Déplacements
 
 ***Alexis.G***
-Initiation à socket et mise en place d'une communication serveur / client
+- Initiation à socket et créer client.c / serveur.c 
+- Créer un code pour jouer du son
+
+***Léo.N***
+- Animations ( taille & emplacement des persos )
+- Menu principal
