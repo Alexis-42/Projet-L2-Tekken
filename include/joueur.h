@@ -6,6 +6,7 @@
 typedef struct {
   int posX, posY;
   int vie;
+  int action;
   char * nom;
   SDL_Texture * texture;
   SDL_Rect srcrect;
