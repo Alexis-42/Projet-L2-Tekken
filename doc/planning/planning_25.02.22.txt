@@ -1,2 +1,6 @@
+***Charly***
+Ameliorrer le fonctionnement des animations
+Déplacements
 
-Alexis.G : Initiation à socket et mise en place d'une communication serveur / client
+***Alexis.G***
+Initiation à socket et mise en place d'une communication serveur / client
