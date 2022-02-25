@@ -35,7 +35,7 @@ void inverserDirection(Joueur * joueur){
 
 }
 
-void jouerAnimation(Joueur * joueur, Uint32 seconds){
+void jouerAnimation(Joueur * joueur, Uint32 seconds){ //Pour freezer l'anim il faut anuller le getTick
   int posYSprite, nbFrames;
 
   switch (joueur->action) {
@@ -49,23 +49,24 @@ void jouerAnimation(Joueur * joueur, Uint32 seconds){
                 posYSprite=1280;
     break;
     case IDLE: nbFrames=1;
-    		       posYSprite=0;
+    		posYSprite=0;
   }
-Uint32 sprite = seconds % nbFrames;
+  
+  Uint32 sprite = seconds % nbFrames;
   SDL_Rect srcrect = {
     sprite * 540, //Pas
     posYSprite,
     520,
     640
   };
-  
+
   SDL_Rect dstrect = {
     joueur->posX,
     joueur->posY,
     TAILLE_X_JOUEUR,
     TAILLE_Y_JOUEUR
   };
-  
+
    joueur->srcrect=srcrect;
    joueur->dstrect=dstrect;
 }
