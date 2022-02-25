@@ -1,1 +1,2 @@
 
+Alexis.G : Initiation à socket et mise en place d'une communication serveur / client
