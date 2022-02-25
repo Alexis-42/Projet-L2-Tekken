@@ -56,10 +56,14 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   resetAnimation(&j2);
 
   while (!quit) {
+  Uint32 ticks = SDL_GetTicks();
+  Uint32 seconds = ticks / 30; //Fréquence (toutes les 30ms)
+
     SDL_RenderClear(renderer);
     deplacements(&j1);
     //SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
   //  SDL_RenderCopy(renderer, tex_menu_Principal, NULL, &rect1);
+    jouerAnimation(&j1, seconds);
     renderAnimation(&j1);
     SDL_RenderPresent(renderer);
   }

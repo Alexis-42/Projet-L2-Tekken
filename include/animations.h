@@ -8,4 +8,4 @@
 
 void renderAnimation(Joueur * joueur);
 void resetAnimation(Joueur * joueur);
-void jouerAnimation(int anim, Joueur * joueur);
+void jouerAnimation(Joueur * joueur, Uint32 seconds);

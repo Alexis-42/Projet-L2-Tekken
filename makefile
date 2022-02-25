@@ -20,7 +20,7 @@ menu_principal.o: src/menu_principal.c include/initSdl.h include/deplacements.h
 	${CC} -c src/menu_principal.c ${LIBS} ${INCS} ${FLAGS} -o bin/menu_principal.o
 animations.o: src/animations.c include/animations.h include/joueur.h include/jeu.h
 	${CC} -c src/animations.c ${LIBS} ${INCS} ${FLAGS} -o bin/animations.o
-joueur.o: src/joueur.c include/joueur.h include/jeu.h
+joueur.o: src/joueur.c include/joueur.h include/jeu.h include/animations.h
 	${CC} -c src/joueur.c ${LIBS} ${INCS} ${FLAGS} -o bin/joueur.o
 test: test.o
 	${CC} bin/test.o ${LIBS} ${INCS} ${FLAGS} -o test1

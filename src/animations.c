@@ -35,10 +35,10 @@ void inverserDirection(Joueur * joueur){
 
 }
 
-void jouerAnimation(int anim, Joueur * joueur){
+void jouerAnimation(Joueur * joueur, Uint32 seconds){
   int posYSprite, nbFrames;
-  int i;
-  switch (anim) {
+
+  switch (joueur->action) {
     case COURIR: nbFrames=15; //Nombre de frames
                  posYSprite=0;
     break;
@@ -51,26 +51,21 @@ void jouerAnimation(int anim, Joueur * joueur){
     case IDLE: nbFrames=1;
     		       posYSprite=0;
   }
-
-  for(i=0; i<nbFrames; i++){
-  Uint32 ticks = SDL_GetTicks();
-  Uint32 seconds = ticks / 30; //Fréquence (toutes les 30ms)
-  Uint32 sprite = seconds % nbFrames;;
-
+Uint32 sprite = seconds % nbFrames;
   SDL_Rect srcrect = {
-    i * 540, //Pas
+    sprite * 540, //Pas
     posYSprite,
     520,
     640
   };
+  
   SDL_Rect dstrect = {
     joueur->posX,
     joueur->posY,
     TAILLE_X_JOUEUR,
     TAILLE_Y_JOUEUR
   };
-
-    joueur->srcrect=srcrect;
-    joueur->dstrect=dstrect;
-  }
+  
+   joueur->srcrect=srcrect;
+   joueur->dstrect=dstrect;
 }
