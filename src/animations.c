@@ -29,30 +29,36 @@ void resetAnimation(Joueur * joueur){
   };
   joueur->srcrect=srcrect;
   joueur->dstrect=dstrect;
-  renderAnimation(joueur);
+}
+
+void inverserDirection(Joueur * joueur){
+
 }
 
 void jouerAnimation(int anim, Joueur * joueur){
-  Uint32 ticks = SDL_GetTicks();
-  Uint32 seconds = ticks / 30; //Fréquence (toutes les 60ms)
-  Uint32 sprite;
   int posYSprite, nbFrames;
   int i;
-
   switch (anim) {
     case COURIR: nbFrames=15; //Nombre de frames
                  posYSprite=0;
     break;
     case PARER: nbFrames=3; //Nombre de frames
-                posYSprite=680;
+                posYSprite=640;
     break;
     case POING: nbFrames=14; //Nombre de frames
                 posYSprite=1280;
     break;
+    case IDLE: nbFrames=1;
+    		       posYSprite=0;
   }
-  sprite = seconds % nbFrames;
+
+  for(i=0; i<nbFrames; i++){
+  Uint32 ticks = SDL_GetTicks();
+  Uint32 seconds = ticks / 30; //Fréquence (toutes les 30ms)
+  Uint32 sprite = seconds % nbFrames;;
+
   SDL_Rect srcrect = {
-    sprite * 540, //Pas
+    i * 540, //Pas
     posYSprite,
     520,
     640
@@ -64,9 +70,7 @@ void jouerAnimation(int anim, Joueur * joueur){
     TAILLE_Y_JOUEUR
   };
 
-  for(i=0; i<nbFrames; i++){
     joueur->srcrect=srcrect;
     joueur->dstrect=dstrect;
-    renderAnimation(joueur);
   }
 }

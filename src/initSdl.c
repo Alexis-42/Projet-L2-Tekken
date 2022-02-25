@@ -56,15 +56,14 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   resetAnimation(&j2);
 
   while (!quit) {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
-    SDL_RenderCopy(renderer, tex_menu_Principal, NULL, &rect1);
-    renderAnimation(&j1);
-    renderAnimation(&j2);
-    SDL_RenderPresent(renderer);
     deplacements(&j1);
+    //SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
+  //  SDL_RenderCopy(renderer, tex_menu_Principal, NULL, &rect1);
+    renderAnimation(&j1);
+    SDL_RenderPresent(renderer);
   }
+
   SDL_DestroyTexture(texture_stage);
   SDL_DestroyTexture(tex_menu_Principal);
   SDL_DestroyTexture(texture_joueur1);
