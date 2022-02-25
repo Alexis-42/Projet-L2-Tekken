@@ -1,8 +1,10 @@
 #include "../include/joueur.h"
 
-#define COURIR 0
-#define POING 1
-#define PARER 2
+#define IDLE 0
+#define COURIR 1
+#define POING 2
+#define PARER 3
+
 
 void renderAnimation(Joueur * joueur);
 void resetAnimation(Joueur * joueur);
