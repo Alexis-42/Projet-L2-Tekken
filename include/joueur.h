@@ -3,10 +3,13 @@
 #define COMPLEX_H_INCLUDED__
 #include <SDL2/SDL.h>
 
+typedef enum {droite, gauche} Direction;
+
 typedef struct {
   int posX, posY;
   int vie;
   int action;
+  Direction direction;
   char * nom;
   SDL_Texture * texture;
   SDL_Rect srcrect;
@@ -21,5 +24,5 @@ struct personnage {
     int taille_x;
 };
 
-void initJoueur(Joueur * joueur, int posX, SDL_Texture * texture);
+void initJoueur(Joueur * joueur, int posX, SDL_Texture * texture, Direction direction);
 #endif

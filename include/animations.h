@@ -5,7 +5,6 @@
 #define POING 2
 #define PARER 3
 
-
-void renderAnimation(Joueur * joueur);
+void renderAnimation(Joueur * joueur, SDL_RendererFlip flip);
 void resetAnimation(Joueur * joueur);
-void jouerAnimation(Joueur * joueur, Uint32 seconds);
+void jouerAnimation(Joueur * joueur, int anim);
