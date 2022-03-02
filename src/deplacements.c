@@ -38,10 +38,10 @@ void deplacements(Joueur * joueur) {
   case SDL_MOUSEBUTTONUP:
   switch (event.button.button) {
     case SDL_BUTTON_RIGHT:
-      resetAnimation(joueur);
+      jouerAnimation(joueur, IDLE);
       break;
     case SDL_BUTTON_LEFT:
-      resetAnimation(joueur);
+      jouerAnimation(joueur, IDLE);
       break;
     }
     break;
@@ -49,12 +49,14 @@ void deplacements(Joueur * joueur) {
   case SDL_KEYDOWN:
     switch (event.key.keysym.sym) {
     case SDLK_q:
-      joueur->posX -= VITESSE;
-      joueur->action=COURIR;
+      if(joueur->posX>0)
+        joueur->posX -= VITESSE;
+      jouerAnimation(joueur, COURIR);
       break;
     case SDLK_d:
-      joueur->posX += VITESSE;
-      joueur->action=COURIR;
+      if(joueur->posX<ecran.w-408)
+        joueur->posX += VITESSE;
+      jouerAnimation(joueur, COURIR);
       break;
     case SDLK_SPACE:
       sauter(joueur);
@@ -65,16 +67,16 @@ void deplacements(Joueur * joueur) {
   case SDL_KEYUP:
     switch (event.key.keysym.sym) {
       case SDLK_q:
-      joueur->action=IDLE;
+      jouerAnimation(joueur, IDLE);
         break;
       case SDLK_d:
-      joueur->action=IDLE;
+      jouerAnimation(joueur, IDLE);
         break;
       case SDLK_z:
-      joueur->action=IDLE;
+      jouerAnimation(joueur, IDLE);
         break;
       case SDLK_SPACE:
-      joueur->action=IDLE;
+      jouerAnimation(joueur, IDLE);
         break;
     }
     break;

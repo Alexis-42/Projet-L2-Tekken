@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -10,8 +11,8 @@
 #define TAILLE_X_JOUEUR 408
 #define TAILLE_Y_JOUEUR 672
 
-void renderAnimation(Joueur * joueur){
-  SDL_RenderCopy(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect));
+void renderAnimation(Joueur * joueur, SDL_RendererFlip flip){
+  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect), 0, NULL, flip);
 }
 
 void resetAnimation(Joueur * joueur){
@@ -35,10 +36,12 @@ void inverserDirection(Joueur * joueur){
 
 }
 
-void jouerAnimation(Joueur * joueur, Uint32 seconds){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimation(Joueur * joueur, int anim){ //Pour freezer l'anim il faut anuller le getTick
   int posYSprite, nbFrames;
+  Uint32 ticks = SDL_GetTicks();
+  Uint32 seconds = ticks / 30; //Fréquence (toutes les 30ms)
 
-  switch (joueur->action) {
+  switch (anim) {
     case COURIR: nbFrames=15; //Nombre de frames
                  posYSprite=0;
     break;
@@ -51,9 +54,10 @@ void jouerAnimation(Joueur * joueur, Uint32 seconds){ //Pour freezer l'anim il f
     case IDLE: nbFrames=1;
     		posYSprite=0;
   }
-  
-  Uint32 sprite = seconds % nbFrames;
-  SDL_Rect srcrect = {
+
+    Uint32 sprite = seconds % nbFrames;
+
+    SDL_Rect srcrect = {
     sprite * 540, //Pas
     posYSprite,
     520,
