@@ -49,16 +49,18 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   TTF_Init();
   menu_principal(renderer, &ecran, &tex_menu_Principal, &rect1);
-  Joueur j1, j2;
   
+  
+  Joueur j1, j2;
   initJoueur(&j1, 128, texture_joueur1, droite);
   initJoueur(&j2, 680, texture_joueur2, gauche);
-  
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
 
   while (!quit) {
     deplacements(&j1);
+    checkCollisions(rect1, rect2);
+    
     j1.direction=j1.posX<j2.posX;
     j2.direction=j2.posX<j1.posX;
 

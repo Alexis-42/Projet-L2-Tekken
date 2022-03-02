@@ -6,6 +6,13 @@
 #include "../include/jeu.h"
 #include "../include/animations.h"
 
+void checkCollisions(){
+	SDL_Rect * res;
+	SDL_bool SDL_IntersectRect(j1->dstrect, j2->dstrect, res);
+	if(res==SDL_TRUE)
+		printf("Ouin");
+}
+
 void initJoueur(Joueur * joueur, int posX, SDL_Texture * texture, Direction direction){
   joueur->vie=100;
   joueur->nom="test";
