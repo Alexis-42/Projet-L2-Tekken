@@ -13,5 +13,13 @@ typedef struct {
   SDL_Rect dstrect;
 } Joueur;
 
+/* struc qui permet de fair le menu de selection des persos */
+struct personnage {
+    char * nom;
+    char * sprite;
+    int taille_y;
+    int taille_x;
+};
+
 void initJoueur(Joueur * joueur, int posX, SDL_Texture * texture);
 #endif
