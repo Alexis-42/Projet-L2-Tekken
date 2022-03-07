@@ -8,6 +8,7 @@
 #include "../include/joueur.h"
 #include "../include/animations.h"
 #include "../include/jeu.h"
+#include "../include/son.h"
 
 #define VITESSE 10
 
@@ -22,6 +23,7 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	if(checkCollisions(jAttaquant, j2)){
 		j2->action=PARER;
 		j2->vie-=50;
+		test_son();
 	}
 }
 
