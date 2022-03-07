@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <inttypes.h>
 #include <string.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -8,23 +7,20 @@
 #include "../include/joueur.h"
 #include "../include/jeu.h"
 
-#define TAILLE_X_JOUEUR 408
-#define TAILLE_Y_JOUEUR 672
-
-void renderAnimation(Joueur * joueur, SDL_RendererFlip flip){
-  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect), 0, NULL, flip);
+void renderAnimation(Joueur * joueur){
+  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect), 0, NULL, joueur->direction);
 }
 
 void resetAnimation(Joueur * joueur){
   SDL_Rect srcrect = {
     0, //Pas
     0,
-    520,
-    640
+    TAILLE_X_JOUEUR,
+    TAILLE_Y_JOUEUR
   };
   SDL_Rect dstrect = {
-    joueur->posX,
-    joueur->posY,
+    joueur->position.x,
+    joueur->position.y,
     TAILLE_X_JOUEUR,
     TAILLE_Y_JOUEUR
   };
@@ -32,14 +28,9 @@ void resetAnimation(Joueur * joueur){
   joueur->dstrect=dstrect;
 }
 
-void inverserDirection(Joueur * joueur){
-
-}
-
-void jouerAnimation(Joueur * joueur, int anim){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le getTick
   int posYSprite, nbFrames;
-  Uint32 ticks = SDL_GetTicks();
-  Uint32 seconds = ticks / 30; //Fréquence (toutes les 30ms)
+  int anim=joueur->action;
 
   switch (anim) {
     case COURIR: nbFrames=15; //Nombre de frames
@@ -49,28 +40,35 @@ void jouerAnimation(Joueur * joueur, int anim){ //Pour freezer l'anim il faut an
                 posYSprite=640;
     break;
     case POING: nbFrames=14; //Nombre de frames
-                posYSprite=1280;
+                posYSprite=1310;
     break;
     case IDLE: nbFrames=1;
     		posYSprite=0;
   }
-
+    Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
     Uint32 sprite = seconds % nbFrames;
+    //printf("**** sprite = %d ****\n", sprite);
+    
+  if(sprite<nbFrames){
 
     SDL_Rect srcrect = {
     sprite * 540, //Pas
     posYSprite,
-    520,
-    640
+    TAILLE_X_JOUEUR,
+    TAILLE_Y_JOUEUR
   };
 
   SDL_Rect dstrect = {
-    joueur->posX,
-    joueur->posY,
+    joueur->position.x,
+    joueur->position.y,
     TAILLE_X_JOUEUR,
     TAILLE_Y_JOUEUR
   };
 
    joueur->srcrect=srcrect;
    joueur->dstrect=dstrect;
+   } else {
+   	joueur->action=IDLE;
+   }
+   //printf("---------------\n");
 }

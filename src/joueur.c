@@ -1,23 +1,49 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "../include/joueur.h"
 #include "../include/jeu.h"
 #include "../include/animations.h"
 
-void checkCollisions(){
-	SDL_Rect * res;
-	SDL_bool SDL_IntersectRect(j1->dstrect, j2->dstrect, res);
-	if(res==SDL_TRUE)
-		printf("Ouin");
+void direction(Joueur * j1, Joueur * j2){
+    if(j1->direction==gauche)
+    	j1->hitbox.x+=j1->hitbox.w;
+    if(j2->direction==gauche)
+    	j2->hitbox.x+=j2->hitbox.w;
+
+    j1->direction=j1->hitbox.x<j2->hitbox.x; //Direction
+    j2->direction=j1->hitbox.x>j2->hitbox.x;
 }
 
-void initJoueur(Joueur * joueur, int posX, SDL_Texture * texture, Direction direction){
+void hitbox(Joueur * joueur){
+  SDL_Rect hitbox = {
+    joueur->position.x,
+    joueur->position.y,
+    TAILLE_X_JOUEUR/2,
+    TAILLE_Y_JOUEUR/2
+  };
+  joueur->hitbox=hitbox;
+}
+
+void checkPerdu(Joueur * j1, Joueur * j2){
+	if(j1->vie==0)
+		printf("%s a gagné !", j2->nom);
+	else if(j2->vie==0)
+		printf("%s a gagné !", j1->nom);
+}
+
+bool checkCollisions(Joueur * j1, Joueur * j2){
+	SDL_bool collision = SDL_HasIntersection(&(j1->hitbox), &(j2->hitbox));
+	return collision==SDL_TRUE;
+}
+
+void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * texture, Direction direction){
   joueur->vie=100;
-  joueur->nom="test";
+  joueur->action=IDLE;
+  joueur->nom=pseudo;
   joueur->texture=texture;
   joueur->direction=direction;
-  joueur->posX=posX;
-  joueur->posY=(float) 425/900*ecran.h; //425 est la valeur qui convient quand la résolution est de 900px, il faut rester proportionel avec la taille de l'écran utilisé, possiblement foireux
+  joueur->position.x=(int)((posX/1280.0)*(float) ecran.w);
+  joueur->position.y=(int)((350.0/720.0)*(float) ecran.h);
 }

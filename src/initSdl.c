@@ -20,6 +20,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Rect rect1;
+  
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
   SDL_GetDesktopDisplayMode(0, &ecran);
@@ -44,30 +45,29 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
 
-  // SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
-  // SDL_RenderClear(renderer);
-
   TTF_Init();
   menu_principal(renderer, &ecran, &tex_menu_Principal, &rect1);
   
-  
   Joueur j1, j2;
-  initJoueur(&j1, 128, texture_joueur1, droite);
-  initJoueur(&j2, 680, texture_joueur2, gauche);
+  initJoueur(&j1, 300.0, "PINGUU", texture_joueur1, gauche);
+  initJoueur(&j2, 600.0, "Shrekleouinouin", texture_joueur2, droite);
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
+  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //Couleur des hitbox
+  j2.action=COURIR;
 
   while (!quit) {
-    deplacements(&j1);
-    checkCollisions(rect1, rect2);
+    deplacements(&j1, &j2);
+    jouerAnimation(&j1);
+    jouerAnimation(&j2);
+    checkPerdu(&j1, &j2);
     
-    j1.direction=j1.posX<j2.posX;
-    j2.direction=j2.posX<j1.posX;
-
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
-    renderAnimation(&j1, j1.direction);
-    renderAnimation(&j2, j2.direction);
+    SDL_RenderFillRect(renderer, &(j1.hitbox)); //Afficher les hitboxes
+    SDL_RenderFillRect(renderer, &(j2.hitbox));
+    renderAnimation(&j1);
+    renderAnimation(&j2);
     SDL_RenderPresent(renderer);
   }
 
