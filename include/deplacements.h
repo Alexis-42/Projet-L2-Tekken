@@ -1,3 +1,3 @@
 #include "../include/joueur.h"
 
-void deplacements(Joueur * joueur);
+void deplacements(Joueur * j1, Joueur * j2);
