@@ -16,7 +16,7 @@ void resetAnimation(Joueur * joueur){
     0, //Pas
     0,
     TAILLE_X_JOUEUR,
-    TAILLE_Y_JOUEUR
+    640
   };
   SDL_Rect dstrect = {
     joueur->position.x,
@@ -40,7 +40,7 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
                 posYSprite=640;
     break;
     case POING: nbFrames=14; //Nombre de frames
-                posYSprite=1310;
+                posYSprite=1280;
     break;
     case IDLE: nbFrames=1;
     		       posYSprite=0;

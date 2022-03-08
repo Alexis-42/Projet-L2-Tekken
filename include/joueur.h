@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 #define TAILLE_X_JOUEUR 380
-#define TAILLE_Y_JOUEUR 672
+#define TAILLE_Y_JOUEUR 640
 
 typedef enum {gauche, droite} Direction;
 
