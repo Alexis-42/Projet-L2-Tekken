@@ -1,3 +1,4 @@
+/*
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
@@ -32,3 +33,4 @@ int test_son(){
 
 	return 0;
 }
+*/

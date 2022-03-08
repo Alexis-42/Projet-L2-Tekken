@@ -23,7 +23,7 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	if(checkCollisions(jAttaquant, j2)){
 		j2->action=PARER;
 		j2->vie-=50;
-		test_son();
+		//test_son();
 	}
 }
 
@@ -33,7 +33,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
   direction(j1, j2);
   SDL_Event event;
   SDL_PollEvent(&event);
-  
+
   switch (event.type) {
   case SDL_QUIT:
     quit = true;

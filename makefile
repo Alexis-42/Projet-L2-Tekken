@@ -3,7 +3,7 @@ FLAGS=-Wall -g
 SDL_DIR=${HOME}/SDL2
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
-LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf #-lSDL2_mixer
 INCS=-I${SDL_INC_DIR}
 
 PROG=jeu
@@ -20,7 +20,7 @@ menu_principal.o: src/menu_principal.c include/initSdl.h include/deplacements.h
 	${CC} -c src/menu_principal.c ${LIBS} ${INCS} ${FLAGS} -o bin/menu_principal.o
 animations.o: src/animations.c include/animations.h include/joueur.h include/jeu.h
 	${CC} -c src/animations.c ${LIBS} ${INCS} ${FLAGS} -o bin/animations.o
-joueur.o: src/joueur.c include/joueur.h include/jeu.h include/animations.h #include
+joueur.o: src/joueur.c include/joueur.h include/jeu.h include/animations.h
 	${CC} -c src/joueur.c ${LIBS} ${INCS} ${FLAGS} -o bin/joueur.o
 son.o: src/son.c
 	${CC} -c src/son.c ${LIBS} ${INCS} ${FLAGS} -o bin/son.o
