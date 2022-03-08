@@ -11,7 +11,7 @@
 #include "../include/animations.h"
 #include "../include/jeu.h"
 
-#define MODE BORDERLESS
+#define MODE FULLSCREEN
 
 bool quit;
 SDL_DisplayMode ecran;
@@ -20,7 +20,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Rect rect1;
-  
+
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
   SDL_GetDesktopDisplayMode(0, &ecran);
@@ -47,7 +47,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   TTF_Init();
   menu_principal(renderer, &ecran, &tex_menu_Principal, &rect1);
-  
+
   Joueur j1, j2;
   initJoueur(&j1, 300.0, "PINGUU", texture_joueur1, gauche);
   initJoueur(&j2, 600.0, "Shrekleouinouin", texture_joueur2, droite);
@@ -61,7 +61,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     jouerAnimation(&j1);
     jouerAnimation(&j2);
     checkPerdu(&j1, &j2);
-    
+
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
     SDL_RenderFillRect(renderer, &(j1.hitbox)); //Afficher les hitboxes

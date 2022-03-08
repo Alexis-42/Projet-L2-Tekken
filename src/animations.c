@@ -8,7 +8,7 @@
 #include "../include/jeu.h"
 
 void renderAnimation(Joueur * joueur){
-  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect), 0, NULL, joueur->direction);
+  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect), 0, 0, joueur->direction);
 }
 
 void resetAnimation(Joueur * joueur){
@@ -43,12 +43,11 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
                 posYSprite=1310;
     break;
     case IDLE: nbFrames=1;
-    		posYSprite=0;
+    		       posYSprite=0;
   }
     Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
     Uint32 sprite = seconds % nbFrames;
-    //printf("**** sprite = %d ****\n", sprite);
-    
+
   if(sprite<nbFrames){
 
     SDL_Rect srcrect = {
@@ -70,5 +69,4 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
    } else {
    	joueur->action=IDLE;
    }
-   //printf("---------------\n");
 }
