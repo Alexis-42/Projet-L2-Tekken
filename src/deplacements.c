@@ -28,8 +28,6 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 }
 
 void deplacements(Joueur * j1, Joueur * j2) {
-  hitbox(j1);
-  hitbox(j2);
   direction(j1, j2);
   SDL_Event event;
   SDL_PollEvent(&event);
@@ -70,9 +68,11 @@ void deplacements(Joueur * j1, Joueur * j2) {
        }
       break;
     case SDLK_d:
-      if(j1->hitbox.x<ecran.w-j1->hitbox.w){
+      if(j1->position.x<ecran.w-j1->perso.taille_x){
+				//if(event.key.repeat == 1)
         j1->position.x += VITESSE;
         j1->action=COURIR;
+
        }
       break;
     case SDLK_SPACE:
