@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
@@ -10,6 +11,7 @@
 #include "../include/joueur.h"
 #include "../include/animations.h"
 #include "../include/jeu.h"
+#include "../include/personnages.h"
 
 #define MODE BORDERLESS
 
@@ -36,8 +38,17 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
-  SDL_Surface * perso1 = IMG_Load("res/sprites/Pingutest.png");
-  SDL_Surface * perso2 = IMG_Load("res/sprites/Shrektest.png");
+
+  Joueur j1, j2;
+  initPerso(&j1, 0); //Pingu
+  initPerso(&j2, 1); //Shrek
+
+  char j1sprite[50], j2sprite[50];
+  snprintf(j1sprite, sizeof(j1sprite), "res/sprites/%s.png", j1.perso.nom);
+  snprintf(j2sprite, sizeof(j2sprite), "res/sprites/%s.png", j2.perso.nom);
+
+  SDL_Surface * perso1 = IMG_Load(j1sprite);
+  SDL_Surface * perso2 = IMG_Load(j2sprite);
 
   SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
   SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
@@ -48,12 +59,10 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   TTF_Init();
   menu_principal(renderer, &ecran, &tex_menu_Principal, &rect1);
 
-  Joueur j1, j2;
   initJoueur(&j1, 300.0, "PINGUU", texture_joueur1, gauche);
   initJoueur(&j2, 600.0, "Shrekleouinouin", texture_joueur2, droite);
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
-  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //Couleur des hitbox
   j2.action=COURIR;
 
   while (!quit) {
@@ -64,8 +73,6 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
-    SDL_RenderFillRect(renderer, &(j1.hitbox)); //Afficher les hitboxes
-    SDL_RenderFillRect(renderer, &(j2.hitbox));
     renderAnimation(&j1);
     renderAnimation(&j2);
     SDL_RenderPresent(renderer);

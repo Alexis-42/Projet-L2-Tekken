@@ -6,26 +6,27 @@
 #include "../include/animations.h"
 #include "../include/joueur.h"
 #include "../include/jeu.h"
+#include "../include/personnages.h"
 
 void renderAnimation(Joueur * joueur){
-  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->srcrect), &(joueur->dstrect), 0, 0, joueur->direction);
+  SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->perso.srcrect), &(joueur->perso.dstrect), 0, 0, joueur->direction);
 }
 
 void resetAnimation(Joueur * joueur){
   SDL_Rect srcrect = {
     0, //Pas
     0,
-    TAILLE_X_JOUEUR,
-    TAILLE_Y_JOUEUR
+    joueur->perso.taille_x,
+    joueur->perso.taille_y
   };
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
-    TAILLE_X_JOUEUR,
-    TAILLE_Y_JOUEUR
+    joueur->perso.taille_x,
+    joueur->perso.taille_y
   };
-  joueur->srcrect=srcrect;
-  joueur->dstrect=dstrect;
+  joueur->perso.srcrect=srcrect;
+  joueur->perso.dstrect=dstrect;
 }
 
 void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le getTick
@@ -53,19 +54,19 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
     SDL_Rect srcrect = {
     sprite * 540, //Pas
     posYSprite,
-    TAILLE_X_JOUEUR,
-    TAILLE_Y_JOUEUR
+    joueur->perso.taille_x,
+    joueur->perso.taille_y
   };
 
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
-    TAILLE_X_JOUEUR,
-    TAILLE_Y_JOUEUR
+    joueur->perso.taille_x,
+    joueur->perso.taille_y
   };
 
-   joueur->srcrect=srcrect;
-   joueur->dstrect=dstrect;
+   joueur->perso.srcrect=srcrect;
+   joueur->perso.dstrect=dstrect;
    } else {
    	joueur->action=IDLE;
    }

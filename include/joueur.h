@@ -3,10 +3,7 @@
 #define COMPLEX_H_INCLUDED__
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-
-// normalement 220 et 76
-#define TAILLE_X_JOUEUR 176
-#define TAILLE_Y_JOUEUR 320
+#include "../include/personnages.h"
 
 typedef enum {gauche, droite} Direction;
 
@@ -20,11 +17,11 @@ typedef struct {
   int action;
   Direction direction;
 	Personnage perso;
+	SDL_Texture * texture;
   char * nom;
-  SDL_Rect hitbox;
-  SDL_Rect srcrect;
-  SDL_Rect dstrect;
 } Joueur;
+
+void initPerso(Joueur * j, int i);
 
 void direction(Joueur * j1, Joueur * j2);
 void hitbox(Joueur * joueur);
