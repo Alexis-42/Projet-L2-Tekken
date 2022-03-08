@@ -11,7 +11,7 @@
 #include "../include/animations.h"
 #include "../include/jeu.h"
 
-#define MODE FULLSCREEN
+#define MODE BORDERLESS
 
 bool quit;
 SDL_DisplayMode ecran;

@@ -19,20 +19,12 @@ typedef struct {
   int vie;
   int action;
   Direction direction;
+	Personnage perso;
   char * nom;
-  SDL_Texture * texture;
   SDL_Rect hitbox;
   SDL_Rect srcrect;
   SDL_Rect dstrect;
 } Joueur;
-
-/* struc qui permet de faire le menu de selection des persos */
-struct personnage {
-    char * nom;
-    char * sprite;
-    int taille_y;
-    int taille_x;
-};
 
 void direction(Joueur * j1, Joueur * j2);
 void hitbox(Joueur * joueur);
