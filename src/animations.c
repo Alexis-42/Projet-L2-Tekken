@@ -16,7 +16,7 @@ void resetAnimation(Joueur * joueur){
     0, //Pas
     0,
     TAILLE_X_JOUEUR,
-    640
+    TAILLE_Y_JOUEUR
   };
   SDL_Rect dstrect = {
     joueur->position.x,

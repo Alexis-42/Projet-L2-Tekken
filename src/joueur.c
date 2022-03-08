@@ -28,7 +28,7 @@ void hitbox(Joueur * joueur){
     joueur->position.x,
     joueur->position.y,
     TAILLE_X_JOUEUR/2,
-    TAILLE_Y_JOUEUR/2
+    TAILLE_Y_JOUEUR
   };
   joueur->hitbox=hitbox;
 }

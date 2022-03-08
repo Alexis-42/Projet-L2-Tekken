@@ -4,8 +4,9 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 
-#define TAILLE_X_JOUEUR 380
-#define TAILLE_Y_JOUEUR 640
+// normalement 220 et 76
+#define TAILLE_X_JOUEUR 176
+#define TAILLE_Y_JOUEUR 320
 
 typedef enum {gauche, droite} Direction;
 

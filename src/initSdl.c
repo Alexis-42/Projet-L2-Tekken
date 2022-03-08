@@ -36,8 +36,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
-  SDL_Surface * perso1 = IMG_Load("res/sprites/Pingu.png");
-  SDL_Surface * perso2 = IMG_Load("res/sprites/Shrek.png");
+  SDL_Surface * perso1 = IMG_Load("res/sprites/Pingutest.png");
+  SDL_Surface * perso2 = IMG_Load("res/sprites/Shrektest.png");
 
   SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
   SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
