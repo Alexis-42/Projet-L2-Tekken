@@ -2,11 +2,19 @@
 #include <SDL2/SDL_image.h>
 #include "../include/joueur.h"
 #include "../include/personnages.h"
+#include "../include/animations.h"
+
 
 void initPerso(Joueur * j, int i){
 	switch(i){
 		case 0:
 			j->perso.nom="Pingu";
+
+			j->perso.nb_frame[IDLE]=1;
+			j->perso.nb_frame[COURIR]=15;
+			j->perso.nb_frame[POING]=14;
+			j->perso.nb_frame[PARER]=3;
+
 			j->perso.taille_perso.w=310;
 			j->perso.taille_perso.h=320;
 
@@ -18,6 +26,12 @@ void initPerso(Joueur * j, int i){
 		break;
 		case 1:
 			j->perso.nom="Shrek";
+
+			j->perso.nb_frame[IDLE]=1;
+			j->perso.nb_frame[COURIR]=15;
+			j->perso.nb_frame[POING]=14;
+			j->perso.nb_frame[PARER]=3;
+
 			j->perso.taille_perso.w=176;
 			j->perso.taille_perso.h=320;
 

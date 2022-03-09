@@ -13,7 +13,7 @@
 #include "../include/jeu.h"
 #include "../include/personnages.h"
 
-#define MODE BORDERLESS
+#define MODE FULLSCREEN
 
 bool quit;
 SDL_DisplayMode ecran;
@@ -63,11 +63,11 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   initJoueur(&j2, 600.0, "Shrekleouinouin", texture_joueur2, droite);
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
-  j2.action=COURIR;
+  j2.action=IDLE;
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //Couleur des hitbox
 
   while (!quit) {
-    deplacements(&j2, &j1);
+    deplacements(&j1, &j2);
     jouerAnimation(&j1);
     jouerAnimation(&j2);
     checkPerdu(&j1, &j2);

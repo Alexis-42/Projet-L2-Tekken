@@ -1,4 +1,5 @@
 #include "../include/joueur.h"
+#define NB_ANIMATIONS 4
 
 #ifndef PERSO_H_INCLUDED__
 #define PERSO_H_INCLUDED__
@@ -15,6 +16,7 @@ typedef struct {
     int hitbox_offsetX, hitbox_offsetY;
     SDL_Rect srcrect;
     SDL_Rect dstrect;
+    int nb_frame[NB_ANIMATIONS];
 } Personnage;
 
 #endif
