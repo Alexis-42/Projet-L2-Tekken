@@ -48,8 +48,7 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
   }
     Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
     Uint32 sprite = seconds % nbFrames;
-
-  if(sprite<nbFrames){
+  if(sprite>0){
 
     SDL_Rect srcrect = {
     sprite * 540, //Pas
@@ -67,7 +66,5 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
 
    joueur->perso.srcrect=srcrect;
    joueur->perso.dstrect=dstrect;
-   } else {
-   	joueur->action=IDLE;
    }
 }
