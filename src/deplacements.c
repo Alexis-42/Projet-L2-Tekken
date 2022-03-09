@@ -59,7 +59,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		}
 		break;
 
-		/*
+		
 case SDL_KEYUP:
 switch (event.key.keysym.sym) {
 case SDLK_q:
@@ -72,7 +72,7 @@ case SDLK_z:
 j1->action=IDLE;
 break;
 }
-break;*/
+break;
 }
 
 const Uint8 *state = SDL_GetKeyboardState(NULL);
