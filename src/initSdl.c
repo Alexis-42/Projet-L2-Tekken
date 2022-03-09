@@ -64,17 +64,21 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
   j2.action=COURIR;
+  SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //Couleur des hitbox
 
   while (!quit) {
-    deplacements(&j1, &j2);
+    deplacements(&j2, &j1);
     jouerAnimation(&j1);
     jouerAnimation(&j2);
     checkPerdu(&j1, &j2);
 
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
+    SDL_RenderFillRect(renderer, &(j1.hitbox)); //Afficher les hitboxes
+    SDL_RenderFillRect(renderer, &(j2.hitbox));
     renderAnimation(&j1);
     renderAnimation(&j2);
+
     SDL_RenderPresent(renderer);
   }
 

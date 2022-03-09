@@ -28,6 +28,8 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 }
 
 void deplacements(Joueur * j1, Joueur * j2) {
+	hitbox(j1);
+	hitbox(j2);
 	direction(j1, j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
@@ -59,7 +61,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		}
 		break;
 
-		
+
 case SDL_KEYUP:
 switch (event.key.keysym.sym) {
 case SDLK_q:
@@ -77,13 +79,13 @@ break;
 
 const Uint8 *state = SDL_GetKeyboardState(NULL);
 if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
-	if(j1->position.x>0){
+	if(j1->hitbox.x>0){
 		j1->position.x -= VITESSE;
 		j1->action=COURIR;
 	}
 }
 if (state[SDL_SCANCODE_D]) {
-	if(j1->position.x<ecran.w-j1->perso.taille_x){
+	if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
 		j1->position.x += VITESSE;
 		j1->action=COURIR;
 	}

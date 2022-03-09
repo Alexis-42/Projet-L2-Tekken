@@ -17,6 +17,7 @@ typedef struct {
   int action;
   Direction direction;
 	Personnage perso;
+	SDL_Rect hitbox;
 	SDL_Texture * texture;
   char * nom;
 } Joueur;

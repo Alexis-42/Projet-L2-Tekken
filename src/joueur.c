@@ -12,15 +12,25 @@ void direction(Joueur * j1, Joueur * j2){
     j2->direction=j1->position.x>j2->position.x;
 }
 
+void hitbox(Joueur * joueur){
+  SDL_Rect hitbox = {
+    joueur->position.x+joueur->perso.hitbox_offsetX,
+    joueur->position.y+joueur->perso.hitbox_offsetY,
+    joueur->perso.taille_hitbox.w,
+    joueur->perso.taille_hitbox.h
+  };
+  joueur->hitbox=hitbox;
+}
+
 void checkPerdu(Joueur * j1, Joueur * j2){
 	if(j1->vie==0)
-		printf("%s a gagné !", j2->nom);
+		printf("%s a gagné !\n", j2->nom);
 	else if(j2->vie==0)
-		printf("%s a gagné !", j1->nom);
+		printf("%s a gagné !\n", j1->nom);
 }
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
-	SDL_bool collision = SDL_HasIntersection(&(j1->perso.dstrect), &(j2->perso.dstrect));
+	SDL_bool collision = SDL_HasIntersection(&(j1->perso.dstrect), &(j2->hitbox));
 	return collision==SDL_TRUE;
 }
 

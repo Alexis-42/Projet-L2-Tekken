@@ -13,7 +13,7 @@ PROG=jeu
 ${PROG}: ${SOURCE} ${LOCLIB}
 	${CC} -o ${PROG} ${SOURCE} ${LIBS} ${INCS} ${FLAGS}
 
-jouer:
+jouer: ${PROG}
 	./jeu
 
 clean:
