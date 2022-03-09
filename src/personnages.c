@@ -6,14 +6,26 @@
 void initPerso(Joueur * j, int i){
 	switch(i){
 		case 0:
-			j->perso.nom="Pingutest";
-			j->perso.taille_x=260;
-			j->perso.taille_y=320;
+			j->perso.nom="Pingu";
+			j->perso.taille_perso.w=310;
+			j->perso.taille_perso.h=320;
+
+			j->perso.taille_hitbox.w=140;
+			j->perso.taille_hitbox.h=250;
+
+			j->perso.hitbox_offsetX=93;
+			j->perso.hitbox_offsetY=65;
 		break;
 		case 1:
-			j->perso.nom="Shrektest";
-			j->perso.taille_x=176;
-			j->perso.taille_y=320;
+			j->perso.nom="Shrek";
+			j->perso.taille_perso.w=176;
+			j->perso.taille_perso.h=320;
+
+			j->perso.taille_hitbox.w=105;
+			j->perso.taille_hitbox.h=235;
+
+			j->perso.hitbox_offsetX=40;
+			j->perso.hitbox_offsetY=57;
 		break;
 	}
 }

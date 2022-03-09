@@ -16,14 +16,14 @@ void resetAnimation(Joueur * joueur){
   SDL_Rect srcrect = {
     0, //Pas
     0,
-    joueur->perso.taille_x,
-    joueur->perso.taille_y
+    joueur->perso.taille_perso.w,
+    joueur->perso.taille_perso.h
   };
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
-    joueur->perso.taille_x,
-    joueur->perso.taille_y
+    joueur->perso.taille_perso.w,
+    joueur->perso.taille_perso.h
   };
   joueur->perso.srcrect=srcrect;
   joueur->perso.dstrect=dstrect;
@@ -53,15 +53,15 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
     SDL_Rect srcrect = {
     sprite * 540, //Pas
     posYSprite,
-    joueur->perso.taille_x,
-    joueur->perso.taille_y
+    joueur->perso.taille_perso.w,
+    joueur->perso.taille_perso.h
   };
 
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
-    joueur->perso.taille_x,
-    joueur->perso.taille_y
+    joueur->perso.taille_perso.w,
+    joueur->perso.taille_perso.h
   };
 
    joueur->perso.srcrect=srcrect;
