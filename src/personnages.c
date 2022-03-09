@@ -7,7 +7,7 @@ void initPerso(Joueur * j, int i){
 	switch(i){
 		case 0:
 			j->perso.nom="Pingutest";
-			j->perso.taille_x=220;
+			j->perso.taille_x=260;
 			j->perso.taille_y=320;
 		break;
 		case 1:
