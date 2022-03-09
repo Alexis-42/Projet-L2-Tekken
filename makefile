@@ -12,9 +12,11 @@ PROG=jeu
 
 ${PROG}: ${SOURCE} ${LOCLIB}
 	${CC} -o ${PROG} ${SOURCE} ${LIBS} ${INCS} ${FLAGS}
+	rm -f bin/*.o
 
 jouer: ${PROG}
 	./jeu
+	rm -f bin/*.o
 
 clean:
 	rm -f ${PROG}
