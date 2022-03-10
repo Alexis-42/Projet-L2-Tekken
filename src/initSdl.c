@@ -20,7 +20,7 @@ SDL_DisplayMode ecran;
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
-  SDL_Rect rect1;
+  SDL_Rect rect1, srcBg, dstBg;
 
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
@@ -48,7 +48,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage2.png");
+  SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage.png");
   SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
@@ -60,16 +60,15 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   initJoueur(&j2, 600.0, "Shrekleouinouin", texture_joueur2, droite);
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
-  SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //Couleur des hitbox
+  SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //Couleur des hitboxes
 
   while (!quit) {
+    jouerAnimationBackground(&srcBg, &dstBg);
     jouerAnimation(&j1);
     deplacements(&j1, &j2);
     checkPerdu(&j1, &j2);
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture_stage, NULL, NULL);
-    SDL_RenderFillRect(renderer, &(j1.hitbox)); //Afficher les hitboxes
-    SDL_RenderFillRect(renderer, &(j2.hitbox));
+    SDL_RenderCopy(renderer, texture_stage, &srcBg, &dstBg);
     renderAnimation(&j1);
     renderAnimation(&j2);
     SDL_RenderPresent(renderer);
