@@ -12,6 +12,11 @@
 
 #define VITESSE 1
 
+typedef struct {
+	Joueur * joueur;
+	int anim;
+} params;
+
 void sauter(Joueur * joueur){
 	int i, pos=joueur->position.y;
 	for(i=pos; i<0; i++, joueur->position.y--);
@@ -33,6 +38,8 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	direction(j1, j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
+	SDL_Thread *thread;
+	params *data = malloc(sizeof(params));
 
 	switch (event.type) {
 		case SDL_QUIT:
@@ -42,9 +49,15 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		case SDL_MOUSEBUTTONDOWN:
 		switch (event.button.button) {
 			case SDL_BUTTON_RIGHT:
+			resetAnimation(j1);
 			j1->action=PARER;
+		/*	data->joueur=j1;
+			data->anim=PARER;
+			thread = SDL_CreateThread(jouerAnimation, "jouerAnimation", data);
+			*/
 			break;
 			case SDL_BUTTON_LEFT:
+			resetAnimation(j1);
 			attaquer(j1, j2);
 			break;
 		}
@@ -53,32 +66,34 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		case SDL_MOUSEBUTTONUP:
 		switch (event.button.button) {
 			case SDL_BUTTON_RIGHT:
+			resetAnimation(j1);
 			j1->action=IDLE;
 			break;
 			case SDL_BUTTON_LEFT:
+			resetAnimation(j1);
 			j1->action=IDLE;
 			break;
 		}
 		break;
 
 
-case SDL_KEYUP:
-switch (event.key.keysym.sym) {
-case SDLK_q:
-j1->action=IDLE;
-break;
-case SDLK_d:
-j1->action=IDLE;
-break;
-case SDLK_z:
-j1->action=IDLE;
-break;
-}
-break;
-}
+		case SDL_KEYUP:
+		switch (event.key.keysym.sym) {
+			case SDLK_q:
+			j1->action=IDLE;
+			break;
+			case SDLK_d:
+			j1->action=IDLE;
+			break;
+			case SDLK_z:
+			j1->action=IDLE;
+			break;
+		}
+		break;
+	}
 
-const Uint8 *state = SDL_GetKeyboardState(NULL);
-if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
+	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
 	if(j1->hitbox.x>0){
 		j1->position.x -= VITESSE;
 		j1->action=COURIR;

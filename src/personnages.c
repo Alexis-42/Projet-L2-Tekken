@@ -6,6 +6,7 @@
 
 
 void initPerso(Joueur * j, int i){
+	j->perso.frame=0;
 	switch(i){
 		case 0:
 			j->perso.nom="Pingu";

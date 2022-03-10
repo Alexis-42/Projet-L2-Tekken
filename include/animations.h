@@ -6,8 +6,11 @@
 #define COURIR 1
 #define POING 2
 #define PARER 3
+#define PIED 4
+#define SAUTER 5
 
 void renderAnimation(Joueur * joueur);
 void resetAnimation(Joueur * joueur);
 void jouerAnimation(Joueur * joueur);
+
 #endif
