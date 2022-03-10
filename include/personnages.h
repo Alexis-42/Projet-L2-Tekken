@@ -15,6 +15,7 @@ typedef struct {
     taille taille_hitbox;
     int hitbox_offsetX, hitbox_offsetY;
     int frame;
+    Uint32 seconds;
     SDL_Rect srcrect;
     SDL_Rect dstrect;
     int nb_frame[NB_ANIMATIONS];
