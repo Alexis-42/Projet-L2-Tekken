@@ -49,18 +49,18 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
     		       posYSprite=0;
   }
   Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
-  Uint32 sprite = seconds % joueur->perso.nb_frame[anim];
-  printf("sprite : %d, frame : %d, seconds : %d\n", sprite, joueur->perso.frame, seconds);
 
-  if(joueur->perso.frame<joueur->perso.nb_frame[anim] && joueur->action!=IDLE){
+  if(anim!=COURIR){
+  if(joueur->perso.frame<joueur->perso.nb_frame[anim]){
+    if(joueur->perso.seconds!=seconds){
 
     SDL_Rect srcrect = {
-    sprite * 540, //Pas
+    joueur->perso.frame * 540, //Pas
     posYSprite,
     joueur->perso.taille_perso.w,
     joueur->perso.taille_perso.h
   };
-  
+
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
@@ -70,6 +70,28 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
    joueur->perso.srcrect=srcrect;
    joueur->perso.dstrect=dstrect;
 
-   joueur->perso.frame++;
- }
+      joueur->perso.frame++;
+      joueur->perso.seconds=seconds;
+    }
+  }
+} else {
+  SDL_Rect srcrect = {
+  (seconds%joueur->perso.nb_frame[anim]) * 540, //Pas
+  posYSprite,
+  joueur->perso.taille_perso.w,
+  joueur->perso.taille_perso.h
+};
+
+SDL_Rect dstrect = {
+  joueur->position.x,
+  joueur->position.y,
+  joueur->perso.taille_perso.w,
+  joueur->perso.taille_perso.h
+};
+ joueur->perso.srcrect=srcrect;
+ joueur->perso.dstrect=dstrect;
+
+    joueur->perso.frame++;
+    joueur->perso.seconds=seconds;
+}
 }

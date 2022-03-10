@@ -7,7 +7,7 @@
 #include "../include/menu_principal.h"
 
 int main(int argc, char ** argv) {
-  //menu_principal();
-  initSdl();
+  menu_principal();
+  //initSdl();
   return 0;
 }
