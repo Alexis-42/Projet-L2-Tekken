@@ -36,17 +36,13 @@ void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le g
   int anim=joueur->action;
 
   switch (anim) {
-    case COURIR:
-                 posYSprite=0;
+    case COURIR: posYSprite=0;
     break;
-    case PARER:
-                posYSprite=640;
+    case PARER: posYSprite=640;
     break;
-    case POING:
-                posYSprite=1280;
+    case POING: posYSprite=1280;
     break;
-    case IDLE:
-    		       posYSprite=0;
+    case IDLE: posYSprite=0;
   }
   Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
 
@@ -94,4 +90,26 @@ SDL_Rect dstrect = {
     joueur->perso.frame++;
     joueur->perso.seconds=seconds;
 }
+}
+
+void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){ //Pour freezer l'anim il faut anuller le getTick
+  Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
+  Uint32 sprite = seconds % 8;
+  printf("sprite : %d\n", sprite);
+
+    SDL_Rect srcrect = {
+    sprite * (6144/8),
+    0,
+    726,
+    368
+  };
+
+  SDL_Rect dstrect = {
+    0,
+    0,
+    ecran.w,
+    ecran.h
+  };
+   *srcBg=srcrect;
+   *dstBg=dstrect;
 }
