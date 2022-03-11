@@ -12,9 +12,35 @@
 
 void aff_menu_selection(int carre,float pos_x){}
 
+void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour){ //Pour freezer l'anim il faut anuller le getTick
+  Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
+  Uint32 sprite = seconds % 14;
+
+    int x;
+    if(tour){
+        x=200;
+    }else{
+        x=1400;
+    }
+
+    SDL_Rect srcrect = {
+    sprite * 540,
+    0,
+    176,
+    320
+  };
 
 
+  SDL_Rect dstrect = {
+    500,
+    500,
+    310,
+    320
+  };
+   *src=srcrect;
+   *dst=dstrect;
 
+}
 
 
 
@@ -81,7 +107,7 @@ void menu_selection(){
     rect_tinky.w = ecran.w/6.0;
     rect_tinky.h = ecran.w/6.0;
 
-//carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
+//initialisation carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
     //carré rouge de sélection du personnage 
     SDL_Surface * image_carre_rouge = IMG_Load("res/carre_rouge.png");
     SDL_Texture * texture_carre_rouge = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_rouge);
@@ -113,15 +139,27 @@ void menu_selection(){
     rect_carre_violet.h = ecran.w/6.0;
 
 
+//initialisation sprite des personnages 
+    //sprite de shrek
+    SDL_Surface * surface_sprite_shrek = IMG_Load("res/sprites/Shrek.png");
+    SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer, surface_sprite_shrek);
+    SDL_FreeSurface(surface_sprite_shrek);
+    SDL_Rect rect_sprite_shrek_source;
+    SDL_Rect rect_sprite_shrek;
 
+    //sprite de goku
+
+
+    //sprite de pingu
+
+
+    //sprite de tinky
 
 
 
 //affichage de la page
     SDL_RenderClear(renderer_menu_selection);
     SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-    //SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-    //SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
     SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
     SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
     SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
@@ -132,12 +170,12 @@ void menu_selection(){
 
     int x_button;
   	int y_button;
-    int tour_joueur;
+    int tour_joueur=1;
 
     bool quitter=false;
     while (!quitter) {
         SDL_Event event;
-  	    SDL_WaitEvent(&event);
+  	    SDL_PollEvent(&event);
     	switch (event.type){
   	    	case SDL_QUIT:
   	    		quitter = true;
@@ -150,132 +188,36 @@ void menu_selection(){
                     if(x_button>(200.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(200.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
                             rect_carre_bleu.x = 200.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=0;
                         }else{
                             rect_carre_rouge.x = 200.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=1;
                         }
                         //carre 2eme pers
                     }else if(x_button>(600.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(600.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
                             rect_carre_bleu.x = 600.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=0;
                         }else{
                             rect_carre_rouge.x = 600.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=1;
                         }
                         //carre 3eme pers
                     }else if(x_button>(1000.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(1000.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
                             rect_carre_bleu.x = 1000.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=0;
                         }else{
                             rect_carre_rouge.x = 1000.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=1;
                         }
                         //carre 4eme pers
                     }else if(x_button>(1400.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(1400.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
                             rect_carre_bleu.x = 1400.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=0;
                         }else{
                             rect_carre_rouge.x = 1400.0/1920.0*ecran.w;
-                            SDL_RenderClear(renderer_menu_selection);
-                            SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
-                            if(rect_carre_bleu.x == rect_carre_rouge.x){
-                                SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
-                            }
-                            SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-                            SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-                            SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-                            SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-                            SDL_RenderPresent(renderer_menu_selection);
                             tour_joueur=1;
                         }
                     }
@@ -287,6 +229,31 @@ void menu_selection(){
   			    break;
                 }
         }
+        SDL_RenderClear(renderer_menu_selection);
+        SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
+
+        jouerAnimationPersoMenu(&rect_sprite_shrek_source, &rect_sprite_shrek,tour_joueur);
+        printf("\n%d",rect_sprite_shrek_source.x);
+        printf("\n%d",rect_sprite_shrek_source.y);
+        printf("\n%d",rect_sprite_shrek_source.w);
+        printf("\n%d",rect_sprite_shrek_source.h);
+        printf("\n%d",rect_sprite_shrek.x);
+        printf("\n%d",rect_sprite_shrek.y);
+        printf("\n%d",rect_sprite_shrek.w);
+        printf("\n%d\n",rect_sprite_shrek.h);
+
+        SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
+        SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
+        if(rect_carre_bleu.x == rect_carre_rouge.x){
+            SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
+         }
+        SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
+        SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
+        SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
+        SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
+
+        SDL_RenderCopy(renderer_menu_selection, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek);
+        SDL_RenderPresent(renderer_menu_selection);
     }
 
 
