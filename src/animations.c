@@ -95,7 +95,6 @@ SDL_Rect dstrect = {
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){ //Pour freezer l'anim il faut anuller le getTick
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
   Uint32 sprite = seconds % 8;
-  printf("sprite : %d\n", sprite);
 
     SDL_Rect srcrect = {
     sprite * (6144/8),

@@ -6,6 +6,7 @@
 #include "../include/initSdl.h"
 #include "../include/jeu.h"
 #include "../include/menu_selection.h"
+#include "../include/animations.h"
 
   bool quitter;
 
@@ -13,7 +14,7 @@
   SDL_Renderer * renderer_menu ;
   SDL_Surface * image_stage_menu;
   SDL_Texture * texture_stage_menu;
-
+  SDL_Rect srcBg, dstBg;
   SDL_DisplayMode ecran;
 
   typedef struct {
@@ -21,27 +22,11 @@
     SDL_Rect * rect;
   } texture_rect;
 
-  void bouton(TTF_Font * font, char * texte, SDL_Color couleur, float posX, float posY, int i, SDL_Texture * texture, SDL_Rect * rect, texture_rect texrect[]){
-    SDL_Surface * surface = TTF_RenderText_Solid(font, texte, couleur);
-    texture = SDL_CreateTextureFromSurface(renderer_menu, surface);
-    int text_width_jouer_multi = surface->w;
-    int text_height_jouer_multi = surface->h;
-
-    SDL_FreeSurface(surface);
-
-    rect->x = posX/1920.0*ecran.w;
-    rect->y = posY/1080.0*ecran.h;
-    rect->w = text_width_jouer_multi;
-    rect->h = text_height_jouer_multi;
-
-    texrect[i].texture=texture;
-    texrect[i].rect=&rect;
-  }
-
   void renderMenu(texture_rect texrect[], texture_rect flammes){
     int i;
     SDL_RenderClear(renderer_menu);
-    SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
+    jouerAnimationBackground(&srcBg, &dstBg);
+    SDL_RenderCopy(renderer_menu, texture_stage_menu, &srcBg, &dstBg);
     if(flammes.texture!=NULL)
       SDL_RenderCopy(renderer_menu, flammes.texture, NULL, flammes.rect);
 
@@ -80,7 +65,7 @@
     window_menu = SDL_CreateWindow("SDL2 Tekken - menu principal",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
     renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
-    image_stage_menu = IMG_Load("res/backgrounds/ryu_menu.png");
+    image_stage_menu = IMG_Load("res/backgrounds/stage.png");
     texture_stage_menu = SDL_CreateTextureFromSurface(renderer_menu, image_stage_menu);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
@@ -148,7 +133,6 @@
     flammes[3].rect=&rect_flamme_quitter;
 
   //preparation couleur et font du texte
-    SDL_Color ColorRed = {255, 0, 0, 0};
     SDL_Color ColorWhite = {255, 255, 255, 0};
     int taille = 50;
     TTF_Font * font = TTF_OpenFont("res/fonts/Sans.ttf", taille);
@@ -160,27 +144,87 @@
 
 
     //affichage menu principal
-    SDL_Rect rect_jouer_multi, rect_jouer_IA, rect_option, rect_quitter;
-    SDL_Texture * texture_jouer_multi, * texture_jouer_IA, * texture_option, * texture_quitter;
 
     //création affichage jouer en multijoueur
-    bouton(font, "Jouer en multijoueur", ColorWhite, 100.0, 50.0, 0, texture_jouer_multi, &rect_jouer_multi, texrect);
-    bouton(font, "jouer contre une IA", ColorWhite, 100.0, 150.0, 1, texture_jouer_IA, &rect_jouer_IA, texrect);
-    bouton(font, "Options", ColorWhite, 100.0, 250.0, 2, texture_option, &rect_option, texrect);
-    bouton(font, "Quitter", ColorWhite, 100.0, 350.0, 3, texture_quitter, &rect_quitter, texrect);
+    SDL_Surface * surface_jouer_multi = TTF_RenderText_Solid(font,"jouer en multijoueur", ColorWhite);
+    SDL_Texture * texture_jouer_multi = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_multi);
+    int text_width_jouer_multi = surface_jouer_multi->w;
+    int text_height_jouer_multi = surface_jouer_multi->h;
+
+    SDL_FreeSurface(surface_jouer_multi);
+    SDL_Rect rect_jouer_multi;
+
+    rect_jouer_multi.x = 100.0/1920.0*ecran.w;
+    rect_jouer_multi.y = 50.0/1080.0*ecran.h;
+    rect_jouer_multi.w = text_width_jouer_multi;
+    rect_jouer_multi.h = text_height_jouer_multi;
+
+    texrect[0].texture=texture_jouer_multi;
+    texrect[0].rect=&rect_jouer_multi;
+
+    //création affichage jouer contre IA
+    SDL_Surface * surface_jouer_IA = TTF_RenderText_Solid(font,"jouer contre une IA", ColorWhite);
+    SDL_Texture * texture_jouer_IA = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_IA);
+
+    int text_width_jouer_IA = surface_jouer_IA->w;
+    int text_height_jouer_IA = surface_jouer_IA->h;
+    SDL_FreeSurface(surface_jouer_IA);
+    SDL_Rect rect_jouer_IA;
+
+    rect_jouer_IA.x = 100.0/1920.0*ecran.w;
+    rect_jouer_IA.y = 150.0/1080.0*ecran.h;;
+    rect_jouer_IA.w = text_width_jouer_IA;
+    rect_jouer_IA.h = text_height_jouer_IA;
+
+    texrect[1].texture=texture_jouer_IA;
+    texrect[1].rect=&rect_jouer_IA;
+
+    //création affichage option
+    SDL_Surface * surface_option = TTF_RenderText_Solid(font,"options", ColorWhite);
+    SDL_Texture * texture_option = SDL_CreateTextureFromSurface(renderer_menu, surface_option);
+
+    int text_width_option = surface_option->w;
+    int text_height_option = surface_option->h;
+    SDL_FreeSurface(surface_option);
+
+    SDL_Rect rect_option;
+    rect_option.x = 100.0/1920.0*ecran.w;
+    rect_option.y = 250.0/1080.0*ecran.h;;
+    rect_option.w = text_width_option;
+    rect_option.h = text_height_option;
+
+    texrect[2].texture=texture_option;
+    texrect[2].rect=&rect_option;
+
+    //création affichage quitter
+    SDL_Surface * surface_quitter = TTF_RenderText_Solid(font,"quitter", ColorWhite);
+    SDL_Texture * texture_quitter = SDL_CreateTextureFromSurface(renderer_menu, surface_quitter);
+
+    int text_width_quitter = surface_quitter->w;
+    int text_height_quitter = surface_quitter->h;
+    SDL_FreeSurface(surface_quitter);
+
+    SDL_Rect rect_quitter;
+    rect_quitter.x = 100.0/1920.0*ecran.w;
+    rect_quitter.y = 350.0/1080.0*ecran.h;;
+    rect_quitter.w = text_width_quitter;
+    rect_quitter.h = text_height_quitter;
+
+    texrect[3].texture=texture_quitter;
+    texrect[3].rect=&rect_quitter;
 
     //affichage du fond d'écran apres avoir néttoyer le renderer
-    renderMenu(texrect, flammes[4]);
-
    	int x_button;
   	int y_button;
     quitter=false;
-    int sortie=0;
+    int sortie=1;
 
   while (!quitter) {
   	SDL_Event event;
-  	SDL_WaitEvent(&event);
-  	//SDL_PollEvent(&event);
+  	//SDL_WaitEvent(&event);
+  	SDL_PollEvent(&event);
+    renderMenu(texrect, flammes[sortie-1]);
+
   	switch (event.type){
   		case SDL_QUIT:
   			quitter = true;
@@ -216,16 +260,16 @@
           //sur le texte multijoueur
 
           switch (getSelection(x_button, y_button)) {
-            case 1: renderMenu(texrect, flammes[0]);
+            case 1:
                     sortie=1;
                     break;
-            case 2: renderMenu(texrect, flammes[1]);
+            case 2:
                     sortie=2;
                     break;
-            case 3: renderMenu(texrect, flammes[2]);
+            case 3:
                     sortie=3;
                     break;
-            case 4: renderMenu(texrect, flammes[3]);
+            case 4:
                     sortie=4;
                     break;
           }
@@ -244,31 +288,23 @@
         case SDLK_UP:
           if(sortie==0){
               sortie=1;
-              renderMenu(texrect, flammes[0]);
           }else if(sortie==2){
               sortie=1;
-              renderMenu(texrect, flammes[0]);
           }else if(sortie==3){
               sortie=2;
-              renderMenu(texrect, flammes[1]);
           }else if(sortie==4){
               sortie=3;
-              renderMenu(texrect, flammes[2]);
             }
-  			break;
+  	break;
         case SDLK_DOWN:
           if(sortie==0){
               sortie=1;
-              renderMenu(texrect, flammes[0]);
           }else if(sortie==1){
               sortie=2;
-              renderMenu(texrect, flammes[1]);
           }else if(sortie==2){
               sortie=3;
-              renderMenu(texrect, flammes[2]);
           }else if(sortie==3){
               sortie=4;
-              renderMenu(texrect, flammes[3]);
   			  break;
         }
   		}
