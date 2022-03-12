@@ -10,7 +10,7 @@
 #include "../include/jeu.h"
 #include "../include/son.h"
 
-#define VITESSE 1
+#define VITESSE 2
 
 typedef struct {
 	Joueur * joueur;
@@ -50,10 +50,6 @@ void deplacements(Joueur * j1, Joueur * j2) {
 			case SDL_BUTTON_RIGHT:
 			resetAnimation(j1);
 			j1->action=PARER;
-		/*	data->joueur=j1;
-			data->anim=PARER;
-			thread = SDL_CreateThread(jouerAnimation, "jouerAnimation", data);
-			*/
 			break;
 			case SDL_BUTTON_LEFT:
 			resetAnimation(j1);
@@ -97,14 +93,14 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
 	if(j1->hitbox.x>0){
-		if(ticks%4==0)
+		if(ticks%2==0)
 			j1->position.x -= VITESSE;
 		j1->action=COURIR;
 	}
 }
 if (state[SDL_SCANCODE_D]) {
 	if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
-		if(ticks%4==0)
+		if(ticks%2==0)
 			j1->position.x += VITESSE;
 		j1->action=COURIR;
 	}
