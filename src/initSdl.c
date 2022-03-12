@@ -20,7 +20,7 @@ SDL_DisplayMode ecran;
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
-  SDL_Rect rect1, srcBg, dstBg;
+  SDL_Rect srcBg, dstBg;
 
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
