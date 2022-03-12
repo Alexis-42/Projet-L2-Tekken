@@ -190,7 +190,6 @@ void menu_selection(){
             case SDL_MOUSEBUTTONDOWN:
   				x_button =event.button.x;
   				y_button =event.button.y;
-  				printf("\n%i %i",x_button,y_button);
                   //carre 1er pers
                     if(x_button>(200.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(200.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
@@ -240,14 +239,6 @@ void menu_selection(){
         SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
 
         jouerAnimationPersoMenu(&rect_sprite_shrek_source, &rect_sprite_shrek,tour_joueur);
-        printf("\n%d",rect_sprite_shrek_source.x);
-        printf("\n%d",rect_sprite_shrek_source.y);
-        printf("\n%d",rect_sprite_shrek_source.w);
-        printf("\n%d",rect_sprite_shrek_source.h);
-        printf("\n%d",rect_sprite_shrek.x);
-        printf("\n%d",rect_sprite_shrek.y);
-        printf("\n%d",rect_sprite_shrek.w);
-        printf("\n%d\n",rect_sprite_shrek.h);
 
         SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
         SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
