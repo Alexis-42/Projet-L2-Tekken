@@ -6,6 +6,7 @@
 #include "../include/initSdl.h"
 #include "../include/jeu.h"
 #include "../include/menu_selection.h"
+#include "../include/animations.h"
 
   bool quitter;
 
@@ -13,11 +14,44 @@
   SDL_Renderer * renderer_menu ;
   SDL_Surface * image_stage_menu;
   SDL_Texture * texture_stage_menu;
-
+  SDL_Rect srcBg, dstBg;
   SDL_DisplayMode ecran;
 
-  void menu_principal(){
+  typedef struct {
+    SDL_Texture * texture;
+    SDL_Rect * rect;
+  } texture_rect;
 
+  void renderMenu(texture_rect texrect[], texture_rect flammes){
+    int i;
+    SDL_RenderClear(renderer_menu);
+    jouerAnimationBackground(&srcBg, &dstBg);
+    SDL_RenderCopy(renderer_menu, texture_stage_menu, &srcBg, &dstBg);
+    if(flammes.texture!=NULL)
+      SDL_RenderCopy(renderer_menu, flammes.texture, NULL, flammes.rect);
+
+    for(i=0; i<4; i++){
+      SDL_RenderCopy(renderer_menu, texrect[i].texture, NULL, texrect[i].rect);
+    }
+    SDL_RenderPresent(renderer_menu);
+  }
+
+  int getSelection(int x_button, int y_button){
+    if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
+      return 1;
+    else if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
+      return 2;
+    else if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
+      return 3;
+    else if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
+      return 4;
+
+    return 0;
+  }
+
+  void menu_principal(){
+    texture_rect texrect[5];
+    texture_rect flammes[5];
 
     if(TTF_Init()==-1){
       printf("librairie non initialisé");
@@ -28,11 +62,11 @@
     IMG_Init(IMG_INIT_PNG);
     SDL_GetDesktopDisplayMode(0, &ecran);
 
-    SDL_Window * window_menu = SDL_CreateWindow("SDL2 Tekken - menu principal",
+    window_menu = SDL_CreateWindow("SDL2 Tekken - menu principal",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
-    SDL_Renderer * renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
-    SDL_Surface * image_stage_menu = IMG_Load("res/backgrounds/ryu_menu.png");
-    SDL_Texture * texture_stage_menu = SDL_CreateTextureFromSurface(renderer_menu, image_stage_menu);
+    renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
+    image_stage_menu = IMG_Load("res/backgrounds/stage.png");
+    texture_stage_menu = SDL_CreateTextureFromSurface(renderer_menu, image_stage_menu);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
     SDL_Surface * image_flamme_multi = IMG_Load("res/flamme3.png");
@@ -47,6 +81,9 @@
     rect_flamme_multi.w = text_width_flamme_multi+600.0;
     rect_flamme_multi.h = text_height_flamme_multi+50.0;
 
+    flammes[0].texture=texture_flamme_multi;
+    flammes[0].rect=&rect_flamme_multi;
+
     //fond flamme texte IA
     SDL_Surface * image_flamme_IA = IMG_Load("res/flamme3.png");
     SDL_Texture * texture_flamme_IA = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_IA);
@@ -59,6 +96,9 @@
     rect_flamme_IA.y = 125.0/1080.0*ecran.h;
     rect_flamme_IA.w = text_width_flamme_IA+600.0;
     rect_flamme_IA.h = text_height_flamme_IA+50.0;
+
+    flammes[1].texture=texture_flamme_IA;
+    flammes[1].rect=&rect_flamme_IA;
 
     //fond flamme texte options
     SDL_Surface * image_flamme_options = IMG_Load("res/flamme3.png");
@@ -73,6 +113,8 @@
     rect_flamme_options.w = text_width_flamme_options+250.0;
     rect_flamme_options.h = text_height_flamme_options+50.0;
 
+    flammes[2].texture=texture_flamme_options;
+    flammes[2].rect=&rect_flamme_options;
 
     //fond flamme texte quitter
     SDL_Surface * image_flamme_quitter = IMG_Load("res/flamme3.png");
@@ -87,8 +129,10 @@
     rect_flamme_quitter.w = text_width_flamme_quitter+250.0;
     rect_flamme_quitter.h = text_height_flamme_quitter+50.0;
 
+    flammes[3].texture=texture_flamme_quitter;
+    flammes[3].rect=&rect_flamme_quitter;
+
   //preparation couleur et font du texte
-    SDL_Color ColorRed = {255, 0, 0, 0};
     SDL_Color ColorWhite = {255, 255, 255, 0};
     int taille = 50;
     TTF_Font * font = TTF_OpenFont("res/fonts/Sans.ttf", taille);
@@ -115,6 +159,9 @@
     rect_jouer_multi.w = text_width_jouer_multi;
     rect_jouer_multi.h = text_height_jouer_multi;
 
+    texrect[0].texture=texture_jouer_multi;
+    texrect[0].rect=&rect_jouer_multi;
+
     //création affichage jouer contre IA
     SDL_Surface * surface_jouer_IA = TTF_RenderText_Solid(font,"jouer contre une IA", ColorWhite);
     SDL_Texture * texture_jouer_IA = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_IA);
@@ -122,13 +169,15 @@
     int text_width_jouer_IA = surface_jouer_IA->w;
     int text_height_jouer_IA = surface_jouer_IA->h;
     SDL_FreeSurface(surface_jouer_IA);
-
     SDL_Rect rect_jouer_IA;
+
     rect_jouer_IA.x = 100.0/1920.0*ecran.w;
     rect_jouer_IA.y = 150.0/1080.0*ecran.h;;
     rect_jouer_IA.w = text_width_jouer_IA;
     rect_jouer_IA.h = text_height_jouer_IA;
 
+    texrect[1].texture=texture_jouer_IA;
+    texrect[1].rect=&rect_jouer_IA;
 
     //création affichage option
     SDL_Surface * surface_option = TTF_RenderText_Solid(font,"options", ColorWhite);
@@ -144,6 +193,8 @@
     rect_option.w = text_width_option;
     rect_option.h = text_height_option;
 
+    texrect[2].texture=texture_option;
+    texrect[2].rect=&rect_option;
 
     //création affichage quitter
     SDL_Surface * surface_quitter = TTF_RenderText_Solid(font,"quitter", ColorWhite);
@@ -159,36 +210,21 @@
     rect_quitter.w = text_width_quitter;
     rect_quitter.h = text_height_quitter;
 
-
+    texrect[3].texture=texture_quitter;
+    texrect[3].rect=&rect_quitter;
 
     //affichage du fond d'écran apres avoir néttoyer le renderer
-    SDL_RenderClear(renderer_menu);
-    SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-
-    /* texture des flammes
-    SDL_RenderCopy(renderer_menu, texture_flamme_multi, NULL, &rect_flamme_multi);
-    SDL_RenderCopy(renderer_menu, texture_flamme_IA, NULL, &rect_flamme_IA);
-    SDL_RenderCopy(renderer_menu, texture_flamme_options, NULL, &rect_flamme_options);
-    SDL_RenderCopy(renderer_menu, texture_flamme_quitter, NULL, &rect_flamme_quitter);*/
-
-
-    //affichage des textes
-    SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-    SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-    SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-    SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-    //affichage du tout
-    SDL_RenderPresent(renderer_menu);
-
    	int x_button;
   	int y_button;
     quitter=false;
-    int sortie=0;
+    int sortie=1;
 
   while (!quitter) {
   	SDL_Event event;
-  	SDL_WaitEvent(&event);
-  	//SDL_PollEvent(&event);
+  	//SDL_WaitEvent(&event);
+  	SDL_PollEvent(&event);
+    renderMenu(texrect, flammes[sortie-1]);
+
   	switch (event.type){
   		case SDL_QUIT:
   			quitter = true;
@@ -199,24 +235,21 @@
   				y_button =event.button.y;
   				printf("\n%i %i",x_button,y_button);
           //sortie jouer en multijoueur
-          if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0)){
-            quitter=true;
-            sortie=1;
-          }
-          //sortie contre IA
-          if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0)){
-            quitter=true;
-            sortie=2;
-          }
-          //sortie option
-          if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0)){
-            quitter=true;
-            sortie=3;
-          }
-          //sortie quitter
-          if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0)){
-            quitter=true;
-            sortie=4;
+
+          switch (getSelection(x_button, y_button)) {
+            case 1: quitter=true;
+                    sortie=1;
+                    break;
+            case 2: quitter=true;
+                    sortie=2;
+                    break;
+            case 3: quitter=true;
+                    sortie=3;
+                    break;
+            case 4: quitter=true;
+                    sortie=4;
+                    break;
+
           }
   				break;
 
@@ -225,59 +258,23 @@
   				y_button =event.button.y;
       //postions de la souris
           //sur le texte multijoueur
-          if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0)){
-              printf("\nsouris sur 1");
-                  sortie=1;
-                  SDL_RenderClear(renderer_menu);
-                  SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-                  SDL_RenderCopy(renderer_menu, texture_flamme_multi, NULL, &rect_flamme_multi);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-                  SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-                  SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-                  SDL_RenderPresent(renderer_menu);
-          }
-          //sur le texte contre IA
-          else if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0)){
-              printf("\nsouris sur 2");
-                  sortie=2;
-                  SDL_RenderClear(renderer_menu);
-                  SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-                  SDL_RenderCopy(renderer_menu, texture_flamme_IA, NULL, &rect_flamme_IA);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-                  SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-                  SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-                  SDL_RenderPresent(renderer_menu);
-          }
-          //sur le texte options
-          else if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0)){
-              printf("\nsouris sur 3");
-                  sortie=3;
-                  SDL_RenderClear(renderer_menu);
-                  SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-                  SDL_RenderCopy(renderer_menu, texture_flamme_options, NULL, &rect_flamme_options);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-                  SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-                  SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-                  SDL_RenderPresent(renderer_menu);
-          }
-          //sur le texte quitter
-          else if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0)){
-              printf("\nsouris sur 4");
-                  sortie=4;
-                  SDL_RenderClear(renderer_menu);
-                  SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-                  SDL_RenderCopy(renderer_menu, texture_flamme_quitter, NULL, &rect_flamme_quitter);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-                  SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-                  SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-                  SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-                  SDL_RenderPresent(renderer_menu);
-          }
 
+          switch (getSelection(x_button, y_button)) {
+            case 1:
+                    sortie=1;
+                    break;
+            case 2:
+                    sortie=2;
+                    break;
+            case 3:
+                    sortie=3;
+                    break;
+            case 4:
+                    sortie=4;
+                    break;
+          }
           break;
+
   		case SDL_KEYDOWN:
   		switch(event.key.keysym.sym){
   			case SDLK_q:
@@ -291,88 +288,23 @@
         case SDLK_UP:
           if(sortie==0){
               sortie=1;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_multi, NULL, &rect_flamme_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
           }else if(sortie==2){
               sortie=1;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_multi, NULL, &rect_flamme_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
           }else if(sortie==3){
               sortie=2;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_IA, NULL, &rect_flamme_IA);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
-
           }else if(sortie==4){
               sortie=3;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_options, NULL, &rect_flamme_options);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
             }
-  			break;
+  	break;
         case SDLK_DOWN:
           if(sortie==0){
               sortie=1;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_multi, NULL, &rect_flamme_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
           }else if(sortie==1){
               sortie=2;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_IA, NULL, &rect_flamme_IA);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
           }else if(sortie==2){
               sortie=3;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_options, NULL, &rect_flamme_options);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
           }else if(sortie==3){
               sortie=4;
-              SDL_RenderClear(renderer_menu);
-              SDL_RenderCopy(renderer_menu, texture_stage_menu, NULL, NULL);
-              SDL_RenderCopy(renderer_menu, texture_flamme_quitter, NULL, &rect_flamme_quitter);
-              SDL_RenderCopy(renderer_menu,texture_jouer_multi, NULL, &rect_jouer_multi);
-              SDL_RenderCopy(renderer_menu,texture_jouer_IA, NULL, &rect_jouer_IA);
-              SDL_RenderCopy(renderer_menu,texture_option, NULL, &rect_option);
-              SDL_RenderCopy(renderer_menu,texture_quitter, NULL, &rect_quitter);
-              SDL_RenderPresent(renderer_menu);
   			  break;
         }
   		}
