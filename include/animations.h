@@ -14,4 +14,10 @@ void resetAnimation(Joueur * joueur);
 void jouerAnimation(Joueur * joueur);
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg);
 
+typedef struct {
+  int posY;
+  int nb_frames;
+  char * chemin_sprite;
+} Background;
+
 #endif

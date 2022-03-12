@@ -8,7 +8,7 @@
 #include "../include/jeu.h"
 
 #define MODE FULLSCREEN
-
+SDL_Window * window_menu_selection;
 
 void aff_menu_selection(int carre,float pos_x){}
 
@@ -62,10 +62,10 @@ void menu_selection(){
 //création de la page
       switch(MODE){
         case FULLSCREEN:
-          SDL_Window * window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_FULLSCREEN);
+          window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_FULLSCREEN);
           break;
         case BORDERLESS:
-          SDL_Window * window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
+          window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
           break;
       }
 
