@@ -5,13 +5,10 @@
 
 int test_son(){
 	Mix_Chunk *wave = NULL;
-	// Initialize SDL.
-	if (SDL_Init(SDL_INIT_AUDIO) < 0)
-		return -1;
 
-	//Initialize SDL_mixer
-	if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
-		return -1;
+	//Initialize SDL_mixerœœ
+if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1)
+		printf("Erreur de merde : %s", Mix_GetError());
 
 	// Load our sound effect
 	wave = Mix_LoadWAV(WAV_PATH);
