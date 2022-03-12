@@ -28,7 +28,7 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	if(checkCollisions(jAttaquant, j2)){
 		j2->action=PARER;
 		j2->vie-=50;
-		//test_son();
+		test_son();
 	}
 }
 
@@ -38,8 +38,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	direction(j1, j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
-	SDL_Thread *thread;
-	params *data = malloc(sizeof(params));
+	Uint32 ticks = SDL_GetTicks();
 
 	switch (event.type) {
 		case SDL_QUIT:
@@ -80,12 +79,15 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		case SDL_KEYUP:
 		switch (event.key.keysym.sym) {
 			case SDLK_q:
+			resetAnimation(j1);
 			j1->action=IDLE;
 			break;
 			case SDLK_d:
+			resetAnimation(j1);
 			j1->action=IDLE;
 			break;
 			case SDLK_z:
+			resetAnimation(j1);
 			j1->action=IDLE;
 			break;
 		}
@@ -95,13 +97,15 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
 	if(j1->hitbox.x>0){
-		j1->position.x -= VITESSE;
+		if(ticks%4==0)
+			j1->position.x -= VITESSE;
 		j1->action=COURIR;
 	}
 }
 if (state[SDL_SCANCODE_D]) {
 	if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
-		j1->position.x += VITESSE;
+		if(ticks%4==0)
+			j1->position.x += VITESSE;
 		j1->action=COURIR;
 	}
 }
