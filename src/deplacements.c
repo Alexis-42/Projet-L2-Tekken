@@ -93,20 +93,12 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
 	if(j1->hitbox.x>0){
-<<<<<<< HEAD
-=======
-		if(ticks%2==0)
->>>>>>> 90539440eaa71b5b5cf5bde13330fb9f7cae8d62
 			j1->position.x -= VITESSE;
 		j1->action=COURIR;
 	}
 }
 if (state[SDL_SCANCODE_D]) {
 	if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
-<<<<<<< HEAD
-=======
-		if(ticks%2==0)
->>>>>>> 90539440eaa71b5b5cf5bde13330fb9f7cae8d62
 			j1->position.x += VITESSE;
 		j1->action=COURIR;
 	}
