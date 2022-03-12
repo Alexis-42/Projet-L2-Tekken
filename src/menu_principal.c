@@ -242,7 +242,6 @@ SDL_DisplayMode ecran;
   		case SDL_MOUSEBUTTONDOWN:
   				x_button =event.button.x;
   				y_button =event.button.y;
-  				printf("\n%i %i",x_button,y_button);
           //sortie jouer en multijoueur
 
           switch (getSelection(x_button, y_button)) {
