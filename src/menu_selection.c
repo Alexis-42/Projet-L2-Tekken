@@ -7,7 +7,7 @@
 #include "../include/menu_principal.h"
 #include "../include/jeu.h"
 
-
+#define MODE FULLSCREEN
 
 
 void aff_menu_selection(int carre,float pos_x){}
@@ -60,8 +60,15 @@ void menu_selection(){
     IMG_Init(IMG_INIT_PNG);
 
 //création de la page
-    SDL_Window * window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, 0);
+      switch(MODE){
+        case FULLSCREEN:
+          SDL_Window * window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_FULLSCREEN);
+          break;
+        case BORDERLESS:
+          SDL_Window * window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
+          break;
+      }
+
     SDL_Renderer * renderer_menu_selection = SDL_CreateRenderer(window_menu_selection, -1, 0);
     SDL_Surface * image_stage_menu_selection = IMG_Load("res/backgrounds/ryu_menu.png");
     SDL_Texture * texture_stage_menu_selection = SDL_CreateTextureFromSurface(renderer_menu_selection, image_stage_menu_selection);
@@ -108,7 +115,7 @@ void menu_selection(){
     rect_tinky.h = ecran.w/6.0;
 
 //initialisation carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
-    //carré rouge de sélection du personnage 
+    //carré rouge de sélection du personnage
     SDL_Surface * image_carre_rouge = IMG_Load("res/carre_rouge.png");
     SDL_Texture * texture_carre_rouge = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_rouge);
     SDL_FreeSurface(image_carre_rouge);
@@ -118,7 +125,7 @@ void menu_selection(){
     rect_carre_rouge.w = ecran.w/6.0;
     rect_carre_rouge.h = ecran.w/6.0;
 
-    //carré bleu de sélection du personnage 
+    //carré bleu de sélection du personnage
     SDL_Surface * image_carre_bleu = IMG_Load("res/carre_bleu.png");
     SDL_Texture * texture_carre_bleu = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_bleu);
     SDL_FreeSurface(image_carre_bleu);
@@ -139,7 +146,7 @@ void menu_selection(){
     rect_carre_violet.h = ecran.w/6.0;
 
 
-//initialisation sprite des personnages 
+//initialisation sprite des personnages
     //sprite de shrek
     SDL_Surface * surface_sprite_shrek = IMG_Load("res/sprites/Shrek.png");
     SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer, surface_sprite_shrek);
