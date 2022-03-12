@@ -23,10 +23,10 @@ void hitbox(Joueur * joueur){
 }
 
 void checkPerdu(Joueur * j1, Joueur * j2){
-	if(j1->vie==0)
+/*	if(j1->vie==0)
 		printf("%s a gagné !\n", j2->nom);
 	else if(j2->vie==0)
-		printf("%s a gagné !\n", j1->nom);
+		printf("%s a gagné !\n", j1->nom);*/
 }
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
