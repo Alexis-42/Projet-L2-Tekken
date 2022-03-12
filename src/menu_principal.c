@@ -1,4 +1,4 @@
-#include <stdio.h>
+cd g#include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
@@ -8,14 +8,15 @@
 #include "../include/menu_selection.h"
 #include "../include/animations.h"
 
-  bool quitter;
+#define MODE FULLSCREEN
+bool quitter;
 
-  SDL_Window * window_menu;
-  SDL_Renderer * renderer_menu ;
-  SDL_Surface * image_stage_menu;
-  SDL_Texture * texture_stage_menu;
-  SDL_Rect srcBg, dstBg;
-  SDL_DisplayMode ecran;
+SDL_Window * window_menu;
+SDL_Renderer * renderer_menu ;
+SDL_Surface * image_stage_menu;
+SDL_Texture * texture_stage_menu;
+SDL_Rect srcBg, dstBg;
+SDL_DisplayMode ecran;
 
   typedef struct {
     SDL_Texture * texture;
@@ -62,8 +63,16 @@
     IMG_Init(IMG_INIT_PNG);
     SDL_GetDesktopDisplayMode(0, &ecran);
 
-    window_menu = SDL_CreateWindow("SDL2 Tekken - menu principal",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
+    switch(MODE){
+      case FULLSCREEN:
+        window_menu = SDL_CreateWindow("SDL2 Tekken - menu principal",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_FULLSCREEN);
+        break;
+      case BORDERLESS:
+        window_menu = SDL_CreateWindow("SDL2 Tekken - menu principal",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
+        break;
+    }
+
+
     renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
     image_stage_menu = IMG_Load("res/backgrounds/stage.png");
     texture_stage_menu = SDL_CreateTextureFromSurface(renderer_menu, image_stage_menu);
