@@ -83,12 +83,9 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     SDL_RenderPresent(renderer);
   }
 
-<<<<<<< HEAD
 
   SDL_DestroyTexture(texture_stage);
-=======
   //SDL_DestroyTexture(texture_stage);
->>>>>>> fed070aa7797be998f0982a9f5841be3dca05f12
   SDL_DestroyTexture(tex_menu_Principal);
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);
