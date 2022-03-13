@@ -4,7 +4,10 @@
 #ifndef PERSO_H_INCLUDED__
 #define PERSO_H_INCLUDED__
 
-/* struc qui permet de faire le menu de selection des persos */
+#define PINGU 0
+#define SHREK 1
+
+/* struct qui permet de faire le menu de selection des persos */
 typedef struct {
   int w, h;
 } taille;

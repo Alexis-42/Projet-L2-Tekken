@@ -13,7 +13,7 @@ void initPerso(Joueur * j, int i){
 
 			j->perso.nb_frame[IDLE]=1;
 			j->perso.nb_frame[COURIR]=15;
-			j->perso.nb_frame[POING]=14;
+			j->perso.nb_frame[POING]=13;
 			j->perso.nb_frame[PARER]=3;
 
 			j->perso.taille_perso.w=310;
