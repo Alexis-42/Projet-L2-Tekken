@@ -10,7 +10,7 @@
 #include "../include/jeu.h"
 #include "../include/son.h"
 
-#define VITESSE 2
+#define VITESSE 0.4
 
 typedef struct {
 	Joueur * joueur;
@@ -18,8 +18,8 @@ typedef struct {
 } params;
 
 void sauter(Joueur * joueur){
-	int i, pos=joueur->position.y;
-	for(i=pos; i<0; i++, joueur->position.y--);
+	joueur->position.y += 1.5;
+
 }
 
 void attaquer(Joueur * jAttaquant, Joueur * j2){
@@ -104,6 +104,7 @@ if (state[SDL_SCANCODE_D]) {
 	}
 }
 if (state[SDL_SCANCODE_SPACE]) {
+	j1->action=COURIR;
 	sauter(j1);
 }
 if (state[SDL_SCANCODE_ESCAPE]) {

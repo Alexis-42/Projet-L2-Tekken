@@ -8,7 +8,7 @@
 typedef enum {gauche, droite} Direction;
 
 typedef struct {
-	int x, y;
+	float x, y;
 } coord;
 
 typedef struct {
