@@ -7,6 +7,7 @@
 #include "../include/jeu.h"
 #include "../include/menu_selection.h"
 #include "../include/animations.h"
+#include "../include/map.h"
 
 #define MODE FULLSCREEN
 bool quitter;
@@ -14,7 +15,6 @@ bool quitter;
 SDL_Window * window_menu;
 SDL_Renderer * renderer_menu ;
 SDL_Surface * image_stage_menu;
-SDL_Texture * texture_stage_menu;
 SDL_Rect srcBg, dstBg;
 SDL_DisplayMode ecran;
 
@@ -27,7 +27,7 @@ SDL_DisplayMode ecran;
     int i;
     SDL_RenderClear(renderer_menu);
     jouerAnimationBackground(&srcBg, &dstBg);
-    SDL_RenderCopy(renderer_menu, texture_stage_menu, &srcBg, &dstBg);
+    renderMap(&srcBg, &dstBg, renderer_menu);
     if(flammes.texture!=NULL)
       SDL_RenderCopy(renderer_menu, flammes.texture, NULL, flammes.rect);
 
@@ -74,8 +74,7 @@ SDL_DisplayMode ecran;
 
 
     renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
-    image_stage_menu = IMG_Load("res/backgrounds/stage.png");
-    texture_stage_menu = SDL_CreateTextureFromSurface(renderer_menu, image_stage_menu);
+    chargerMap(0, renderer_menu);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
     SDL_Surface * image_flamme_multi = IMG_Load("res/flamme3.png");
