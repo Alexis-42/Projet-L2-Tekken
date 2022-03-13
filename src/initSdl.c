@@ -17,11 +17,13 @@
 
 bool quit;
 SDL_DisplayMode ecran;
+SDL_Texture * text_viej1 = NULL;
+SDL_Texture * text_viej2 = NULL;
 
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
-  SDL_Rect srcBg, dstBg;
+  SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2;
 
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
@@ -62,6 +64,11 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   resetAnimation(&j2);
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //Couleur des hitboxes
 
+  init_sprite_pv(&rect_sprite_pv_j1, 1);
+  init_sprite_pv(&rect_sprite_pv_j2, 2);
+
+  SDL_Surface * sprite_barre_de_vie = IMG_Load("res/barre_de_vie.png");
+
   while (!quit) {
     jouerAnimationBackground(&srcBg, &dstBg);
     jouerAnimation(&j1);
@@ -71,13 +78,23 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderMap(&srcBg, &dstBg, renderer);
     renderAnimation(&j1);
     renderAnimation(&j2);
+    text_viej1 = barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer); 
+    text_viej2 = barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer);
     SDL_RenderPresent(renderer);
   }
 
+<<<<<<< HEAD
+
+  SDL_DestroyTexture(texture_stage);
+=======
   //SDL_DestroyTexture(texture_stage);
+>>>>>>> fed070aa7797be998f0982a9f5841be3dca05f12
   SDL_DestroyTexture(tex_menu_Principal);
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);
+  SDL_DestroyTexture(text_viej1);
+  SDL_DestroyTexture(text_viej2);
+  SDL_FreeSurface(sprite_barre_de_vie);
   SDL_FreeSurface(perso1);
   SDL_FreeSurface(perso2);
   SDL_DestroyRenderer(renderer);
