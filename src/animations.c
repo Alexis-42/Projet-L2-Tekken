@@ -10,8 +10,30 @@
 #include "../include/personnages.h"
 #include "../include/map.h"
 
+SDL_DisplayMode ecran;
+
 void renderAnimation(Joueur * joueur){
   SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->perso.srcrect), &(joueur->perso.dstrect), 0, 0, joueur->direction);
+}
+
+
+// fonction qui permet l'init d'un sprite barre de vie en fonction du joueur
+void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
+  rect_sprite_pv->y = 0;
+  rect_sprite_pv->w = 854;
+  rect_sprite_pv->h = 161;
+  if(num_joueur==1){
+    rect_sprite_pv->x = 0;
+  }else{
+    rect_sprite_pv->x = ecran.w-rect_sprite_pv->w ;
+  }
+}
+
+// fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
+SDL_Texture * barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv,SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer){
+    SDL_Texture * texture_barre_de_vie = SDL_CreateTextureFromSurface(renderer, sprite_barre_de_vie);
+    SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
+    return texture_barre_de_vie;
 }
 
 void resetAnimation(Joueur * joueur){
@@ -22,6 +44,7 @@ void resetAnimation(Joueur * joueur){
     joueur->perso.taille_perso.w,
     joueur->perso.taille_perso.h
   };
+
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,

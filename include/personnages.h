@@ -23,5 +23,4 @@ typedef struct {
     SDL_Rect dstrect;
     int nb_frame[NB_ANIMATIONS];
 } Personnage;
-
 #endif
