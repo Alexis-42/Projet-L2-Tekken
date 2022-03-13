@@ -6,6 +6,11 @@
 #include "../include/jeu.h"
 #include "../include/animations.h"
 #include "../include/personnages.h"
+#include "../include/map.h"
+
+bool estAuSol(Joueur * joueur){
+  return joueur->position.y==spawnY;
+}
 
 void direction(Joueur * j1, Joueur * j2){
     j1->direction=j1->position.x<j2->position.x; //Direction
@@ -41,5 +46,5 @@ void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * textur
   joueur->texture=texture;
   joueur->direction=direction;
   joueur->position.x=(int)((posX/1280.0)*(float) ecran.w);
-  joueur->position.y=(int)((350.0/720.0)*(float) ecran.h);
+  joueur->position.y=(int)((spawnY/720.0)*(float) ecran.h);
 }

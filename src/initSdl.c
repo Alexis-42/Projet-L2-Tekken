@@ -11,6 +11,7 @@
 #include "../include/animations.h"
 #include "../include/jeu.h"
 #include "../include/personnages.h"
+#include "../include/map.h"
 
 #define MODE FULLSCREEN
 
@@ -48,8 +49,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  SDL_Surface * image_stage = IMG_Load("res/backgrounds/stage.png");
-  SDL_Texture * texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
+  chargerMap(2, renderer);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
@@ -68,13 +68,13 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     deplacements(&j1, &j2);
     checkPerdu(&j1, &j2);
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture_stage, &srcBg, &dstBg);
+    renderMap(&srcBg, &dstBg, renderer);
     renderAnimation(&j1);
     renderAnimation(&j2);
     SDL_RenderPresent(renderer);
   }
 
-  SDL_DestroyTexture(texture_stage);
+  //SDL_DestroyTexture(texture_stage);
   SDL_DestroyTexture(tex_menu_Principal);
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);

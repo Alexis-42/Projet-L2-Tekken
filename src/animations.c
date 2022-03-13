@@ -8,6 +8,7 @@
 #include "../include/joueur.h"
 #include "../include/jeu.h"
 #include "../include/personnages.h"
+#include "../include/map.h"
 
 void renderAnimation(Joueur * joueur){
   SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->perso.srcrect), &(joueur->perso.dstrect), 0, 0, joueur->direction);
@@ -31,7 +32,7 @@ void resetAnimation(Joueur * joueur){
   joueur->perso.dstrect=dstrect;
 }
 
-void jouerAnimation(Joueur * joueur){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimation(Joueur * joueur){
   int posYSprite;
   int anim=joueur->action;
 
@@ -92,12 +93,12 @@ SDL_Rect dstrect = {
 }
 }
 
-void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
-  Uint32 sprite = seconds % 8;
+  Uint32 sprite = seconds % nbFramesMap;
 
     SDL_Rect srcrect = {
-    sprite * (6144/8),
+    sprite * pas,
     0,
     726,
     368
