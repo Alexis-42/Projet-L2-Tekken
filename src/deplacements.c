@@ -18,13 +18,16 @@ typedef struct {
 } params;
 
 void sauter(Joueur * joueur){
-	joueur->position.y += 1.5;
-
+        /*if(joueur->action==SAUTER)
+           if(estTropHaut(joueur))
+              if(!estAuSol(joueur))
+	         joueur->position.y -= 1.5;
+	   else
+	         joueur->position.y += 1.5;*/
 }
 
 void attaquer(Joueur * jAttaquant, Joueur * j2){
 	jAttaquant->action=POING;
-
 	if(checkCollisions(jAttaquant, j2)){
 		j2->action=PARER;
 		j2->vie-=50;
@@ -36,6 +39,8 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	hitbox(j1);
 	hitbox(j2);
 	direction(j1, j2);
+	sauter(j1);
+	sauter(j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	Uint32 ticks = SDL_GetTicks();
@@ -104,8 +109,7 @@ if (state[SDL_SCANCODE_D]) {
 	}
 }
 if (state[SDL_SCANCODE_SPACE]) {
-	j1->action=COURIR;
-	sauter(j1);
+	j1->action=SAUTER;
 }
 if (state[SDL_SCANCODE_ESCAPE]) {
 	quit=true;

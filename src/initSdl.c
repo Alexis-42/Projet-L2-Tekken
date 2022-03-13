@@ -39,8 +39,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
   Joueur j1, j2;
-  initPerso(&j1, 0); //Pingu
-  initPerso(&j2, 1); //Shrek
+  initPerso(&j1, SHREK);
+  initPerso(&j2, PINGU);
 
   char j1sprite[50], j2sprite[50];
   snprintf(j1sprite, sizeof(j1sprite), "res/sprites/%s.png", j1.perso.nom);
@@ -56,8 +56,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   TTF_Init();
 
-  initJoueur(&j1, 300.0, "PINGUU", texture_joueur1, gauche);
-  initJoueur(&j2, 600.0, "Shrekleouinouin", texture_joueur2, droite);
+  initJoueur(&j1, 300.0, "Shrekleouinouin", texture_joueur1, gauche);
+  initJoueur(&j2, 600.0, "PINGU", texture_joueur2, droite);
   resetAnimation(&j1); //Spawn du joueur
   resetAnimation(&j2);
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //Couleur des hitboxes

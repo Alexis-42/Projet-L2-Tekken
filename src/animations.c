@@ -48,7 +48,7 @@ void jouerAnimation(Joueur * joueur){
   Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
 
   if(anim!=COURIR){
-  if(joueur->perso.frame<joueur->perso.nb_frame[anim]){
+  if(joueur->perso.frame-1<joueur->perso.nb_frame[anim]){
     if(joueur->perso.seconds!=seconds){
 
     SDL_Rect srcrect = {
