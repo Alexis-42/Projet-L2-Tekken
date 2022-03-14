@@ -83,8 +83,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderMap(&srcBg, &dstBg, renderer);
     renderAnimation(&j1);
     renderAnimation(&j2);
-    barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer, 1); 
-    barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer, 2);
+    barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer, 1, font); 
+    barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer, 2, font);
     init_affichage_temps(sec_deb_combat, font, renderer, &rect_sprite_pv_j1);
     SDL_RenderPresent(renderer);
   }
