@@ -9,14 +9,13 @@ SDL_Texture * texture_stage = NULL;
 
 float spawnY;
 int nbFramesMap, pas;
-char * cheminMap;
 
 void renderMap(SDL_Rect * src, SDL_Rect * dst, SDL_Renderer * renderer){
   SDL_RenderCopy(renderer, texture_stage, src, dst);
 }
 
 void chargerMap(int map, SDL_Renderer * renderer){
-  cheminMap = malloc(sizeof(char *));
+  char * cheminMap = malloc(sizeof(char *));
   switch (map) {
     case 0: nbFramesMap=8;
             pas=(6144/nbFramesMap);
@@ -42,5 +41,4 @@ void chargerMap(int map, SDL_Renderer * renderer){
   image_stage = IMG_Load(cheminMap);
   texture_stage = SDL_CreateTextureFromSurface(renderer, image_stage);
   SDL_FreeSurface(image_stage);
-  free(cheminMap);
 }
