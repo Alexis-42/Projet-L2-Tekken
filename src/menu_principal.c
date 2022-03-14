@@ -196,26 +196,35 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
           break;
 
   		case SDL_KEYDOWN:
-  		  switch(event.key.keysym.sym){
+  		switch(event.key.keysym.sym){
   			case SDLK_q:
           quitter=true;
-  			  break;
+  			break;
   			case SDLK_RETURN :
-          if(sortie)
-            quitter=true;
-          break;
+        if(sortie){
+          quitter=true;
+        }
+  			break;
         case SDLK_UP:
-          if(sortie==0)
-            sortie=1;
-          else
-            sortie -=1;
-        	break;
-
+          if(sortie==0){
+              sortie=1;
+          }else if(sortie==2){
+              sortie=1;
+          }else if(sortie==3){
+              sortie=2;
+          }else if(sortie==4){
+              sortie=3;
+            }
+  	break;
         case SDLK_DOWN:
-          if(sortie==4)
-            sortie=4;
-          else
-            sortie +=1;
+          if(sortie==0){
+              sortie=1;
+          }else if(sortie==1){
+              sortie=2;
+          }else if(sortie==2){
+              sortie=3;
+          }else if(sortie==3){
+              sortie=4;
   			  break;
         }
   		}
