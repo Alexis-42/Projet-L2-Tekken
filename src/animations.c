@@ -16,7 +16,6 @@ void renderAnimation(Joueur * joueur){
   SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->perso.srcrect), &(joueur->perso.dstrect), 0, 0, joueur->direction);
 }
 
-
 void init_affichage_temps(int sec_deb_combat, TTF_Font* font, SDL_Renderer * renderer, SDL_Rect * rect_sprite_pvj1){
   char str_temps[3];
   SDL_Color textColor = {255, 255, 255, 0};
@@ -46,12 +45,29 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
   }
 }
 
+void afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Renderer * renderer){
+  SDL_Color textColor = {255, 255, 255, 0};
+  SDL_Rect rect_nom_joueur;
+
+  rect_nom_joueur.x = rect_sprite_pv->x;
+  rect_nom_joueur.y = rect_sprite_pv->h;
+  rect_nom_joueur.w = rect_sprite_pv->w;
+  rect_nom_joueur.h = rect_sprite_pv->h/2;
+
+  char * nom = joueur->nom;
+  SDL_Surface * surface = TTF_RenderText_Solid(font, nom, textColor);
+  SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_FreeSurface(surface);
+  SDL_RenderCopy(renderer, texture, NULL ,&rect_nom_joueur);
+  SDL_DestroyTexture(texture);
+}
+
 // fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
-void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer, int num_joueur){
+void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer, int num_joueur, TTF_Font* font){
     // SDL_rect de la barre de pv en fonction des pv
     SDL_Rect rect_pv,rect_pv_rouge;
     //destrect pv rouge
-    rect_pv.y = 0;
+    rect_pv.y = rect_sprite_pv->y;
     if (joueur->vie != 0){
       rect_pv.w = (rect_sprite_pv->w/100)*joueur->vie;
     }
@@ -87,6 +103,9 @@ void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * spri
     SDL_Texture * texture_barre_de_vie = SDL_CreateTextureFromSurface(renderer, sprite_barre_de_vie);
     SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
     SDL_DestroyTexture(texture_barre_de_vie);
+
+    // nom apres le reste
+    afficher_nom_joueur(joueur, font, rect_sprite_pv, renderer);
 }
 
 void resetAnimation(Joueur * joueur){
