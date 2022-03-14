@@ -12,17 +12,21 @@
 #include "../include/jeu.h"
 #include "../include/personnages.h"
 #include "../include/map.h"
+#include "../include/gui.h"
 
 #define MODE FULLSCREEN
 int sec_deb_combat;
 bool quit;
 SDL_DisplayMode ecran;
-SDL_Texture * text_viej1 = NULL;
-SDL_Texture * text_viej2 = NULL;
+
 
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
+  SDL_Texture * texture_carre_jaune = NULL;
+  SDL_Texture * texture_carre_rouge = NULL;
+  SDL_Texture * texture_barre_de_vie = NULL;
+
   SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2;
 
   SDL_Init(SDL_INIT_VIDEO);
@@ -69,6 +73,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   init_sprite_pv(&rect_sprite_pv_j2, 2);
 
   SDL_Surface * sprite_barre_de_vie = IMG_Load("res/barre_de_vie.png");
+  init_gui(&texture_carre_jaune, &texture_carre_rouge, sprite_barre_de_vie, &texture_barre_de_vie);
+  printf("image_carre_rouge : %d", texture_carre_rouge==NULL);
 
   TTF_Font * font = NULL;
   font = TTF_OpenFont("res/fonts/Sans.ttf", 50);
@@ -83,14 +89,17 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderMap(&srcBg, &dstBg, renderer);
     renderAnimation(&j1);
     renderAnimation(&j2);
-    barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer, 1, font); 
-    barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer, 2, font);
-    init_affichage_temps(sec_deb_combat, font, renderer, &rect_sprite_pv_j1);
+    barre_de_vie(&j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
+    barre_de_vie(&j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
+    init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1);
     SDL_RenderPresent(renderer);
   }
 
 
   //SDL_DestroyTexture(texture_stage);
+  SDL_DestroyTexture(texture_carre_rouge);
+  SDL_DestroyTexture(texture_carre_jaune);
+  SDL_DestroyTexture(texture_barre_de_vie);
   SDL_DestroyTexture(tex_menu_Principal);
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);

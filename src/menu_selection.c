@@ -15,7 +15,6 @@ void aff_menu_selection(int carre,float pos_x){}
 void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour){ //Pour freezer l'anim il faut anuller le getTick
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
   Uint32 sprite = seconds % 14;
-
     int x;
     if(tour){
         x=200;
@@ -41,13 +40,6 @@ void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour){ //Pour fr
    *dst=dstrect;
 
 }
-
-
-
-
-
-
-
 
 void menu_selection(){
 
@@ -165,18 +157,11 @@ void menu_selection(){
 
 
 //affichage de la page
-    SDL_RenderClear(renderer_menu_selection);
-    SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-    SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-    SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-    SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-    SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-    SDL_RenderPresent(renderer_menu_selection);
 
 //recherche des actions
 
     int x_button;
-  	int y_button;
+    int y_button;
     int tour_joueur=1;
 
     bool quitter=false;
@@ -237,11 +222,10 @@ void menu_selection(){
         }
         SDL_RenderClear(renderer_menu_selection);
         SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
-
-        jouerAnimationPersoMenu(&rect_sprite_shrek_source, &rect_sprite_shrek,tour_joueur);
-
+        jouerAnimationPersoMenu(&rect_sprite_shrek_source, &rect_sprite_shrek, tour_joueur);
         SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
         SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
+
         if(rect_carre_bleu.x == rect_carre_rouge.x){
             SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
          }
@@ -250,7 +234,7 @@ void menu_selection(){
         SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
         SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
 
-        SDL_RenderCopy(renderer_menu_selection, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek);
+        SDL_RenderCopy(renderer_menu_selection, texture_sprite_shrek, NULL, &rect_sprite_shrek);
         SDL_RenderPresent(renderer_menu_selection);
     }
 
