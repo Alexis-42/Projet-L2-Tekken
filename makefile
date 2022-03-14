@@ -17,6 +17,7 @@ ${PROG}: ${SOURCE} ${LOCLIB}
 jouer: ${PROG}
 	./jeu
 	rm -f bin/*.o
+  clear
 
 clean:
 	rm -f ${PROG}
