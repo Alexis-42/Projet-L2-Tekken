@@ -22,19 +22,18 @@ void init_gui(SDL_Texture ** texture_carre_jaune, SDL_Texture ** texture_carre_r
 }
 
 void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Rect * rect_sprite_pvj1, SDL_Texture **texture,SDL_Rect * rect_temps){
-  if(sec_deb_combat != ancien_temps){ // sachant que ces deux temps sont en secondes on regenere les textures que si la seconde est differente
-    char str_temps[3];
-    SDL_Color textColor = {255, 255, 255, 0};
-    rect_temps->x = rect_sprite_pvj1->x+rect_sprite_pvj1->w;
-    rect_temps->y = rect_sprite_pvj1->y;
-    rect_temps->w = ecran.w-(2*rect_sprite_pvj1->w);
-    rect_temps->h = rect_sprite_pvj1->h;
-    snprintf(str_temps, sizeof(str_temps), "%i", 60-sec_deb_combat);
+ // sachant que ces deux temps sont en secondes on regenere les textures que si la seconde est differente
+  char str_temps[3];
+  SDL_Color textColor = {255, 255, 255, 0};
+  rect_temps->x = rect_sprite_pvj1->x+rect_sprite_pvj1->w;
+  rect_temps->y = rect_sprite_pvj1->y;
+  rect_temps->w = ecran.w-(2*rect_sprite_pvj1->w);
+  rect_temps->h = rect_sprite_pvj1->h;
+  snprintf(str_temps, sizeof(str_temps), "%i", 60-sec_deb_combat);
 
-    SDL_Surface * surface = TTF_RenderText_Solid(font, str_temps, textColor);
-    *texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_FreeSurface(surface);
-  }
+  SDL_Surface * surface = TTF_RenderText_Solid(font, str_temps, textColor);
+  *texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_FreeSurface(surface);
 }
 
 // fonction qui permet l'init d'un sprite barre de vie en fonction du joueur
