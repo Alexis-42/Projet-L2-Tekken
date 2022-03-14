@@ -230,6 +230,7 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
   	}
   }
     //fin du menu principal, changement de fenetre
+    SDL_RenderClear(renderer);
     SDL_DestroyTexture(texFlamme1);
     SDL_DestroyTexture(texFlamme2);
     SDL_DestroyTexture(texFlamme3);
