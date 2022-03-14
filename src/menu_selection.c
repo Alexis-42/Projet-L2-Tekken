@@ -62,7 +62,7 @@ void menu_selection(){
       }
 
     SDL_Renderer * renderer_menu_selection = SDL_CreateRenderer(window_menu_selection, -1, 0);
-    SDL_Surface * image_stage_menu_selection = IMG_Load("res/backgrounds/ryu_menu.png");
+    SDL_Surface * image_stage_menu_selection = IMG_Load("res/backgrounds/selectperso.png");
     SDL_Texture * texture_stage_menu_selection = SDL_CreateTextureFromSurface(renderer_menu_selection, image_stage_menu_selection);
 
 //preparation image des personnages
