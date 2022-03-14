@@ -24,7 +24,7 @@ typedef struct {
 
 void direction(Joueur * j1, Joueur * j2);
 void hitbox(Joueur * joueur);
-void checkPerdu(Joueur * j1, Joueur * j2);
+int checkPerdu(Joueur * j1, Joueur * j2);
 bool checkCollisions(Joueur * j1, Joueur * j2);
 void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * texture, Direction direction);
 void initPerso(Joueur * j, int i);

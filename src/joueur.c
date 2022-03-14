@@ -32,11 +32,12 @@ void hitbox(Joueur * joueur){
   joueur->hitbox=hitbox;
 }
 
-void checkPerdu(Joueur * j1, Joueur * j2){
+int checkPerdu(Joueur * j1, Joueur * j2){
 	if(j1->vie==0)
-		printf("%s a gagné !\n", j2->nom);
+		return 2;
 	else if(j2->vie==0)
-		printf("%s a gagné !\n", j1->nom);
+		return 1;
+  return 0;
 }
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
