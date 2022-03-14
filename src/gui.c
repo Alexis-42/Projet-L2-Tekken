@@ -50,21 +50,18 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
   }
 }
 
-void afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv){
+void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Rect * rect_nom_joueur, SDL_Texture * texture){
   SDL_Color textColor = {255, 255, 255, 0};
-  SDL_Rect rect_nom_joueur;
 
-  rect_nom_joueur.x = rect_sprite_pv->x;
-  rect_nom_joueur.y = rect_sprite_pv->h;
-  rect_nom_joueur.w = rect_sprite_pv->w;
-  rect_nom_joueur.h = rect_sprite_pv->h/2;
+  rect_nom_joueur->x = rect_sprite_pv->x;
+  rect_nom_joueur->y = rect_sprite_pv->h;
+  rect_nom_joueur->w = rect_sprite_pv->w;
+  rect_nom_joueur->h = rect_sprite_pv->h/2;
 
   char * nom = joueur->nom;
   SDL_Surface * surface = TTF_RenderText_Solid(font, nom, textColor);
-  SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+  texture = SDL_CreateTextureFromSurface(renderer, surface);
   SDL_FreeSurface(surface);
-  SDL_RenderCopy(renderer, texture, NULL ,&rect_nom_joueur);
-  SDL_DestroyTexture(texture);
 }
 
 // fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
@@ -98,5 +95,5 @@ void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * text
     SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
 
     // nom apres le reste
-    afficher_nom_joueur(joueur, font, rect_sprite_pv);
+    //afficher_nom_joueur(joueur, font, rect_sprite_pv);
 }
