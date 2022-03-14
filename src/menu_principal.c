@@ -17,23 +17,63 @@ SDL_Renderer * renderer_menu ;
 SDL_Surface * image_stage_menu;
 SDL_Rect srcBg, dstBg;
 SDL_DisplayMode ecran;
+SDL_Rect btn1, btn2, btn3, btn4;
+SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4;
 
-  typedef struct {
-    SDL_Texture * texture;
-    SDL_Rect * rect;
-  } texture_rect;
+SDL_Rect flamme1, flamme2, flamme3, flamme4;
+SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
 
-  void renderMenu(texture_rect texrect[], texture_rect flammes){
+  void creerBouton(TTF_Font * font, char * texte, SDL_Color couleur, SDL_Rect * rect, SDL_Texture ** texture, float x, float y){
+    SDL_Surface * surface_jouer_multi = TTF_RenderText_Solid(font, texte, couleur);
+    *texture = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_multi);
+    int text_width_jouer_multi = surface_jouer_multi->w;
+    int text_height_jouer_multi = surface_jouer_multi->h;
+    SDL_FreeSurface(surface_jouer_multi);
+
+    SDL_Rect rect_jouer_multi;
+
+    rect_jouer_multi.x = x/1920.0*ecran.w;
+    rect_jouer_multi.y = y/1080.0*ecran.h;
+    rect_jouer_multi.w = text_width_jouer_multi;
+    rect_jouer_multi.h = text_height_jouer_multi;
+
+    *rect=rect_jouer_multi;
+  }
+
+  void initFlammes(SDL_Rect * rect, SDL_Texture ** texture, float x, float y){
+    SDL_Surface * image_flamme_multi = IMG_Load("res/flamme.png");
+    *texture = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_multi);
+    int text_width_flamme_multi = image_flamme_multi->w;
+    int text_height_flamme_multi = image_flamme_multi->h;
+
+    SDL_FreeSurface(image_flamme_multi);
+    SDL_Rect rect_flamme_multi;
+    rect_flamme_multi.x = x/1920.0*ecran.w;
+    rect_flamme_multi.y = y/1080.0*ecran.h;
+    rect_flamme_multi.w = text_width_flamme_multi+600.0;
+    rect_flamme_multi.h = text_height_flamme_multi+50.0;
+
+    *rect=rect_flamme_multi;
+  }
+
+  void renderMenu(int sortie){
     int i;
     SDL_RenderClear(renderer_menu);
     jouerAnimationBackground(&srcBg, &dstBg);
     renderMap(&srcBg, &dstBg, renderer_menu);
-    if(flammes.texture!=NULL)
-      SDL_RenderCopy(renderer_menu, flammes.texture, NULL, flammes.rect);
 
-    for(i=0; i<4; i++){
-      SDL_RenderCopy(renderer_menu, texrect[i].texture, NULL, texrect[i].rect);
+    switch (sortie) {
+      case 1: SDL_RenderCopy(renderer_menu, texFlamme1, NULL, &flamme1); break;
+      case 2: SDL_RenderCopy(renderer_menu, texFlamme2, NULL, &flamme2); break;
+      case 3: SDL_RenderCopy(renderer_menu, texFlamme3, NULL, &flamme3); break;
+      case 4: SDL_RenderCopy(renderer_menu, texFlamme4, NULL, &flamme4); break;
     }
+
+    SDL_RenderCopy(renderer_menu, texBtn1, NULL, &btn1);
+    SDL_RenderCopy(renderer_menu, texBtn2, NULL, &btn2);
+    SDL_RenderCopy(renderer_menu, texBtn3, NULL, &btn3);
+    SDL_RenderCopy(renderer_menu, texBtn4, NULL, &btn4);
+
     SDL_RenderPresent(renderer_menu);
   }
 
@@ -51,9 +91,6 @@ SDL_DisplayMode ecran;
   }
 
   void menu_principal(){
-    texture_rect texrect[5];
-    texture_rect flammes[5];
-
     if(TTF_Init()==-1){
       printf("librairie non initialisé");
       exit(EXIT_FAILURE);
@@ -72,73 +109,14 @@ SDL_DisplayMode ecran;
         break;
     }
 
-
     renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
     chargerMap(0, renderer_menu);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
-    SDL_Surface * image_flamme_multi = IMG_Load("res/flamme3.png");
-    SDL_Texture * texture_flamme_multi = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_multi);
-    int text_width_flamme_multi = image_flamme_multi->w;
-    int text_height_flamme_multi = image_flamme_multi->h;
-
-    SDL_FreeSurface(image_flamme_multi);
-    SDL_Rect rect_flamme_multi;
-    rect_flamme_multi.x = 75.0/1920.0*ecran.w;
-    rect_flamme_multi.y = 25.0/1080.0*ecran.h;
-    rect_flamme_multi.w = text_width_flamme_multi+600.0;
-    rect_flamme_multi.h = text_height_flamme_multi+50.0;
-
-    flammes[0].texture=texture_flamme_multi;
-    flammes[0].rect=&rect_flamme_multi;
-
-    //fond flamme texte IA
-    SDL_Surface * image_flamme_IA = IMG_Load("res/flamme3.png");
-    SDL_Texture * texture_flamme_IA = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_IA);
-    int text_width_flamme_IA = image_flamme_IA->w;
-    int text_height_flamme_IA = image_flamme_IA->h;
-
-    SDL_FreeSurface(image_flamme_IA);
-    SDL_Rect rect_flamme_IA;
-    rect_flamme_IA.x = 75.0/1920.0*ecran.w;
-    rect_flamme_IA.y = 125.0/1080.0*ecran.h;
-    rect_flamme_IA.w = text_width_flamme_IA+600.0;
-    rect_flamme_IA.h = text_height_flamme_IA+50.0;
-
-    flammes[1].texture=texture_flamme_IA;
-    flammes[1].rect=&rect_flamme_IA;
-
-    //fond flamme texte options
-    SDL_Surface * image_flamme_options = IMG_Load("res/flamme3.png");
-    SDL_Texture * texture_flamme_options = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_options);
-    int text_width_flamme_options = image_flamme_options->w;
-    int text_height_flamme_options = image_flamme_options->h;
-
-    SDL_FreeSurface(image_flamme_options);
-    SDL_Rect rect_flamme_options;
-    rect_flamme_options.x = 75.0/1920.0*ecran.w;
-    rect_flamme_options.y = 225.0/1080.0*ecran.h;
-    rect_flamme_options.w = text_width_flamme_options+250.0;
-    rect_flamme_options.h = text_height_flamme_options+50.0;
-
-    flammes[2].texture=texture_flamme_options;
-    flammes[2].rect=&rect_flamme_options;
-
-    //fond flamme texte quitter
-    SDL_Surface * image_flamme_quitter = IMG_Load("res/flamme3.png");
-    SDL_Texture * texture_flamme_quitter = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_quitter);
-    int text_width_flamme_quitter = image_flamme_quitter->w;
-    int text_height_flamme_quitter = image_flamme_quitter->h;
-
-    SDL_FreeSurface(image_flamme_quitter);
-    SDL_Rect rect_flamme_quitter;
-    rect_flamme_quitter.x = 75.0/1920.0*ecran.w;
-    rect_flamme_quitter.y = 325.0/1080.0*ecran.h;
-    rect_flamme_quitter.w = text_width_flamme_quitter+250.0;
-    rect_flamme_quitter.h = text_height_flamme_quitter+50.0;
-
-    flammes[3].texture=texture_flamme_quitter;
-    flammes[3].rect=&rect_flamme_quitter;
+    initFlammes(&flamme1, &texFlamme1, 75.0, 25.0);
+    initFlammes(&flamme2, &texFlamme2, 75.0, 125.0);
+    initFlammes(&flamme3, &texFlamme3, 75.0, 225.0);
+    initFlammes(&flamme4, &texFlamme4, 75.0, 325.0);
 
   //preparation couleur et font du texte
     SDL_Color ColorWhite = {255, 255, 255, 0};
@@ -150,76 +128,11 @@ SDL_DisplayMode ecran;
           exit(EXIT_FAILURE);
     }
 
-
-    //affichage menu principal
-
     //création affichage jouer en multijoueur
-    SDL_Surface * surface_jouer_multi = TTF_RenderText_Solid(font,"jouer en multijoueur", ColorWhite);
-    SDL_Texture * texture_jouer_multi = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_multi);
-    int text_width_jouer_multi = surface_jouer_multi->w;
-    int text_height_jouer_multi = surface_jouer_multi->h;
-
-    SDL_FreeSurface(surface_jouer_multi);
-    SDL_Rect rect_jouer_multi;
-
-    rect_jouer_multi.x = 100.0/1920.0*ecran.w;
-    rect_jouer_multi.y = 50.0/1080.0*ecran.h;
-    rect_jouer_multi.w = text_width_jouer_multi;
-    rect_jouer_multi.h = text_height_jouer_multi;
-
-    texrect[0].texture=texture_jouer_multi;
-    texrect[0].rect=&rect_jouer_multi;
-
-    //création affichage jouer contre IA
-    SDL_Surface * surface_jouer_IA = TTF_RenderText_Solid(font,"jouer contre une IA", ColorWhite);
-    SDL_Texture * texture_jouer_IA = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_IA);
-
-    int text_width_jouer_IA = surface_jouer_IA->w;
-    int text_height_jouer_IA = surface_jouer_IA->h;
-    SDL_FreeSurface(surface_jouer_IA);
-    SDL_Rect rect_jouer_IA;
-
-    rect_jouer_IA.x = 100.0/1920.0*ecran.w;
-    rect_jouer_IA.y = 150.0/1080.0*ecran.h;;
-    rect_jouer_IA.w = text_width_jouer_IA;
-    rect_jouer_IA.h = text_height_jouer_IA;
-
-    texrect[1].texture=texture_jouer_IA;
-    texrect[1].rect=&rect_jouer_IA;
-
-    //création affichage option
-    SDL_Surface * surface_option = TTF_RenderText_Solid(font,"options", ColorWhite);
-    SDL_Texture * texture_option = SDL_CreateTextureFromSurface(renderer_menu, surface_option);
-
-    int text_width_option = surface_option->w;
-    int text_height_option = surface_option->h;
-    SDL_FreeSurface(surface_option);
-
-    SDL_Rect rect_option;
-    rect_option.x = 100.0/1920.0*ecran.w;
-    rect_option.y = 250.0/1080.0*ecran.h;;
-    rect_option.w = text_width_option;
-    rect_option.h = text_height_option;
-
-    texrect[2].texture=texture_option;
-    texrect[2].rect=&rect_option;
-
-    //création affichage quitter
-    SDL_Surface * surface_quitter = TTF_RenderText_Solid(font,"quitter", ColorWhite);
-    SDL_Texture * texture_quitter = SDL_CreateTextureFromSurface(renderer_menu, surface_quitter);
-
-    int text_width_quitter = surface_quitter->w;
-    int text_height_quitter = surface_quitter->h;
-    SDL_FreeSurface(surface_quitter);
-
-    SDL_Rect rect_quitter;
-    rect_quitter.x = 100.0/1920.0*ecran.w;
-    rect_quitter.y = 350.0/1080.0*ecran.h;;
-    rect_quitter.w = text_width_quitter;
-    rect_quitter.h = text_height_quitter;
-
-    texrect[3].texture=texture_quitter;
-    texrect[3].rect=&rect_quitter;
+    creerBouton(font, "Jouer en multijoueur", ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
+    creerBouton(font, "Jouer contre une IA", ColorWhite, &btn2, &texBtn2, 75.0, 150.0);
+    creerBouton(font, "Options", ColorWhite, &btn3, &texBtn3, 75.0, 250.0);
+    creerBouton(font, "Quitter", ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
 
     //affichage du fond d'écran apres avoir néttoyer le renderer
    	int x_button;
@@ -231,7 +144,7 @@ SDL_DisplayMode ecran;
   	SDL_Event event;
   	//SDL_WaitEvent(&event);
   	SDL_PollEvent(&event);
-    renderMenu(texrect, flammes[sortie-1]);
+    renderMenu(sortie);
 
   	switch (event.type){
   		case SDL_QUIT:
@@ -318,14 +231,14 @@ SDL_DisplayMode ecran;
   	}
   }
     //fin du menu principal, changement de fenetre
-    SDL_DestroyTexture(texture_flamme_IA);
-    SDL_DestroyTexture(texture_flamme_multi);
-    SDL_DestroyTexture(texture_flamme_options);
-    SDL_DestroyTexture(texture_flamme_quitter);
-    SDL_DestroyTexture(texture_jouer_multi);
-    SDL_DestroyTexture(texture_jouer_IA);
-    SDL_DestroyTexture(texture_option);
-    SDL_DestroyTexture(texture_quitter);
+    SDL_DestroyTexture(texFlamme1);
+    SDL_DestroyTexture(texFlamme2);
+    SDL_DestroyTexture(texFlamme3);
+    SDL_DestroyTexture(texFlamme4);
+    SDL_DestroyTexture(texBtn1);
+    SDL_DestroyTexture(texBtn2);
+    SDL_DestroyTexture(texBtn3);
+    SDL_DestroyTexture(texBtn4);
     SDL_DestroyRenderer(renderer_menu);
     SDL_DestroyWindow(window_menu);
     TTF_CloseFont(font);
