@@ -30,7 +30,7 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
 }
 
 // fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
-SDL_Texture * barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer, int num_joueur){
+void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer, int num_joueur){
     // SDL_rect de la barre de pv en fonction des pv
     SDL_Rect rect_pv,rect_pv_rouge;
     //destrect pv rouge
@@ -69,7 +69,7 @@ SDL_Texture * barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surfa
     // sprite apres les rect de couleurs
     SDL_Texture * texture_barre_de_vie = SDL_CreateTextureFromSurface(renderer, sprite_barre_de_vie);
     SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
-    return texture_barre_de_vie;
+    SDL_DestroyTexture(texture_barre_de_vie);
 }
 
 void resetAnimation(Joueur * joueur){
