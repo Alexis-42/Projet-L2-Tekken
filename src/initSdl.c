@@ -116,6 +116,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     }
   }
 
+  SDL_RenderClear(renderer);
   SDL_DestroyTexture(texture_nomj1);
   SDL_DestroyTexture(texture_nomj2);
   SDL_DestroyTexture(texture_carre_rouge);
