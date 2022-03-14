@@ -57,7 +57,6 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
   }
 
   void renderMenu(int sortie){
-    int i;
     SDL_RenderClear(renderer_menu);
     jouerAnimationBackground(&srcBg, &dstBg);
     renderMap(&srcBg, &dstBg, renderer_menu);

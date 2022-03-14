@@ -10,11 +10,11 @@
 #define MODE FULLSCREEN
 SDL_Window * window_menu_selection;
 
-void aff_menu_selection(int carre,float pos_x){}
+void aff_menu_selection(int carre, float pos_x){}
 
-void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst, int tour){ //Pour freezer l'anim il faut anuller le getTick
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
-  Uint32 sprite = seconds % 14;
+  Uint32 sprite = seconds % 15;
     int x;
     if(tour){
         x=200;
@@ -31,14 +31,13 @@ void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour){ //Pour fr
 
 
   SDL_Rect dstrect = {
+    x,
     500,
-    500,
-    310,
+    176,
     320
   };
    *src=srcrect;
    *dst=dstrect;
-
 }
 
 void menu_selection(){
@@ -141,7 +140,7 @@ void menu_selection(){
 //initialisation sprite des personnages
     //sprite de shrek
     SDL_Surface * surface_sprite_shrek = IMG_Load("res/sprites/Shrek.png");
-    SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer, surface_sprite_shrek);
+    SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_shrek);
     SDL_FreeSurface(surface_sprite_shrek);
     SDL_Rect rect_sprite_shrek_source;
     SDL_Rect rect_sprite_shrek;
@@ -234,7 +233,7 @@ void menu_selection(){
         SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
         SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
 
-        SDL_RenderCopy(renderer_menu_selection, texture_sprite_shrek, NULL, &rect_sprite_shrek);
+        SDL_RenderCopyEx(renderer_menu_selection, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek, 0, NULL, 1);
         SDL_RenderPresent(renderer_menu_selection);
     }
 
