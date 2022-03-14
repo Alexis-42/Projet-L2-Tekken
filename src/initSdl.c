@@ -63,6 +63,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
+  SDL_FreeSurface(perso1);
+  SDL_FreeSurface(perso2);
 
   TTF_Init();
 
@@ -77,7 +79,6 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   SDL_Surface * sprite_barre_de_vie = IMG_Load("res/barre_de_vie.png");
   init_gui(&texture_carre_jaune, &texture_carre_rouge, sprite_barre_de_vie, &texture_barre_de_vie);
-  printf("image_carre_rouge : %d", texture_carre_rouge==NULL);
 
   TTF_Font * font = NULL;
   font = TTF_OpenFont("res/fonts/Sans.ttf", 50);
@@ -124,8 +125,6 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);
   SDL_FreeSurface(sprite_barre_de_vie);
-  SDL_FreeSurface(perso1);
-  SDL_FreeSurface(perso2);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   TTF_CloseFont(font);

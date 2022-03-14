@@ -9,7 +9,7 @@
 
 /* struct qui permet de faire le menu de selection des persos */
 typedef struct {
-  int w, h;
+  float w, h;
 } taille;
 
 typedef struct {
