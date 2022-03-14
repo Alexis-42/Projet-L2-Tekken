@@ -328,6 +328,8 @@ SDL_DisplayMode ecran;
     SDL_DestroyTexture(texture_quitter);
     SDL_DestroyRenderer(renderer_menu);
     SDL_DestroyWindow(window_menu);
+    TTF_CloseFont(font);
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 

@@ -14,7 +14,7 @@
 #include "../include/map.h"
 
 #define MODE FULLSCREEN
-
+int sec_deb_combat;
 bool quit;
 SDL_DisplayMode ecran;
 SDL_Texture * text_viej1 = NULL;
@@ -70,7 +70,11 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   SDL_Surface * sprite_barre_de_vie = IMG_Load("res/barre_de_vie.png");
 
+  TTF_Font * font = NULL;
+  font = TTF_OpenFont("res/fonts/Sans.ttf", 50);
+
   while (!quit) {
+    sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg);
     jouerAnimation(&j1);
     deplacements(&j1, &j2);
@@ -81,6 +85,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderAnimation(&j2);
     barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer, 1); 
     barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer, 2);
+    init_affichage_temps(sec_deb_combat, font, renderer, &rect_sprite_pv_j1);
     SDL_RenderPresent(renderer);
   }
 
@@ -94,6 +99,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_FreeSurface(perso2);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
+  TTF_CloseFont(font);
   TTF_Quit();
   IMG_Quit();
   SDL_Quit();

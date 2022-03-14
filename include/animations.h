@@ -10,6 +10,7 @@
 #define SAUTER 5
 
 void renderAnimation(Joueur * joueur);
+void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Renderer * renderer, SDL_Rect * rect_sprite_pvj1);
 void resetAnimation(Joueur * joueur);
 void jouerAnimation(Joueur * joueur);
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg);
