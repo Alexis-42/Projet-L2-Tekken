@@ -10,7 +10,7 @@
 #include "../include/jeu.h"
 #include "../include/son.h"
 
-#define VITESSE 0.5
+#define VITESSE 7
 
 typedef struct {
 	Joueur * joueur;
