@@ -30,7 +30,7 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	jAttaquant->action=POING;
 	if(checkCollisions(jAttaquant, j2)){
 		j2->action=PARER;
-		j2->vie-=50;
+		j2->vie-=20;
 		test_son();
 	}
 }
