@@ -10,13 +10,10 @@
 #define SAUTER 5
 
 void renderAnimation(Joueur * joueur);
-void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Renderer * renderer, SDL_Rect * rect_sprite_pvj1);
 void resetAnimation(Joueur * joueur);
 void jouerAnimation(Joueur * joueur);
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg);
-void init_sprite_pv(SDL_Rect * rect_sprite_pv,int num_joueur);
-void afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Renderer * renderer);
-void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer, int num_joueur, TTF_Font* font);
+
 typedef struct {
   int posY;
   int nb_frames;
