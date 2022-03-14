@@ -3,9 +3,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "../include/map.h"
-
+SDL_DisplayMode ecran;
 SDL_Surface * image_stage = NULL;
 SDL_Texture * texture_stage = NULL;
+
 float spawnY;
 int nbFramesMap, pas;
 char * cheminMap;
@@ -25,17 +26,17 @@ void chargerMap(int map, SDL_Renderer * renderer){
     case 1: nbFramesMap=7;
             pas=(5124/nbFramesMap);
             cheminMap="res/backgrounds/stage1.png";
-            spawnY=450.0;
+            spawnY=450.0*(ecran.w/1920);;
             break;
     case 2: nbFramesMap=4;
             pas=(2928/nbFramesMap);
             cheminMap="res/backgrounds/stage2.png";
-            spawnY=450.0;
+            spawnY=450.0*(ecran.w/1920);;
             break;
     case 3: nbFramesMap=14;
             pas=(11200/nbFramesMap);
             cheminMap="res/backgrounds/stage3.png";
-            spawnY=500.0;
+            spawnY=500.0*(ecran.w/1920);
             break;
   }
 
