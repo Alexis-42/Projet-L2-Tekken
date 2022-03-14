@@ -17,6 +17,23 @@ void renderAnimation(Joueur * joueur){
 }
 
 
+void init_affichage_temps(int sec_deb_combat, TTF_Font* font, SDL_Renderer * renderer, SDL_Rect * rect_sprite_pvj1){
+  char str_temps[3];
+  SDL_Color textColor = {255, 255, 255, 0};
+  SDL_Rect rect_temps;
+  rect_temps.x = rect_sprite_pvj1->x+rect_sprite_pvj1->w;
+  rect_temps.y = rect_sprite_pvj1->y; 
+  rect_temps.w = ecran.w-(2*rect_sprite_pvj1->w);
+  rect_temps.h = rect_sprite_pvj1->h;
+  snprintf(str_temps, sizeof(str_temps), "%i", 60-sec_deb_combat);
+
+  SDL_Surface * surface = TTF_RenderText_Solid(font, str_temps, textColor);
+  SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_FreeSurface(surface);
+  SDL_RenderCopy(renderer, texture, NULL ,&rect_temps);
+  SDL_DestroyTexture(texture);
+}
+
 // fonction qui permet l'init d'un sprite barre de vie en fonction du joueur
 void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
   rect_sprite_pv->y = 0;
