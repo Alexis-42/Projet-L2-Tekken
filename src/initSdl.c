@@ -48,7 +48,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   renderer = SDL_CreateRenderer(window, -1, 0);
   Joueur j1;
   Joueur j2;
-  initPerso(&j1, PINGU);
+  initPerso(&j1, SHREK);
   initPerso(&j2, PINGU);
 
   char j1sprite[50], j2sprite[50];
@@ -58,7 +58,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  chargerMap(2, renderer);
+  chargerMap(3, renderer);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
