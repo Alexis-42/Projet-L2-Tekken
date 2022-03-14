@@ -36,12 +36,12 @@ void init_affichage_temps(int sec_deb_combat, TTF_Font* font, SDL_Renderer * ren
 // fonction qui permet l'init d'un sprite barre de vie en fonction du joueur
 void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
   rect_sprite_pv->y = 0;
-  rect_sprite_pv->w = 854;
-  rect_sprite_pv->h = 161;
+  rect_sprite_pv->w = (int)(0.44*ecran.w);
+  rect_sprite_pv->h = (int)(0.13*ecran.h);
   if(num_joueur==1){
     rect_sprite_pv->x = 0;
   }else{
-    rect_sprite_pv->x = ecran.w-rect_sprite_pv->w ;
+    rect_sprite_pv->x = ecran.w-rect_sprite_pv->w;
   }
 }
 
