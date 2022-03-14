@@ -21,7 +21,7 @@ void init_gui(SDL_Texture ** texture_carre_jaune, SDL_Texture ** texture_carre_r
   *texture_barre_de_vie = SDL_CreateTextureFromSurface(renderer, sprite_barre_de_vie);
 }
 
-void init_affichage_temps(int sec_deb_combat, int ancien_temps, TTF_Font* font, SDL_Rect * rect_sprite_pvj1, SDL_Texture **texture,SDL_Rect * rect_temps){
+void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Rect * rect_sprite_pvj1, SDL_Texture **texture,SDL_Rect * rect_temps){
   if(sec_deb_combat != ancien_temps){ // sachant que ces deux temps sont en secondes on regenere les textures que si la seconde est differente
     char str_temps[3];
     SDL_Color textColor = {255, 255, 255, 0};

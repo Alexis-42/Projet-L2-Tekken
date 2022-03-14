@@ -15,12 +15,13 @@
 #include "../include/gui.h"
 
 #define MODE FULLSCREEN
-int sec_deb_combat,ancien_temps;
+int sec_deb_combat,ancien_temps=-1;
 bool quit;
 SDL_DisplayMode ecran;
 
 
 void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
+  int flag_perdu=0;
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Texture * texture_carre_jaune = NULL;
@@ -84,28 +85,35 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   init_afficher_nom_joueur(&j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1);
   init_afficher_nom_joueur(&j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2);
 
-  while (!quit) {
-    ancien_temps = -1;
+  while (!quit ) {
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg);
     jouerAnimation(&j1);
     deplacements(&j1, &j2);
-    checkPerdu(&j1, &j2);
+    flag_perdu = checkPerdu(&j1, &j2);
     SDL_RenderClear(renderer);
     renderMap(&srcBg, &dstBg, renderer);
     renderAnimation(&j1);
     renderAnimation(&j2);
     barre_de_vie(&j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
     barre_de_vie(&j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
-    init_affichage_temps(sec_deb_combat, ancien_temps, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+    init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
     SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
     SDL_DestroyTexture(texture_temps);
 
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
     SDL_RenderPresent(renderer);
+    quit = flag_perdu!=0 || sec_deb_combat >59;
   }
 
+  if(flag_perdu == 1)
+    printf("\n=========================\n%s à gagné ! \n=========================\n",j1.nom);
+  else{
+    if(flag_perdu == 2){
+      printf("\n=========================\n%s à gagné ! \n=========================\n",j2.nom);
+    }
+  }
 
   SDL_DestroyTexture(texture_nomj1);
   SDL_DestroyTexture(texture_nomj2);
