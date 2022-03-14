@@ -9,7 +9,7 @@
 #include "../include/jeu.h"
 #include "../include/personnages.h"
 #include "../include/map.h"
-
+#define OFFSET 26
 SDL_DisplayMode ecran;
 
 void renderAnimation(Joueur * joueur){
@@ -32,24 +32,38 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
 // fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
 SDL_Texture * barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Surface * sprite_barre_de_vie, SDL_Renderer * renderer, int num_joueur){
     // SDL_rect de la barre de pv en fonction des pv
-    SDL_Rect rect_pv;
+    SDL_Rect rect_pv,rect_pv_rouge;
+    //destrect pv rouge
     rect_pv.y = 0;
     if (joueur->vie != 0){
-      rect_pv.w = (int)((rect_sprite_pv->w*100)/joueur->vie);
+      rect_pv.w = (rect_sprite_pv->w/100)*joueur->vie;
     }
     else
       rect_pv.w = 0;
     rect_pv.h = rect_sprite_pv->h ;
     if(num_joueur==1){
-      rect_pv.x = 20;
+      rect_pv.x = OFFSET;
     }else{
-      rect_pv.x = 20;
+      rect_pv.x = rect_sprite_pv->x+OFFSET;
     }
+    //destrect pv jaune
+    rect_pv_rouge.x = rect_pv.x;
+    rect_pv_rouge.y = rect_pv.y ;
+    rect_pv_rouge.w = rect_sprite_pv->w-(OFFSET *2);
+    rect_pv_rouge.h = rect_sprite_pv->h;
+
+    // creation rect rouge derriere le jaune
+    SDL_Surface * image_carre_rouge = IMG_Load("res/carre_rouge.png");
+    SDL_Texture * texture_carre_rouge = SDL_CreateTextureFromSurface(renderer, image_carre_rouge);
+    SDL_FreeSurface(image_carre_rouge);
+    SDL_RenderCopy(renderer, texture_carre_rouge, NULL ,&rect_pv_rouge );
+    SDL_DestroyTexture(texture_carre_rouge);
+
     // creation rect jaune
     SDL_Surface * image_carre_jaune = IMG_Load("res/carre_jaune.png");
     SDL_Texture * texture_carre_jaune = SDL_CreateTextureFromSurface(renderer, image_carre_jaune);
     SDL_FreeSurface(image_carre_jaune);
-    SDL_RenderCopy(renderer, texture_carre_jaune, &rect_pv ,rect_sprite_pv );
+    SDL_RenderCopy(renderer, texture_carre_jaune, NULL ,&rect_pv );
     SDL_DestroyTexture(texture_carre_jaune);
 
     // sprite apres les rect de couleurs
