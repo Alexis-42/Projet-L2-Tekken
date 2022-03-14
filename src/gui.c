@@ -92,7 +92,4 @@ void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * text
     SDL_RenderCopy(renderer, texture_carre_jaune, NULL ,&rect_pv );
     // sprite apres les rect de couleurs
     SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
-
-    // nom apres le reste
-    //afficher_nom_joueur(joueur, font, rect_sprite_pv);
 }
