@@ -15,7 +15,7 @@
 #include "../include/gui.h"
 
 #define MODE FULLSCREEN
-int sec_deb_combat;
+int sec_deb_combat,ancien_temps;
 bool quit;
 SDL_DisplayMode ecran;
 
@@ -28,9 +28,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Texture * texture_barre_de_vie = NULL;
   SDL_Texture * texture_nomj1 = NULL;
   SDL_Texture * texture_nomj2 = NULL;
-
-  SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2;
-  SDL_Rect rect_nom_j1, rect_nom_j2;
+  SDL_Texture * texture_temps = NULL;
+  SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2,rect_nom_j1, rect_nom_j2,rect_temps;
 
   SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
@@ -49,7 +48,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   renderer = SDL_CreateRenderer(window, -1, 0);
   Joueur j1;
   Joueur j2;
-  initPerso(&j1, PINGU);
+  initPerso(&j1, SHREK);
   initPerso(&j2, PINGU);
 
   char j1sprite[50], j2sprite[50];
@@ -59,7 +58,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  chargerMap(2, renderer);
+  chargerMap(3, renderer);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
@@ -86,6 +85,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   init_afficher_nom_joueur(&j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2);
 
   while (!quit) {
+    ancien_temps = -1;
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg);
     jouerAnimation(&j1);
@@ -97,7 +97,10 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderAnimation(&j2);
     barre_de_vie(&j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
     barre_de_vie(&j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
-    init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1);
+    init_affichage_temps(sec_deb_combat, ancien_temps, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+    SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
+    SDL_DestroyTexture(texture_temps);
+
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
     SDL_RenderPresent(renderer);
