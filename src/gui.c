@@ -50,7 +50,7 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
   }
 }
 
-void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Rect * rect_nom_joueur, SDL_Texture * texture){
+void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Rect * rect_nom_joueur, SDL_Texture ** texture){
   SDL_Color textColor = {255, 255, 255, 0};
 
   rect_nom_joueur->x = rect_sprite_pv->x;
@@ -60,7 +60,7 @@ void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_s
 
   char * nom = joueur->nom;
   SDL_Surface * surface = TTF_RenderText_Solid(font, nom, textColor);
-  texture = SDL_CreateTextureFromSurface(renderer, surface);
+  *texture = SDL_CreateTextureFromSurface(renderer, surface);
   SDL_FreeSurface(surface);
 }
 
@@ -93,7 +93,4 @@ void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * text
     SDL_RenderCopy(renderer, texture_carre_jaune, NULL ,&rect_pv );
     // sprite apres les rect de couleurs
     SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
-
-    // nom apres le reste
-    //afficher_nom_joueur(joueur, font, rect_sprite_pv);
 }
