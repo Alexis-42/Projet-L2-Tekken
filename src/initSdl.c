@@ -40,7 +40,8 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
-  Joueur j1, j2;
+  Joueur j1;
+  Joueur j2;
   initPerso(&j1, PINGU);
   initPerso(&j2, PINGU);
 
@@ -78,11 +79,9 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderMap(&srcBg, &dstBg, renderer);
     renderAnimation(&j1);
     renderAnimation(&j2);
-    text_viej1 = barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer,1); 
-    text_viej2 = barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer, 2);
+    barre_de_vie(&j1, &rect_sprite_pv_j1, sprite_barre_de_vie, renderer, 1); 
+    barre_de_vie(&j2, &rect_sprite_pv_j2, sprite_barre_de_vie, renderer, 2);
     SDL_RenderPresent(renderer);
-    SDL_DestroyTexture(text_viej1);
-    SDL_DestroyTexture(text_viej2);
   }
 
 
