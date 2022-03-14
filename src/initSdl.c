@@ -15,7 +15,7 @@
 #include "../include/gui.h"
 
 #define MODE FULLSCREEN
-int sec_deb_combat,acien_temps;
+int sec_deb_combat,ancien_temps;
 bool quit;
 SDL_DisplayMode ecran;
 
@@ -85,7 +85,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   init_afficher_nom_joueur(&j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2);
 
   while (!quit) {
-    acien_temps = sec_deb_combat;
+    ancien_temps = -1;
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg);
     jouerAnimation(&j1);
@@ -97,9 +97,7 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
     renderAnimation(&j2);
     barre_de_vie(&j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
     barre_de_vie(&j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
-    if(acien_temps != sec_deb_combat)
-      init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
-
+    init_affichage_temps(sec_deb_combat, ancien_temps, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
     SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
     SDL_DestroyTexture(texture_temps);
 
