@@ -43,7 +43,6 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	sauter(j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
-	Uint32 ticks = SDL_GetTicks();
 
 	switch (event.type) {
 		case SDL_QUIT:
