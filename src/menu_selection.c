@@ -7,7 +7,7 @@
 #include "../include/menu_principal.h"
 #include "../include/jeu.h"
 #include "../include/joueur.h"
-#include "../include/personnage.h"
+#include "../include/personnages.h"
 
 #define MODE FULLSCREEN
 SDL_Window * window_menu_selection;
