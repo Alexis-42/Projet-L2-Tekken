@@ -9,7 +9,7 @@
 void initPerso(Joueur * j, int i){
 	j->perso.frame=0;
 	switch(i){
-		case 0:
+		case PINGU:
 			j->perso.nom="Pingu";
 
 			j->perso.nb_frame[IDLE]=1;
@@ -19,6 +19,8 @@ void initPerso(Joueur * j, int i){
 
 			j->perso.taille_perso.w=310;
 			j->perso.taille_perso.h=320;
+			j->perso.taille_perso.mult=1.0;
+
 
 			j->perso.taille_hitbox.w=140;
 			j->perso.taille_hitbox.h=250;
@@ -26,7 +28,7 @@ void initPerso(Joueur * j, int i){
 			j->perso.hitbox_offsetX=93;
 			j->perso.hitbox_offsetY=65;
 		break;
-		case 1:
+		case SHREK:
 			j->perso.nom="Shrek";
 
 			j->perso.nb_frame[IDLE]=1;
@@ -36,12 +38,30 @@ void initPerso(Joueur * j, int i){
 
 			j->perso.taille_perso.w=176;
 			j->perso.taille_perso.h=320;
+			j->perso.taille_perso.mult=1.3;
 
 			j->perso.taille_hitbox.w=105;
 			j->perso.taille_hitbox.h=235;
 
 			j->perso.hitbox_offsetX=40;
 			j->perso.hitbox_offsetY=57;
+			case GOKU:
+				j->perso.nom="Goku";
+
+				j->perso.nb_frame[IDLE]=1;
+				j->perso.nb_frame[COURIR]=14;
+				j->perso.nb_frame[POING]=14;
+				j->perso.nb_frame[PARER]=3;
+
+				j->perso.taille_perso.w=176;
+				j->perso.taille_perso.h=320;
+				j->perso.taille_perso.mult=1.3;
+
+				j->perso.taille_hitbox.w=105;
+				j->perso.taille_hitbox.h=235;
+
+				j->perso.hitbox_offsetX=40;
+				j->perso.hitbox_offsetY=57;
 		break;
 	}
 }

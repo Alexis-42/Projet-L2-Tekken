@@ -19,8 +19,7 @@ int sec_deb_combat,ancien_temps=-1;
 bool quit;
 SDL_DisplayMode ecran;
 
-
-void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
+void initSdl(Joueur * j1, Joueur * j2) { //Créer la fenêtre et l'environnement (pour l'instant)
   int flag_perdu=0;
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
@@ -47,14 +46,10 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
-  Joueur j1;
-  Joueur j2;
-  initPerso(&j1, SHREK);
-  initPerso(&j2, PINGU);
 
   char j1sprite[50], j2sprite[50];
-  snprintf(j1sprite, sizeof(j1sprite), "res/sprites/%s.png", j1.perso.nom);
-  snprintf(j2sprite, sizeof(j2sprite), "res/sprites/%s.png", j2.perso.nom);
+  snprintf(j1sprite, sizeof(j1sprite), "res/sprites/%s.png", j1->perso.nom);
+  snprintf(j2sprite, sizeof(j2sprite), "res/sprites/%s.png", j2->perso.nom);
 
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
@@ -68,10 +63,10 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
 
   TTF_Init();
 
-  initJoueur(&j1, 300.0, "Shrekleouinouin", texture_joueur1, gauche);
-  initJoueur(&j2, 600.0, "PINGU", texture_joueur2, droite);
-  resetAnimation(&j1); //Spawn du joueur
-  resetAnimation(&j2);
+  initJoueur(j1, 300.0, "Shrekleouinouin", texture_joueur1, gauche);
+  initJoueur(j2, 600.0, "PINGU", texture_joueur2, droite);
+  resetAnimation(j1); //Spawn du joueur
+  resetAnimation(j2);
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0); //Couleur des hitboxes
 
   init_sprite_pv(&rect_sprite_pv_j1, 1);
@@ -83,22 +78,22 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   TTF_Font * font = NULL;
   font = TTF_OpenFont("res/fonts/Sans.ttf", 50);
 
-  init_afficher_nom_joueur(&j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1);
-  init_afficher_nom_joueur(&j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2);
+  init_afficher_nom_joueur(j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1);
+  init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2);
 
   while (!quit ) {
     Uint8 *state = SDL_GetKeyboardState(NULL);
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg);
-    jouerAnimation(&j1);
-    deplacements(&j1, &j2);
-    flag_perdu = checkPerdu(&j1, &j2);
+    jouerAnimation(j1);
+    deplacements(j1, j2);
+    flag_perdu = checkPerdu(j1, j2);
     SDL_RenderClear(renderer);
     renderMap(&srcBg, &dstBg, renderer);
-    renderAnimation(&j1);
-    renderAnimation(&j2);
-    barre_de_vie(&j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
-    barre_de_vie(&j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
+    renderAnimation(j1);
+    renderAnimation(j2);
+    barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
+    barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
     init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
     SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
     SDL_DestroyTexture(texture_temps);
@@ -110,10 +105,10 @@ void initSdl() { //Créer la fenêtre et l'environnement (pour l'instant)
   }
 
   if(flag_perdu == 1)
-    printf("\n=========================\n%s à gagné ! \n=========================\n",j1.nom);
+    printf("\n=========================\n%s à gagné ! \n=========================\n",j1->nom);
   else{
     if(flag_perdu == 2){
-      printf("\n=========================\n%s à gagné ! \n=========================\n",j2.nom);
+      printf("\n=========================\n%s à gagné ! \n=========================\n",j2->nom);
     }
   }
 

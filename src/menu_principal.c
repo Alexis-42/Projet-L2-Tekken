@@ -251,7 +251,7 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
       printf("\nerreur de sortie\n");
     }else if(sortie==1){
       printf("\nsortie 1: multijoueur\n");
-      initSdl();
+      //initSdl();
     }else if(sortie==2){
       printf("\nsortie 2: IA\n");
       menu_selection();
