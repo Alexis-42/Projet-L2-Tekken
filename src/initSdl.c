@@ -78,8 +78,8 @@ void initSdl(Joueur * j1, Joueur * j2) { //Créer la fenêtre et l'environnement
   TTF_Font * font = NULL;
   font = TTF_OpenFont("res/fonts/Sans.ttf", 50);
 
-  init_afficher_nom_joueur(j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1);
-  init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2);
+  init_afficher_nom_joueur(j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1,1);
+  init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2,2);
 
   while (!quit ) {
     Uint8 *state = SDL_GetKeyboardState(NULL);

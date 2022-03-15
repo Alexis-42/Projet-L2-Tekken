@@ -11,7 +11,7 @@
 #include "../include/animations.h"
 
 #define MODE FULLSCREEN
-SDL_Window * window_menu_selection;
+SDL_Window * window_menu_selection=NULL;
 
 void aff_menu_selection(int carre,float pos_x){}
 
