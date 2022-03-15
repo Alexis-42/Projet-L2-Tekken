@@ -48,13 +48,17 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
   }
 }
 
-void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Rect * rect_nom_joueur, SDL_Texture ** texture){
+void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Rect * rect_nom_joueur, SDL_Texture ** texture, int num_joueur){
+  int len_nom = strlen(joueur->nom);
   SDL_Color textColor = {255, 255, 255, 0};
-
-  rect_nom_joueur->x = rect_sprite_pv->x;
   rect_nom_joueur->y = rect_sprite_pv->h;
-  rect_nom_joueur->w = rect_sprite_pv->w;
+  rect_nom_joueur->w = ((0.44*ecran.w)/17)*len_nom;
   rect_nom_joueur->h = rect_sprite_pv->h/2;
+  if(num_joueur == 1){
+    rect_nom_joueur->x = rect_sprite_pv->x;
+  }else{
+    rect_nom_joueur->x = (rect_sprite_pv->x+rect_sprite_pv->w)-rect_nom_joueur->w;
+  }
 
   char * nom = joueur->nom;
   SDL_Surface * surface = TTF_RenderText_Solid(font, nom, textColor);
