@@ -28,8 +28,8 @@ void resetAnimation(Joueur * joueur){
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
-    joueur->perso.taille_perso.w,
-    joueur->perso.taille_perso.h
+    joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
+    joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
   };
   joueur->perso.srcrect=srcrect;
   joueur->perso.dstrect=dstrect;
@@ -64,8 +64,8 @@ void jouerAnimation(Joueur * joueur){
   SDL_Rect dstrect = {
     joueur->position.x,
     joueur->position.y,
-    joueur->perso.taille_perso.w,
-    joueur->perso.taille_perso.h
+    joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
+    joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
   };
    joueur->perso.srcrect=srcrect;
    joueur->perso.dstrect=dstrect;
@@ -85,8 +85,8 @@ void jouerAnimation(Joueur * joueur){
 SDL_Rect dstrect = {
   joueur->position.x,
   joueur->position.y,
-  joueur->perso.taille_perso.w,
-  joueur->perso.taille_perso.h
+  joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
+  joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
 };
  joueur->perso.srcrect=srcrect;
  joueur->perso.dstrect=dstrect;

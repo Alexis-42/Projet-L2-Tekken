@@ -7,14 +7,15 @@
 #include "../include/menu_principal.h"
 #include "../include/jeu.h"
 #include "../include/joueur.h"
-#include "../include/personnage.h"
+#include "../include/personnages.h"
+#include "../include/animations.h"
 
 #define MODE FULLSCREEN
 SDL_Window * window_menu_selection;
 
 void aff_menu_selection(int carre,float pos_x){}
 
-void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour,double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimationPersoMenu(Joueur * joueur, int tour, double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
   Uint32 sprite = seconds % 15;
     float posx;
@@ -27,53 +28,20 @@ void jouerAnimationPersoMenu(SDL_Rect * src, SDL_Rect * dst,int tour,double cord
     SDL_Rect dstrect;
 
 //shrek
-    if(cord_perso==200.0/1920.0*ecran.w){   
+  //  if(cord_perso==200.0/1920.0*ecran.w){
         srcrect.x = sprite * 540;
-        srcrect.y =0;
-        srcrect.w =176;
-        srcrect.h =320;
+        srcrect.y = 0;
+        srcrect.w = joueur->perso.taille_perso.w;
+        srcrect.h = joueur->perso.taille_perso.h;
 
         dstrect.x = posx/1920*ecran.w;
-        dstrect.y =300.0/1080.0*ecran.h;
-        dstrect.w =310;
-        dstrect.h =320;
-//goku
-    }else if(cord_perso==600.0/1920.0*ecran.w){
-        srcrect.x = sprite * 540;
-        srcrect.y =0;
-        srcrect.w =176;
-        srcrect.h =320;
+        dstrect.y = 300/1080.0*ecran.h;
+        dstrect.w = joueur->perso.taille_perso.w;
+        dstrect.h = joueur->perso.taille_perso.h;
 
-        dstrect.x = posx/1920.0*ecran.w;
-        dstrect.y =300.0/1080.0*ecran.h;
-        dstrect.w =310;
-        dstrect.h =320;
-//pingu
-    }else if(cord_perso==1000/1920*ecran.w){
-        srcrect.x = sprite * 540;
-        srcrect.y =0;
-        srcrect.w =310;
-        srcrect.h =320;
-
-        dstrect.x = posx/1920.0*ecran.w;
-        dstrect.y =300.0/1080.0*ecran.h;
-        dstrect.w =310;
-        dstrect.h =320;
-//tinky
-    }else if(cord_perso==1400.0/1920.0*ecran.w){
-        srcrect.x = sprite * 540;
-        srcrect.y =0;
-        srcrect.w =176;
-        srcrect.h =320;
-
-        dstrect.x = posx/1920.0*ecran.w;
-        dstrect.y =300.0/1080.0*ecran.h;
-        dstrect.w =310;
-        dstrect.h =320;
-    }
-
-   *src=srcrect;
-   *dst=dstrect;
+   joueur->perso.srcrect=srcrect;
+   joueur->perso.dstrect=dstrect;
+ //}
 }
 
 void menu_selection(){
@@ -158,7 +126,7 @@ void menu_selection(){
     SDL_Texture * texture_carre_bleu = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_bleu);
     SDL_FreeSurface(image_carre_bleu);
     SDL_Rect rect_carre_bleu;
-    rect_carre_bleu.x = 600.0/1920.0*ecran.w;
+    rect_carre_bleu.x = ecran.w+10000;
     rect_carre_bleu.y = 700.0/1080.0*ecran.h;
     rect_carre_bleu.w = ecran.w/6.0;
     rect_carre_bleu.h = ecran.w/6.0;
@@ -174,22 +142,6 @@ void menu_selection(){
     rect_carre_violet.h = ecran.w/6.0;
 
 //initialisation sprite des personnages
-    //sprite de shrek
-    SDL_Surface * surface_sprite_shrek = IMG_Load("res/sprites/Shrek.png");
-    SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_shrek);
-    SDL_FreeSurface(surface_sprite_shrek);
-
-    //sprite de goku
-    SDL_Surface * surface_sprite_goku = IMG_Load("res/sprites/Goku.png");
-    SDL_Texture * texture_sprite_goku = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_goku);
-    SDL_FreeSurface(surface_sprite_goku);
-
-
-    //sprite de pingu
-    SDL_Surface * surface_sprite_pingu = IMG_Load("res/sprites/Pingu.png");
-    SDL_Texture * texture_sprite_pingu = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_pingu);
-    SDL_FreeSurface(surface_sprite_pingu);
-
 
     //sprite de tinky
     /* pas encore créé
@@ -198,17 +150,26 @@ void menu_selection(){
     SDL_FreeSurface(surface_sprite_tinky);
     SDL_Rect rect_sprite_tinky_source;
     SDL_Rect rect_sprite_tinky;
-    
+
     */
 
-    SDL_Texture * texture_sprite_j1;
-    SDL_Rect rect_sprite_j1_source;
-    SDL_Rect rect_sprite_j1;
+    Joueur j1, j2;
+    char j1sprite[50], j2sprite[50];
 
-    SDL_Texture * texture_sprite_j2;
-    SDL_Rect rect_sprite_j2_source;
-    SDL_Rect rect_sprite_j2;
+    SDL_Surface * surface_sprite_shrek = IMG_Load("res/sprites/Shrek.png");
+    SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_shrek);
+    SDL_FreeSurface(surface_sprite_shrek);
 
+    SDL_Surface * surface_sprite_goku = IMG_Load("res/sprites/Pingutest.png");
+    SDL_Texture * texture_sprite_goku = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_goku);
+    SDL_FreeSurface(surface_sprite_goku);
+
+    SDL_Surface * surface_sprite_pingu = IMG_Load("res/sprites/Pingu.png");
+    SDL_Texture * texture_sprite_pingu = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_pingu);
+    SDL_FreeSurface(surface_sprite_pingu);
+
+    j1.texture=NULL;
+    j2.texture=NULL;
 
     int x_button;
     int y_button;
@@ -231,33 +192,39 @@ void menu_selection(){
                         if(tour_joueur){
                             rect_carre_bleu.x = 200.0/1920.0*ecran.w;
                             tour_joueur=0;
-                            texture_sprite_j1=texture_sprite_shrek;
+                            j1.texture = texture_sprite_shrek;
+                            initPerso(&j1, SHREK);
                         }else{
                             rect_carre_rouge.x = 200.0/1920.0*ecran.w;
                             tour_joueur=1;
-                            texture_sprite_j2=texture_sprite_shrek;
+                            j2.texture = texture_sprite_shrek;
+                            initPerso(&j2, SHREK);
                         }
                         //carre 2eme pers
                     }else if(x_button>(600.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(600.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
                             rect_carre_bleu.x = 600.0/1920.0*ecran.w;
                             tour_joueur=0;
-                            texture_sprite_j1=texture_sprite_goku;
+                            j1.texture = texture_sprite_goku;
+                            initPerso(&j1, GOKU);
                         }else{
                             rect_carre_rouge.x = 600.0/1920.0*ecran.w;
                             tour_joueur=1;
-                            texture_sprite_j2=texture_sprite_goku;
+                            j2.texture = texture_sprite_goku;
+                            initPerso(&j2, GOKU);
                         }
                         //carre 3eme pers
                     }else if(x_button>(1000.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(1000.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
                         if(tour_joueur){
                             rect_carre_bleu.x = 1000.0/1920.0*ecran.w;
                             tour_joueur=0;
-                            texture_sprite_j1=texture_sprite_pingu;
+                            j1.texture = texture_sprite_pingu;
+                            initPerso(&j1, PINGU);
                         }else{
                             rect_carre_rouge.x = 1000.0/1920.0*ecran.w;
                             tour_joueur=1;
-                            texture_sprite_j2=texture_sprite_pingu;
+                            j2.texture = texture_sprite_pingu;
+                            initPerso(&j2, PINGU);
                         }
                         //carre 4eme pers
                     }else if(x_button>(1400.0/1920.0*ecran.w) && y_button>(700.0/1080.0*ecran.h) && x_button<(1400.0/1920.0*ecran.w+ecran.w/6.0) && (y_button<700.0/1080.0*ecran.h+ecran.w/6.0)){
@@ -298,10 +265,10 @@ void menu_selection(){
 
     //affichage des sprites
         //SDL_RenderCopyEX(renderer_menu_selection, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek,0,NULL,tour_joueur);
-        jouerAnimationPersoMenu(&rect_sprite_j1_source, &rect_sprite_j1,1,rect_carre_bleu.x);
-        jouerAnimationPersoMenu(&rect_sprite_j2_source, &rect_sprite_j2,0,rect_carre_rouge.x);
-        SDL_RenderCopyEx(renderer_menu_selection, texture_sprite_j1, &rect_sprite_j1_source, &rect_sprite_j1,0,NULL,1);
-        SDL_RenderCopyEx(renderer_menu_selection, texture_sprite_j2, &rect_sprite_j2_source, &rect_sprite_j2,0,NULL,0);
+        jouerAnimationPersoMenu(&j1, 1, rect_carre_bleu.x);
+        jouerAnimationPersoMenu(&j2, 0, rect_carre_rouge.x);
+        SDL_RenderCopyEx(renderer_menu_selection, j1.texture, &(j1.perso.srcrect), &(j1.perso.dstrect), 0, NULL, 1);
+        SDL_RenderCopyEx(renderer_menu_selection, j2.texture, &(j2.perso.srcrect), &(j2.perso.dstrect), 0, NULL, 0);
 
         SDL_RenderPresent(renderer_menu_selection);
     }

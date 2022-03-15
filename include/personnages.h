@@ -6,10 +6,11 @@
 
 #define PINGU 0
 #define SHREK 1
+#define GOKU 2
 
 /* struct qui permet de faire le menu de selection des persos */
 typedef struct {
-  float w, h;
+  float w, h, mult;
 } taille;
 
 typedef struct {
