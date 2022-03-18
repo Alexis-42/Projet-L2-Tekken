@@ -45,6 +45,7 @@ void initPerso(Joueur * j, int i){
 
 			j->perso.hitbox_offsetX=40;
 			j->perso.hitbox_offsetY=57;
+			break;
 			case GOKU:
 				j->perso.nom="Goku";
 
