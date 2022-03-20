@@ -80,9 +80,6 @@ void menu_selection(){
   }
 
   SDL_Renderer * renderer_menu_selection = SDL_CreateRenderer(window_menu_selection, -1, 0);
-  SDL_Surface * image_stage_menu_selection = IMG_Load("res/backgrounds/selectperso.png");
-  SDL_Texture * texture_stage_menu_selection = SDL_CreateTextureFromSurface(renderer_menu_selection, image_stage_menu_selection);
-  SDL_FreeSurface(image_stage_menu_selection);
 
   //preparation image des personnages
   //image de shrek
@@ -282,7 +279,6 @@ void menu_selection(){
     }
     //affichage de la page
     SDL_RenderClear(renderer_menu_selection);
-    //SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
     jouerAnimationBackground(&srcrect_bg, &dstrect_bg);
     renderMap(&srcrect_bg, &dstrect_bg, renderer_menu_selection);
 
@@ -342,8 +338,11 @@ void menu_selection(){
   SDL_DestroyTexture(texture_contour_goku);
   SDL_DestroyTexture(texture_contour_pingu);
   SDL_DestroyTexture(texture_contour_tinky);
+  SDL_DestroyTexture(texture_bg_shrek);
+  SDL_DestroyTexture(texture_bg_goku);
+  SDL_DestroyTexture(texture_bg_pingu);
+  SDL_DestroyTexture(texture_bg_tinky);
   SDL_DestroyRenderer(renderer_menu_selection);
-  SDL_DestroyRenderer(texture_bg_tinky);
   SDL_DestroyWindow(window_menu_selection);
   IMG_Quit();
   TTF_Quit();
