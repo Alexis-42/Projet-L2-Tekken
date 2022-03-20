@@ -103,8 +103,8 @@ void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){
     SDL_Rect srcrect = {
     sprite * pas,
     0,
-    726,
-    368
+    pas,
+    h_map
   };
 
   SDL_Rect dstrect = {

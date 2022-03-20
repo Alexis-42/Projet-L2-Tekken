@@ -54,7 +54,7 @@ void initSdl(Joueur * j1, Joueur * j2) { //Créer la fenêtre et l'environnement
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  chargerMap(1, renderer);
+  chargerMap(6, renderer);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);

@@ -1,6 +1,7 @@
 extern float spawnY;
 extern int nbFramesMap;
 extern int pas;
+extern int h_map;
 
 #define stage1 0
 #define stage2 1
