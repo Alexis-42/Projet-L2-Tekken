@@ -292,12 +292,23 @@ void menu_selection(){
     SDL_RenderPresent(renderer_menu_selection);
   }
   //sdl destroy texture
+  SDL_DestroyTexture(texture_shrek);
+  SDL_DestroyTexture(texture_pingu);
+  SDL_DestroyTexture(texture_goku);
+  SDL_DestroyTexture(texture_tinky);
+  SDL_DestroyTexture(texture_carre_rouge);
+  SDL_DestroyTexture(texture_carre_bleu);
+  SDL_DestroyTexture(texture_carre_violet);
+  SDL_DestroyTexture(texture_texte_jouer);
+  SDL_DestroyTexture(texture_texte_jouer_white);
   SDL_DestroyRenderer(renderer_menu_selection);
+  SDL_DestroyTexture(texture_sprite_shrek);
+  SDL_DestroyTexture(texture_sprite_goku);
+  SDL_DestroyTexture(texture_sprite_pingu);
   SDL_DestroyWindow(window_menu_selection);
   IMG_Quit();
   TTF_Quit();
   SDL_Quit();
-
   if(sortie==1)
     initSdl(&j1, &j2);
 }
