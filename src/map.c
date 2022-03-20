@@ -18,6 +18,14 @@ void chargerMap(int map, SDL_Renderer * renderer){ // à noter revoyer un pointe
   char cheminMap[35];
 
   switch (map) {
+    /*
+    case -2: nbFramesMap=8;
+            pas=(1886/nbFramesMap);
+            snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/flamme_sprite.png");
+            break;
+    */
+   
+    // bg menu selection
     case -1: nbFramesMap=16;
             pas=(12800/nbFramesMap);
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/menu_selec.png");
