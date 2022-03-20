@@ -22,10 +22,10 @@ void chargerMap(int map, SDL_Renderer * renderer){
             pas=(6144/nbFramesMap);
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/menu.png");
             break;
-    case 1: nbFramesMap=7;
-            pas=(5124/nbFramesMap);
+    case 1: nbFramesMap=8;
+            pas=(6400/nbFramesMap);
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage1.png");
-            spawnY=(450.0/1080.0)*ecran.h;
+            spawnY=(500.0/1080.0)*ecran.h;
             break;
     case 2: nbFramesMap=4;
             pas=(2928/nbFramesMap);
@@ -33,9 +33,19 @@ void chargerMap(int map, SDL_Renderer * renderer){
             spawnY=(450.0/1080.0)*ecran.h;
             break;
     case 3: nbFramesMap=14;
-            pas=(11200/nbFramesMap);
+            pas=(26112/nbFramesMap);
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage3.png");
             spawnY=(500.0/1080.0)*ecran.h;
+            break;
+    case 4: nbFramesMap=16;
+            pas=(12800/nbFramesMap);
+            snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage4.png");
+            spawnY=(500.0/1080.0)*ecran.h;
+            break;
+    case 5: nbFramesMap=7;
+            pas=(5124/nbFramesMap);
+            snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage5.png");
+            spawnY=(450.0/1080.0)*ecran.h;
             break;
   }
   image_stage = IMG_Load(cheminMap);
