@@ -52,5 +52,5 @@ void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * textur
   joueur->texture=texture;
   joueur->direction=direction;
   joueur->position.x=(posX/1280.0)*ecran.w;
-  joueur->position.y=(spawnY/720.0)*ecran.h;
+  joueur->position.y= ( (spawnY - ( joueur->perso.taille_perso.h * joueur->perso.taille_perso.mult ) )/1080.0)*ecran.h; // pas 720 apaprament
 }
