@@ -88,24 +88,33 @@ void menu_selection(){
   //image de shrek
   SDL_Rect rect_shrek;
   SDL_Texture * texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);  
+  SDL_Rect rect_bg_shrek;
+  SDL_Texture * texture_bg_shrek = creat_texture_rect("res/carre_gris.png", &rect_bg_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_shrek;
   SDL_Texture * texture_contour_shrek = creat_texture_rect("res/carre_perso.png", &rect_contour_shrek, renderer_menu_selection, (200.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
   //image de goku
   SDL_Rect rect_goku;
   SDL_Texture * texture_goku = creat_texture_rect("res/goku.png", &rect_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Rect rect_bg_goku;
+  SDL_Texture * texture_bg_goku = creat_texture_rect("res/carre_gris.png", &rect_bg_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+
   SDL_Rect rect_contour_goku;
   SDL_Texture * texture_contour_goku = creat_texture_rect("res/carre_perso.png", &rect_contour_goku, renderer_menu_selection, (600.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
   //image de pingu
   SDL_Rect rect_pingu;
   SDL_Texture * texture_pingu = creat_texture_rect("res/pingu.png", &rect_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Rect rect_bg_pingu;
+  SDL_Texture * texture_bg_pingu = creat_texture_rect("res/carre_gris.png", &rect_bg_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0); 
   SDL_Rect rect_contour_pingu;
   SDL_Texture * texture_contour_pingu = creat_texture_rect("res/carre_perso.png", &rect_contour_pingu, renderer_menu_selection, (1000.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
   //image de tinky
   SDL_Rect rect_tinky;
   SDL_Texture * texture_tinky = creat_texture_rect("res/tinky.png", &rect_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Rect rect_bg_tinky;
+  SDL_Texture * texture_bg_tinky = creat_texture_rect("res/carre_gris.png", &rect_bg_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_tinky;
   SDL_Texture * texture_contour_tinky = creat_texture_rect("res/carre_perso.png", &rect_contour_tinky, renderer_menu_selection, (1400.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
@@ -277,6 +286,12 @@ void menu_selection(){
     jouerAnimationBackground(&srcrect_bg, &dstrect_bg);
     renderMap(&srcrect_bg, &dstrect_bg, renderer_menu_selection);
 
+    // carré gris selec perso
+    SDL_RenderCopy(renderer_menu_selection, texture_bg_shrek, NULL, &rect_bg_shrek);
+    SDL_RenderCopy(renderer_menu_selection, texture_bg_goku, NULL, &rect_bg_goku);
+    SDL_RenderCopy(renderer_menu_selection, texture_bg_pingu, NULL, &rect_bg_pingu);
+    SDL_RenderCopy(renderer_menu_selection, texture_bg_tinky, NULL, &rect_bg_tinky);
+
     //affichage des carré de selections
     SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
     SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
@@ -328,6 +343,7 @@ void menu_selection(){
   SDL_DestroyTexture(texture_contour_pingu);
   SDL_DestroyTexture(texture_contour_tinky);
   SDL_DestroyRenderer(renderer_menu_selection);
+  SDL_DestroyRenderer(texture_bg_tinky);
   SDL_DestroyWindow(window_menu_selection);
   IMG_Quit();
   TTF_Quit();
