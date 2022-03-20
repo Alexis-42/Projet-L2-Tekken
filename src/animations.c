@@ -96,16 +96,21 @@ SDL_Rect dstrect = {
 }
 }
 
-void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){
+void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg,int flag_bg){
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
   Uint32 sprite = seconds % nbFramesMap;
 
-    SDL_Rect srcrect = {
-    sprite * pas,
-    0,
-    pas,
-    h_map
-  };
+    SDL_Rect srcrect;
+    srcrect.y =0;
+  if(flag_bg){
+    srcrect.x = sprite * pas;
+    srcrect.w = pas;
+    srcrect.h =h_map;
+  }else{
+    srcrect.x = sprite * pas2;
+    srcrect.w = pas2;
+    srcrect.h =h_map2;
+  }
 
   SDL_Rect dstrect = {
     0,
@@ -114,5 +119,6 @@ void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg){
     ecran.h
   };
    *srcBg=srcrect;
+  if(dstBg!=NULL)
    *dstBg=dstrect;
 }

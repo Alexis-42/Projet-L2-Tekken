@@ -19,7 +19,7 @@ int sec_deb_combat,ancien_temps=-1;
 bool quit;
 SDL_DisplayMode ecran;
 
-void initSdl(Joueur * j1, Joueur * j2) { //Créer la fenêtre et l'environnement (pour l'instant)
+void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'environnement (pour l'instant)
   int flag_perdu=0;
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
@@ -54,7 +54,7 @@ void initSdl(Joueur * j1, Joueur * j2) { //Créer la fenêtre et l'environnement
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  chargerMap(1, renderer);
+  chargerMap(num_map, renderer,1);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
@@ -84,7 +84,7 @@ void initSdl(Joueur * j1, Joueur * j2) { //Créer la fenêtre et l'environnement
   while (!quit ) {
     Uint8 *state = SDL_GetKeyboardState(NULL);
     sec_deb_combat = SDL_GetTicks()/1000;
-    jouerAnimationBackground(&srcBg, &dstBg);
+    jouerAnimationBackground(&srcBg, &dstBg,1);
     jouerAnimation(j1);
     deplacements(j1, j2);
     flag_perdu = checkPerdu(j1, j2);
