@@ -9,6 +9,7 @@
 #include "../include/joueur.h"
 #include "../include/personnages.h"
 #include "../include/animations.h"
+#include "../include/map.h"
 
 #define MODE FULLSCREEN
 SDL_Window * window_menu_selection=NULL;
@@ -142,7 +143,6 @@ void menu_selection(){
   */
 
   Joueur j1, j2;
-  char j1sprite[50], j2sprite[50];
 
   SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
