@@ -58,7 +58,7 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
 
   void renderMenu(int sortie){
     SDL_RenderClear(renderer_menu);
-    jouerAnimationBackground(&srcBg, &dstBg);
+    jouerAnimationBackground(&srcBg, &dstBg,1);
     renderMap(&srcBg, &dstBg, renderer_menu);
 
     switch (sortie) {
@@ -109,7 +109,7 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
     }
 
     renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
-    chargerMap(0, renderer_menu);
+    chargerMap(0, renderer_menu,1);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
     initFlammes(&flamme1, &texFlamme1, 75.0, 25.0);

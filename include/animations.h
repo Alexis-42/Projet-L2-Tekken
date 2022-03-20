@@ -12,7 +12,7 @@
 void renderAnimation(Joueur * joueur);
 void resetAnimation(Joueur * joueur);
 void jouerAnimation(Joueur * joueur);
-void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg);
+void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg,int flag_bg);
 
 typedef struct {
   int posY;
