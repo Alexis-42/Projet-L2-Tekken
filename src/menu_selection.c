@@ -88,18 +88,26 @@ void menu_selection(){
   //image de shrek
   SDL_Rect rect_shrek;
   SDL_Texture * texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);  
-  
+  SDL_Rect rect_contour_shrek;
+  SDL_Texture * texture_contour_shrek = creat_texture_rect("res/carre_perso.png", &rect_contour_shrek, renderer_menu_selection, (200.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
+
   //image de goku
   SDL_Rect rect_goku;
   SDL_Texture * texture_goku = creat_texture_rect("res/goku.png", &rect_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Rect rect_contour_goku;
+  SDL_Texture * texture_contour_goku = creat_texture_rect("res/carre_perso.png", &rect_contour_goku, renderer_menu_selection, (600.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
   //image de pingu
   SDL_Rect rect_pingu;
   SDL_Texture * texture_pingu = creat_texture_rect("res/pingu.png", &rect_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Rect rect_contour_pingu;
+  SDL_Texture * texture_contour_pingu = creat_texture_rect("res/carre_perso.png", &rect_contour_pingu, renderer_menu_selection, (1000.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
   //image de tinky
   SDL_Rect rect_tinky;
   SDL_Texture * texture_tinky = creat_texture_rect("res/tinky.png", &rect_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Rect rect_contour_tinky;
+  SDL_Texture * texture_contour_tinky = creat_texture_rect("res/carre_perso.png", &rect_contour_tinky, renderer_menu_selection, (1400.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
 
 
   //initialisation carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
@@ -184,6 +192,9 @@ void menu_selection(){
   int sortie=0;
   bool quitter=false;
 
+  SDL_Rect srcrect_bg;
+  SDL_Rect dstrect_bg;
+  chargerMap(-1, renderer_menu_selection);
   //recherche des actions
   while (!quitter) {
 
@@ -262,7 +273,9 @@ void menu_selection(){
     }
     //affichage de la page
     SDL_RenderClear(renderer_menu_selection);
-    SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
+    //SDL_RenderCopy(renderer_menu_selection, texture_stage_menu_selection, NULL, NULL);
+    jouerAnimationBackground(&srcrect_bg, &dstrect_bg);
+    renderMap(&srcrect_bg, &dstrect_bg, renderer_menu_selection);
 
     //affichage des carré de selections
     SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
@@ -273,10 +286,16 @@ void menu_selection(){
 
     //affichage de la tete des personnages
     SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-    SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-    SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-    SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
+    SDL_RenderCopy(renderer_menu_selection, texture_contour_shrek, NULL, &rect_contour_shrek);
 
+    SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
+    SDL_RenderCopy(renderer_menu_selection, texture_contour_goku, NULL, &rect_contour_goku);
+
+    SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
+    SDL_RenderCopy(renderer_menu_selection, texture_contour_pingu, NULL, &rect_contour_pingu);
+
+    SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
+    SDL_RenderCopy(renderer_menu_selection, texture_contour_tinky, NULL, &rect_contour_tinky);
     //affichage des sprites
     //SDL_RenderCopyEX(renderer_menu_selection, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek,0,NULL,tour_joueur);
     jouerAnimationPersoMenu(&j1, 1, rect_carre_bleu.x);
@@ -301,10 +320,14 @@ void menu_selection(){
   SDL_DestroyTexture(texture_carre_violet);
   SDL_DestroyTexture(texture_texte_jouer);
   SDL_DestroyTexture(texture_texte_jouer_white);
-  SDL_DestroyRenderer(renderer_menu_selection);
   SDL_DestroyTexture(texture_sprite_shrek);
   SDL_DestroyTexture(texture_sprite_goku);
   SDL_DestroyTexture(texture_sprite_pingu);
+  SDL_DestroyTexture(texture_contour_shrek);
+  SDL_DestroyTexture(texture_contour_goku);
+  SDL_DestroyTexture(texture_contour_pingu);
+  SDL_DestroyTexture(texture_contour_tinky);
+  SDL_DestroyRenderer(renderer_menu_selection);
   SDL_DestroyWindow(window_menu_selection);
   IMG_Quit();
   TTF_Quit();

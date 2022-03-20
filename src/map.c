@@ -14,10 +14,14 @@ void renderMap(SDL_Rect * src, SDL_Rect * dst, SDL_Renderer * renderer){
   SDL_RenderCopy(renderer, texture_stage, src, dst);
 }
 
-void chargerMap(int map, SDL_Renderer * renderer){
+void chargerMap(int map, SDL_Renderer * renderer){ // à noter revoyer un pointeur texture pour la supprimer
   char cheminMap[35];
 
   switch (map) {
+    case -1: nbFramesMap=16;
+            pas=(12800/nbFramesMap);
+            snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/menu_selec.png");
+            break;
     case 0: nbFramesMap=8;
             pas=(6144/nbFramesMap);
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/menu.png");
