@@ -15,6 +15,21 @@ SDL_Window * window_menu_selection=NULL;
 
 void aff_menu_selection(int carre,float pos_x){}
 
+SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, int x, int y, int w, int h){
+  /* creation de la texture */
+  SDL_Surface * img = IMG_Load(chemin_img);
+  SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, img);
+  SDL_FreeSurface(img);
+  /* init des valeurs du rect correspondant */
+  if(rect != NULL){
+    rect->x= x;
+    rect->y= y;
+    rect->w= w;
+    rect->h= h;
+  }
+  return texture;
+}
+
 void jouerAnimationPersoMenu(Joueur * joueur, int tour, double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
 Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 Uint32 sprite = seconds % 15;
@@ -71,75 +86,35 @@ void menu_selection(){
 
   //preparation image des personnages
   //image de shrek
-  SDL_Surface * image_shrek = IMG_Load("res/shrek.png");
-  SDL_Texture * texture_shrek = SDL_CreateTextureFromSurface(renderer_menu_selection, image_shrek);
-  SDL_FreeSurface(image_shrek);
   SDL_Rect rect_shrek;
-  rect_shrek.x = 200.0/1920.0*ecran.w;
-  rect_shrek.y = 700.0/1080.0*ecran.h;
-  rect_shrek.w = ecran.w/6.0;
-  rect_shrek.h = ecran.w/6.0;
-
+  SDL_Texture * texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);  
+  
   //image de goku
-  SDL_Surface * image_goku = IMG_Load("res/goku.png");
-  SDL_Texture * texture_goku = SDL_CreateTextureFromSurface(renderer_menu_selection, image_goku);
-  SDL_FreeSurface(image_goku);
   SDL_Rect rect_goku;
-  rect_goku.x = 600.0/1920.0*ecran.w;
-  rect_goku.y = 700.0/1080.0*ecran.h;
-  rect_goku.w = ecran.w/6.0;
-  rect_goku.h = ecran.w/6.0;
+  SDL_Texture * texture_goku = creat_texture_rect("res/goku.png", &rect_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //image de pingu
-  SDL_Surface * image_pingu = IMG_Load("res/pingu.png");
-  SDL_Texture * texture_pingu = SDL_CreateTextureFromSurface(renderer_menu_selection, image_pingu);
-  SDL_FreeSurface(image_pingu);
   SDL_Rect rect_pingu;
-  rect_pingu.x = 1000.0/1920.0*ecran.w;
-  rect_pingu.y = 700.0/1080.0*ecran.h;
-  rect_pingu.w = ecran.w/6.0;
-  rect_pingu.h = ecran.w/6.0;
+  SDL_Texture * texture_pingu = creat_texture_rect("res/pingu.png", &rect_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //image de tinky
-  SDL_Surface * image_tinky = IMG_Load("res/tinky.png");
-  SDL_Texture * texture_tinky = SDL_CreateTextureFromSurface(renderer_menu_selection, image_tinky);
-  SDL_FreeSurface(image_tinky);
   SDL_Rect rect_tinky;
-  rect_tinky.x = 1400.0/1920.0*ecran.w;
-  rect_tinky.y = 700.0/1080.0*ecran.h;
-  rect_tinky.w = ecran.w/6.0;
-  rect_tinky.h = ecran.w/6.0;
+  SDL_Texture * texture_tinky = creat_texture_rect("res/tinky.png", &rect_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+
 
   //initialisation carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
   //carré rouge de sélection du personnage
-  SDL_Surface * image_carre_rouge = IMG_Load("res/carre_rouge.png");
-  SDL_Texture * texture_carre_rouge = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_rouge);
-  SDL_FreeSurface(image_carre_rouge);
   SDL_Rect rect_carre_rouge;
-  rect_carre_rouge.x = ecran.w+10000;
-  rect_carre_rouge.y = 700.0/1080.0*ecran.h;
-  rect_carre_rouge.w = ecran.w/6.0;
-  rect_carre_rouge.h = ecran.w/6.0;
+  SDL_Texture * texture_carre_rouge = creat_texture_rect("res/carre_rouge.png", &rect_carre_rouge, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //carré bleu de sélection du personnage
-  SDL_Surface * image_carre_bleu = IMG_Load("res/carre_bleu.png");
-  SDL_Texture * texture_carre_bleu = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_bleu);
-  SDL_FreeSurface(image_carre_bleu);
   SDL_Rect rect_carre_bleu;
-  rect_carre_bleu.x = ecran.w+10000;
-  rect_carre_bleu.y = 700.0/1080.0*ecran.h;
-  rect_carre_bleu.w = ecran.w/6.0;
-  rect_carre_bleu.h = ecran.w/6.0;
+  SDL_Texture * texture_carre_bleu = creat_texture_rect("res/carre_bleu.png", &rect_carre_bleu, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //carré violet de sélection du personnage si les 2 joueurs choissisent le meme
-  SDL_Surface * image_carre_violet = IMG_Load("res/carre_violet.png");
-  SDL_Texture * texture_carre_violet = SDL_CreateTextureFromSurface(renderer_menu_selection, image_carre_violet);
-  SDL_FreeSurface(image_carre_violet);
-  SDL_Rect rect_carre_violet; //wtf
-  rect_carre_violet.x = ecran.w+10000;
-  rect_carre_violet.y = 700.0/1080.0*ecran.h;
-  rect_carre_violet.w = ecran.w/6.0;
-  rect_carre_violet.h = ecran.w/6.0;
+  SDL_Rect rect_carre_violet;
+  SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", &rect_carre_bleu, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+
 
   //initialisation sprite des personnages
 
@@ -156,23 +131,17 @@ void menu_selection(){
   Joueur j1, j2;
   char j1sprite[50], j2sprite[50];
 
-  SDL_Surface * surface_sprite_shrek = IMG_Load("res/sprites/Shrek.png");
-  SDL_Texture * texture_sprite_shrek = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_shrek);
-  SDL_FreeSurface(surface_sprite_shrek);
+  SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
-  SDL_Surface * surface_sprite_goku = IMG_Load("res/sprites/Pingutest.png");
-  SDL_Texture * texture_sprite_goku = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_goku);
-  SDL_FreeSurface(surface_sprite_goku);
+  SDL_Texture * texture_sprite_goku = creat_texture_rect("res/sprites/Pingutest.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
-  SDL_Surface * surface_sprite_pingu = IMG_Load("res/sprites/Pingu.png");
-  SDL_Texture * texture_sprite_pingu = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_pingu);
-  SDL_FreeSurface(surface_sprite_pingu);
+  SDL_Texture * texture_sprite_pingu = creat_texture_rect("res/sprites/Pingu.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
   TTF_Font* Sans = TTF_OpenFont("res/fonts/Sans.ttf", 24);
   SDL_Color White = {255, 255, 255};
   SDL_Color Grey = {100, 100, 100};
   //bouton jouer
-  SDL_Surface* surface_texte_jouer =TTF_RenderText_Solid(Sans, "JOUER", Grey);
+  SDL_Surface* surface_texte_jouer = TTF_RenderText_Solid(Sans, "JOUER", Grey);
   SDL_Texture* texture_texte_jouer = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_texte_jouer);
   SDL_FreeSurface(surface_texte_jouer);
   SDL_Rect rect_texte_jouer;
