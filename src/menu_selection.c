@@ -112,8 +112,7 @@ void menu_selection(){
   SDL_Texture * texture_carre_bleu = creat_texture_rect("res/carre_bleu.png", &rect_carre_bleu, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //carré violet de sélection du personnage si les 2 joueurs choissisent le meme
-  SDL_Rect rect_carre_violet;
-  SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", &rect_carre_bleu, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
 
   //initialisation sprite des personnages
