@@ -74,6 +74,18 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		}
 		break;
 
+		case SDL_KEYDOWN:
+		switch (event.key.keysym.sym) {
+			case SDLK_e:
+				resetAnimation(j1);
+				j1->action=PARER;
+			break;
+			case SDLK_a:
+				resetAnimation(j1);
+				j1->action=POING;
+				break;
+		}
+		break;
 
 		case SDL_KEYUP:
 		switch (event.key.keysym.sym) {
@@ -138,14 +150,6 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	if (state[SDL_SCANCODE_SPACE]) {
 		j1->action=SAUTER;
 	}
-	if (state[SDL_SCANCODE_Q]){
-		if(j1->action!=POING)
-			attaquer(j1, j2);
-	}
-	if (state[SDL_SCANCODE_E]){
-		if(j1->action!=PARER)
-			j1->action=PARER;
-	}
 	/* verif touches J2 */
 	if (state[SDL_SCANCODE_LEFT]) {
 		if(j2->hitbox.x>0){
@@ -161,5 +165,5 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	}
 	if (state[SDL_SCANCODE_KP_0]) {
 		j2->action=SAUTER;
-	}	
+	}
 }

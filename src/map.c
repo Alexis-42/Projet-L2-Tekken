@@ -37,7 +37,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
             break;
     case 1: nbFramesMap=8;
             if(flag_bg){
-                pas=(6400/nbFramesMap);   
+                pas=(6400/nbFramesMap);
                 h_map = 336;
             }else{
                 pas2=(6400/nbFramesMap);
@@ -48,11 +48,11 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
             break;
     case 2: nbFramesMap=4;
             if(flag_bg){
-                h_map = 366; 
-                pas=(2928/nbFramesMap);   
+                h_map = 366;
+                pas=(2928/nbFramesMap);
             }else{
-                h_map2 = 366; 
-                pas2=(2928/nbFramesMap);   
+                h_map2 = 366;
+                pas2=(2928/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage2.png");
             spawnY=1040.0;
@@ -60,9 +60,9 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
     case 3: nbFramesMap=14;
             if(flag_bg){
                 h_map = 328;
-                pas=(11200/nbFramesMap);   
+                pas=(11200/nbFramesMap);
             }else{
-                h_map2 = 328;  
+                h_map2 = 328;
                 pas2=(11200/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage3.png");
@@ -73,19 +73,19 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
                 pas=(12800/nbFramesMap);
                 h_map = 336;
             }else{
-                pas2=(12800/nbFramesMap);  
-                h_map2 = 336;  
+                pas2=(12800/nbFramesMap);
+                h_map2 = 336;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage4.png");
             spawnY=1040.0;
             break;
     case 5: nbFramesMap=7;
             if(flag_bg){
-                h_map = 366;   
-                pas=(5124/nbFramesMap); 
+                h_map = 366;
+                pas=(5124/nbFramesMap);
             }else{
-                h_map2 = 366;   
-                pas2=(5124/nbFramesMap);   
+                h_map2 = 366;
+                pas2=(5124/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage5.png");
             spawnY=1040.0;
@@ -93,7 +93,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
     case 6: nbFramesMap=8;
             if(flag_bg){
                 h_map = 256;
-                pas=(6144/nbFramesMap);    
+                pas=(6144/nbFramesMap);
             }else{
                 h_map2 = 256;
                 pas2=(6144/nbFramesMap);
@@ -111,14 +111,14 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage7.png");
             spawnY=1040.0;
-            
+
             break;
     case 8: nbFramesMap=20; // à voir avec charly
             if(flag_bg){
                 pas=(12800/nbFramesMap);
                 h_map = 480;
             }else{
-                pas2=(12800/nbFramesMap);    
+                pas2=(12800/nbFramesMap);
                 h_map2 = 480;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage8.png");
@@ -126,10 +126,10 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
             break;
     case 9: nbFramesMap=8;
             if(flag_bg){
-                pas=(6400/nbFramesMap);  
-                h_map = 336;  
+                pas=(6400/nbFramesMap);
+                h_map = 336;
             }else{
-                pas2=(6400/nbFramesMap);   
+                pas2=(6400/nbFramesMap);
                 h_map2 = 336;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage9.png");
@@ -141,9 +141,9 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
                 h_map = 384;
             }else{
                 pas2=(5120/nbFramesMap);
-                h_map2 = 384;    
+                h_map2 = 384;
             }
-            
+
             spawnY=1040.0;
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage10.png");
             break;
