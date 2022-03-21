@@ -11,12 +11,12 @@
 #include "../include/animations.h"
 #include "../include/map.h"
 
-#define MODE FULLSCREEN
+#define MODE BORDERLESS
 SDL_Window * window_menu_selection=NULL;
 
 void aff_menu_selection(int carre,float pos_x){}
 
-SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, int x, int y, int w, int h){
+SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, float x, float y, float w, float h){
   /* creation de la texture */
   SDL_Surface * img = IMG_Load(chemin_img);
   SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, img);
@@ -95,6 +95,13 @@ void menu_selection(){
   texture_preview[8] = creat_texture_rect("res/backgrounds/stage8.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
   texture_preview[9] = creat_texture_rect("res/backgrounds/stage9.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
   texture_preview[10] = creat_texture_rect("res/backgrounds/stage10.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+
+//fond des fonds d écran en preview
+  SDL_Rect rect_bg_map_fond;
+  SDL_Texture * texture_fond_bg_preview = creat_texture_rect("res/carre_perso.png",&rect_bg_map_fond, renderer_menu_selection,ecran.w/4.0-10.0, 250.0/1080.0*(ecran.h/4.5)-10.0, ecran.w/2.0+20.0, ecran.w/5.0+20.0);
+
+
+
   //preparation image des personnages
   //image de shrek
   SDL_Rect rect_shrek;
@@ -180,27 +187,6 @@ void menu_selection(){
   SDL_Texture* texture_texte_jouer_white = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_texte_jouer_white);
   SDL_FreeSurface(surface_texte_jouer_white);
 
-  //nom des personnages
-  /*char * nom_pers_j1=NULL;
-  SDL_Surface* surface_texte_pers1 =TTF_RenderText_Solid(Sans,"Texte", White);
-  SDL_Texture* texture_texte_pers1 = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_texte_pers1);
-  SDL_FreeSurface(surface_texte_pers1);
-  SDL_Rect rect_texte_pers1;
-  rect_texte_pers1.x = 850.0/1920.0*ecran.w;
-  rect_texte_pers1.y = 500.0/1080.0*ecran.h;
-  rect_texte_pers1.w = 200.0/1920.0*ecran.w;
-  rect_texte_pers1.h = 125.0/1080.0*ecran.h;*/
-
-  /*char * texte2;
-  SDL_Surface* surface_texte_texte2 =TTF_RenderText_Solid(Sans,"texte2", Grey);
-  SDL_Texture* texture_texte_texte2 = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_texte_texte2);
-  SDL_FreeSurface(surface_texte_texte2);
-  SDL_Rect rect_texte_texte2;
-  rect_texte_texte2.x = 200.0/1920.0*ecran.w;
-  rect_texte_texte2.y = 500.0/1080.0*ecran.h;
-  rect_texte_texte2.w = 1400.0/1920.0*ecran.w;
-  rect_texte_texte2.h = 125.0/1080.0*ecran.h;*/
-
 
   /* AFFICHAGE RELATIF A LA SELECTION DE MAP */
   SDL_Rect rect_bg_map;
@@ -208,6 +194,8 @@ void menu_selection(){
   rect_bg_map.y = 250/1080.0*(ecran.h/4.5);
   rect_bg_map.w = ecran.w/2;
   rect_bg_map.h = ecran.w/5.0;
+
+
 
   SDL_Rect rect_bouton_gauche;
   SDL_Texture * texture_bouton_gauche = creat_texture_rect("res/bouton_gauche.png", &rect_bouton_gauche, renderer_menu_selection, (rect_bg_map.x-ecran.w/14.0)-(ecran.w/100), 700.0/1080.0*(ecran.h/4.5), ecran.w/14.0, ecran.w/14.0);
@@ -360,6 +348,9 @@ void menu_selection(){
     SDL_RenderCopy(renderer_menu_selection, texture_preview[num_map], &srcBg, &rect_bg_map);
     SDL_RenderCopy(renderer_menu_selection, texture_bouton_gauche, NULL, &rect_bouton_gauche);
     SDL_RenderCopy(renderer_menu_selection, texture_bouton_droit, NULL, &rect_bouton_droit);
+    //a voir
+    SDL_RenderCopy(renderer_menu_selection, texture_fond_bg_preview,NULL, &rect_bg_map_fond);
+    //a voir
     SDL_RenderPresent(renderer_menu_selection);
   }
   //sdl destroy texture
@@ -381,6 +372,8 @@ void menu_selection(){
   SDL_DestroyTexture(texture_contour_tinky);
   SDL_DestroyTexture(texture_bouton_gauche);
   SDL_DestroyTexture(texture_bouton_droit);
+  //a voir
+  SDL_DestroyTexture(texture_fond_bg_preview);
   for(int i=1; i<=10; i++)
       SDL_DestroyTexture(texture_preview[i]);
   free(texture_preview);
