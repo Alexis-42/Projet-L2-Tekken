@@ -105,11 +105,11 @@ void menu_selection(){
   //preparation image des personnages
   //image de shrek
   SDL_Rect rect_shrek;
-  SDL_Texture * texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);  
+  SDL_Texture * texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_bg_shrek;
   SDL_Texture * texture_bg_shrek = creat_texture_rect("res/carre_gris.png", &rect_bg_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_shrek;
-  SDL_Texture * texture_contour_shrek = creat_texture_rect("res/carre_perso.png", &rect_contour_shrek, renderer_menu_selection, (200.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
+  SDL_Texture * texture_contour_shrek = creat_texture_rect("res/carre_perso.png", &rect_contour_shrek, renderer_menu_selection, (200.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
   //image de goku
   SDL_Rect rect_goku;
@@ -118,15 +118,15 @@ void menu_selection(){
   SDL_Texture * texture_bg_goku = creat_texture_rect("res/carre_gris.png", &rect_bg_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   SDL_Rect rect_contour_goku;
-  SDL_Texture * texture_contour_goku = creat_texture_rect("res/carre_perso.png", &rect_contour_goku, renderer_menu_selection, (600.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
+  SDL_Texture * texture_contour_goku = creat_texture_rect("res/carre_perso.png", &rect_contour_goku, renderer_menu_selection, (600.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
   //image de pingu
   SDL_Rect rect_pingu;
   SDL_Texture * texture_pingu = creat_texture_rect("res/pingu.png", &rect_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_bg_pingu;
-  SDL_Texture * texture_bg_pingu = creat_texture_rect("res/carre_gris.png", &rect_bg_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0); 
+  SDL_Texture * texture_bg_pingu = creat_texture_rect("res/carre_gris.png", &rect_bg_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_pingu;
-  SDL_Texture * texture_contour_pingu = creat_texture_rect("res/carre_perso.png", &rect_contour_pingu, renderer_menu_selection, (1000.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
+  SDL_Texture * texture_contour_pingu = creat_texture_rect("res/carre_perso.png", &rect_contour_pingu, renderer_menu_selection, (1000.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
   //image de tinky
   SDL_Rect rect_tinky;
@@ -134,7 +134,7 @@ void menu_selection(){
   SDL_Rect rect_bg_tinky;
   SDL_Texture * texture_bg_tinky = creat_texture_rect("res/carre_gris.png", &rect_bg_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_tinky;
-  SDL_Texture * texture_contour_tinky = creat_texture_rect("res/carre_perso.png", &rect_contour_tinky, renderer_menu_selection, (1400.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);  
+  SDL_Texture * texture_contour_tinky = creat_texture_rect("res/carre_perso.png", &rect_contour_tinky, renderer_menu_selection, (1400.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
 
   //initialisation carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
@@ -149,26 +149,15 @@ void menu_selection(){
   //carré violet de sélection du personnage si les 2 joueurs choissisent le meme
   SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
-
-  //initialisation sprite des personnages
-
-  //sprite de tinky
-  /* pas encore créé
-  SDL_Surface * surface_sprite_tinky = IMG_Load("res/sprites/Tinky.png");
-  SDL_Texture * texture_sprite_Tinky = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_sprite_tinky);
-  SDL_FreeSurface(surface_sprite_tinky);
-  SDL_Rect rect_sprite_tinky_source;
-  SDL_Rect rect_sprite_tinky;
-
-  */
-
   Joueur j1, j2;
 
   SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
-  SDL_Texture * texture_sprite_goku = creat_texture_rect("res/sprites/Pingutest.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  SDL_Texture * texture_sprite_goku = creat_texture_rect("res/sprites/Goku.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
   SDL_Texture * texture_sprite_pingu = creat_texture_rect("res/sprites/Pingu.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+
+  SDL_Texture * texture_sprite_mickey = creat_texture_rect("res/sprites/Mickey.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
   TTF_Font* Sans = TTF_OpenFont("res/fonts/Sans.ttf", 24);
   SDL_Color White = {255, 255, 255};
@@ -272,11 +261,13 @@ void menu_selection(){
         if(tour_joueur){
           rect_carre_bleu.x = 1400.0/1920.0*ecran.w;
           tour_joueur=0;
-          //texture_sprite_j1=texture_sprite_tinky;
+          j1.texture = texture_sprite_mickey;
+          initPerso(&j1, MICKEY);
         }else{
           rect_carre_rouge.x = 1400.0/1920.0*ecran.w;
           tour_joueur=1;
-          //texture_sprite_j2=texture_sprite_tinky;
+          j2.texture = texture_sprite_mickey;
+          initPerso(&j2, MICKEY);
         }
       } else if(x_button>(850.0/1920.0*ecran.w) && y_button>(500.0/1080.0*ecran.h) && x_button<(850.0/1920.0*ecran.w+200.0/1920.0*ecran.w) && (y_button<500.0/1080.0*ecran.h+125.0/1080.0*ecran.h)){
             if(rect_carre_bleu.x>=0 && rect_carre_bleu.x<=ecran.w && rect_carre_rouge.x>=0 && rect_carre_rouge.x<=ecran.w){

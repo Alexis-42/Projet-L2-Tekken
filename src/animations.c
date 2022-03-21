@@ -39,19 +39,31 @@ void jouerAnimation(Joueur * joueur){
   int posYSprite;
   int anim=joueur->action;
 
+
   switch (anim) {
-    case COURIR: posYSprite=0;
+    case DANSE: posYSprite=0;
     break;
-    case PARER: posYSprite=640;
+    case DEGAT: posYSprite=550;
     break;
-    case POING: posYSprite=1280;
+    case IDLE: posYSprite=1100;
     break;
-    case IDLE: posYSprite=0;
+    case MORT: posYSprite=1645;
+    break;
+    case PIED: posYSprite=2195;
+    break;
+    case POING: posYSprite=2745;
+    break;
+    case COURIR: posYSprite=3290;
+    break;
+    case SAUTER: posYSprite=3865;
+    break;
+    case PARER: posYSprite=4395;
+    break;
   }
-  Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
 
+  Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 
-  if(anim==COURIR){
+  if(anim==COURIR || anim==IDLE){
     SDL_Rect srcrect = {
     (seconds%joueur->perso.nb_frame[anim]) * 540, //Pas
     posYSprite,
@@ -71,7 +83,7 @@ void jouerAnimation(Joueur * joueur){
 
     joueur->perso.frame++;
     joueur->perso.seconds=seconds;
-}else if(joueur->perso.frame<=joueur->perso.nb_frame[anim] && (joueur->perso.seconds!=seconds) ){
+}else if(joueur->perso.frame<joueur->perso.nb_frame[anim] && (joueur->perso.seconds!=seconds) ){
     SDL_Rect srcrect = {
     joueur->perso.frame * 540, //Pas
     posYSprite,

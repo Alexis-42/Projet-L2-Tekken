@@ -2,12 +2,15 @@
 #ifndef ANIM_H_INCLUDED__
 #define ANIM_H_INCLUDED__
 
-#define IDLE 0
-#define COURIR 1
-#define POING 2
-#define PARER 3
+#define DANSE 0
+#define DEGAT 1
+#define IDLE 2
+#define MORT 3
 #define PIED 4
-#define SAUTER 5
+#define POING 5
+#define COURIR 6
+#define SAUTER 7
+#define PARER 8
 
 void renderAnimation(Joueur * joueur);
 void resetAnimation(Joueur * joueur);
