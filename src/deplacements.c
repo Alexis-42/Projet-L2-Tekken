@@ -29,9 +29,8 @@ void sauter(Joueur * joueur){
 void attaquer(Joueur * jAttaquant, Joueur * j2){
 	jAttaquant->action=POING;
 	if(checkCollisions(jAttaquant, j2)){
-		j2->action=PARER;
-		j2->vie-=20;
-		test_son();
+		if(j2->action!=PARER)
+			j2->vie-=20;
 	}
 }
 
@@ -52,65 +51,115 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		case SDL_MOUSEBUTTONDOWN:
 		switch (event.button.button) {
 			case SDL_BUTTON_RIGHT:
-			resetAnimation(j1);
-			j1->action=PARER;
-			break;
+				resetAnimation(j2);
+				j2->action=PARER;
+				break;
 			case SDL_BUTTON_LEFT:
-			resetAnimation(j1);
-			attaquer(j1, j2);
-			break;
+				resetAnimation(j2);
+				attaquer(j2, j1);
+				break;
 		}
 		break;
 
 		case SDL_MOUSEBUTTONUP:
 		switch (event.button.button) {
 			case SDL_BUTTON_RIGHT:
-			resetAnimation(j1);
-			j1->action=IDLE;
-			break;
+				resetAnimation(j2);
+				j2->action=IDLE;
+				break;
 			case SDL_BUTTON_LEFT:
-			resetAnimation(j1);
-			j1->action=IDLE;
-			break;
+				resetAnimation(j2);
+				j2->action=IDLE;
+				break;
 		}
 		break;
 
 
 		case SDL_KEYUP:
 		switch (event.key.keysym.sym) {
+			/* event J1 */
 			case SDLK_q:
-			resetAnimation(j1);
-			j1->action=IDLE;
-			break;
+				resetAnimation(j1);
+				j1->action=IDLE;
+				break;
 			case SDLK_d:
-			resetAnimation(j1);
-			j1->action=IDLE;
-			break;
+				resetAnimation(j1);
+				j1->action=IDLE;
+				break;
 			case SDLK_z:
-			resetAnimation(j1);
-			j1->action=IDLE;
-			break;
+				resetAnimation(j1);
+				j1->action=IDLE;
+				break;
+			case SDLK_SPACE:
+				resetAnimation(j1);
+				j1->action=IDLE;
+				break;
+			case SDLK_a:
+				resetAnimation(j1);
+				j1->action=IDLE;
+				break;
+			case SDLK_e:
+				resetAnimation(j1);
+				j1->action=IDLE;
+				break;
+			/* event J2 */
+			case SDLK_0:
+				resetAnimation(j2);
+				j2->action=IDLE;
+				break;
+			case SDLK_LEFT:
+				resetAnimation(j2);
+				j2->action=IDLE;
+				break;
+			case SDLK_RIGHT:
+				resetAnimation(j2);
+				j2->action=IDLE;
+				break;
 		}
 		break;
 	}
-
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
+	if (state[SDL_SCANCODE_ESCAPE]) {
+		quit=true;
+	}
+	/* verif touches J1 */
 	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
 	if(j1->hitbox.x>0){
 			j1->position.x -= VITESSE;
 		j1->action=COURIR;
+		}
 	}
-}
-if (state[SDL_SCANCODE_D]) {
-	if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
-			j1->position.x += VITESSE;
-		j1->action=COURIR;
+	if (state[SDL_SCANCODE_D]){
+		if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
+				j1->position.x += VITESSE;
+			j1->action=COURIR;
+		}
 	}
-}
-if (state[SDL_SCANCODE_SPACE]) {
-	j1->action=SAUTER;
-}
-if (state[SDL_SCANCODE_ESCAPE]) {
-	quit=true;
-}
+	if (state[SDL_SCANCODE_SPACE]) {
+		j1->action=SAUTER;
+	}
+	if (state[SDL_SCANCODE_Q]){
+		if(j1->action!=POING)
+			attaquer(j1, j2);
+	}
+	if (state[SDL_SCANCODE_E]){
+		if(j1->action!=PARER)
+			j1->action=PARER;
+	}
+	/* verif touches J2 */
+	if (state[SDL_SCANCODE_LEFT]) {
+		if(j2->hitbox.x>0){
+			j2->position.x -= VITESSE;
+		j2->action=COURIR;
+		}
+	}
+	if (state[SDL_SCANCODE_RIGHT]) {
+		if(j2->hitbox.x<ecran.w-j2->perso.taille_hitbox.w){
+				j2->position.x += VITESSE;
+			j2->action=COURIR;
+		}
+	}
+	if (state[SDL_SCANCODE_KP_0]) {
+		j2->action=SAUTER;
+	}	
 }

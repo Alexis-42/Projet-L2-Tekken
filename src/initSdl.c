@@ -14,7 +14,7 @@
 #include "../include/map.h"
 #include "../include/gui.h"
 
-#define MODE FULLSCREEN
+#define MODE BORDERLESS
 int sec_deb_combat,ancien_temps=-1;
 bool quit;
 SDL_DisplayMode ecran;
@@ -86,6 +86,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg,1);
     jouerAnimation(j1);
+    jouerAnimation(j2);
     deplacements(j1, j2);
     flag_perdu = checkPerdu(j1, j2);
     SDL_RenderClear(renderer);
