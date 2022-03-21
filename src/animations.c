@@ -17,7 +17,7 @@ void renderAnimation(Joueur * joueur){
 }
 
 void resetAnimation(Joueur * joueur){
-  joueur->perso.frame=0;
+ joueur->perso.frame=0;
   SDL_Rect srcrect = {
     0, //Pas
     0,
@@ -50,51 +50,50 @@ void jouerAnimation(Joueur * joueur){
   }
   Uint32 seconds = SDL_GetTicks() / 30; //Fréquence (toutes les 30ms)
 
-  if(anim!=COURIR){
-  if(joueur->perso.frame-1<joueur->perso.nb_frame[anim]){
-    if(joueur->perso.seconds!=seconds){
 
+  if(anim==COURIR){
+    SDL_Rect srcrect = {
+    (seconds%joueur->perso.nb_frame[anim]) * 540, //Pas
+    posYSprite,
+    joueur->perso.taille_perso.w,
+    joueur->perso.taille_perso.h
+    };
+
+    SDL_Rect dstrect = {
+    joueur->position.x,
+    joueur->position.y,
+    joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
+    joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
+    };
+
+    joueur->perso.srcrect=srcrect;
+    joueur->perso.dstrect=dstrect;
+
+    joueur->perso.frame++;
+    joueur->perso.seconds=seconds;
+}else if(joueur->perso.frame<=joueur->perso.nb_frame[anim] && (joueur->perso.seconds!=seconds) ){
     SDL_Rect srcrect = {
     joueur->perso.frame * 540, //Pas
     posYSprite,
     joueur->perso.taille_perso.w,
     joueur->perso.taille_perso.h
-  };
+    };
 
-  SDL_Rect dstrect = {
-    joueur->position.x,
-    joueur->position.y,
-    joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
-    joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
-  };
-   joueur->perso.srcrect=srcrect;
-   joueur->perso.dstrect=dstrect;
+    SDL_Rect dstrect = {
+      joueur->position.x,
+      joueur->position.y,
+      joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
+      joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
+    };
 
-      joueur->perso.frame++;
-      joueur->perso.seconds=seconds;
-    }
-  }
-} else {
-  SDL_Rect srcrect = {
-  (seconds%joueur->perso.nb_frame[anim]) * 540, //Pas
-  posYSprite,
-  joueur->perso.taille_perso.w,
-  joueur->perso.taille_perso.h
-};
-
-SDL_Rect dstrect = {
-  joueur->position.x,
-  joueur->position.y,
-  joueur->perso.taille_perso.w*joueur->perso.taille_perso.mult,
-  joueur->perso.taille_perso.h*joueur->perso.taille_perso.mult
-};
- joueur->perso.srcrect=srcrect;
- joueur->perso.dstrect=dstrect;
+    joueur->perso.srcrect=srcrect;
+    joueur->perso.dstrect=dstrect;
 
     joueur->perso.frame++;
     joueur->perso.seconds=seconds;
+  }
 }
-}
+
 
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg,int flag_bg){
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
