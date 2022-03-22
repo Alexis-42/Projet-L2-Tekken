@@ -1,3 +1,13 @@
+/**
+ * @file animations.c
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier contenant les fonctions en relation avec les variables d'animations
+ * @version 1.0
+ * @date 2022-03-22
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -12,6 +22,7 @@
 
 SDL_DisplayMode ecran;
 
+
 void renderAnimation(Joueur * joueur){
   SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->perso.srcrect), &(joueur->perso.dstrect), 0, 0, joueur->direction);
 }
@@ -20,7 +31,7 @@ void resetAnimation(Joueur * joueur){
  joueur->perso.frame=0;
   SDL_Rect srcrect = {
     0, //Pas
-    0,
+    1100,
     joueur->perso.taille_perso.w,
     joueur->perso.taille_perso.h
   };
@@ -33,35 +44,44 @@ void resetAnimation(Joueur * joueur){
   };
   joueur->perso.srcrect=srcrect;
   joueur->perso.dstrect=dstrect;
+
+  joueur->action=IDLE;
 }
 
 void jouerAnimation(Joueur * joueur){
   int posYSprite;
   int anim=joueur->action;
-
+  Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 
   switch (anim) {
-    case DANSE: posYSprite=0;
-    break;
-    case DEGAT: posYSprite=550;
-    break;
-    case IDLE: posYSprite=1100;
-    break;
-    case MORT: posYSprite=1645;
-    break;
-    case PIED: posYSprite=2195;
-    break;
-    case POING: posYSprite=2745;
-    break;
-    case COURIR: posYSprite=3290;
-    break;
-    case SAUTER: posYSprite=3865;
-    break;
-    case PARER: posYSprite=4395;
-    break;
+    case DANSE: 
+      posYSprite=0;
+      break;
+    case DEGAT: 
+      posYSprite=550;
+      break;
+    case IDLE: 
+      posYSprite=1100;
+      break;
+    case MORT: 
+      posYSprite=1645;
+      break;
+    case PIED: 
+      posYSprite=2195;
+      break;
+    case POING: 
+      posYSprite=2745;
+      break;
+    case COURIR: 
+      posYSprite=3290;
+      break;
+    case SAUTER: 
+      posYSprite=3865;
+      break;
+    case PARER: 
+      posYSprite=4395;
+      break;
   }
-
-  Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 
   if(anim==COURIR || anim==IDLE){
     SDL_Rect srcrect = {
@@ -106,7 +126,6 @@ void jouerAnimation(Joueur * joueur){
   }
 }
 
-
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg,int flag_bg){
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
   Uint32 sprite = seconds % nbFramesMap;
@@ -120,7 +139,7 @@ void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg,int flag_bg){
   }else{
     srcrect.x = sprite * pas2;
     srcrect.w = pas2;
-    srcrect.h =h_map2;
+    srcrect.h = h_map2;
   }
 
   SDL_Rect dstrect = {
