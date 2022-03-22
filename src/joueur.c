@@ -29,19 +29,25 @@ void hitbox(Joueur * joueur){
     joueur->perso.taille_hitbox.w,
     joueur->perso.taille_hitbox.h
   };
+  SDL_Rect hitbox2 = {
+    hitbox.x,
+    hitbox.y,
+    joueur->perso.taille_hitbox_coup.w,
+    joueur->perso.taille_hitbox_coup.h
+  };
   joueur->hitbox=hitbox;
+  joueur->hitbox_coup=hitbox2;
 }
 
-int checkPerdu(Joueur * j1, Joueur * j2){
+void checkPerdu(Joueur * j1, Joueur * j2){
 	if(j1->vie==0)
-		return 2;
+    j1->action=MORT;
 	else if(j2->vie==0)
-		return 1;
-  return 0;
+    j2->action=MORT;
 }
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
-	SDL_bool collision = SDL_HasIntersection(&(j1->perso.dstrect), &(j2->hitbox));
+	SDL_bool collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
 	return collision==SDL_TRUE;
 }
 

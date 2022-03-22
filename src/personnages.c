@@ -26,9 +26,11 @@ void initPerso(Joueur * j, int i){
 			j->perso.taille_perso.h=529;
 			j->perso.taille_perso.mult=1.0;
 
-
 			j->perso.taille_hitbox.w=140;
 			j->perso.taille_hitbox.h=250;
+
+			j->perso.taille_hitbox_coup.w=105;
+			j->perso.taille_hitbox_coup.h=235;
 
 			j->perso.hitbox_offsetX=93;
 			j->perso.hitbox_offsetY=65;
@@ -53,6 +55,9 @@ void initPerso(Joueur * j, int i){
 			j->perso.taille_hitbox.w=105;
 			j->perso.taille_hitbox.h=235;
 
+			j->perso.taille_hitbox_coup.w=105;
+			j->perso.taille_hitbox_coup.h=235;
+
 			j->perso.hitbox_offsetX=40;
 			j->perso.hitbox_offsetY=57;
 			break;
@@ -69,14 +74,17 @@ void initPerso(Joueur * j, int i){
 				j->perso.nb_frame[SAUTER]=4;
 				j->perso.nb_frame[PARER]=1;
 
-				j->perso.taille_perso.w=545;
+				j->perso.taille_perso.w=554.4;
 				j->perso.taille_perso.h=300;
-				j->perso.taille_perso.mult=1.3;
+				j->perso.taille_perso.mult=1.0;
 
-				j->perso.taille_hitbox.w=105;
-				j->perso.taille_hitbox.h=235;
+				j->perso.taille_hitbox.w=190;
+				j->perso.taille_hitbox.h=300;
 
-				j->perso.hitbox_offsetX=40;
+				j->perso.taille_hitbox_coup.w=140;
+				j->perso.taille_hitbox_coup.h=235;
+
+				j->perso.hitbox_offsetX=((j->perso.taille_perso.w/2)-70)*j->perso.taille_perso.mult;
 				j->perso.hitbox_offsetY=70;
 				break;
 				case MICKEY:
@@ -92,14 +100,17 @@ void initPerso(Joueur * j, int i){
 					j->perso.nb_frame[SAUTER]=4;
 					j->perso.nb_frame[PARER]=1;
 
-					j->perso.taille_perso.w=545;
+					j->perso.taille_perso.w=546.4;
 					j->perso.taille_perso.h=300;
-					j->perso.taille_perso.mult=1.3;
+					j->perso.taille_perso.mult=1.0;
 
-					j->perso.taille_hitbox.w=105;
+					j->perso.taille_hitbox.w=136.6;
 					j->perso.taille_hitbox.h=235;
 
-					j->perso.hitbox_offsetX=40;
+					j->perso.taille_hitbox_coup.w=105;
+					j->perso.taille_hitbox_coup.h=235;
+
+					j->perso.hitbox_offsetX=((j->perso.taille_perso.w/4))*j->perso.taille_perso.mult;
 					j->perso.hitbox_offsetY=57;
 					break;
 	}

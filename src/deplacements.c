@@ -77,12 +77,16 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		case SDL_KEYDOWN:
 		switch (event.key.keysym.sym) {
 			case SDLK_e:
+			if(!event.key.repeat){
 				resetAnimation(j1);
 				j1->action=PARER;
+			}
 			break;
 			case SDLK_a:
+			if(!event.key.repeat){
 				resetAnimation(j1);
-				j1->action=POING;
+				attaquer(j1, j2);
+			}
 				break;
 		}
 		break;
