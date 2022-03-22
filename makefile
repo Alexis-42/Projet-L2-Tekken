@@ -14,14 +14,28 @@ ${PROG}: ${SOURCE} ${LOCLIB}
 	${CC} -o ${PROG} ${SOURCE} ${LIBS} ${INCS} ${FLAGS}
 	rm -f bin/*.o
 
+# compile le code et les documents
+all :
+	${jouer}
+	${docs}
+
+# compile le code 
 jouer: ${PROG}
 	rm -f bin/*.o
 	./jeu
 	rm -f ${PROG}
 
+# compile la doc 
+docs:
+	doxygen ./Doxyfile
+
+# efface les .o et le programme
 clean:
 	rm -f ${PROG}
 	rm -f bin/*.o
 
-docs:
-	doxygen ./Doxyfile
+# efface les .o , le programme et la doc
+clean all:
+	${clean}
+	rm -f doc/html/search/*
+	rm -f doc/latex/*
