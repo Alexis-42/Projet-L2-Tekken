@@ -18,6 +18,7 @@ typedef struct {
     char * nom;
     taille taille_perso;
     taille taille_hitbox;
+    taille taille_hitbox_coup;
     int hitbox_offsetX, hitbox_offsetY;
     int frame;
     Uint32 seconds;

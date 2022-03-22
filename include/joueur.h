@@ -17,14 +17,15 @@ typedef struct {
   int action;
   Direction direction;
 	Personnage perso;
-	SDL_Rect hitbox;
+	SDL_Rect hitbox; //Hitbox pour recevoir des degats et le reste
+	SDL_Rect hitbox_coup; //Hitbox pour la portée des coups
 	SDL_Texture * texture;
   char * nom;
 } Joueur;
 
 void direction(Joueur * j1, Joueur * j2);
 void hitbox(Joueur * joueur);
-int checkPerdu(Joueur * j1, Joueur * j2);
+void checkPerdu(Joueur * j1, Joueur * j2);
 bool checkCollisions(Joueur * j1, Joueur * j2);
 void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * texture, Direction direction);
 void initPerso(Joueur * j, int i);

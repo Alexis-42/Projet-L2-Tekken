@@ -20,7 +20,6 @@ bool quit;
 SDL_DisplayMode ecran;
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'environnement (pour l'instant)
-  int flag_perdu=0;
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Texture * texture_carre_jaune = NULL;
@@ -67,7 +66,6 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   initJoueur(j2, 600.0, "PINGU", texture_joueur2, droite);
   resetAnimation(j1); //Spawn du joueur
   resetAnimation(j2);
-  SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0); //Couleur des hitboxes
 
   init_sprite_pv(&rect_sprite_pv_j1, 1);
   init_sprite_pv(&rect_sprite_pv_j2, 2);
@@ -85,14 +83,26 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     Uint8 *state = SDL_GetKeyboardState(NULL);
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg,1);
+
+    checkPerdu(j1, j2);
     jouerAnimation(j1);
     jouerAnimation(j2);
     deplacements(j1, j2);
-    flag_perdu = checkPerdu(j1, j2);
     SDL_RenderClear(renderer);
     renderMap(&srcBg, &dstBg, renderer);
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0); //Couleur des hitboxes
+    SDL_RenderFillRect(renderer, &(j1->hitbox));
+    SDL_RenderFillRect(renderer, &(j2->hitbox));
+    
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0); //Couleur des hitboxes
+    SDL_RenderFillRect(renderer, &(j1->hitbox_coup));
+    SDL_RenderFillRect(renderer, &(j2->hitbox_coup));
+    
     renderAnimation(j1);
     renderAnimation(j2);
+   
+   
     barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
     barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
     init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
@@ -102,16 +112,9 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
     SDL_RenderPresent(renderer);
-    quit = flag_perdu!=0 || sec_deb_combat >59 || state[SDL_SCANCODE_ESCAPE];
+    quit = sec_deb_combat >59 || state[SDL_SCANCODE_ESCAPE];
   }
 
-  if(flag_perdu == 1)
-    printf("\n=========================\n%s à gagné ! \n=========================\n",j1->nom);
-  else{
-    if(flag_perdu == 2){
-      printf("\n=========================\n%s à gagné ! \n=========================\n",j2->nom);
-    }
-  }
 
   SDL_RenderClear(renderer);
   SDL_DestroyTexture(texture_nomj1);
