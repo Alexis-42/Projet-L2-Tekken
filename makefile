@@ -22,3 +22,6 @@ jouer: ${PROG}
 clean:
 	rm -f ${PROG}
 	rm -f bin/*.o
+
+docs:
+	doxygen ./Doxyfile
