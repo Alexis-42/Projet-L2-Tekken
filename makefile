@@ -16,7 +16,7 @@ ${PROG}: ${SOURCE} ${LOCLIB}
 
 # compile le code et les documents
 all :
-	${jouer}
+	${PROG}
 	${docs}
 
 # compile le code 
