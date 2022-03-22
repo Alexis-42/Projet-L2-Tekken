@@ -7,7 +7,7 @@ LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 INCS=-I${SDL_INC_DIR}
 
 SOURCE = src/main.c src/initSdl.c src/deplacements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/son.c src/map.c src/gui.c
-LOCLIB = include/animations.h include/deplacements.h include/initSdl.h include/jeu.h include/joueur.h include/menu_principal.h include/menu_selection.h include/personnages.h include/son.h include/map.h include/gui.h
+LOCLIB = $(SRCS:.c=.o,src=include) 
 PROG=jeu
 
 ${PROG}: ${SOURCE} ${LOCLIB}
@@ -23,7 +23,6 @@ all :
 jouer: ${PROG}
 	rm -f bin/*.o
 	./jeu
-	rm -f ${PROG}
 
 # compile la doc 
 docs:
@@ -35,7 +34,7 @@ clean:
 	rm -f bin/*.o
 
 # efface les .o , le programme et la doc
-clean all:
+CleanAll:
 	${clean}
 	rm -f doc/html/search/*
 	rm -f doc/latex/*
