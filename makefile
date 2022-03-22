@@ -7,10 +7,9 @@ LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 INCS=-I${SDL_INC_DIR}
 
 SOURCE = src/main.c src/initSdl.c src/deplacements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/son.c src/map.c src/gui.c
-LOCLIB = $(SRCS:.c=.o,src=include) 
 PROG=jeu
 
-${PROG}: ${SOURCE} ${LOCLIB}
+${PROG}: ${SOURCE}
 	${CC} -o ${PROG} ${SOURCE} ${LIBS} ${INCS} ${FLAGS}
 	rm -f bin/*.o
 
