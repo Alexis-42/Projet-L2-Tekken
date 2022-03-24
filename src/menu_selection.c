@@ -34,14 +34,15 @@ SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Rendere
 void jouerAnimationPersoMenu(Joueur * joueur, int tour, double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
 Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 Uint32 sprite = seconds % 15;
-float posx;
-if(tour){
-  posx=100.0;
-}else{
-  posx=1500.0;
-}
 SDL_Rect srcrect;
 SDL_Rect dstrect;
+
+float posx;
+if(tour){
+  posx=0.0;
+}else{
+  posx=1450.0/1920*ecran.w;
+}
 
 //shrek
 //  if(cord_perso==200.0/1920.0*ecran.w){
@@ -63,7 +64,7 @@ joueur->perso.dstrect=dstrect;
 void menu_selection(){
   int num_map=1;
   SDL_Rect srcBg;
-
+  Joueur j1, j2;
   //initialisation de sdl
   if(TTF_Init()==-1){
     printf("librairie non initialisé");
@@ -149,7 +150,6 @@ void menu_selection(){
   //carré violet de sélection du personnage si les 2 joueurs choissisent le meme
   SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
-  Joueur j1, j2;
 
   SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
