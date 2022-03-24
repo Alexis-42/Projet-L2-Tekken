@@ -14,7 +14,8 @@ bool estTropHaut(Joueur * joueur){
 }
 
 bool estAuSol(Joueur * joueur){
-  return joueur->position.y==spawnY;
+  printf("jPosY = %.3f\n", joueur->position.y);
+  return joueur->position.y>=740.0;
 }
 
 void direction(Joueur * j1, Joueur * j2){

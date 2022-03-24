@@ -18,12 +18,14 @@ typedef struct {
 } params;
 
 void sauter(Joueur * joueur){
-        /*if(joueur->action==SAUTER)
-           if(estTropHaut(joueur))
-              if(!estAuSol(joueur))
-	         joueur->position.y -= 1.5;
-	   else
-	         joueur->position.y += 1.5;*/
+	Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
+	Uint32 saut = seconds % 20;
+	if(estAuSol(joueur)){
+		joueur->position.y-=saut;
+	} else if (estTropHaut(joueur)){
+		joueur->position.y+=saut;
+	}
+
 }
 
 void attaquer(Joueur * jAttaquant, Joueur * j2){
@@ -38,8 +40,6 @@ void deplacements(Joueur * j1, Joueur * j2) {
 	hitbox(j1);
 	hitbox(j2);
 	direction(j1, j2);
-	sauter(j1);
-	sauter(j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
 
@@ -87,7 +87,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 				resetAnimation(j1);
 				attaquer(j1, j2);
 			}
-				break;
+			break;
 		}
 		break;
 
@@ -106,10 +106,6 @@ void deplacements(Joueur * j1, Joueur * j2) {
 				resetAnimation(j1);
 				j1->action=IDLE;
 				break;
-			case SDLK_SPACE:
-				resetAnimation(j1);
-				j1->action=IDLE;
-				break;
 			case SDLK_a:
 				resetAnimation(j1);
 				j1->action=IDLE;
@@ -121,7 +117,8 @@ void deplacements(Joueur * j1, Joueur * j2) {
 			/* event J2 */
 			case SDLK_0:
 				resetAnimation(j2);
-				j2->action=IDLE;
+				j2->action=SAUTER;
+				sauter(j2);
 				break;
 			case SDLK_LEFT:
 				resetAnimation(j2);
@@ -152,7 +149,9 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		}
 	}
 	if (state[SDL_SCANCODE_SPACE]) {
+		resetAnimation(j1);
 		j1->action=SAUTER;
+		sauter(j1);
 	}
 	/* verif touches J2 */
 	if (state[SDL_SCANCODE_LEFT]) {
