@@ -235,7 +235,7 @@ int getSelection(int x_button, int y_button){
       printf("\nsortie 1: multijoueur\n");
     }else if(sortie==2){
       printf("\nsortie 2: IA\n");
-      menu_selection();
+      lancerMenu(MENU_SELECTION);
     }else if(sortie==3){
       printf("\nsortie 3 : options\n");
     }else if(sortie==4){

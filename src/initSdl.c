@@ -84,15 +84,13 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   initPause();
 
   while (!quit) {
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
-
     SDL_Event event;
 	  SDL_PollEvent(&event);
 
 	switch (event.type) {
     case SDL_KEYDOWN:
 		switch (event.key.keysym.sym) {
-		case SDLK_BACKSPACE:
+		case SDLK_ESCAPE:
 		  pause = !pause;
 		break;
     }
@@ -126,7 +124,6 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
       renderPause();
     }
     SDL_RenderPresent(renderer);
-    quit = sec_deb_combat >59 || state[SDL_SCANCODE_ESCAPE];
   }
 
   SDL_RenderClear(renderer);

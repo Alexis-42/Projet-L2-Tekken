@@ -129,9 +129,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
 		break;
 	}
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
-	if (state[SDL_SCANCODE_ESCAPE]) {
-		quit=true;
-	}
+	
 	/* verif touches J1 */
 	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
 	if(j1->hitbox.x>0){
