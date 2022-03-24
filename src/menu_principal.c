@@ -8,6 +8,7 @@
 #include "../include/menu_selection.h"
 #include "../include/animations.h"
 #include "../include/map.h"
+#include "../include/menu.h"
 
 #define MODE BORDERLESS
 bool quitter;
@@ -23,22 +24,18 @@ SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4;
 SDL_Rect flamme1, flamme2, flamme3, flamme4;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
 
-  void creerBouton(TTF_Font * font, char * texte, SDL_Color couleur, SDL_Rect * rect, SDL_Texture ** texture, float x, float y){
-    SDL_Surface * surface_jouer_multi = TTF_RenderText_Solid(font, texte, couleur);
-    *texture = SDL_CreateTextureFromSurface(renderer_menu, surface_jouer_multi);
-    int text_width_jouer_multi = surface_jouer_multi->w;
-    int text_height_jouer_multi = surface_jouer_multi->h;
-    SDL_FreeSurface(surface_jouer_multi);
+int getSelection(int x_button, int y_button){
+  if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
+    return 1;
+  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
+    return 2;
+  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
+    return 3;
+  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
+    return 4;
 
-    SDL_Rect rect_jouer_multi;
-
-    rect_jouer_multi.x = x/1920.0*ecran.w;
-    rect_jouer_multi.y = y/1080.0*ecran.h;
-    rect_jouer_multi.w = text_width_jouer_multi;
-    rect_jouer_multi.h = text_height_jouer_multi;
-
-    *rect=rect_jouer_multi;
-  }
+  return 0;
+}
 
   void initFlammes(SDL_Rect * rect, SDL_Texture ** texture, float x, float y){
     SDL_Surface * image_flamme_multi = IMG_Load("res/flamme.png");
@@ -74,19 +71,6 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
     SDL_RenderCopy(renderer_menu, texBtn4, NULL, &btn4);
 
     SDL_RenderPresent(renderer_menu);
-  }
-
-  int getSelection(int x_button, int y_button){
-    if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
-      return 1;
-    else if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
-      return 2;
-    else if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
-      return 3;
-    else if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
-      return 4;
-
-    return 0;
   }
 
   void menu_principal(){
@@ -128,10 +112,10 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
     }
 
     //création affichage jouer en multijoueur
-    creerBouton(font, "Jouer en multijoueur", ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
-    creerBouton(font, "Jouer contre une IA", ColorWhite, &btn2, &texBtn2, 75.0, 150.0);
-    creerBouton(font, "Options", ColorWhite, &btn3, &texBtn3, 75.0, 250.0);
-    creerBouton(font, "Quitter", ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
+    creerBouton(renderer_menu, font, "Jouer en multijoueur", ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
+    creerBouton(renderer_menu, font, "Jouer contre une IA", ColorWhite, &btn2, &texBtn2, 75.0, 150.0);
+    creerBouton(renderer_menu, font, "Options", ColorWhite, &btn3, &texBtn3, 75.0, 250.0);
+    creerBouton(renderer_menu, font, "Quitter", ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
 
     //affichage du fond d'écran apres avoir néttoyer le renderer
    	int x_button;
@@ -148,7 +132,6 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
   	switch (event.type){
   		case SDL_QUIT:
   			quitter = true;
-        sortie=100;
   			break;
   		case SDL_MOUSEBUTTONDOWN:
   				x_button =event.button.x;
@@ -168,7 +151,6 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
             case 4: quitter=true;
                     sortie=4;
                     break;
-
           }
   				break;
 
@@ -251,10 +233,9 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
       printf("\nerreur de sortie\n");
     }else if(sortie==1){
       printf("\nsortie 1: multijoueur\n");
-      //initSdl();
     }else if(sortie==2){
       printf("\nsortie 2: IA\n");
-      menu_selection();
+      lancerMenu(MENU_SELECTION);
     }else if(sortie==3){
       printf("\nsortie 3 : options\n");
     }else if(sortie==4){

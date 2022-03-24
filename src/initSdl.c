@@ -13,14 +13,15 @@
 #include "../include/personnages.h"
 #include "../include/map.h"
 #include "../include/gui.h"
+#include "../include/pause.h"
 
 #define MODE BORDERLESS
 int sec_deb_combat,ancien_temps=-1;
 bool quit;
+bool pause=false;
 SDL_DisplayMode ecran;
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'environnement (pour l'instant)
-  bool pause=false;
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Texture * texture_carre_jaune = NULL;
@@ -80,20 +81,20 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   init_afficher_nom_joueur(j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1,1);
   init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2,2);
 
-  while (!quit ) {
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
+  initPause();
 
-  /*  SDL_Event event;
+  while (!quit) {
+    SDL_Event event;
 	  SDL_PollEvent(&event);
 
 	switch (event.type) {
     case SDL_KEYDOWN:
 		switch (event.key.keysym.sym) {
-		case SDLK_BACKSPACE:
+		case SDLK_ESCAPE:
 		  pause = !pause;
 		break;
     }
-  }*/
+  }
 
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg,1);
@@ -104,33 +105,26 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     SDL_RenderClear(renderer);
     renderMap(&srcBg, &dstBg, renderer);
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0); //Couleur des hitboxes
-    SDL_RenderFillRect(renderer, &(j1->hitbox));
-    SDL_RenderFillRect(renderer, &(j2->hitbox));
-
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0); //Couleur des hitboxes
-    SDL_RenderFillRect(renderer, &(j1->hitbox_coup));
-    SDL_RenderFillRect(renderer, &(j2->hitbox_coup));
-
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
     renderAnimation(j1);
     renderAnimation(j2);
+
     init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+    SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
+    SDL_DestroyTexture(texture_temps);
 
     barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
     barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
 
-    if(!pause){
-      deplacements(j1, j2);
-
-      SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
-      SDL_DestroyTexture(texture_temps);
-      SDL_RenderPresent(renderer);
+    if(!pause)
+      deplacements(j1, j2, &event);
+    else {
+      selectionPause(&event);
+      renderPause();
     }
-    quit = sec_deb_combat >59 || state[SDL_SCANCODE_ESCAPE];
+    SDL_RenderPresent(renderer);
   }
-
 
   SDL_RenderClear(renderer);
   SDL_DestroyTexture(texture_nomj1);
