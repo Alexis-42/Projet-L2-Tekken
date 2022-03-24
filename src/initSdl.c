@@ -18,10 +18,10 @@
 #define MODE BORDERLESS
 int sec_deb_combat,ancien_temps=-1;
 bool quit;
+bool pause=false;
 SDL_DisplayMode ecran;
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'environnement (pour l'instant)
-  bool pause=false;
   quit = false;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Texture * texture_carre_jaune = NULL;
@@ -83,7 +83,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
 
   initPause();
 
-  while (!quit ) {
+  while (!quit) {
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
     SDL_Event event;
@@ -128,7 +128,6 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     SDL_RenderPresent(renderer);
     quit = sec_deb_combat >59 || state[SDL_SCANCODE_ESCAPE];
   }
-
 
   SDL_RenderClear(renderer);
   SDL_DestroyTexture(texture_nomj1);
