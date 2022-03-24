@@ -10,7 +10,7 @@ void initPerso(Joueur * j, int i){
 	j->perso.frame=0;
 	switch(i){
 		case PINGU:
-			j->perso.nom="Pingu";
+			j->perso.nom="Pingutest";
 
 			j->perso.nb_frame[DANSE]=46;
 			j->perso.nb_frame[DEGAT]=8;
@@ -22,8 +22,8 @@ void initPerso(Joueur * j, int i){
 			j->perso.nb_frame[SAUTER]=4;
 			j->perso.nb_frame[PARER]=1;
 
-			j->perso.taille_perso.w=360;
-			j->perso.taille_perso.h=529;
+			j->perso.taille_perso.w=470;
+			j->perso.taille_perso.h=300;
 			j->perso.taille_perso.mult=1.0;
 
 			j->perso.taille_hitbox.w=140;
