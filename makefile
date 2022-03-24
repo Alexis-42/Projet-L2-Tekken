@@ -6,7 +6,7 @@ SDL_INC_DIR=${SDL_DIR}/include
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 INCS=-I${SDL_INC_DIR}
 
-SOURCE = src/main.c src/initSdl.c src/deplacements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/son.c src/map.c src/gui.c
+SOURCE = src/main.c src/initSdl.c src/deplacements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/son.c src/map.c src/gui.c src/pause.c src/menu.c
 PROG=jeu
 
 ${PROG}: ${SOURCE}
@@ -18,12 +18,12 @@ all :
 	${PROG}
 	${docs}
 
-# compile le code 
+# compile le code
 jouer: ${PROG}
 	rm -f bin/*.o
 	./jeu
 
-# compile la doc 
+# compile la doc
 docs:
 	doxygen ./Doxyfile
 
