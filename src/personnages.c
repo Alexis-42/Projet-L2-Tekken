@@ -10,7 +10,7 @@ void initPerso(Joueur * j, int i){
 	j->perso.frame=0;
 	switch(i){
 		case PINGU:
-			j->perso.nom="Pingutest";
+			j->perso.nom="Pingu";
 
 			j->perso.nb_frame[DANSE]=46;
 			j->perso.nb_frame[DEGAT]=8;
