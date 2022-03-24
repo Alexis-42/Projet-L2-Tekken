@@ -14,7 +14,6 @@ bool estTropHaut(Joueur * joueur){
 }
 
 bool estAuSol(Joueur * joueur){
-  printf("jPosY = %.3f\n", joueur->position.y);
   return joueur->position.y>=740.0;
 }
 
@@ -30,6 +29,7 @@ void hitbox(Joueur * joueur){
     joueur->perso.taille_hitbox.w,
     joueur->perso.taille_hitbox.h
   };
+
   SDL_Rect hitbox2 = {
     hitbox.x,
     hitbox.y,

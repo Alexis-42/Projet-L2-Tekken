@@ -25,7 +25,6 @@ void sauter(Joueur * joueur){
 	} else if (estTropHaut(joueur)){
 		joueur->position.y+=saut;
 	}
-
 }
 
 void attaquer(Joueur * jAttaquant, Joueur * j2){
@@ -36,20 +35,18 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	}
 }
 
-void deplacements(Joueur * j1, Joueur * j2) {
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
 	hitbox(j1);
 	hitbox(j2);
 	direction(j1, j2);
-	SDL_Event event;
-	SDL_PollEvent(&event);
 
-	switch (event.type) {
+	switch (event->type) {
 		case SDL_QUIT:
 		quit = true;
 		break;
 
 		case SDL_MOUSEBUTTONDOWN:
-		switch (event.button.button) {
+		switch (event->button.button) {
 			case SDL_BUTTON_RIGHT:
 				resetAnimation(j2);
 				j2->action=PARER;
@@ -62,7 +59,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		break;
 
 		case SDL_MOUSEBUTTONUP:
-		switch (event.button.button) {
+		switch (event->button.button) {
 			case SDL_BUTTON_RIGHT:
 				resetAnimation(j2);
 				j2->action=IDLE;
@@ -75,15 +72,15 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		break;
 
 		case SDL_KEYDOWN:
-		switch (event.key.keysym.sym) {
+		switch (event->key.keysym.sym) {
 			case SDLK_e:
-			if(!event.key.repeat){
+			if(!event->key.repeat){
 				resetAnimation(j1);
 				j1->action=PARER;
 			}
 			break;
 			case SDLK_a:
-			if(!event.key.repeat){
+			if(!event->key.repeat){
 				resetAnimation(j1);
 				attaquer(j1, j2);
 			}
@@ -92,7 +89,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 		break;
 
 		case SDL_KEYUP:
-		switch (event.key.keysym.sym) {
+		switch (event->key.keysym.sym) {
 			/* event J1 */
 			case SDLK_q:
 				resetAnimation(j1);
