@@ -23,6 +23,8 @@ typedef struct {
   char * nom;
 } Joueur;
 
+bool estTropHaut(Joueur * joueur);
+bool estAuSol(Joueur * joueur);
 void direction(Joueur * j1, Joueur * j2);
 void hitbox(Joueur * joueur);
 void checkPerdu(Joueur * j1, Joueur * j2);

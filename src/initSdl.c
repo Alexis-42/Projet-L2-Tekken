@@ -83,7 +83,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   while (!quit ) {
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-    SDL_Event event;
+  /*  SDL_Event event;
 	  SDL_PollEvent(&event);
 
 	switch (event.type) {
@@ -93,7 +93,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
 		  pause = !pause;
 		break;
     }
-  }
+  }*/
 
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg,1);
@@ -107,23 +107,25 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0); //Couleur des hitboxes
     SDL_RenderFillRect(renderer, &(j1->hitbox));
     SDL_RenderFillRect(renderer, &(j2->hitbox));
-    
+
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0); //Couleur des hitboxes
     SDL_RenderFillRect(renderer, &(j1->hitbox_coup));
     SDL_RenderFillRect(renderer, &(j2->hitbox_coup));
-   
-    barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
-    barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
-    init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
-    SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
-    SDL_DestroyTexture(texture_temps);
+
+    SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
+    SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
     renderAnimation(j1);
     renderAnimation(j2);
+    init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+
+    barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
+    barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
 
     if(!pause){
       deplacements(j1, j2);
-      SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
-      SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
+
+      SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
+      SDL_DestroyTexture(texture_temps);
       SDL_RenderPresent(renderer);
     }
     quit = sec_deb_combat >59 || state[SDL_SCANCODE_ESCAPE];
