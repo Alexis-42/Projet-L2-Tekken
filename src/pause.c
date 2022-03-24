@@ -21,57 +21,46 @@ void renderPause(){
   SDL_RenderPresent(renderer);
 }
 
+int getSelection2(int x_button, int y_button){
+  if(x_button>(btn1.x/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(btn1.x/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
+    return 1;
+  else if(x_button>(btn1.x/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(btn1.x/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
+    return 2;
+  else if(x_button>(btn1.x/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(btn1.x/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
+    return 3;
+  else if(x_button>(btn1.x/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(btn1.x/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
+    return 4;
+
+  return 0;
+}
+
 void selectionPause(SDL_Event * event){
-    //  printf("buttons : %d, %d\n", x_button, y_button);
-
       switch (event->type){
-        case SDL_QUIT:
-        quit = true;
-        break;
-
         case SDL_MOUSEBUTTONDOWN:
           x_button =event->button.x;
           y_button =event->button.y;
         //sortie jouer en multijoueur
-
-        switch (getSelection(x_button, y_button, 100.0, 100.0, ecran.w/2)) {
-          case 1: quit=true;
-          sortie=1;
-          break;
-          case 2: quit=true;
-          sortie=2;
-          break;
-          case 3: quit=true;
-          sortie=3;
-          break;
-          case 4: quit=true;
-          sortie=4;
-          break;
-        }
         break;
       }
 
-      printf("sortie = %d\n", sortie);
-      if(sortie<=1){
-        //fin du menu principal, changement de fenetre
-        SDL_RenderClear(renderer);
-        SDL_DestroyTexture(texBtn1);
-        SDL_DestroyTexture(texBtn2);
-        SDL_DestroyTexture(texBtn3);
-        SDL_DestroyTexture(texBtn4);
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        IMG_Quit();
-        SDL_Quit();
+      sortie = getSelection2(x_button, y_button);
 
-      } else {
-          return;
-      }
-       if(sortie==2){
-        lancerMenu(MENU_PRINCIPAL);
+      printf("sortie = %d\n", sortie);
+      if(sortie==1){
+          pause = false;
+          sortie = 0;
+      } else if(sortie==2){
+         lancerMenu(MENU_PRINCIPAL);
+         SDL_RenderClear(renderer);
+         SDL_DestroyTexture(texBtn1);
+         SDL_DestroyTexture(texBtn2);
+         SDL_DestroyTexture(texBtn3);
+         SDL_DestroyTexture(texBtn4);
+         SDL_DestroyRenderer(renderer);
+         SDL_DestroyWindow(window);
+         SDL_Quit();
       }else if(sortie==3){
-      }else if(sortie==4){
-      }
+      } else if(sortie==4) quit=true;
 }
 
 void initPause(){
@@ -83,11 +72,11 @@ void initPause(){
     printf("\n%s\n",TTF_GetError());
     exit(EXIT_FAILURE);
   }
-
-  creerBouton(renderer, font, "Retour au combat", ColorWhite, &btn1, &texBtn1, ecran.w/2-btn1.w/2, ecran.h/4);
-  creerBouton(renderer, font, "Retour au menu", ColorWhite, &btn2, &texBtn2, ecran.w/2-btn2.w/2, ecran.h/4+100);
-  creerBouton(renderer, font, "Options", ColorWhite, &btn3, &texBtn3, ecran.w/2-btn3.w/2, ecran.h/4+200);
-  creerBouton(renderer, font, "Quitter", ColorWhite, &btn4, &texBtn4, ecran.w/2-btn4.w/2, ecran.h/4+300);
+  int x = 720;
+  creerBouton(renderer, font, "Retour au combat", ColorWhite, &btn1, &texBtn1, x/1920.0*ecran.w, 50/1920.0*ecran.w);
+  creerBouton(renderer, font, "Retour au menu", ColorWhite, &btn2, &texBtn2, x/1920.0*ecran.w, 150/1920.0*ecran.w);
+  creerBouton(renderer, font, "Options", ColorWhite, &btn3, &texBtn3, x/1920.0*ecran.w, 250/1920.0*ecran.w);
+  creerBouton(renderer, font, "Quitter", ColorWhite, &btn4, &texBtn4, x/1920.0*ecran.w, 350/1920.0*ecran.w);
 
   TTF_CloseFont(font);
   TTF_Quit();

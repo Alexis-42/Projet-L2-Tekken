@@ -24,6 +24,19 @@ SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4;
 SDL_Rect flamme1, flamme2, flamme3, flamme4;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
 
+int getSelection(int x_button, int y_button){
+  if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
+    return 1;
+  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
+    return 2;
+  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
+    return 3;
+  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
+    return 4;
+
+  return 0;
+}
+
   void initFlammes(SDL_Rect * rect, SDL_Texture ** texture, float x, float y){
     SDL_Surface * image_flamme_multi = IMG_Load("res/flamme.png");
     *texture = SDL_CreateTextureFromSurface(renderer_menu, image_flamme_multi);
@@ -119,14 +132,13 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
   	switch (event.type){
   		case SDL_QUIT:
   			quitter = true;
-        sortie=100;
   			break;
   		case SDL_MOUSEBUTTONDOWN:
   				x_button =event.button.x;
   				y_button =event.button.y;
           //sortie jouer en multijoueur
 
-          switch (getSelection(x_button, y_button, 50.0, 100.0, 100.0)) {
+          switch (getSelection(x_button, y_button)) {
             case 1: quitter=true;
                     sortie=1;
                     break;
@@ -148,7 +160,7 @@ SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
       //postions de la souris
           //sur le texte multijoueur
 
-          switch (getSelection(x_button, y_button, 50.0, 100.0, 100.0)) {
+          switch (getSelection(x_button, y_button)) {
             case 1:
                     sortie=1;
                     break;

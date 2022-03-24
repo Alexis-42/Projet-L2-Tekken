@@ -13,7 +13,6 @@ void lancerMenu(int menu){
   switch (menu) {
     case MENU_PRINCIPAL: menu_principal(); break;
     case MENU_SELECTION: menu_selection(); break;
-    case MENU_PAUSE: menu_principal(); break;
   }
 }
 
@@ -32,17 +31,4 @@ void creerBouton(SDL_Renderer * renderer, TTF_Font * font, char * texte, SDL_Col
   rect_jouer_multi.h = text_height_jouer_multi;
 
   *rect=rect_jouer_multi;
-}
-
-int getSelection(int x_button, int y_button, float debut, float pas, float x){
-  if(x_button>(x/1920.0*ecran.w) && y_button>(debut/1080.0*ecran.h) && x_button<(x/1920.0*ecran.w+600.0) && (y_button<debut/1080.0*ecran.h+x))
-    return 1;
-  else if(x_button>(x/1920.0*ecran.w) && y_button>(debut+pas/1080.0*ecran.h) && x_button<(x/1920.0*ecran.w+600.0) && (y_button<debut+pas/1080.0*ecran.h+x))
-    return 2;
-  else if(x_button>(x/1920.0*ecran.w) && y_button>(debut+pas*2/1080.0*ecran.h) && x_button<(x/1920.0*ecran.w+600.0) && (y_button<debut+pas*2/1080.0*ecran.h+x))
-    return 3;
-  else if(x_button>(x/1920.0*ecran.w) && y_button>(debut+pas*3/1080.0*ecran.h) && x_button<(x/1920.0*ecran.w+600.0) && (y_button<debut+pas*3/1080.0*ecran.h+x))
-    return 4;
-
-  return 0;
 }
