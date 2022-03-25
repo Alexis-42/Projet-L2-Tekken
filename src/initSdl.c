@@ -14,7 +14,7 @@
 #include "../include/map.h"
 #include "../include/gui.h"
 
-#define MODE BORDERLESS
+#define MODE FULLSCREEN
 int sec_deb_combat,ancien_temps=-1;
 bool quit;
 SDL_DisplayMode ecran;
@@ -22,6 +22,15 @@ SDL_DisplayMode ecran;
 void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'environnement (pour l'instant)
   bool pause=false;
   quit = false;
+  const Uint8 *state;
+  SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
+  SDL_Texture * texture_hitbox_coupj1;
+  SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/rectangle_bleu.png");
+  SDL_Texture * texture_hitbox_coupj2;
+  SDL_Surface * surface_hitbox_piedj1 = IMG_Load("res/rectangle_rouge.png");
+  SDL_Texture * texture_hitbox_piedj1;
+  SDL_Surface * surface_hitbox_piedj2 = IMG_Load("res/rectangle_rouge.png");
+  SDL_Texture * texture_hitbox_piedj2;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Texture * texture_carre_jaune = NULL;
   SDL_Texture * texture_carre_rouge = NULL;
@@ -41,11 +50,15 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     break;
     case BORDERLESS: window = SDL_CreateWindow("SDL2 Tekken",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
-    break;
-    default: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
+    break;SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj1);
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
+  texture_hitbox_coupj1 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj1);
+  texture_hitbox_coupj2 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj2);
+
+  texture_hitbox_piedj1 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_piedj1);
+  texture_hitbox_piedj2 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_piedj2);
+
 
   char j1sprite[50], j2sprite[50];
   snprintf(j1sprite, sizeof(j1sprite), "res/sprites/%s.png", j1->perso.nom);
@@ -81,7 +94,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2,2);
 
   while (!quit ) {
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    state = SDL_GetKeyboardState(NULL);
 
   /*  SDL_Event event;
 	  SDL_PollEvent(&event);
@@ -97,20 +110,21 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
 
     sec_deb_combat = SDL_GetTicks()/1000;
     jouerAnimationBackground(&srcBg, &dstBg,1);
-
     checkPerdu(j1, j2);
     jouerAnimation(j1);
     jouerAnimation(j2);
     SDL_RenderClear(renderer);
     renderMap(&srcBg, &dstBg, renderer);
 
+    hitbox(j1, texture_hitbox_coupj1,1);
+	  hitbox(j2, texture_hitbox_coupj2,1);
+    hitbox(j1, texture_hitbox_piedj1,0);
+    hitbox(j2, texture_hitbox_piedj2,0);
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 0); //Couleur des hitboxes
     SDL_RenderFillRect(renderer, &(j1->hitbox));
     SDL_RenderFillRect(renderer, &(j2->hitbox));
 
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0); //Couleur des hitboxes
-    SDL_RenderFillRect(renderer, &(j1->hitbox_coup));
-    SDL_RenderFillRect(renderer, &(j2->hitbox_coup));
 
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
@@ -123,7 +137,6 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
 
     if(!pause){
       deplacements(j1, j2);
-
       SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
       SDL_DestroyTexture(texture_temps);
       SDL_RenderPresent(renderer);
@@ -133,6 +146,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
 
 
   SDL_RenderClear(renderer);
+  SDL_DestroyTexture(texture_hitbox_coupj1);
+  SDL_DestroyTexture(texture_hitbox_coupj2);
   SDL_DestroyTexture(texture_nomj1);
   SDL_DestroyTexture(texture_nomj2);
   SDL_DestroyTexture(texture_carre_rouge);
@@ -142,6 +157,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);
   SDL_FreeSurface(sprite_barre_de_vie);
+  SDL_FreeSurface(surface_hitbox_coupj1);
+  SDL_FreeSurface(surface_hitbox_coupj2);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   TTF_CloseFont(font);

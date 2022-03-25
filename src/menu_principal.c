@@ -9,7 +9,7 @@
 #include "../include/animations.h"
 #include "../include/map.h"
 
-#define MODE BORDERLESS
+#define MODE FULLSCREEN
 bool quitter;
 
 SDL_Window * window_menu;

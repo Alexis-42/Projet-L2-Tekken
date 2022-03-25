@@ -29,16 +29,17 @@ void sauter(Joueur * joueur){
 }
 
 void attaquer(Joueur * jAttaquant, Joueur * j2){
-	jAttaquant->action=POING;
 	if(checkCollisions(jAttaquant, j2)){
-		if(j2->action!=PARER)
-			j2->vie-=20;
+		if(j2->action!=PARER){
+			if(jAttaquant->action==PIED)
+				j2->vie-=jAttaquant->perso.dmg_pied;
+			if(jAttaquant->action==POING)
+				j2->vie-=jAttaquant->perso.dmg_poing;
+		}
 	}
 }
 
 void deplacements(Joueur * j1, Joueur * j2) {
-	hitbox(j1);
-	hitbox(j2);
 	direction(j1, j2);
 	SDL_Event event;
 	SDL_PollEvent(&event);
@@ -56,6 +57,7 @@ void deplacements(Joueur * j1, Joueur * j2) {
 				break;
 			case SDL_BUTTON_LEFT:
 				resetAnimation(j2);
+				j2->action=POING;
 				attaquer(j2, j1);
 				break;
 		}
@@ -85,6 +87,14 @@ void deplacements(Joueur * j1, Joueur * j2) {
 			case SDLK_a:
 			if(!event.key.repeat){
 				resetAnimation(j1);
+				j1->action=POING;
+				attaquer(j1, j2);
+			}
+			break;
+			case SDLK_z:
+			if(!event.key.repeat){
+				resetAnimation(j1);
+				j1->action=PIED;
 				attaquer(j1, j2);
 			}
 			break;

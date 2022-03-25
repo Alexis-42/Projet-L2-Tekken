@@ -23,21 +23,45 @@ void direction(Joueur * j1, Joueur * j2){
     j2->direction=j1->position.x>j2->position.x;
 }
 
-void hitbox(Joueur * joueur){
+void hitbox(Joueur * joueur, SDL_Texture * texture,int coup){
   SDL_Rect hitbox = {
     joueur->position.x+joueur->perso.hitbox_offsetX,
     joueur->position.y+joueur->perso.hitbox_offsetY,
     joueur->perso.taille_hitbox.w,
     joueur->perso.taille_hitbox.h
   };
-  SDL_Rect hitbox2 = {
-    hitbox.x,
-    hitbox.y,
-    joueur->perso.taille_hitbox_coup.w,
-    joueur->perso.taille_hitbox_coup.h
-  };
+  SDL_Rect hitbox2;
+
+  if(coup){
+      if(joueur->direction == droite){
+        hitbox2.x = hitbox.x;
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_coup.w;
+        hitbox2.h = joueur->hitbox_coup.h; 
+      }if(joueur->direction == gauche){
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_coup.w;
+        hitbox2.x = (hitbox.x+hitbox.w)-hitbox2.w;
+        hitbox2.h = joueur->hitbox_coup.h;   
+      }
+     joueur->hitbox_coup=hitbox2;
+    }else{
+      // si le joueur est tourné à droite
+      if(joueur->direction == droite){
+        hitbox2.x = hitbox.x;
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_pied.w;
+        hitbox2.h = joueur->hitbox_pied.h;  
+      }if(joueur->direction == gauche){
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_pied.w;
+        hitbox2.x = (hitbox.x+hitbox.w)-hitbox2.w;
+        hitbox2.h = joueur->hitbox_pied.h;  
+      }
+      joueur->hitbox_pied=hitbox2;
+    }
   joueur->hitbox=hitbox;
-  joueur->hitbox_coup=hitbox2;
+  SDL_RenderCopyEx(renderer, texture ,NULL , &hitbox2, 0, 0, joueur->direction);
 }
 
 void checkPerdu(Joueur * j1, Joueur * j2){
@@ -48,7 +72,11 @@ void checkPerdu(Joueur * j1, Joueur * j2){
 }
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
-	SDL_bool collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
+  SDL_bool collision = SDL_FALSE;
+  if(j1->action == POING)
+	  collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
+  if(j1->action == PIED)
+	  collision = SDL_HasIntersection(&(j1->hitbox_pied), &(j2->hitbox));
 	return collision==SDL_TRUE;
 }
 
