@@ -34,7 +34,7 @@ Ainsi qu'une large sélection de cartes disponibles !
 
 <br>
 
-<h2 id="Dépendances" style="font-size:20px;">Dépendances</h2>
+<h3 id="Dépendances" style="font-size:20px;">Dépendances</h3>
 
 Dépendances requises : 
   * <a href="https://www.libsdl.org/download-2.0.php">SDL2</a>
@@ -47,7 +47,7 @@ Fonctionnement approuvé sur Ubuntu
 
 <br>
 
-<h2 id="Installation" style="font-size:20px;">Installation</h2>
+<h3 id="Installation" style="font-size:20px;">Installation</h3>
 
 
 ```
@@ -57,7 +57,7 @@ Dans un terminal à l'emplacement du dossier, exécutez : ```make all```
 
 <br>
 
-<h2 id="Executer le programme" style="font-size:20px;">Executer le programme</h2>
+<h3 id="Executer le programme" style="font-size:20px;">Executer le programme</h3>
 
 
 ```
