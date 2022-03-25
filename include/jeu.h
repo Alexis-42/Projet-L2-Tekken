@@ -8,7 +8,7 @@ SDL_Window * window;
 SDL_Renderer * renderer;
 
 extern bool quit;
-extern SDL_DisplayMode ecran;
 extern bool pause;
+extern SDL_DisplayMode ecran;
 
 #endif

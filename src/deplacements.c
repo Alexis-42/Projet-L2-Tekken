@@ -18,7 +18,7 @@ typedef struct {
 } params;
 
 void sauter(Joueur * joueur){
-	Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
+    Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
 	Uint32 saut = seconds % 20;
 	if(estAuSol(joueur)){
 		joueur->position.y-=saut;
@@ -27,141 +27,114 @@ void sauter(Joueur * joueur){
 	}
 }
 
-void attaquer(Joueur * jAttaquant, Joueur * j2){
-	jAttaquant->action=POING;
-	if(checkCollisions(jAttaquant, j2)){
-		if(j2->action!=PARER)
-			j2->vie-=20;
-	}
-}
-
-void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
-	hitbox(j1);
-	hitbox(j2);
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 	direction(j1, j2);
 
-	switch (event->type) {
+	switch (event.type) {
 		case SDL_QUIT:
 		quit = true;
 		break;
-
-		case SDL_MOUSEBUTTONDOWN:
-		switch (event->button.button) {
-			case SDL_BUTTON_RIGHT:
-				resetAnimation(j2);
-				j2->action=PARER;
-				break;
-			case SDL_BUTTON_LEFT:
-				resetAnimation(j2);
-				attaquer(j2, j1);
-				break;
-		}
-		break;
-
-		case SDL_MOUSEBUTTONUP:
-		switch (event->button.button) {
-			case SDL_BUTTON_RIGHT:
-				resetAnimation(j2);
-				j2->action=IDLE;
-				break;
-			case SDL_BUTTON_LEFT:
-				resetAnimation(j2);
-				j2->action=IDLE;
-				break;
-		}
-		break;
-
-		case SDL_KEYDOWN:
-		switch (event->key.keysym.sym) {
-			case SDLK_e:
-			if(!event->key.repeat){
-				resetAnimation(j1);
-				j1->action=PARER;
+		
+			case SDL_KEYDOWN:
+			switch (event.key.keysym.sym) {
+				if(j1->perso.frame==0 && j1->action==IDLE){
+					case SDLK_a:
+						if(!(event.key.repeat)){
+							j1->action=POING;
+						}
+						break;
+				}
+				if(j2->perso.frame==0 && j2->action==IDLE){
+					case SDLK_KP_2:
+						if(!(event.key.repeat)){
+							j2->action=POING;
+						}
+						break;
+				}
+				
+				if(j1->perso.frame==0 && j1->action==IDLE){
+					case SDLK_z:
+					if(!event.key.repeat){
+						j1->action=PIED;
+					}
+					break;
+				}
 			}
 			break;
-			case SDLK_a:
-			if(!event->key.repeat){
-				resetAnimation(j1);
-				attaquer(j1, j2);
-			}
-			break;
-		}
-		break;
-
+		
 		case SDL_KEYUP:
-		switch (event->key.keysym.sym) {
-			/* event J1 */
+		switch (event.key.keysym.sym) {
+			// event J1 
+			if((j1->perso.frame)==0){
 			case SDLK_q:
-				resetAnimation(j1);
 				j1->action=IDLE;
-				break;
+				
 			case SDLK_d:
-				resetAnimation(j1);
 				j1->action=IDLE;
-				break;
-			case SDLK_z:
-				resetAnimation(j1);
-				j1->action=IDLE;
-				break;
-			case SDLK_a:
-				resetAnimation(j1);
-				j1->action=IDLE;
-				break;
+				
 			case SDLK_e:
-				resetAnimation(j1);
 				j1->action=IDLE;
-				break;
-			/* event J2 */
-			case SDLK_0:
-				resetAnimation(j2);
-				j2->action=SAUTER;
-				sauter(j2);
-				break;
+				j1->perso.frame=0;
+				
+			}
+			// event J2 
+			if((j2->perso.frame )==0){
 			case SDLK_LEFT:
-				resetAnimation(j2);
 				j2->action=IDLE;
-				break;
+				
 			case SDLK_RIGHT:
-				resetAnimation(j2);
 				j2->action=IDLE;
-				break;
+				
+			case SDLK_KP_3:
+				j2->action=IDLE;
+				j2->perso.frame=0;
+				
+			}
 		}
 		break;
 	}
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
-	
 	/* verif touches J1 */
-	if (state[SDL_SCANCODE_A]) { //QWERTY C'EST TOTALEMENT CON
-	if(j1->hitbox.x>0){
-			j1->position.x -= VITESSE;
-		j1->action=COURIR;
+	if(j1->perso.frame==0){
+		if (state[SDL_SCANCODE_A]) { //recule : touche q
+			if(j1->hitbox.x>0){
+				j1->position.x -= VITESSE;
+				j1->action=COURIR;
+			}
 		}
-	}
-	if (state[SDL_SCANCODE_D]){
-		if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
+		if (state[SDL_SCANCODE_D]){ // avance
+			if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
 				j1->position.x += VITESSE;
-			j1->action=COURIR;
+				j1->action=COURIR;
+			}
 		}
-	}
-	if (state[SDL_SCANCODE_SPACE]) {
-		resetAnimation(j1);
-		j1->action=SAUTER;
-		sauter(j1);
-	}
+		if (state[SDL_SCANCODE_E] && j1->action!=COURIR) { // parer
+			j1->action=PARER;
+		}
+		if (state[SDL_SCANCODE_SPACE]) { //sauter
+			j1->action=SAUTER;
+		}
 	/* verif touches J2 */
-	if (state[SDL_SCANCODE_LEFT]) {
-		if(j2->hitbox.x>0){
-			j2->position.x -= VITESSE;
-		j2->action=COURIR;
-		}
 	}
-	if (state[SDL_SCANCODE_RIGHT]) {
-		if(j2->hitbox.x<ecran.w-j2->perso.taille_hitbox.w){
+	if(j2->perso.frame==0){
+		if (state[SDL_SCANCODE_LEFT]) {
+			if(j2->hitbox.x>0){
+				j2->position.x -= VITESSE;
+				j2->action=COURIR;
+			}
+		}
+		if (state[SDL_SCANCODE_RIGHT]) {
+			if(j2->hitbox.x<ecran.w-j2->perso.taille_hitbox.w){
 				j2->position.x += VITESSE;
-			j2->action=COURIR;
+				j2->action=COURIR;
+			}
 		}
-	}
-	if (state[SDL_SCANCODE_KP_0]) {
-		j2->action=SAUTER;
+		if (state[SDL_SCANCODE_KP_3] && j2->action!=COURIR) {
+			j2->action=PARER;
+		}
+		if (state[SDL_SCANCODE_KP_0]) {
+			j2->action=SAUTER;
+		}
+		
 	}
 }

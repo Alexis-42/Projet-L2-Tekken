@@ -10,7 +10,7 @@
 #include "../include/map.h"
 #include "../include/menu.h"
 
-#define MODE BORDERLESS
+#define MODE FULLSCREEN
 bool quitter;
 
 SDL_Window * window_menu;

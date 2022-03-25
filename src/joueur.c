@@ -14,7 +14,7 @@ bool estTropHaut(Joueur * joueur){
 }
 
 bool estAuSol(Joueur * joueur){
-  return joueur->position.y>=740.0;
+  return joueur->position.y==spawnY;
 }
 
 void direction(Joueur * j1, Joueur * j2){
@@ -22,33 +22,61 @@ void direction(Joueur * j1, Joueur * j2){
     j2->direction=j1->position.x>j2->position.x;
 }
 
-void hitbox(Joueur * joueur){
+ void hitbox(Joueur * joueur, SDL_Texture * texture,int coup){
   SDL_Rect hitbox = {
-    joueur->position.x+joueur->perso.hitbox_offsetX,
+    joueur->position.x+joueur->perso.hitbox_offsetX/joueur->perso.taille_perso.mult,
     joueur->position.y+joueur->perso.hitbox_offsetY,
     joueur->perso.taille_hitbox.w,
     joueur->perso.taille_hitbox.h
   };
+  SDL_Rect hitbox2;
 
-  SDL_Rect hitbox2 = {
-    hitbox.x,
-    hitbox.y,
-    joueur->perso.taille_hitbox_coup.w,
-    joueur->perso.taille_hitbox_coup.h
-  };
+  if(coup){
+      if(joueur->direction == droite){
+        hitbox2.x = hitbox.x;
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_coup.w;
+        hitbox2.h = joueur->hitbox_coup.h; 
+      }if(joueur->direction == gauche){
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_coup.w;
+        hitbox2.x = (hitbox.x+hitbox.w)-hitbox2.w;
+        hitbox2.h = joueur->hitbox_coup.h;   
+      }
+     joueur->hitbox_coup=hitbox2;
+    }else{
+      // si le joueur est tourné à droite
+      if(joueur->direction == droite){
+        hitbox2.x = hitbox.x;
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_pied.w;
+        hitbox2.h = joueur->hitbox_pied.h;  
+      }if(joueur->direction == gauche){
+        hitbox2.y = hitbox.y;
+        hitbox2.w = joueur->hitbox_pied.w;
+        hitbox2.x = (hitbox.x+hitbox.w)-hitbox2.w;
+        hitbox2.h = joueur->hitbox_pied.h;  
+      }
+      joueur->hitbox_pied=hitbox2;
+    }
   joueur->hitbox=hitbox;
-  joueur->hitbox_coup=hitbox2;
+  SDL_RenderCopyEx(renderer, texture ,NULL , &hitbox2, 0, 0, joueur->direction);
 }
 
-void checkPerdu(Joueur * j1, Joueur * j2){
+int checkPerdu(Joueur * j1, Joueur * j2){
 	if(j1->vie==0)
-    j1->action=MORT;
+		return 2;
 	else if(j2->vie==0)
-    j2->action=MORT;
+		return 1;
+  return 0;
 }
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
-	SDL_bool collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
+	SDL_bool collision = SDL_FALSE;
+  if(j1->action == POING)
+	  collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
+  if(j1->action == PIED)
+	  collision = SDL_HasIntersection(&(j1->hitbox_pied), &(j2->hitbox));
 	return collision==SDL_TRUE;
 }
 
@@ -59,5 +87,6 @@ void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * textur
   joueur->texture=texture;
   joueur->direction=direction;
   joueur->position.x=(posX/1280.0)*ecran.w;
-  joueur->position.y= ( (spawnY - ( joueur->perso.taille_perso.h * joueur->perso.taille_perso.mult ) )/1080.0)*ecran.h; // pas 720 apaprament
+  joueur->position.y= ( (spawnY - joueur->perso.taille_perso.h )/1080.0)*ecran.h; // pas 720 apaprament
+  joueur->perso.frame=0;
 }

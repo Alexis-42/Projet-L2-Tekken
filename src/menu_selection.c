@@ -11,7 +11,7 @@
 #include "../include/animations.h"
 #include "../include/map.h"
 
-#define MODE BORDERLESS
+#define MODE FULLSCREEN
 SDL_Window * window_menu_selection=NULL;
 
 void aff_menu_selection(int carre,float pos_x){}
@@ -34,27 +34,26 @@ SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Rendere
 void jouerAnimationPersoMenu(Joueur * joueur, int tour, double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
 Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 Uint32 sprite = seconds % 15;
-SDL_Rect srcrect;
-SDL_Rect dstrect;
-
 float posx;
 if(tour){
-  posx=0.0;
+  posx=100.0;
 }else{
-  posx=1450.0/1920*ecran.w;
+  posx=1500.0;
 }
+SDL_Rect srcrect;
+SDL_Rect dstrect;
 
 //shrek
 //  if(cord_perso==200.0/1920.0*ecran.w){
 srcrect.x = sprite * 540;
 srcrect.y = 0;
-srcrect.w = joueur->perso.taille_perso.w;
-srcrect.h = joueur->perso.taille_perso.h;
+srcrect.w = joueur->perso.taille_perso.w/joueur->perso.taille_perso.mult;
+srcrect.h = joueur->perso.taille_perso.h/joueur->perso.taille_perso.mult;
 
 dstrect.x = posx/1920*ecran.w;
 dstrect.y = 300/1080.0*ecran.h;
-dstrect.w = joueur->perso.taille_perso.w;
-dstrect.h = joueur->perso.taille_perso.h;
+dstrect.w = joueur->perso.taille_perso.w/joueur->perso.taille_perso.mult;
+dstrect.h = joueur->perso.taille_perso.h/joueur->perso.taille_perso.mult;
 
 joueur->perso.srcrect=srcrect;
 joueur->perso.dstrect=dstrect;
@@ -64,7 +63,7 @@ joueur->perso.dstrect=dstrect;
 void menu_selection(){
   int num_map=1;
   SDL_Rect srcBg;
-  Joueur j1, j2;
+
   //initialisation de sdl
   if(TTF_Init()==-1){
     printf("librairie non initialisé");
@@ -150,6 +149,7 @@ void menu_selection(){
   //carré violet de sélection du personnage si les 2 joueurs choissisent le meme
   SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
+  Joueur j1, j2;
 
   SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
 
@@ -339,9 +339,7 @@ void menu_selection(){
     SDL_RenderCopy(renderer_menu_selection, texture_preview[num_map], &srcBg, &rect_bg_map);
     SDL_RenderCopy(renderer_menu_selection, texture_bouton_gauche, NULL, &rect_bouton_gauche);
     SDL_RenderCopy(renderer_menu_selection, texture_bouton_droit, NULL, &rect_bouton_droit);
-    //a voir
     SDL_RenderCopy(renderer_menu_selection, texture_fond_bg_preview,NULL, &rect_bg_map_fond);
-    //a voir
     SDL_RenderPresent(renderer_menu_selection);
   }
   //sdl destroy texture
