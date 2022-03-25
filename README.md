@@ -22,7 +22,6 @@ Jeu vidéo réalisé dans le cadre des séances de projets en deuxième année d
 
 <h2 id="Description" style="font-size:30px;"> Description</h2>
 
-#
 
 Ce jeu est inspiré du jeu de combat Tekken. Le but est d'affronter un adversaire, contre l'ordinateur ou en local avec un deuxième joueur.
 Il y a le choix entre 4 personnages : Pingu, Shrek, Goku ou encore Mickey
@@ -32,7 +31,6 @@ Ainsi qu'une large sélection de cartes disponibles !
 
 <h2 id="Getting Started" style="font-size:30px;"> Getting Started</h2>
 
-#
 
 <br>
 
@@ -51,7 +49,6 @@ Fonctionnement approuvé sur Ubuntu
 
 <h2 id="Installation" style="font-size:20px;">Installation</h2>
 
-##
 
 ```
 git clone https://github.com/Alexis-42/Projet-L2-Tekken
@@ -62,7 +59,6 @@ Dans un terminal à l'emplacement du dossier, exécutez : ```make all```
 
 <h2 id="Executer le programme" style="font-size:20px;">Executer le programme</h2>
 
-##
 
 ```
 ./jeu
@@ -71,7 +67,6 @@ Dans un terminal à l'emplacement du dossier, exécutez : ```make all```
 
 <h2 id="Auteurs" style="font-size:30px;">Auteurs</h2>
 
-#
 
 <table>
   <tr align = "center">
