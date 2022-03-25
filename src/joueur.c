@@ -25,7 +25,7 @@ void direction(Joueur * j1, Joueur * j2){
  void hitbox(Joueur * joueur, SDL_Texture * texture,int coup){
   SDL_Rect hitbox = {
     joueur->position.x+joueur->perso.hitbox_offsetX/joueur->perso.taille_perso.mult,
-    joueur->position.y+joueur->perso.hitbox_offsetY,
+    joueur->position.y+joueur->perso.hitbox_offsetY/joueur->perso.taille_perso.mult,
     joueur->perso.taille_hitbox.w,
     joueur->perso.taille_hitbox.h
   };
