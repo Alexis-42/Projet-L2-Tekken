@@ -11,16 +11,17 @@
 
 /* struct qui permet de faire le menu de selection des persos */
 typedef struct {
-  float w, h, mult;
+  float x, w, h, mult;
 } taille;
 
 typedef struct {
     char * nom;
     taille taille_perso;
     taille taille_hitbox;
-    taille taille_hitbox_coup;
     int hitbox_offsetX, hitbox_offsetY;
     int frame;
+    int dmg_pied;
+    int dmg_poing;
     Uint32 seconds;
     SDL_Rect srcrect;
     SDL_Rect dstrect;

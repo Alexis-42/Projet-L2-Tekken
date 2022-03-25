@@ -21,13 +21,13 @@ void renderPause(){
 }
 
 int getSelection2(int x_button, int y_button){
-  if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
+  if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(201.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<300.0/1080.0*ecran.h+100.0))
     return 1;
-  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
+  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(301.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<400.0/1080.0*ecran.h+100.0))
     return 2;
-  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
+  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(401.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<500.0/1080.0*ecran.h+100.0))
     return 3;
-  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
+  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(501.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<600.0/1080.0*ecran.h+100.0))
     return 4;
 
   return 0;
@@ -43,10 +43,10 @@ void quitterr(){
   quit = true;
 }
 
-void selectionPause(SDL_Event * event){
-      switch (event->type){
+void selectionPause(SDL_Event event){
+      switch (event.type){
         case SDL_MOUSEBUTTONDOWN:
-          sortie = getSelection2(event->button.x, event->button.y);
+          sortie = getSelection2(event.button.x, event.button.y);
         //sortie jouer en multijoueur
         break;
       }
@@ -80,8 +80,8 @@ void initPause(){
   rectbackground.w = ecran.w;
   rectbackground.h = ecran.h;
 
-  creerBouton(renderer, font, "Retour au combat", ColorWhite, &btn1, &texBtn1, POSX_TEXTE/1920.0*ecran.w, 50/1920.0*ecran.w);
-  creerBouton(renderer, font, "Retour au menu", ColorWhite, &btn2, &texBtn2, POSX_TEXTE/1920.0*ecran.w, 150/1920.0*ecran.w);
-  creerBouton(renderer, font, "Options", ColorWhite, &btn3, &texBtn3, POSX_TEXTE/1920.0*ecran.w, 250/1920.0*ecran.w);
-  creerBouton(renderer, font, "Quitter", ColorWhite, &btn4, &texBtn4, POSX_TEXTE/1920.0*ecran.w, 350/1920.0*ecran.w);
+  creerBouton(renderer, font, "Retour au combat", ColorWhite, &btn1, &texBtn1, POSX_TEXTE/1920.0*ecran.w, 300/1920.0*ecran.w);
+  creerBouton(renderer, font, "Retour au menu", ColorWhite, &btn2, &texBtn2, POSX_TEXTE/1920.0*ecran.w, 400/1920.0*ecran.w);
+  creerBouton(renderer, font, "Options", ColorWhite, &btn3, &texBtn3, POSX_TEXTE/1920.0*ecran.w, 500/1920.0*ecran.w);
+  creerBouton(renderer, font, "Quitter", ColorWhite, &btn4, &texBtn4, POSX_TEXTE/1920.0*ecran.w, 600/1920.0*ecran.w);
 }
