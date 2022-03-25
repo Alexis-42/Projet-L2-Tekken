@@ -29,6 +29,14 @@ Ainsi qu'une large sélection de cartes disponibles !
 
 <br>
 
+<details open="close">
+  <summary>Images du jeu</summary>
+  <img src="https://i.imgur.com/MGtqF44.png">
+
+</details>
+
+<br>
+
 <h2 id="Getting Started" style="font-size:30px;"> Getting Started</h2>
 
 
