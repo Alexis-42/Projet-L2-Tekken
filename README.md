@@ -87,7 +87,7 @@ make ???????? -> secret
 <h2 id="Auteurs" style="font-size:30px;">Auteurs</h2>
 
 
-<table>
+<table align = "center">
   <tr align = "center">
     <td><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Alexis-42"><img src="https://avatars.githubusercontent.com/u/97942917?v=4" width="175px;" alt=""/><br /><sub><b>Alexis Guimbert</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Jck0day"><img src="https://avatars.githubusercontent.com/u/77964646?v=4" width="175px;" alt=""/><br /><sub><b>Charly P</b></sub></a><br /></td>
