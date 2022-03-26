@@ -16,12 +16,17 @@
 #include "../include/pause.h"
 
 #define MODE FULLSCREEN
-int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause=0, temps_fin_pause=0, temps_pause=0;
+int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause, temps_fin_pause, temps_pause;
 bool quit;
 bool pause=false;
 SDL_DisplayMode ecran;
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fenêtre et l'environnement (pour l'instant)
+  temps_combat = 0;
+  sec_deb_combat = 0;
+  temps_fin_pause = 0;
+  temps_deb_pause = 0;
+  temps_pause = 0;
   int flag_perdu=0;
   quit = false;
   const Uint8 *state;
@@ -100,14 +105,14 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
 
   int sec_anim;
 
-  sec_deb_combat = SDL_GetTicks()/1000;
+  sec_deb_combat = SDL_GetTicks();
 
   while (!quit ) {
     SDL_Event event;
 	  SDL_PollEvent(&event);
     state = SDL_GetKeyboardState(NULL);
     if(!pause)
-      temps_combat = SDL_GetTicks()/1000 - temps_pause;
+      temps_combat = (SDL_GetTicks() - (temps_pause*1000))/1000;
     sec_anim = SDL_GetTicks()/75;
     jouerAnimationBackground(&srcBg, &dstBg,1);
     
@@ -116,10 +121,10 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
       switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
           if(pause)
-            temps_deb_pause = (sec_deb_combat - SDL_GetTicks()/1000);
+            temps_deb_pause = (sec_deb_combat - SDL_GetTicks());
           if(!pause)
-            temps_fin_pause = (sec_deb_combat - SDL_GetTicks()/1000);
-          temps_pause+=temps_fin_pause - temps_deb_pause;
+            temps_fin_pause = (sec_deb_combat - SDL_GetTicks());
+          temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
           pause = !pause;
         break;
       }
