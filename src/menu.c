@@ -9,9 +9,9 @@
 #include "../include/menu_principal.h"
 #include "../include/menu_selection.h"
 
-void lancerMenu(int menu){
+void lancerMenu(int menu,int drip){
   switch (menu) {
-    case MENU_PRINCIPAL: menu_principal(); break;
+    case MENU_PRINCIPAL: menu_principal(drip); break;
     case MENU_SELECTION: menu_selection(); break;
   }
 }

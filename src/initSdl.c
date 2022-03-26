@@ -21,7 +21,7 @@ bool quit;
 bool pause=false;
 SDL_DisplayMode ecran;
 
-void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'environnement (pour l'instant)
+void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fenêtre et l'environnement (pour l'instant)
   int flag_perdu=0;
   quit = false;
 
@@ -71,7 +71,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
   SDL_Surface * perso1 = IMG_Load(j1sprite);
   SDL_Surface * perso2 = IMG_Load(j2sprite);
 
-  chargerMap(num_map, renderer,1);
+  chargerMap(num_map, renderer, 1, drip);
 
   SDL_Texture * texture_joueur1 = SDL_CreateTextureFromSurface(renderer, perso1);
   SDL_Texture * texture_joueur2 = SDL_CreateTextureFromSurface(renderer, perso2);
@@ -135,8 +135,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     hitbox(j1, texture_hitbox_piedj1,0);
     hitbox(j2, texture_hitbox_piedj2,0);
 
-    SDL_RenderFillRect(renderer, &(j1->hitbox));
-    SDL_RenderFillRect(renderer, &(j2->hitbox));
+    //SDL_RenderFillRect(renderer, &(j1->hitbox));
+    //SDL_RenderFillRect(renderer, &(j2->hitbox));
 
     renderAnimation(j1);
     renderAnimation(j2);
@@ -152,7 +152,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map) { //Créer la fenêtre et l'
     if(!pause)
       deplacements(j1, j2, event);
     else {
-      selectionPause(event);
+      selectionPause(event, drip);
       renderPause();
     }
     SDL_RenderPresent(renderer);

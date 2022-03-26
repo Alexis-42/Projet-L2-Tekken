@@ -6,8 +6,9 @@
 #include "../include/deplacements.h"
 #include "../include/menu_principal.h"
 
-int main(int argc, char ** argv) {
-  menu_principal();
+int main(int argc, char *argv[]) {
+  // 1 si drip 
+  menu_principal(!strcmp(argv[1],"drip"));
   //initSdl();
   return 0;
 }

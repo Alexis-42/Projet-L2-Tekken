@@ -43,7 +43,7 @@ void quitterr(){
   quit = true;
 }
 
-void selectionPause(SDL_Event event){
+void selectionPause(SDL_Event event, int drip){
       switch (event.type){
         case SDL_MOUSEBUTTONDOWN:
           sortie = getSelection2(event.button.x, event.button.y);
@@ -56,7 +56,7 @@ void selectionPause(SDL_Event event){
           pause = false;
       } else if(sortie==2){
          quitterr();
-         lancerMenu(MENU_PRINCIPAL);
+         lancerMenu(MENU_PRINCIPAL,drip);
       }else if(sortie==3){
       } else if(sortie==4) {
         quitterr();

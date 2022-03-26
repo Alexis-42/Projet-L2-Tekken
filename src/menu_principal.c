@@ -12,17 +12,29 @@
 
 #define MODE FULLSCREEN
 bool quitter;
-
 SDL_Window * window_menu;
-SDL_Renderer * renderer_menu ;
-SDL_Surface * image_stage_menu;
+SDL_Renderer * renderer_menu;
+SDL_Surface * image_stage_menu, * surface;
+SDL_Surface * surface_jonathan;
 SDL_Rect srcBg, dstBg;
 SDL_DisplayMode ecran;
 SDL_Rect btn1, btn2, btn3, btn4;
-SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4;
+SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4, * texture_jonathan, *text_jonathan;
 
 SDL_Rect flamme1, flamme2, flamme3, flamme4;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
+
+void renderjonathan(SDL_Renderer * renderer_menu, int drip){
+  if(drip){
+    // photo jonathan
+    SDL_Rect rect_jonathan={ecran.w-213, 0, 213, 317};
+    surface_jonathan = IMG_Load("res/jonathan.png");
+    texture_jonathan = SDL_CreateTextureFromSurface(renderer_menu, surface_jonathan);
+    SDL_FreeSurface(surface_jonathan);
+    SDL_RenderCopy(renderer_menu, texture_jonathan, NULL, &rect_jonathan);
+    SDL_DestroyTexture(texture_jonathan);
+  }
+}
 
 int getSelection(int x_button, int y_button){
   if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
@@ -49,14 +61,16 @@ int getSelection(int x_button, int y_button){
     rect_flamme_multi.y = y/1080.0*ecran.h;
     rect_flamme_multi.w = text_width_flamme_multi+600.0;
     rect_flamme_multi.h = text_height_flamme_multi+50.0;
-
     *rect=rect_flamme_multi;
   }
 
-  void renderMenu(int sortie){
+  void renderMenu(int sortie, int drip){
     SDL_RenderClear(renderer_menu);
+    
     jouerAnimationBackground(&srcBg, &dstBg,1);
     renderMap(&srcBg, &dstBg, renderer_menu);
+
+    renderjonathan(renderer_menu,drip);
 
     switch (sortie) {
       case 1: SDL_RenderCopy(renderer_menu, texFlamme1, NULL, &flamme1); break;
@@ -71,9 +85,10 @@ int getSelection(int x_button, int y_button){
     SDL_RenderCopy(renderer_menu, texBtn4, NULL, &btn4);
 
     SDL_RenderPresent(renderer_menu);
+    
   }
 
-  void menu_principal(){
+  void menu_principal(int drip){
     if(TTF_Init()==-1){
       printf("librairie non initialisé");
       exit(EXIT_FAILURE);
@@ -93,7 +108,7 @@ int getSelection(int x_button, int y_button){
     }
 
     renderer_menu = SDL_CreateRenderer(window_menu, -1, 0);
-    chargerMap(0, renderer_menu,1);
+    chargerMap(0, renderer_menu,1,drip);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
     initFlammes(&flamme1, &texFlamme1, 75.0, 25.0);
@@ -127,7 +142,7 @@ int getSelection(int x_button, int y_button){
   	SDL_Event event;
   	//SDL_WaitEvent(&event);
   	SDL_PollEvent(&event);
-    renderMenu(sortie);
+    renderMenu(sortie, drip);
 
   	switch (event.type){
   		case SDL_QUIT:
@@ -235,7 +250,7 @@ int getSelection(int x_button, int y_button){
       printf("\nsortie 1: multijoueur\n");
     }else if(sortie==2){
       printf("\nsortie 2: IA\n");
-      lancerMenu(MENU_SELECTION);
+      lancerMenu(MENU_SELECTION,drip);
     }else if(sortie==3){
       printf("\nsortie 3 : options\n");
     }else if(sortie==4){

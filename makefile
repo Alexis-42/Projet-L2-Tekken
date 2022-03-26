@@ -37,3 +37,8 @@ CleanAll:
 	${clean}
 	rm -f doc/html/search/*
 	rm -f doc/latex/*
+
+jonathan:${PROG}
+	rm -f bin/*.o
+	./jeu drip
+
