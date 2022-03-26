@@ -13,7 +13,7 @@ void renderMap(SDL_Rect * src, SDL_Rect * dst, SDL_Renderer * renderer){
   SDL_RenderCopy(renderer, texture_stage, src, dst);
 }
 
-void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revoyer un pointeur texture pour la supprimer
+void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à noter revoyer un pointeur texture pour la supprimer
   char cheminMap[35];
 
   switch (map) {
@@ -146,6 +146,18 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg){ // à noter revo
 
             spawnY=1040.0;
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage10.png");
+            break;
+    case 11:nbFramesMap=1;
+            if(flag_bg){
+                pas=1920;
+                h_map = 1080;
+            }else{
+                pas2=1920;
+                h_map2 = 1080;
+            }
+
+            spawnY=1040.0;
+            snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage11.png");
             break;
   }
   if(renderer != NULL){

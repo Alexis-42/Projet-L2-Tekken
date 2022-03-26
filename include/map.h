@@ -10,4 +10,4 @@ extern int pas2;
 #define stage3 3
 
 void renderMap(SDL_Rect * src, SDL_Rect * dst, SDL_Renderer * renderer);
-void chargerMap(int map, SDL_Renderer * renderer, int flag_bg);
+void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip);
