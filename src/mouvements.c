@@ -3,7 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
-#include "../include/deplacements.h"
+#include "../include/mouvements.h"
 #include "../include/initSdl.h"
 #include "../include/joueur.h"
 #include "../include/animations.h"
@@ -12,7 +12,7 @@
 
 #define VITESSE 1
 
-bool monte=false, saute=false;
+bool monte=false;
 
 typedef struct {
 	Joueur * joueur;
@@ -20,7 +20,7 @@ typedef struct {
 } params;
 
 void sauter(Joueur * joueur){
-	if(saute){
+	if(joueur->sauter){
 		if(monte==false && estAuSol(joueur)){
 			monte=true;
 		}
@@ -34,7 +34,7 @@ void sauter(Joueur * joueur){
 			if(!estAuSol(joueur))
 				joueur->position.y++;
 			
-			saute=!estAuSol(joueur);
+			joueur->sauter=!estAuSol(joueur);
 		}
 	}
 }
@@ -87,6 +87,10 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 					j1->action=IDLE;
 					j1->perso.frame=0;	
 					break;
+				case SDLK_f:
+					j1->action=DANSE;
+					j1->perso.frame=0;	
+					break;
 			}
 		}
 			// event J2 
@@ -102,6 +106,10 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 					j2->action=IDLE;
 					j2->perso.frame=0;	
 					break;		
+				case SDLK_KP_5:
+					j2->action=DANSE;
+					j2->perso.frame=0;	
+					break;	
 				}
 			}
 			break;
@@ -125,7 +133,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 			j1->action=PARER;
 		}
 		if (state[SDL_SCANCODE_SPACE]) { //sauter
-			saute=true;
+			j1->sauter=true;
 			j1->action=SAUTER;
 		}
 	/* verif touches J2 */
@@ -147,7 +155,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 			j2->action=PARER;
 		}
 		if (state[SDL_SCANCODE_KP_0]) {
-			saute=true;
+			j2->sauter=true;
 			j2->action=SAUTER;
 		}
 		
