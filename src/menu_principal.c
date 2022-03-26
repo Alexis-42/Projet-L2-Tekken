@@ -14,12 +14,12 @@
 bool quitter;
 SDL_Window * window_menu;
 SDL_Renderer * renderer_menu;
-SDL_Surface * image_stage_menu, * surface;
+SDL_Surface * image_stage_menu;
 SDL_Surface * surface_jonathan;
 SDL_Rect srcBg, dstBg;
 SDL_DisplayMode ecran;
 SDL_Rect btn1, btn2, btn3, btn4;
-SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4, * texture_jonathan, *text_jonathan;
+SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4, * texture_jonathan;
 
 SDL_Rect flamme1, flamme2, flamme3, flamme4;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
@@ -250,7 +250,7 @@ int getSelection(int x_button, int y_button){
       printf("\nsortie 1: multijoueur\n");
     }else if(sortie==2){
       printf("\nsortie 2: IA\n");
-      lancerMenu(MENU_SELECTION,drip);
+      lancerMenu(MENU_SELECTION, drip);
     }else if(sortie==3){
       printf("\nsortie 3 : options\n");
     }else if(sortie==4){
