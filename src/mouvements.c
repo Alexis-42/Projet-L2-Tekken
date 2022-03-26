@@ -130,6 +130,9 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 		if (state[SDL_SCANCODE_E] && j1->action!=COURIR) { // parer
 			j1->action=PARER;
 		}
+		if (state[SDL_SCANCODE_S] && j1->action!=COURIR) { // parer
+			j1->action=DANSE;
+		}
 		if (state[SDL_SCANCODE_SPACE]) { //sauter
 			j1->sauter=true;
 			j1->action=SAUTER;
@@ -155,6 +158,9 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 		if (state[SDL_SCANCODE_KP_0]) {
 			j2->sauter=true;
 			j2->action=SAUTER;
+		}
+		if (state[SDL_SCANCODE_KP_5]) {
+			j2->action=DANSE;
 		}
 		
 	}
