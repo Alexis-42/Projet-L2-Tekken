@@ -26,7 +26,7 @@ void initPerso(Joueur * j, int i){
 			j->perso.nb_frame[SAUTER]=4;
 			j->perso.nb_frame[PARER]=1;
 
-			j->perso.taille_perso.mult=2;
+			j->perso.taille_perso.mult=1.0;
 			j->perso.taille_perso.w=470.0*j->perso.taille_perso.mult;
 			j->perso.taille_perso.h=300.0*j->perso.taille_perso.mult;
 
@@ -98,7 +98,7 @@ void initPerso(Joueur * j, int i){
 				j->perso.nb_frame[SAUTER]=4;
 				j->perso.nb_frame[PARER]=1;
 
-				j->perso.taille_perso.mult=1.75;
+				j->perso.taille_perso.mult=1.0;
 				j->perso.taille_perso.w=554.4 * j->perso.taille_perso.mult;
 				j->perso.taille_perso.h=300 * j->perso.taille_perso.mult;
 				
