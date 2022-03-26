@@ -58,7 +58,7 @@ void jouerAnimation(Joueur * joueur,int seconds,Joueur * j2){
     break;
     case COURIR: return;
     break;
-    case SAUTER: posYSprite=3865;
+    case SAUTER: return;
     break;
     case PARER: return;
     break;
@@ -118,7 +118,7 @@ void jouerAnimationContinu(Joueur * joueur,int seconds){
     break;
     case COURIR: posYSprite=3290;
     break;
-    case SAUTER: return;
+    case SAUTER: posYSprite=3865;
     break;
     case PARER: posYSprite=4395;
     break;

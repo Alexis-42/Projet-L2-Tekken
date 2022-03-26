@@ -19,52 +19,51 @@ typedef struct {
 	int anim;
 } params;
 
-void sauter(Joueur * joueur){
+void sauter(Joueur * joueur, SDL_Event * event, const Uint8 *state){
 	if(joueur->sauter){
-		if(monte==false && estAuSol(joueur)){
+		if(monte==false && estAuSol(joueur) && state[SDL_SCANCODE_SPACE])
 			monte=true;
-		}
 
-		if(monte==true && !estTropHaut(joueur))
-			joueur->position.y--;
-		else if(monte==true && estTropHaut(joueur))
-			monte=false;
-	
+		if(monte==true){
+			joueur->position.y=joueur->position.y-2;
+			if(event->type == SDL_KEYUP && event->key.keysym.sym == SDLK_SPACE)
+          		monte=false;
+
+		}
 		if(monte==false){
 			if(!estAuSol(joueur))
-				joueur->position.y++;
-			
+				joueur->position.y=joueur->position.y+4;
 			joueur->sauter=!estAuSol(joueur);
 		}
 	}
 }
 
-void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *state) {
 	direction(j1, j2);
 
-	switch (event.type) {
+	switch (event->type) {
 		case SDL_QUIT:
 		quit = true;
 		break;
 		
 			case SDL_KEYDOWN:
 			if(j1->perso.frame==0 && j1->action==IDLE){
-				switch (event.key.keysym.sym) {
+				switch (event->key.keysym.sym) {
 					case SDLK_a:
-						if(!(event.key.repeat)){
+						if(!(event->key.repeat)){
 							j1->action=POING;
 						}
 						break;
 					case SDLK_z:
-					if(!event.key.repeat){
+					if(!event->key.repeat){
 						j1->action=PIED;
 					}
 					break;
 				}
 				if(j2->perso.frame==0 && j2->action==IDLE){
-					switch (event.key.keysym.sym) {
+					switch (event->key.keysym.sym) {
 						case SDLK_KP_2:
-							if(!(event.key.repeat)){
+							if(!(event->key.repeat)){
 								j2->action=POING;
 							}
 							break;
@@ -75,7 +74,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 		
 		case SDL_KEYUP:
 		if(j1->perso.frame==0){
-			switch (event.key.keysym.sym) {
+			switch (event->key.keysym.sym) {
 			// event J1 
 				case SDLK_q:
 					j1->action=IDLE;
@@ -95,7 +94,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 		}
 			// event J2 
 		if(j2->perso.frame==0){
-			switch (event.key.keysym.sym) {
+			switch (event->key.keysym.sym) {
 				case SDLK_LEFT:
 					j2->action=IDLE;
 					break;
@@ -114,7 +113,6 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event event) {
 			}
 			break;
 	}
-	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	/* verif touches J1 */
 	if(j1->perso.frame==0){
 		if (state[SDL_SCANCODE_A]) { //recule : touche q

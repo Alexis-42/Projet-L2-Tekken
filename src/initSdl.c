@@ -24,7 +24,7 @@ SDL_DisplayMode ecran;
 void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√™tre et l'environnement (pour l'instant)
   int flag_perdu=0;
   quit = false;
-
+  const Uint8 *state;
   SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj1;
   SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/rectangle_bleu.png");
@@ -103,6 +103,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
   while (!quit ) {
     SDL_Event event;
 	  SDL_PollEvent(&event);
+    state = SDL_GetKeyboardState(NULL);
     sec_deb_combat = SDL_GetTicks()/1000;
     sec_anim = SDL_GetTicks()/75;
     jouerAnimationBackground(&srcBg, &dstBg,1);
@@ -116,8 +117,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
       }
     }
 
-    sauter(j1);
-    sauter(j2);
+    sauter(j1,&event, state);
+    sauter(j2,&event, state);
     jouerAnimation(j1,sec_anim,j2);
     jouerAnimation(j2,sec_anim,j1);
 
@@ -137,8 +138,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
     hitbox(j1, texture_hitbox_piedj1,0);
     hitbox(j2, texture_hitbox_piedj2,0);
 
-    //SDL_RenderFillRect(renderer, &(j1->hitbox));
-    //SDL_RenderFillRect(renderer, &(j2->hitbox));
+    SDL_RenderFillRect(renderer, &(j1->hitbox));
+    SDL_RenderFillRect(renderer, &(j2->hitbox));
 
     renderAnimation(j1);
     renderAnimation(j2);
@@ -152,7 +153,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
 
     if(!pause)
-      deplacements(j1, j2, event);
+      deplacements(j1, j2, &event, state);
     else {
       selectionPause(event, drip);
       renderPause();
