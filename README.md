@@ -84,7 +84,7 @@ make ???????? -> secret
 
 <br>
 
-<h2 id="Auteurs" style="font-size:30px;">Auteurs</h2>
+<h2 id="Auteurs" style="font-size:30px;"align = "center">Auteurs</h2>
 
 
 <table align = "center">
