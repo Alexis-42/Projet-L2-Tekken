@@ -12,7 +12,7 @@ Jeu vidéo réalisé dans le cadre des séances de projets en deuxième année d
       <ul>
         <li><a href="#Dépendances">Dépendances</a></li>
         <li><a href="#Installation">Installation</a></li>
-        <li><a href="#Executer le programme">Executer le programme</a></li>
+        <li><a href="#Les commandes make">Les commandes make</a></li>
       </ul>    
     </li>
     <li><a href="#Auteurs"> Auteurs</a></li>
@@ -65,12 +65,23 @@ Dans un terminal à l'emplacement du dossier, exécutez : ```make all```
 
 <br>
 
-<h3 id="Executer le programme" style="font-size:20px;">Executer le programme</h3>
+<h3 id="Les commandes make" style="font-size:20px;">Les commandes make</h3>
 
 
 ```
-./jeu
+make jouer    -> compile et lance le jeu
+
+make docs     -> créer la doc dans le répertoire doc/html
+
+make all      -> compile le jeu puis le lance & créer la doc
+
+make clean    -> enleve les .o & l'executable du jeu
+
+make cleanall -> enleve les .o, l'executable du jeu & la doc
+
+make ???????? -> secret
 ```
+
 <br>
 
 <h2 id="Auteurs" style="font-size:30px;">Auteurs</h2>

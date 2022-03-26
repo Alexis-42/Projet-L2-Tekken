@@ -33,7 +33,7 @@ clean:
 	rm -f bin/*.o
 
 # efface les .o , le programme et la doc
-CleanAll:
+cleanall:
 	${clean}
 	rm -f doc/html/search/*
 	rm -f doc/latex/*
