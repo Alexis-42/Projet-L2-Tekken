@@ -16,7 +16,7 @@
 #include "../include/pause.h"
 
 #define MODE FULLSCREEN
-int sec_deb_combat,ancien_temps=-1;
+int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause=0, temps_fin_pause=0, temps_pause=0;
 bool quit;
 bool pause=false;
 SDL_DisplayMode ecran;
@@ -100,11 +100,14 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
 
   int sec_anim;
 
+  sec_deb_combat = SDL_GetTicks()/1000;
+
   while (!quit ) {
     SDL_Event event;
 	  SDL_PollEvent(&event);
     state = SDL_GetKeyboardState(NULL);
-    sec_deb_combat = SDL_GetTicks()/1000;
+    if(!pause)
+      temps_combat = SDL_GetTicks()/1000 - temps_pause;
     sec_anim = SDL_GetTicks()/75;
     jouerAnimationBackground(&srcBg, &dstBg,1);
     
@@ -112,6 +115,11 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
     case SDL_KEYDOWN:
       switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
+          if(pause)
+            temps_deb_pause = (sec_deb_combat - SDL_GetTicks()/1000);
+          if(!pause)
+            temps_fin_pause = (sec_deb_combat - SDL_GetTicks()/1000);
+          temps_pause+=temps_fin_pause - temps_deb_pause;
           pause = !pause;
         break;
       }
@@ -145,8 +153,11 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
     renderAnimation(j2);
     barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 1, font);
     barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, 2, font);
-    init_affichage_temps(sec_deb_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+    
+    init_affichage_temps(temps_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+
     SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
+
     SDL_DestroyTexture(texture_temps);
 
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
