@@ -15,6 +15,7 @@ typedef struct {
   coord position;
   int vie;
   int action;
+  bool sauter;
   Direction direction;
 	Personnage perso;
 	SDL_Rect hitbox; //Hitbox pour recevoir des degats et le reste

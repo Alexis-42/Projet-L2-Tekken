@@ -5,7 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
 #include "../include/initSdl.h"
-#include "../include/deplacements.h"
+#include "../include/mouvements.h"
 #include "../include/menu_principal.h"
 #include "../include/joueur.h"
 #include "../include/animations.h"
@@ -80,7 +80,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
 
   TTF_Init();
 
-  initJoueur(j1, 300.0, "Shrekleouinouin", texture_joueur1, gauche);
+  initJoueur(j1, 100.0, "Shrekleouinouin", texture_joueur1, gauche);
   initJoueur(j2, 600.0, "PINGU", texture_joueur2, droite);
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0); //Couleur des hitboxes
 

@@ -16,7 +16,7 @@ void initPerso(Joueur * j, int i){
 			j->perso.dmg_pied=15;
 			j->perso.dmg_poing=10;
 
-			j->perso.nb_frame[DANSE]=46;
+			j->perso.nb_frame[DANSE]=21;
 			j->perso.nb_frame[DEGAT]=8;
 			j->perso.nb_frame[IDLE]=15;
 			j->perso.nb_frame[MORT]=18;

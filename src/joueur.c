@@ -73,16 +73,19 @@ int checkPerdu(Joueur * j1, Joueur * j2){
 
 bool checkCollisions(Joueur * j1, Joueur * j2){
 	SDL_bool collision = SDL_FALSE;
-  if(j1->action == POING)
-	  collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
+  //if(j1->action == POING)
   if(j1->action == PIED)
 	  collision = SDL_HasIntersection(&(j1->hitbox_pied), &(j2->hitbox));
+  else
+    collision = SDL_HasIntersection(&(j1->hitbox_coup), &(j2->hitbox));
+
 	return collision==SDL_TRUE;
 }
 
 void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * texture, Direction direction){
   joueur->vie=100;
   joueur->action=IDLE;
+  joueur->sauter=false;
   joueur->nom=pseudo;
   joueur->texture=texture;
   joueur->direction=direction;
