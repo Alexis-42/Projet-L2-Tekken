@@ -116,6 +116,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
       }
     }
 
+    sauter(j1);
+    sauter(j2);
     jouerAnimation(j1,sec_anim,j2);
     jouerAnimation(j2,sec_anim,j1);
 

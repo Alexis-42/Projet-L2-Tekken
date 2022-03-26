@@ -38,15 +38,13 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	}
 }
 
-
-
 void jouerAnimation(Joueur * joueur,int seconds,Joueur * j2){
   int posYSprite;
   int anim=joueur->action;
 
 
   switch (anim) {
-    case DANSE: printf("\nanim = %d",anim);return;
+    case DANSE: return;
     break;
     case DEGAT: posYSprite=550;
     break;
@@ -58,17 +56,16 @@ void jouerAnimation(Joueur * joueur,int seconds,Joueur * j2){
     break;
     case POING: posYSprite=2745;
     break;
-    case COURIR: printf("\nanim = %d",anim); return;
+    case COURIR: return;
     break;
     case SAUTER: posYSprite=3865;
     break;
     case PARER: return;
     break;
-    default: printf("\nanim = %d",anim);return;
-    break;
+    //default: printf("\nanim = %d",anim);return;
   }
 
-printf("second du perso : %d\nsecond system : %d\n",joueur->perso.seconds,seconds);
+//printf("second du perso : %d\nsecond system : %d\n",joueur->perso.seconds,seconds);
 if((joueur->perso.seconds)<seconds){
     SDL_Rect srcrect = {
     joueur->perso.frame * 540, //Pas
@@ -97,7 +94,7 @@ if((joueur->perso.seconds)<seconds){
       joueur->perso.frame=0;
       joueur->action=IDLE;
     }
-    printf("\nframe %d de %i",joueur->perso.frame,joueur->action);
+    //printf("\nframe %d de %i",joueur->perso.frame,joueur->action);
   }
 }
 

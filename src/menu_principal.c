@@ -37,13 +37,13 @@ void renderjonathan(SDL_Renderer * renderer_menu, int drip){
 }
 
 int getSelection(int x_button, int y_button){
-  if(x_button>(100.0/1920.0*ecran.w) && y_button>(50.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<50.0/1080.0*ecran.h+100.0))
+  if(x_button>btn1.x && y_button>btn1.y && x_button<btn1.x+600.0 && y_button<btn1.y+100.0)
     return 1;
-  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(150.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<150.0/1080.0*ecran.h+100.0))
+  else if(x_button>btn2.x && y_button>btn2.y && x_button<btn2.x+600.0 && y_button<btn2.y+100.0)
     return 2;
-  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(250.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<250.0/1080.0*ecran.h+100.0))
+  else if(x_button>btn3.x && y_button>btn3.y && x_button<btn3.x+600.0 && y_button<btn3.y+100.0)
     return 3;
-  else if(x_button>(100.0/1920.0*ecran.w) && y_button>(350.0/1080.0*ecran.h) && x_button<(100.0/1920.0*ecran.w+600.0) && (y_button<350.0/1080.0*ecran.h+100.0))
+  else if(x_button>btn4.x && y_button>btn4.y && x_button<btn4.x+600.0 && y_button<btn4.y+100.0)
     return 4;
 
   return 0;

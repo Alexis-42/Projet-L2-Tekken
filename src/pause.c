@@ -7,7 +7,7 @@
 #include "../include/jeu.h"
 #include "../include/menu.h"
 
-#define POSX_TEXTE 720.0
+#define POSX_TEXTE 720.0/1920.0*ecran.w+100.0
 SDL_Rect btn1, btn2, btn3, btn4, rectbackground;
 SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4;
 int sortie=0;
@@ -21,13 +21,13 @@ void renderPause(){
 }
 
 int getSelection2(int x_button, int y_button){
-  if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(201.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<300.0/1080.0*ecran.h+100.0))
+  if(x_button>btn1.x && y_button>btn1.y && x_button<btn1.x+600.0 && y_button<btn1.y+50.0)
     return 1;
-  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(301.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<400.0/1080.0*ecran.h+100.0))
+  else if(x_button>btn2.x && y_button>btn2.y && x_button<btn2.x+600.0 && y_button<btn2.y+50.0)
     return 2;
-  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(401.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<500.0/1080.0*ecran.h+100.0))
+  else if(x_button>btn3.x && y_button>btn3.y && x_button<btn3.x+600.0 && y_button<btn3.y+50.0)
     return 3;
-  else if(x_button>(POSX_TEXTE/1920.0*ecran.w) && y_button>(501.0/1080.0*ecran.h) && x_button<(POSX_TEXTE/1920.0*ecran.w+600.0) && (y_button<600.0/1080.0*ecran.h+100.0))
+  else if(x_button>btn4.x && y_button>btn4.y && x_button<btn4.x+600.0 && y_button<btn4.y+50.0)
     return 4;
 
   return 0;

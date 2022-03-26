@@ -10,11 +10,11 @@
 #include "../include/map.h"
 
 bool estTropHaut(Joueur * joueur){
-  return joueur->position.y<0;
+  return joueur->position.y<=0;
 }
 
 bool estAuSol(Joueur * joueur){
-  return joueur->position.y==spawnY;
+  return joueur->position.y>=((spawnY - joueur->perso.taille_perso.h )/1080.0)*ecran.h;;
 }
 
 void direction(Joueur * j1, Joueur * j2){
