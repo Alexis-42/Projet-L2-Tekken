@@ -86,8 +86,8 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 					j1->action=IDLE;
 					j1->perso.frame=0;	
 					break;
-				case SDLK_f:
-					j1->action=DANSE;
+				case SDLK_s:
+					j1->action=IDLE;
 					j1->perso.frame=0;	
 					break;
 			}
@@ -106,7 +106,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 					j2->perso.frame=0;	
 					break;		
 				case SDLK_KP_5:
-					j2->action=DANSE;
+					j2->action=IDLE;
 					j2->perso.frame=0;	
 					break;	
 				}
@@ -130,7 +130,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 		if (state[SDL_SCANCODE_E] && j1->action!=COURIR) { // parer
 			j1->action=PARER;
 		}
-		if (state[SDL_SCANCODE_S] && j1->action!=COURIR) { // parer
+		if (state[SDL_SCANCODE_S] && j1->action!=COURIR) {
 			j1->action=DANSE;
 		}
 		if (state[SDL_SCANCODE_SPACE]) { //sauter
@@ -159,7 +159,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 			j2->sauter=true;
 			j2->action=SAUTER;
 		}
-		if (state[SDL_SCANCODE_KP_5]) {
+		if (state[SDL_SCANCODE_KP_5] && j2->action!=COURIR) {
 			j2->action=DANSE;
 		}
 		
