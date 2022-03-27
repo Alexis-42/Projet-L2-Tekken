@@ -21,18 +21,18 @@ typedef struct {
 
 void sauter(Joueur * joueur, SDL_Event * event, const Uint8 *state){
 	if(joueur->sauter){
-		if(monte==false && estAuSol(joueur) && state[SDL_SCANCODE_SPACE])
+		if(monte==false && estAuSol(joueur))
 			monte=true;
 
 		if(monte==true){
-			joueur->position.y=joueur->position.y-2;
-			if(event->type == SDL_KEYUP && event->key.keysym.sym == SDLK_SPACE)
+			joueur->position.y-=2;
+			if(estTropHaut(joueur))
           		monte=false;
 
 		}
 		if(monte==false){
 			if(!estAuSol(joueur))
-				joueur->position.y=joueur->position.y+4;
+				joueur->position.y+=3;
 			joueur->sauter=!estAuSol(joueur);
 		}
 	}

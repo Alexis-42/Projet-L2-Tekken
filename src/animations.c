@@ -30,6 +30,7 @@ void renderAnimation(Joueur * joueur){
 void attaquer(Joueur * jAttaquant, Joueur * j2){
 	if(checkCollisions(jAttaquant, j2)){
 		if(j2->action!=PARER){
+      j2->action=DEGAT;
 			if(jAttaquant->action==PIED)
 				j2->vie-=jAttaquant->perso.dmg_pied;
 			if(jAttaquant->action==POING)
