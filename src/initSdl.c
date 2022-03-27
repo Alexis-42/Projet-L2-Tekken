@@ -29,6 +29,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
   temps_pause = 0;
   int flag_perdu=0;
   quit = false;
+
   const Uint8 *state;
   SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj1;
