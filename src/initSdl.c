@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include "../include/initSdl.h"
 #include "../include/mouvements.h"
-#include "../include/menu_principal.h"
+#include "../include/menu.h"
 #include "../include/joueur.h"
 #include "../include/animations.h"
 #include "../include/jeu.h"
@@ -20,6 +20,30 @@ int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause, temps_fin_pa
 bool quit;
 bool pause=false;
 SDL_DisplayMode ecran;
+int flag_perdu=0;
+int numRound=0;
+
+void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * font){
+  numRound++;
+  SDL_Color blanc = {255, 255, 255};
+  SDL_Texture * texture = NULL;
+  SDL_Rect rect;
+  char texte[50];
+  SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 125);
+
+  snprintf(texte, sizeof(texte), "%s gagne le round %d !", joueurGagnant->perso.nom, numRound);
+  creerBouton(renderer, font, texte, blanc, &rect, &texture, ecran.w/2, ecran.h/2+100);
+  
+  SDL_RenderFillRect(renderer, NULL);
+  SDL_RenderCopy(renderer, texture, NULL, &rect);
+  SDL_RenderPresent(renderer);
+
+  flag_perdu=0;
+  initJoueur(joueurGagnant, 100.0, joueurGagnant->nom, joueurGagnant->texture, gauche);
+  initJoueur(joueurPerdant, 600.0, joueurPerdant->nom, joueurPerdant->texture, droite);
+  SDL_Delay(5000);
+}
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fenêtre et l'environnement (pour l'instant)
   temps_combat = 0;
@@ -27,10 +51,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
   temps_fin_pause = 0;
   temps_deb_pause = 0;
   temps_pause = 0;
-  int flag_perdu=0;
   quit = false;
 
-  const Uint8 *state;
   SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj1;
   SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/rectangle_bleu.png");
@@ -46,6 +68,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
   SDL_Texture * texture_nomj1 = NULL;
   SDL_Texture * texture_nomj2 = NULL;
   SDL_Texture * texture_temps = NULL;
+
   SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2,rect_nom_j1, rect_nom_j2,rect_temps;
 
   SDL_Init(SDL_INIT_VIDEO);
@@ -108,10 +131,10 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
 
   sec_deb_combat = SDL_GetTicks();
 
-  while (!quit ) {
+  while (!quit) {
     SDL_Event event;
 	  SDL_PollEvent(&event);
-    state = SDL_GetKeyboardState(NULL);
+    
     if(!pause)
       temps_combat = (SDL_GetTicks() - (temps_pause*1000))/1000;
     sec_anim = SDL_GetTicks()/75;
@@ -131,8 +154,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
       }
     }
 
-    sauter(j1,&event, state);
-    sauter(j2,&event, state);
+    sauter(j1);
+    sauter(j2);
     jouerAnimation(j1,sec_anim,j2);
     jouerAnimation(j2,sec_anim,j1);
 
@@ -144,7 +167,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
     }
 
     flag_perdu = checkPerdu(j1, j2);
-    SDL_RenderClear(renderer);
+    if(!flag_perdu)
+      SDL_RenderClear(renderer);
     renderMap(&srcBg, &dstBg, renderer);
 
     hitbox(j1, texture_hitbox_coupj1,1);
@@ -172,20 +196,20 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
     checkmort(j1,j2);
 
     if(!pause)
-      deplacements(j1, j2, &event, state);
+      deplacements(j1, j2, &event);
     else {
       selectionPause(event, drip);
       renderPause();
     }
-    SDL_RenderPresent(renderer);
-  }
 
-  if(flag_perdu == 1)
-    printf("\n=========================\n%s à gagné ! \n=========================\n",j1->nom);
-  else{
-    if(flag_perdu == 2){
-      printf("\n=========================\n%s à gagné ! \n=========================\n",j2->nom);
-    }
+  if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
+    roundSuivant(j2, j1, font);
+    sec_deb_combat=SDL_GetTicks();
+  } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
+    roundSuivant(j1, j2, font);
+    sec_deb_combat=SDL_GetTicks();
+  }
+    SDL_RenderPresent(renderer);
   }
 
   SDL_RenderClear(renderer);

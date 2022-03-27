@@ -64,10 +64,10 @@ void direction(Joueur * j1, Joueur * j2){
 }
 
 int checkPerdu(Joueur * j1, Joueur * j2){
-	if(j1->vie==0)
-		return 2;
-	else if(j2->vie==0)
+	if(j1->vie<=0)
 		return 1;
+	else if(j2->vie<=0)
+		return 2;
   return 0;
 }
 

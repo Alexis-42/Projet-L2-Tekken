@@ -30,7 +30,7 @@ int checkmort(Joueur * j1,Joueur * j2){
 	return 0;
 }
 
-void sauter(Joueur * joueur, SDL_Event * event, const Uint8 *state){
+void sauter(Joueur * joueur){
 	if(joueur->sauter){
 		if(monte==false && estAuSol(joueur))
 			monte=true;
@@ -49,9 +49,10 @@ void sauter(Joueur * joueur, SDL_Event * event, const Uint8 *state){
 	}
 }
 
-void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *state) {
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
 	direction(j1, j2);
-
+	const Uint8 * state = SDL_GetKeyboardState(NULL);
+	
 	switch (event->type) {
 		case SDL_QUIT:
 		quit = true;
