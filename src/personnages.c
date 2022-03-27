@@ -13,8 +13,8 @@ void initPerso(Joueur * j, int i){
 		case PINGU:
 			// perso fait 180px en wide
 			j->perso.nom="Pingu";
-			j->perso.dmg_pied=15;
-			j->perso.dmg_poing=10;
+			j->perso.dmg_pied=20;
+			j->perso.dmg_poing=15;
 
 			j->perso.nb_frame[DANSE]=21;
 			j->perso.nb_frame[DEGAT]=8;
@@ -26,7 +26,7 @@ void initPerso(Joueur * j, int i){
 			j->perso.nb_frame[SAUTER]=4;
 			j->perso.nb_frame[PARER]=1;
 
-			j->perso.taille_perso.mult=1.0;
+			j->perso.taille_perso.mult=1.75;
 			j->perso.taille_perso.w=470.0*j->perso.taille_perso.mult;
 			j->perso.taille_perso.h=300.0*j->perso.taille_perso.mult;
 
@@ -63,21 +63,21 @@ void initPerso(Joueur * j, int i){
 			j->perso.nb_frame[SAUTER]=4;
 			j->perso.nb_frame[PARER]=1;
 
-			j->perso.taille_perso.mult=1.0;
+			j->perso.taille_perso.mult=1.5;
 			j->perso.taille_perso.w=545*j->perso.taille_perso.mult;
 			j->perso.taille_perso.h=300*j->perso.taille_perso.mult;
 
-			j->perso.taille_hitbox.w=180;
+			j->perso.taille_hitbox.w=180*j->perso.taille_perso.mult;
 			j->perso.taille_hitbox.h=j->perso.taille_perso.h;
 
 			j->hitbox_pied.y=j->hitbox.y;
-			j->hitbox_coup.x=j->perso.taille_hitbox.w-15*j->perso.taille_perso.mult;
-			j->hitbox_coup.w=j->perso.taille_hitbox.w+30*j->perso.taille_perso.mult;
+			j->hitbox_coup.x=j->perso.taille_hitbox.w-35*j->perso.taille_perso.mult;
+			j->hitbox_coup.w=j->perso.taille_hitbox.w+70*j->perso.taille_perso.mult;
 			j->hitbox_coup.h=j->perso.taille_perso.h;
 
 			j->hitbox_pied.x=j->hitbox.y;
-			j->hitbox_pied.x=j->perso.taille_hitbox.w-35;
-			j->hitbox_pied.w=j->perso.taille_hitbox.w+70;
+			j->hitbox_pied.x=j->perso.taille_hitbox.w-45*j->perso.taille_perso.mult;
+			j->hitbox_pied.w=j->perso.taille_hitbox.w+90*j->perso.taille_perso.mult;
 			j->hitbox_pied.h=j->perso.taille_perso.h;
 
 			j->perso.hitbox_offsetX=((j->perso.taille_perso.w-j->perso.taille_hitbox.w)/2.0)*j->perso.taille_perso.mult;
@@ -98,7 +98,7 @@ void initPerso(Joueur * j, int i){
 				j->perso.nb_frame[SAUTER]=4;
 				j->perso.nb_frame[PARER]=1;
 
-				j->perso.taille_perso.mult=1.0;
+				j->perso.taille_perso.mult=1.25;
 				j->perso.taille_perso.w=554.4 * j->perso.taille_perso.mult;
 				j->perso.taille_perso.h=300 * j->perso.taille_perso.mult;
 				
@@ -121,8 +121,8 @@ void initPerso(Joueur * j, int i){
 				break;
 				case MICKEY:
 					j->perso.nom="Mickey";
-					j->perso.dmg_pied=10;
-					j->perso.dmg_poing=5;
+					j->perso.dmg_pied=15;
+					j->perso.dmg_poing=10;
 
 					j->perso.nb_frame[DANSE]=28;
 					j->perso.nb_frame[DEGAT]=8;
@@ -134,7 +134,7 @@ void initPerso(Joueur * j, int i){
 					j->perso.nb_frame[SAUTER]=4;
 					j->perso.nb_frame[PARER]=1;
 
-					j->perso.taille_perso.mult=1.0;
+					j->perso.taille_perso.mult=1.75;
 					j->perso.taille_perso.w=546.4* j->perso.taille_perso.mult;
 					j->perso.taille_perso.h=300* j->perso.taille_perso.mult;
 					

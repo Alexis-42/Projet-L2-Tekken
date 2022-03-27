@@ -169,6 +169,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Cr√©er la fen√
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
 
+    checkmort(j1,j2);
+
     if(!pause)
       deplacements(j1, j2, &event, state);
     else {

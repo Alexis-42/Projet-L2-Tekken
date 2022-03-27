@@ -4,4 +4,5 @@
 
 void sauter(Joueur * joueur,SDL_Event * event, const Uint8 *state);
 void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 * state);
+int checkmort(Joueur * j1,Joueur * j2);
 #endif
