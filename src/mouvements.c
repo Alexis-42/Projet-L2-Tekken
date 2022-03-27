@@ -19,6 +19,17 @@ typedef struct {
 	int anim;
 } params;
 
+int checkmort(Joueur * j1,Joueur * j2){
+	if(j1->vie<=0){
+		j1->action = MORT;
+		return 1;
+	}else if(j2->vie<=0){
+		j2->action = MORT;
+		return 1;
+	}
+	return 0;
+}
+
 void sauter(Joueur * joueur, SDL_Event * event, const Uint8 *state){
 	if(joueur->sauter){
 		if(monte==false && estAuSol(joueur))
@@ -47,7 +58,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 		break;
 		
 			case SDL_KEYDOWN:
-			if(j1->perso.frame==0 && j1->action==IDLE){
+			if(j1->perso.frame==0 && j1->action==IDLE && j1->action!=MORT){
 				switch (event->key.keysym.sym) {
 					case SDLK_a:
 						if(!(event->key.repeat)){
@@ -73,7 +84,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 			break;
 		
 		case SDL_KEYUP:
-		if(j1->perso.frame==0){
+		if(j1->perso.frame==0 && j1->action!=MORT){
 			switch (event->key.keysym.sym) {
 			// event J1 
 				case SDLK_q:
@@ -93,7 +104,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 			}
 		}
 			// event J2 
-		if(j2->perso.frame==0){
+		if(j2->perso.frame==0 && j2->action!=MORT){
 			switch (event->key.keysym.sym) {
 				case SDLK_LEFT:
 					j2->action=IDLE;
@@ -114,7 +125,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 			break;
 	}
 	/* verif touches J1 */
-	if(j1->perso.frame==0){
+	if(j1->perso.frame==0 && j1->action!=MORT){
 		if (state[SDL_SCANCODE_A]) { //recule : touche q
 			if(j1->hitbox.x>0){
 				j1->position.x -= VITESSE;
@@ -139,7 +150,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event, const Uint8 *stat
 		}
 	/* verif touches J2 */
 	}
-	if(j2->perso.frame==0){
+	if(j2->perso.frame==0 && j2->action!=MORT){
 		if (state[SDL_SCANCODE_LEFT]) {
 			if(j2->hitbox.x>0){
 				j2->position.x -= VITESSE;
