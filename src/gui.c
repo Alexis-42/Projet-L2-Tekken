@@ -10,11 +10,11 @@
 #define OFFSET 26
 
 void init_gui(SDL_Texture ** texture_carre_jaune, SDL_Texture ** texture_carre_rouge, SDL_Surface * sprite_barre_de_vie, SDL_Texture ** texture_barre_de_vie){
-  SDL_Surface * image_carre_jaune = IMG_Load("res/carre_jaune.png");
+  SDL_Surface * image_carre_jaune = IMG_Load("res/barre_jaune.png");
   *texture_carre_jaune = SDL_CreateTextureFromSurface(renderer, image_carre_jaune);
   SDL_FreeSurface(image_carre_jaune);
 
-  SDL_Surface * image_carre_rouge = IMG_Load("res/carre_rouge.png");
+  SDL_Surface * image_carre_rouge = IMG_Load("res/barre_rouge.png");
   *texture_carre_rouge = SDL_CreateTextureFromSurface(renderer, image_carre_rouge);
   SDL_FreeSurface(image_carre_rouge);
 
@@ -67,26 +67,22 @@ void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_s
 }
 
 // fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
-void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * texture_barre_de_vie, SDL_Texture * texture_carre_rouge, SDL_Texture * texture_carre_jaune, int num_joueur, TTF_Font* font){
+void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * texture_barre_de_vie, SDL_Texture * texture_carre_rouge, SDL_Texture * texture_carre_jaune, TTF_Font* font){
     // SDL_rect de la barre de pv en fonction des pv
     SDL_Rect rect_pv,rect_pv_rouge;
     //destrect pv rouge
     rect_pv.y = rect_sprite_pv->y;
-    if (joueur->vie != 0){
-      rect_pv.w = (rect_sprite_pv->w/100)*joueur->vie;
-    }
+    if (joueur->vie != 0)
+      rect_pv.w = (rect_sprite_pv->w/100.0)*joueur->vie;
     else
       rect_pv.w = 0;
+
     rect_pv.h = rect_sprite_pv->h ;
-    if(num_joueur==1){
-      rect_pv.x = OFFSET;
-    }else{
-      rect_pv.x = rect_sprite_pv->x+OFFSET;
-    }
+    rect_pv.x = rect_sprite_pv->x;
     //destrect pv jaune
-    rect_pv_rouge.x = rect_pv.x;
-    rect_pv_rouge.y = rect_pv.y ;
-    rect_pv_rouge.w = rect_sprite_pv->w-(OFFSET *2);
+    rect_pv_rouge.x = rect_sprite_pv->x;
+    rect_pv_rouge.y = rect_sprite_pv->y;
+    rect_pv_rouge.w = rect_sprite_pv->w;
     rect_pv_rouge.h = rect_sprite_pv->h;
 
     // creation rect rouge derriere le jaune
