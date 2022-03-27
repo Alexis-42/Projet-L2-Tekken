@@ -89,7 +89,7 @@ make ???????? -> secret
 
 <table align = "center">
   <tr align = "center">
-    <td><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Alexis-42"><img src="https://avatars.githubusercontent.com/u/97942917?v=4" width="175px;" alt=""/><br /><sub><b>Alexis Guimbert</b></sub></a><br /></td>
+    <td><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Alexis-42"><img src="https://avatars.githubusercontent.com/u/97942917?v=4" width="175px;" alt=""/><br /><sub><b>🧂 Alexis Guimbert 🧂</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Jck0day"><img src="https://avatars.githubusercontent.com/u/77964646?v=4" width="175px;" alt=""/><br /><sub><b>Charly P</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=NoteletL"><img src="https://avatars.githubusercontent.com/u/97942901?v=4" width="175px;" alt=""/><br /><sub><b>Notelet Léo</b></sub></a><br /></td>
   </tr>
