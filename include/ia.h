@@ -1,0 +1,1 @@
+void deplacements_ia(Joueur * ia, Joueur * j1);

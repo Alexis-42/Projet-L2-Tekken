@@ -4,6 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
+#include <time.h>
 #include "../include/initSdl.h"
 #include "../include/mouvements.h"
 #include "../include/menu.h"
@@ -14,6 +15,7 @@
 #include "../include/map.h"
 #include "../include/gui.h"
 #include "../include/pause.h"
+#include "../include/ia.h"
 
 #define MODE FULLSCREEN
 int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause, temps_fin_pause, temps_pause;
@@ -45,14 +47,14 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
   SDL_Delay(5000);
 }
 
-void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) { //Créer la fenêtre et l'environnement (pour l'instant)
+void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
+  srand(time(NULL));
   temps_combat = 0;
   sec_deb_combat = 0;
   temps_fin_pause = 0;
   temps_deb_pause = 0;
   temps_pause = 0;
   quit = false;
-
   SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj1;
   SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/rectangle_bleu.png");
@@ -195,8 +197,12 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) { //Créer
 
     checkmort(j1,j2);
 
-    if(!pause)
+    if(!pause){
       deplacements(j1, j2, &event, ia);
+      if(ia){
+        deplacements_ia(j2,j1);
+      }
+    }
     else {
       selectionPause(event, drip,ia);
       renderPause();
