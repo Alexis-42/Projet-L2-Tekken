@@ -9,15 +9,19 @@
 #define VITESSE 1
 
 void deplacements_ia(Joueur * ia, Joueur * j1){
-  int r = rand()%100;
-  ia->action=IDLE;
+  int r = rand()%1000;
+  if(ia->action == COURIR)
+    ia->action=IDLE;
  // verifier qu'il ne sort pas du terrain
-  if(j1->direction==droite && ( (j1->hitbox.x + j1->hitbox.w) < ia->position.x) ){
+  if(j1->direction==droite && ( (j1->hitbox.x) < ia->position.x) && ia->action==IDLE){
     ia->position.x -= VITESSE;
 		ia->action=COURIR;
-  }else if(r==8){
+  }else if(j1->direction==gauche && ( j1->hitbox.x > ia->position.x) && ia->action==IDLE){
+    ia->position.x += VITESSE;
+		ia->action=COURIR;
+  }else if(r==1 && ia->action==IDLE){
     ia->action=POING;
-  }else if(r==2){
+  }else if(r==2 && ia->action==IDLE){
     ia->action=PIED;
   }
 
