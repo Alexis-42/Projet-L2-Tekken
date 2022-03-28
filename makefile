@@ -23,6 +23,11 @@ jouer: ${PROG}
 	rm -f bin/*.o
 	./jeu
 
+# compile le code avec les hitboxes
+debug: ${PROG}
+	rm -f bin/*.o
+	./jeu debug
+
 # compile la doc
 docs:
 	doxygen ./Doxyfile
