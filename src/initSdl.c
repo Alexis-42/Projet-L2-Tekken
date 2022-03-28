@@ -154,7 +154,14 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
             
           break;
         }
-      }
+      case SDL_MOUSEBUTTONDOWN:
+        if(event.button.x>=btn1.x && event.button.y>=btn1.y && event.button.x<=btn1.w+btn1.x && event.button.y<=btn1.y+btn1.h && pause){
+          temps_fin_pause = (SDL_GetTicks());
+          temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
+          printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
+          pause = !pause;
+        }
+    }
 
     
     if(!pause)
