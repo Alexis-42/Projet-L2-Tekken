@@ -60,7 +60,7 @@ joueur->perso.dstrect=dstrect;
 //}
 }
 
-void menu_selection(int drip){
+void menu_selection(int drip, int ia){
   int num_map=1;
   SDL_Rect srcBg;
 
@@ -404,5 +404,5 @@ void menu_selection(int drip){
   TTF_Quit();
   SDL_Quit();
   if(sortie==1)
-    initSdl(&j1, &j2, num_map,drip);
+    initSdl(&j1, &j2, num_map,drip,ia);
 }

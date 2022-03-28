@@ -247,10 +247,11 @@ int getSelection(int x_button, int y_button){
     if(sortie==0){
       printf("\nerreur de sortie\n");
     }else if(sortie==1){
-      printf("\nsortie 1: multijoueur\n");
+      printf("\nsortie 1: multijoueur local\n");
+      lancerMenu(MENU_SELECTION, drip, 0);
     }else if(sortie==2){
       printf("\nsortie 2: IA\n");
-      lancerMenu(MENU_SELECTION, drip);
+      lancerMenu(MENU_SELECTION, drip, 1);
     }else if(sortie==3){
       printf("\nsortie 3 : options\n");
     }else if(sortie==4){

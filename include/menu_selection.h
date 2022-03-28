@@ -1,1 +1,1 @@
-void menu_selection();
+void menu_selection(int drip, int ia);

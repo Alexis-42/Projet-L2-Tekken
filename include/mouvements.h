@@ -3,6 +3,6 @@
 #define DEPL_H_INCLUDED__
 
 void sauter(Joueur * joueur);
-void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event);
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia);
 int checkmort(Joueur * j1,Joueur * j2);
 #endif

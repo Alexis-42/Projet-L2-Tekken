@@ -49,7 +49,7 @@ void sauter(Joueur * joueur){
 	}
 }
 
-void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
 	direction(j1, j2);
 	const Uint8 * state = SDL_GetKeyboardState(NULL);
 	
@@ -104,26 +104,28 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
 					break;
 			}
 		}
+		if(!ia){
 			// event J2 
-		if(j2->perso.frame==0 && j2->action!=MORT){
-			switch (event->key.keysym.sym) {
-				case SDLK_LEFT:
-					j2->action=IDLE;
-					break;
-				case SDLK_RIGHT:
-					j2->action=IDLE;
-					break;
-				case SDLK_KP_3:
-					j2->action=IDLE;
-					j2->perso.frame=0;	
-					break;		
-				case SDLK_KP_5:
-					j2->action=IDLE;
-					j2->perso.frame=0;	
-					break;	
+			if(j2->perso.frame==0 && j2->action!=MORT){
+				switch (event->key.keysym.sym) {
+					case SDLK_LEFT:
+						j2->action=IDLE;
+						break;
+					case SDLK_RIGHT:
+						j2->action=IDLE;
+						break;
+					case SDLK_KP_3:
+						j2->action=IDLE;
+						j2->perso.frame=0;	
+						break;		
+					case SDLK_KP_5:
+						j2->action=IDLE;
+						j2->perso.frame=0;	
+						break;	
 				}
 			}
 			break;
+		}
 	}
 	/* verif touches J1 */
 	if(j1->perso.frame==0 && j1->action!=MORT){
@@ -149,31 +151,33 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event) {
 			j1->sauter=true;
 			j1->action=SAUTER;
 		}
-	/* verif touches J2 */
 	}
-	if(j2->perso.frame==0 && j2->action!=MORT){
-		if (state[SDL_SCANCODE_LEFT]) {
-			if(j2->hitbox.x>0){
-				j2->position.x -= VITESSE;
-				j2->action=COURIR;
+	if(!ia){
+	/* verif touches J2 */
+		if(j2->perso.frame==0 && j2->action!=MORT){
+			if (state[SDL_SCANCODE_LEFT]) {
+				if(j2->hitbox.x>0){
+					j2->position.x -= VITESSE;
+					j2->action=COURIR;
+				}
 			}
-		}
-		if (state[SDL_SCANCODE_RIGHT]) {
-			if(j2->hitbox.x<ecran.w-j2->perso.taille_hitbox.w){
-				j2->position.x += VITESSE;
-				j2->action=COURIR;
+			if (state[SDL_SCANCODE_RIGHT]) {
+				if(j2->hitbox.x<ecran.w-j2->perso.taille_hitbox.w){
+					j2->position.x += VITESSE;
+					j2->action=COURIR;
+				}
 			}
+			if (state[SDL_SCANCODE_KP_3] && j2->action!=COURIR) {
+				j2->action=PARER;
+			}
+			if (state[SDL_SCANCODE_KP_0]) {
+				j2->sauter=true;
+				j2->action=SAUTER;
+			}
+			if (state[SDL_SCANCODE_KP_5] && j2->action!=COURIR) {
+				j2->action=DANSE;
+			}
+			
 		}
-		if (state[SDL_SCANCODE_KP_3] && j2->action!=COURIR) {
-			j2->action=PARER;
-		}
-		if (state[SDL_SCANCODE_KP_0]) {
-			j2->sauter=true;
-			j2->action=SAUTER;
-		}
-		if (state[SDL_SCANCODE_KP_5] && j2->action!=COURIR) {
-			j2->action=DANSE;
-		}
-		
 	}
 }

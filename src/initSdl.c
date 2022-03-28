@@ -45,7 +45,7 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
   SDL_Delay(5000);
 }
 
-void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fenêtre et l'environnement (pour l'instant)
+void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) { //Créer la fenêtre et l'environnement (pour l'instant)
   temps_combat = 0;
   sec_deb_combat = 0;
   temps_fin_pause = 0;
@@ -196,9 +196,9 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip) { //Créer la fen�
     checkmort(j1,j2);
 
     if(!pause)
-      deplacements(j1, j2, &event);
+      deplacements(j1, j2, &event, ia);
     else {
-      selectionPause(event, drip);
+      selectionPause(event, drip,ia);
       renderPause();
     }
 

@@ -3,6 +3,6 @@
 
 void renderPause();
 void initPause();
-void selectionPause(SDL_Event event, int drip);
+void selectionPause(SDL_Event event, int drip, int ia);
 
 #endif
