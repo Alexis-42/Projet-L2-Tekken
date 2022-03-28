@@ -60,7 +60,9 @@ void direction(Joueur * j1, Joueur * j2){
       joueur->hitbox_pied=hitbox2;
     }
   joueur->hitbox=hitbox;
-  SDL_RenderCopyEx(renderer, texture ,NULL , &hitbox2, 0, 0, joueur->direction);
+
+  if(debug)
+    SDL_RenderCopy(renderer, texture ,NULL , &hitbox2);
 }
 
 int checkPerdu(Joueur * j1, Joueur * j2){

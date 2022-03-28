@@ -12,6 +12,7 @@
 SDL_Window * window;
 SDL_Renderer * renderer;
 
+extern bool debug;
 extern bool quit;
 extern bool pause;
 extern SDL_DisplayMode ecran;
