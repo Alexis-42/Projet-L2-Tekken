@@ -176,9 +176,10 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
     hitbox(j1, texture_hitbox_piedj1,0);
     hitbox(j2, texture_hitbox_piedj2,0);
 
-    SDL_RenderFillRect(renderer, &(j1->hitbox));
-    SDL_RenderFillRect(renderer, &(j2->hitbox));
-
+    if(debug){
+      SDL_RenderFillRect(renderer, &(j1->hitbox));
+      SDL_RenderFillRect(renderer, &(j2->hitbox));
+    }
     renderAnimation(j1);
     renderAnimation(j2);
     barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, font);
