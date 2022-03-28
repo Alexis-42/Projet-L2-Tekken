@@ -129,30 +129,42 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   initPause();
 
   int sec_anim;
-
   sec_deb_combat = SDL_GetTicks();
+  int tmp=-1;
 
   while (!quit) {
     SDL_Event event;
 	  SDL_PollEvent(&event);
     
-    if(!pause)
-      temps_combat = (SDL_GetTicks() - (temps_pause*1000))/1000;
     sec_anim = SDL_GetTicks()/75;
     jouerAnimationBackground(&srcBg, &dstBg,1);
     
+
     switch (event.type) {
-    case SDL_KEYDOWN:
-      switch (event.key.keysym.sym) {
-        case SDLK_ESCAPE:
-          if(pause)
-            temps_deb_pause = (sec_deb_combat - SDL_GetTicks());
-          if(!pause)
-            temps_fin_pause = (sec_deb_combat - SDL_GetTicks());
-          temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
-          pause = !pause;
-        break;
+      case SDL_KEYDOWN:
+        switch (event.key.keysym.sym) {
+          case SDLK_ESCAPE:
+            if(!pause){
+              temps_deb_pause = (SDL_GetTicks());
+            }else if(pause){
+              temps_fin_pause = (SDL_GetTicks());
+              temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
+              printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
+            }
+              pause = !pause;
+            
+          break;
+        }
       }
+
+    
+    if(!pause)
+      temps_combat = SDL_GetTicks()/1000 - temps_pause;
+
+
+    if(temps_combat!=tmp){
+      printf("\ntemps du jeu : %d\ttemp en tick : %d",temps_combat,SDL_GetTicks()/1000);
+      tmp=temps_combat;
     }
 
     sauter(j1);
