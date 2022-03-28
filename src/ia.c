@@ -10,6 +10,7 @@
 
 void deplacements_ia(Joueur * ia, Joueur * j1){
   int r = rand()%1000;
+  int parer = rand()%200;
   if(ia->action == COURIR)
     ia->action=IDLE;
  // verifier qu'il ne sort pas du terrain
@@ -19,6 +20,11 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
   }else if(j1->direction==gauche && ( j1->hitbox.x > ia->hitbox.x + ia->hitbox.w) && ia->action==IDLE){
     ia->position.x += VITESSE;
 		ia->action=COURIR;
+  }else if(((j1->action==POING || j1->action==PIED ) && ia->action==IDLE)){
+    if(parer == 3)
+      ia->action=PARER;
+  }else if((j1->action!=POING && j1->action!=PIED ) && ia->action==PARER){
+    ia->action=IDLE;
   }else if(r==1 && ia->action==IDLE){
     ia->action=POING;
   }else if(r==2 && ia->action==IDLE){
