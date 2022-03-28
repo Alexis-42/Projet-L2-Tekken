@@ -17,7 +17,7 @@
 #include "../include/pause.h"
 #include "../include/ia.h"
 
-#define MODE FULLSCREEN
+#define MODE BORDERLESS
 int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause, temps_fin_pause, temps_pause;
 bool quit;
 bool pause=false;
@@ -35,8 +35,7 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 125);
 
   snprintf(texte, sizeof(texte), "%s gagne le round %d !", joueurGagnant->perso.nom, numRound);
-  creerBouton(renderer, font, texte, blanc, &rect, &texture, ecran.w/2, ecran.h/2+100);
-  
+  creerBouton(renderer, font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
   SDL_RenderFillRect(renderer, NULL);
   SDL_RenderCopy(renderer, texture, NULL, &rect);
   SDL_RenderPresent(renderer);
