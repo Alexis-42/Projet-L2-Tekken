@@ -6,6 +6,8 @@
 #include "../include/animations.h"
 #include "../include/joueur.h"
 #include "../include/personnages.h"
+#include "../include/options.h"
+
 #define VITESSE 1
 
 int peut_bouger_droite(Joueur * ia, Joueur * j1){
@@ -21,8 +23,9 @@ int peut_parer(Joueur * ia, Joueur * j1){
 }
 
 void deplacements_ia(Joueur * ia, Joueur * j1){
-  int r = rand()%1000;
-  int parer = rand()%200;
+    int r = rand()%2000/(difficulte+1);
+    int parer = rand()%800/(difficulte+1);
+
   if(ia->action == COURIR || ia->action==DANSE)
     ia->action=IDLE;
  // verifier qu'il ne sort pas du terrain
@@ -39,7 +42,7 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
       ia->action=PARER;
   }else if((j1->action!=POING && j1->action!=PIED ) && ia->action==PARER){
     ia->action=IDLE;
-  }else if(r==1 && ia->action==IDLE){
+  }else if(r==1 && ia->action==IDLE && j1->action!=PARER){
     ia->action=POING;
   }else if(r==2 && ia->action==IDLE){
     ia->action=PIED;

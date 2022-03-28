@@ -80,8 +80,8 @@ void initPause(){
   rectbackground.w = ecran.w;
   rectbackground.h = ecran.h;
 
-  creerBouton(renderer, font, "Retour au combat", ColorWhite, &btn1, &texBtn1, POSX_TEXTE/1920.0*ecran.w, 300/1920.0*ecran.w);
-  creerBouton(renderer, font, "Retour au menu", ColorWhite, &btn2, &texBtn2, POSX_TEXTE/1920.0*ecran.w, 400/1920.0*ecran.w);
-  creerBouton(renderer, font, "Options", ColorWhite, &btn3, &texBtn3, POSX_TEXTE/1920.0*ecran.w, 500/1920.0*ecran.w);
-  creerBouton(renderer, font, "Quitter", ColorWhite, &btn4, &texBtn4, POSX_TEXTE/1920.0*ecran.w, 600/1920.0*ecran.w);
+  creerBouton(font, "Retour au combat", ColorWhite, &btn1, &texBtn1, POSX_TEXTE/1920.0*ecran.w, 300/1920.0*ecran.w);
+  creerBouton(font, "Retour au menu", ColorWhite, &btn2, &texBtn2, POSX_TEXTE/1920.0*ecran.w, 400/1920.0*ecran.w);
+  creerBouton(font, "Options", ColorWhite, &btn3, &texBtn3, POSX_TEXTE/1920.0*ecran.w, 500/1920.0*ecran.w);
+  creerBouton(font, "Quitter", ColorWhite, &btn4, &texBtn4, POSX_TEXTE/1920.0*ecran.w, 600/1920.0*ecran.w);
 }

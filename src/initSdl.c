@@ -16,33 +16,49 @@
 #include "../include/gui.h"
 #include "../include/pause.h"
 #include "../include/ia.h"
+#include "../include/options.h"
 
 int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause, temps_fin_pause, temps_pause;
-bool quit;
+bool quit=false;
 bool pause=false;
 SDL_DisplayMode ecran;
 int flag_perdu=0;
 int numRound=0;
 
 void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * font){
-  numRound++;
   SDL_Color blanc = {255, 255, 255};
   SDL_Texture * texture = NULL;
   SDL_Rect rect;
   char texte[50];
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 125);
+  if(numRound<nbreRoundsMax){
+    numRound++;
 
-  snprintf(texte, sizeof(texte), "%s gagne le round %d !", joueurGagnant->perso.nom, numRound);
-  creerBouton(renderer, font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
-  SDL_RenderFillRect(renderer, NULL);
-  SDL_RenderCopy(renderer, texture, NULL, &rect);
-  SDL_RenderPresent(renderer);
+    snprintf(texte, sizeof(texte), "%s gagne le round %d !", joueurGagnant->perso.nom, numRound);
+    
+    flag_perdu=0;
+    initJoueur(joueurGagnant, 100.0, joueurGagnant->nom, joueurGagnant->texture, gauche);
+    initJoueur(joueurPerdant, 600.0, joueurPerdant->nom, joueurPerdant->texture, droite);
+    creerBouton(font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
+    SDL_RenderFillRect(renderer, NULL);
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(5000);
+  } else {
+    snprintf(texte, sizeof(texte), "Match termine ! %s gagne la partie !", joueurGagnant->perso.nom);
+    joueurGagnant->action=DANSE;
+    creerBouton(font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
+    SDL_RenderFillRect(renderer, NULL);
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(5000);
+    numRound=0;
+    flag_perdu=0;
+    lancerMenu(MENU_PRINCIPAL, 0, 0);
+    quit=true;
+  }
 
-  flag_perdu=0;
-  initJoueur(joueurGagnant, 100.0, joueurGagnant->nom, joueurGagnant->texture, gauche);
-  initJoueur(joueurPerdant, 600.0, joueurPerdant->nom, joueurPerdant->texture, droite);
-  SDL_Delay(5000);
 }
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
@@ -52,7 +68,6 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   temps_fin_pause = 0;
   temps_deb_pause = 0;
   temps_pause = 0;
-  quit = false;
   SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj1;
   SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/rectangle_bleu.png");
@@ -71,21 +86,6 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
   SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2,rect_nom_j1, rect_nom_j2,rect_temps;
 
-  SDL_Init(SDL_INIT_VIDEO);
-  IMG_Init(IMG_INIT_PNG);
-  SDL_GetDesktopDisplayMode(0, &ecran);
-
-  switch(MODE){
-    case FULLSCREEN: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_FULLSCREEN);
-    break;
-    case BORDERLESS: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
-    break;
-    default: window = SDL_CreateWindow("SDL2 Tekken",
-      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
-  }
-  renderer = SDL_CreateRenderer(window, -1, 0);
   texture_hitbox_coupj1 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj1);
   texture_hitbox_coupj2 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj2);
 

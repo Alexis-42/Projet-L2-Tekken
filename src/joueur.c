@@ -8,6 +8,7 @@
 #include "../include/animations.h"
 #include "../include/personnages.h"
 #include "../include/map.h"
+#include "../include/options.h"
 
 bool estTropHaut(Joueur * joueur){
   return joueur->position.y<=0;

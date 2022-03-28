@@ -11,8 +11,6 @@
 #include "../include/animations.h"
 #include "../include/map.h"
 
-SDL_Window * window_menu_selection=NULL;
-
 void aff_menu_selection(int carre,float pos_x){}
 
   SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, float x, float y, float w, float h){
@@ -68,37 +66,23 @@ void menu_selection(int drip, int ia){
     printf("librairie non initialisé");
     exit(EXIT_FAILURE);
   }
-  SDL_Init(SDL_INIT_VIDEO);
-  IMG_Init(IMG_INIT_PNG);
-
-  //création de la page
-  switch(MODE){
-    case FULLSCREEN:
-    window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_FULLSCREEN);
-    break;
-    case BORDERLESS:
-    window_menu_selection = SDL_CreateWindow("SDL2 Tekken - menu selection personnage",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w, ecran.h, SDL_WINDOW_BORDERLESS);
-    break;
-  }
-
-  SDL_Renderer * renderer_menu_selection = SDL_CreateRenderer(window_menu_selection, -1, 0);
 
   SDL_Texture ** texture_preview = malloc(sizeof(SDL_Texture *)*12);
-  texture_preview[1] = creat_texture_rect("res/backgrounds/stage1.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[2] = creat_texture_rect("res/backgrounds/stage2.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[3] = creat_texture_rect("res/backgrounds/stage3.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[4] = creat_texture_rect("res/backgrounds/stage4.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[5] = creat_texture_rect("res/backgrounds/stage5.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[6] = creat_texture_rect("res/backgrounds/stage6.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[7] = creat_texture_rect("res/backgrounds/stage7.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[8] = creat_texture_rect("res/backgrounds/stage8.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[9] = creat_texture_rect("res/backgrounds/stage9.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
-  texture_preview[10] = creat_texture_rect("res/backgrounds/stage10.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  texture_preview[1] = creat_texture_rect("res/backgrounds/stage1.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[2] = creat_texture_rect("res/backgrounds/stage2.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[3] = creat_texture_rect("res/backgrounds/stage3.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[4] = creat_texture_rect("res/backgrounds/stage4.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[5] = creat_texture_rect("res/backgrounds/stage5.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[6] = creat_texture_rect("res/backgrounds/stage6.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[7] = creat_texture_rect("res/backgrounds/stage7.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[8] = creat_texture_rect("res/backgrounds/stage8.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[9] = creat_texture_rect("res/backgrounds/stage9.png", NULL, renderer, 0, 0, 0, 0);
+  texture_preview[10] = creat_texture_rect("res/backgrounds/stage10.png", NULL, renderer, 0, 0, 0, 0);
   if(drip)
-    texture_preview[11] = creat_texture_rect("res/backgrounds/stage11.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+    texture_preview[11] = creat_texture_rect("res/backgrounds/stage11.png", NULL, renderer, 0, 0, 0, 0);
 //fond des fonds d écran en preview
   SDL_Rect rect_bg_map_fond;
-  SDL_Texture * texture_fond_bg_preview = creat_texture_rect("res/carre_perso.png",&rect_bg_map_fond, renderer_menu_selection,ecran.w/4.0-10.0, 250.0/1080.0*(ecran.h/4.5)-10.0, ecran.w/2.0+20.0, ecran.w/5.0+20.0);
+  SDL_Texture * texture_fond_bg_preview = creat_texture_rect("res/carre_perso.png",&rect_bg_map_fond, renderer,ecran.w/4.0-10.0, 250.0/1080.0*(ecran.h/4.5)-10.0, ecran.w/2.0+20.0, ecran.w/5.0+20.0);
 
 
 
@@ -107,80 +91,80 @@ void menu_selection(int drip, int ia){
   SDL_Rect rect_shrek;
   SDL_Texture * texture_shrek;
   if(drip)
-    texture_shrek = creat_texture_rect("res/shrekdrip.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_shrek = creat_texture_rect("res/shrekdrip.png", &rect_shrek, renderer, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   else
-    texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_shrek = creat_texture_rect("res/shrek.png", &rect_shrek, renderer, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_bg_shrek;
-  SDL_Texture * texture_bg_shrek = creat_texture_rect("res/carre_gris.png", &rect_bg_shrek, renderer_menu_selection, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_bg_shrek = creat_texture_rect("res/carre_gris.png", &rect_bg_shrek, renderer, 200.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_shrek;
-  SDL_Texture * texture_contour_shrek = creat_texture_rect("res/carre_perso.png", &rect_contour_shrek, renderer_menu_selection, (200.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
+  SDL_Texture * texture_contour_shrek = creat_texture_rect("res/carre_perso.png", &rect_contour_shrek, renderer, (200.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
   //image de goku
   SDL_Rect rect_goku;
   SDL_Texture * texture_goku;
   if(drip)
-    texture_goku = creat_texture_rect("res/gokudrip.png", &rect_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_goku = creat_texture_rect("res/gokudrip.png", &rect_goku, renderer, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   else
-    texture_goku = creat_texture_rect("res/goku.png", &rect_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_goku = creat_texture_rect("res/goku.png", &rect_goku, renderer, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_bg_goku;
-  SDL_Texture * texture_bg_goku = creat_texture_rect("res/carre_gris.png", &rect_bg_goku, renderer_menu_selection, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_bg_goku = creat_texture_rect("res/carre_gris.png", &rect_bg_goku, renderer, 600.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   SDL_Rect rect_contour_goku;
-  SDL_Texture * texture_contour_goku = creat_texture_rect("res/carre_perso.png", &rect_contour_goku, renderer_menu_selection, (600.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
+  SDL_Texture * texture_contour_goku = creat_texture_rect("res/carre_perso.png", &rect_contour_goku, renderer, (600.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
   //image de pingu
   SDL_Rect rect_pingu;
   SDL_Texture * texture_pingu;
   if(drip)
-    texture_pingu= creat_texture_rect("res/pingudrip.png", &rect_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_pingu= creat_texture_rect("res/pingudrip.png", &rect_pingu, renderer, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   else
-    texture_pingu = creat_texture_rect("res/pingu.png", &rect_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_pingu = creat_texture_rect("res/pingu.png", &rect_pingu, renderer, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_bg_pingu;
-  SDL_Texture * texture_bg_pingu = creat_texture_rect("res/carre_gris.png", &rect_bg_pingu, renderer_menu_selection, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_bg_pingu = creat_texture_rect("res/carre_gris.png", &rect_bg_pingu, renderer, 1000.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_pingu;
-  SDL_Texture * texture_contour_pingu = creat_texture_rect("res/carre_perso.png", &rect_contour_pingu, renderer_menu_selection, (1000.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
+  SDL_Texture * texture_contour_pingu = creat_texture_rect("res/carre_perso.png", &rect_contour_pingu, renderer, (1000.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
   //image de tinky
   SDL_Rect rect_tinky;
   SDL_Texture * texture_tinky;
   if(drip)
-    texture_tinky = creat_texture_rect("res/mickeydrip.png", &rect_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_tinky = creat_texture_rect("res/mickeydrip.png", &rect_tinky, renderer, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   else
-    texture_tinky = creat_texture_rect("res/mickey.png", &rect_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+    texture_tinky = creat_texture_rect("res/mickey.png", &rect_tinky, renderer, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_bg_tinky;
-  SDL_Texture * texture_bg_tinky = creat_texture_rect("res/carre_gris.png", &rect_bg_tinky, renderer_menu_selection, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_bg_tinky = creat_texture_rect("res/carre_gris.png", &rect_bg_tinky, renderer, 1400.0/1920.0*ecran.w, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
   SDL_Rect rect_contour_tinky;
-  SDL_Texture * texture_contour_tinky = creat_texture_rect("res/carre_perso.png", &rect_contour_tinky, renderer_menu_selection, (1400.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
+  SDL_Texture * texture_contour_tinky = creat_texture_rect("res/carre_perso.png", &rect_contour_tinky, renderer, (1400.0-(0.009*ecran.w))/1920.0*ecran.w, (700.0-(0.009*ecran.w))/1080.0*ecran.h, (ecran.w+(0.063*ecran.w))/6.0, (ecran.w+(0.063*ecran.w))/6.0);
 
 
   //initialisation carrés qui s'affichent derriere le personnage que les joueurs sélectionnent
   //carré rouge de sélection du personnage
   SDL_Rect rect_carre_rouge;
-  SDL_Texture * texture_carre_rouge = creat_texture_rect("res/carre_rouge.png", &rect_carre_rouge, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_carre_rouge = creat_texture_rect("res/carre_rouge.png", &rect_carre_rouge, renderer, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //carré bleu de sélection du personnage
   SDL_Rect rect_carre_bleu;
-  SDL_Texture * texture_carre_bleu = creat_texture_rect("res/carre_bleu.png", &rect_carre_bleu, renderer_menu_selection, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
+  SDL_Texture * texture_carre_bleu = creat_texture_rect("res/carre_bleu.png", &rect_carre_bleu, renderer, ecran.w+10000, 700.0/1080.0*ecran.h, ecran.w/6.0, ecran.w/6.0);
 
   //carré violet de sélection du personnage si les 2 joueurs choissisent le meme
-  SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  SDL_Texture * texture_carre_violet = creat_texture_rect("res/carre_violet.png", NULL, renderer, 0, 0, 0, 0);
 
   Joueur j1, j2;
 
-  SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  SDL_Texture * texture_sprite_shrek = creat_texture_rect("res/sprites/Shrek.png", NULL, renderer, 0, 0, 0, 0);
 
-  SDL_Texture * texture_sprite_goku = creat_texture_rect("res/sprites/Goku.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  SDL_Texture * texture_sprite_goku = creat_texture_rect("res/sprites/Goku.png", NULL, renderer, 0, 0, 0, 0);
 
-  SDL_Texture * texture_sprite_pingu = creat_texture_rect("res/sprites/Pingu.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  SDL_Texture * texture_sprite_pingu = creat_texture_rect("res/sprites/Pingu.png", NULL, renderer, 0, 0, 0, 0);
 
-  SDL_Texture * texture_sprite_mickey = creat_texture_rect("res/sprites/Mickey.png", NULL, renderer_menu_selection, 0, 0, 0, 0);
+  SDL_Texture * texture_sprite_mickey = creat_texture_rect("res/sprites/Mickey.png", NULL, renderer, 0, 0, 0, 0);
 
   TTF_Font* Sans = TTF_OpenFont("res/fonts/Sans.ttf", 24);
   SDL_Color White = {255, 255, 255};
   SDL_Color Grey = {100, 100, 100};
   //bouton jouer
   SDL_Surface* surface_texte_jouer = TTF_RenderText_Solid(Sans, "JOUER", Grey);
-  SDL_Texture* texture_texte_jouer = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_texte_jouer);
+  SDL_Texture* texture_texte_jouer = SDL_CreateTextureFromSurface(renderer, surface_texte_jouer);
   SDL_FreeSurface(surface_texte_jouer);
   SDL_Rect rect_texte_jouer;
   rect_texte_jouer.x = 850.0/1920.0*ecran.w;
@@ -189,7 +173,7 @@ void menu_selection(int drip, int ia){
   rect_texte_jouer.h = 125.0/1080.0*ecran.h;
 
   SDL_Surface* surface_texte_jouer_white =TTF_RenderText_Solid(Sans, "JOUER", White);
-  SDL_Texture* texture_texte_jouer_white = SDL_CreateTextureFromSurface(renderer_menu_selection, surface_texte_jouer_white);
+  SDL_Texture* texture_texte_jouer_white = SDL_CreateTextureFromSurface(renderer, surface_texte_jouer_white);
   SDL_FreeSurface(surface_texte_jouer_white);
 
 
@@ -203,10 +187,10 @@ void menu_selection(int drip, int ia){
 
 
   SDL_Rect rect_bouton_gauche;
-  SDL_Texture * texture_bouton_gauche = creat_texture_rect("res/bouton_gauche.png", &rect_bouton_gauche, renderer_menu_selection, (rect_bg_map.x-ecran.w/14.0)-(ecran.w/100), 700.0/1080.0*(ecran.h/4.5), ecran.w/14.0, ecran.w/14.0);
+  SDL_Texture * texture_bouton_gauche = creat_texture_rect("res/bouton_gauche.png", &rect_bouton_gauche, renderer, (rect_bg_map.x-ecran.w/14.0)-(ecran.w/100), 700.0/1080.0*(ecran.h/4.5), ecran.w/14.0, ecran.w/14.0);
 
   SDL_Rect rect_bouton_droit;
-  SDL_Texture * texture_bouton_droit = creat_texture_rect("res/bouton_droit.png", &rect_bouton_droit, renderer_menu_selection, rect_bg_map.x+rect_bg_map.w+(ecran.w/100), 700.0/1080.0*(ecran.h/4.5), ecran.w/14.0, ecran.w/14.0);
+  SDL_Texture * texture_bouton_droit = creat_texture_rect("res/bouton_droit.png", &rect_bouton_droit, renderer, rect_bg_map.x+rect_bg_map.w+(ecran.w/100), 700.0/1080.0*(ecran.h/4.5), ecran.w/14.0, ecran.w/14.0);
 
   j1.texture=NULL;
   j2.texture=NULL;
@@ -219,7 +203,7 @@ void menu_selection(int drip, int ia){
 
   SDL_Rect srcrect_bg;
   SDL_Rect dstrect_bg;
-  chargerMap(-1, renderer_menu_selection,1,drip);
+  chargerMap(-1, renderer,1,drip);
   //recherche des actions
 
   while (!quitter) {
@@ -316,54 +300,54 @@ void menu_selection(int drip, int ia){
       }
     }
     //affichage de la page
-    SDL_RenderClear(renderer_menu_selection);
+    SDL_RenderClear(renderer);
     jouerAnimationBackground(&srcrect_bg, &dstrect_bg,1);
-    renderMap(&srcrect_bg, &dstrect_bg, renderer_menu_selection);
+    renderMap(&srcrect_bg, &dstrect_bg, renderer);
 
     // carré gris selec perso
-    SDL_RenderCopy(renderer_menu_selection, texture_bg_shrek, NULL, &rect_bg_shrek);
-    SDL_RenderCopy(renderer_menu_selection, texture_bg_goku, NULL, &rect_bg_goku);
-    SDL_RenderCopy(renderer_menu_selection, texture_bg_pingu, NULL, &rect_bg_pingu);
-    SDL_RenderCopy(renderer_menu_selection, texture_bg_tinky, NULL, &rect_bg_tinky);
+    SDL_RenderCopy(renderer, texture_bg_shrek, NULL, &rect_bg_shrek);
+    SDL_RenderCopy(renderer, texture_bg_goku, NULL, &rect_bg_goku);
+    SDL_RenderCopy(renderer, texture_bg_pingu, NULL, &rect_bg_pingu);
+    SDL_RenderCopy(renderer, texture_bg_tinky, NULL, &rect_bg_tinky);
 
     //affichage des carré de selections
-    SDL_RenderCopy(renderer_menu_selection, texture_carre_bleu, NULL, &rect_carre_bleu);
-    SDL_RenderCopy(renderer_menu_selection, texture_carre_rouge, NULL, &rect_carre_rouge);
+    SDL_RenderCopy(renderer, texture_carre_bleu, NULL, &rect_carre_bleu);
+    SDL_RenderCopy(renderer, texture_carre_rouge, NULL, &rect_carre_rouge);
     if(rect_carre_bleu.x == rect_carre_rouge.x){
-      SDL_RenderCopy(renderer_menu_selection, texture_carre_violet, NULL, &rect_carre_bleu);
+      SDL_RenderCopy(renderer, texture_carre_violet, NULL, &rect_carre_bleu);
     }
 
     //affichage de la tete des personnages
-    SDL_RenderCopy(renderer_menu_selection, texture_shrek, NULL, &rect_shrek);
-    SDL_RenderCopy(renderer_menu_selection, texture_contour_shrek, NULL, &rect_contour_shrek);
+    SDL_RenderCopy(renderer, texture_shrek, NULL, &rect_shrek);
+    SDL_RenderCopy(renderer, texture_contour_shrek, NULL, &rect_contour_shrek);
 
-    SDL_RenderCopy(renderer_menu_selection, texture_goku, NULL, &rect_goku);
-    SDL_RenderCopy(renderer_menu_selection, texture_contour_goku, NULL, &rect_contour_goku);
+    SDL_RenderCopy(renderer, texture_goku, NULL, &rect_goku);
+    SDL_RenderCopy(renderer, texture_contour_goku, NULL, &rect_contour_goku);
 
-    SDL_RenderCopy(renderer_menu_selection, texture_pingu, NULL, &rect_pingu);
-    SDL_RenderCopy(renderer_menu_selection, texture_contour_pingu, NULL, &rect_contour_pingu);
+    SDL_RenderCopy(renderer, texture_pingu, NULL, &rect_pingu);
+    SDL_RenderCopy(renderer, texture_contour_pingu, NULL, &rect_contour_pingu);
 
-    SDL_RenderCopy(renderer_menu_selection, texture_tinky, NULL, &rect_tinky);
-    SDL_RenderCopy(renderer_menu_selection, texture_contour_tinky, NULL, &rect_contour_tinky);
+    SDL_RenderCopy(renderer, texture_tinky, NULL, &rect_tinky);
+    SDL_RenderCopy(renderer, texture_contour_tinky, NULL, &rect_contour_tinky);
     //affichage des sprites
-    //SDL_RenderCopyEX(renderer_menu_selection, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek,0,NULL,tour_joueur);
+    //SDL_RenderCopyEX(renderer, texture_sprite_shrek, &rect_sprite_shrek_source, &rect_sprite_shrek,0,NULL,tour_joueur);
     jouerAnimationPersoMenu(&j1, 1, rect_carre_bleu.x);
     jouerAnimationPersoMenu(&j2, 0, rect_carre_rouge.x);
-    SDL_RenderCopyEx(renderer_menu_selection, j1.texture, &(j1.perso.srcrect), &(j1.perso.dstrect), 0, NULL, 1);
-    SDL_RenderCopyEx(renderer_menu_selection, j2.texture, &(j2.perso.srcrect), &(j2.perso.dstrect), 0, NULL, 0);
+    SDL_RenderCopyEx(renderer, j1.texture, &(j1.perso.srcrect), &(j1.perso.dstrect), 0, NULL, 1);
+    SDL_RenderCopyEx(renderer, j2.texture, &(j2.perso.srcrect), &(j2.perso.dstrect), 0, NULL, 0);
 
     if(rect_carre_bleu.x>=0 && rect_carre_bleu.x<=ecran.w && rect_carre_rouge.x>=0 && rect_carre_rouge.x<=ecran.w)
-      SDL_RenderCopy(renderer_menu_selection, texture_texte_jouer_white, NULL, &rect_texte_jouer);
+      SDL_RenderCopy(renderer, texture_texte_jouer_white, NULL, &rect_texte_jouer);
     else
-      SDL_RenderCopy(renderer_menu_selection, texture_texte_jouer, NULL, &rect_texte_jouer);
+      SDL_RenderCopy(renderer, texture_texte_jouer, NULL, &rect_texte_jouer);
 
     chargerMap(num_map, NULL,0,drip);
     jouerAnimationBackground(&srcBg,NULL,0);
-    SDL_RenderCopy(renderer_menu_selection, texture_preview[num_map], &srcBg, &rect_bg_map);
-    SDL_RenderCopy(renderer_menu_selection, texture_bouton_gauche, NULL, &rect_bouton_gauche);
-    SDL_RenderCopy(renderer_menu_selection, texture_bouton_droit, NULL, &rect_bouton_droit);
-    SDL_RenderCopy(renderer_menu_selection, texture_fond_bg_preview,NULL, &rect_bg_map_fond);
-    SDL_RenderPresent(renderer_menu_selection);
+    SDL_RenderCopy(renderer, texture_preview[num_map], &srcBg, &rect_bg_map);
+    SDL_RenderCopy(renderer, texture_bouton_gauche, NULL, &rect_bouton_gauche);
+    SDL_RenderCopy(renderer, texture_bouton_droit, NULL, &rect_bouton_droit);
+    SDL_RenderCopy(renderer, texture_fond_bg_preview,NULL, &rect_bg_map_fond);
+    SDL_RenderPresent(renderer);
   }
   //sdl destroy texture
   SDL_DestroyTexture(texture_shrek);
@@ -397,11 +381,7 @@ void menu_selection(int drip, int ia){
   SDL_DestroyTexture(texture_bg_goku);
   SDL_DestroyTexture(texture_bg_pingu);
   SDL_DestroyTexture(texture_bg_tinky);
-  SDL_DestroyRenderer(renderer_menu_selection);
-  SDL_DestroyWindow(window_menu_selection);
-  IMG_Quit();
   TTF_Quit();
-  SDL_Quit();
   if(sortie==1)
     initSdl(&j1, &j2, num_map,drip,ia);
 }
