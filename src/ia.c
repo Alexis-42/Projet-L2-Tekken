@@ -26,7 +26,7 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
   if(ia->action == COURIR || ia->action==DANSE)
     ia->action=IDLE;
  // verifier qu'il ne sort pas du terrain
-  if(j1->action==DANSE){
+  if(j1->action==DANSE && ia->action==IDLE){
     ia->action=DANSE;
   }else if(peut_bouger_droite(ia, j1) && ia->action!=DANSE){
     ia->position.x -= VITESSE;
