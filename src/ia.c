@@ -13,10 +13,10 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
   if(ia->action == COURIR)
     ia->action=IDLE;
  // verifier qu'il ne sort pas du terrain
-  if(j1->direction==droite && ( (j1->hitbox.x) < ia->position.x) && ia->action==IDLE){
+  if(j1->direction==droite && ( (j1->hitbox.x + j1->hitbox.w ) < ia->hitbox.x ) && ia->action==IDLE){
     ia->position.x -= VITESSE;
 		ia->action=COURIR;
-  }else if(j1->direction==gauche && ( j1->hitbox.x > ia->position.x) && ia->action==IDLE){
+  }else if(j1->direction==gauche && ( j1->hitbox.x > ia->hitbox.x + ia->hitbox.w) && ia->action==IDLE){
     ia->position.x += VITESSE;
 		ia->action=COURIR;
   }else if(r==1 && ia->action==IDLE){
