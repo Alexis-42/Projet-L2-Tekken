@@ -74,6 +74,11 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
 				}
 				if(j2->perso.frame==0 && j2->action==IDLE){
 					switch (event->key.keysym.sym) {
+						case SDLK_KP_1:
+							if(!(event->key.repeat)){
+								j2->action=PIED;
+							}
+							break;
 						case SDLK_KP_2:
 							if(!(event->key.repeat)){
 								j2->action=POING;

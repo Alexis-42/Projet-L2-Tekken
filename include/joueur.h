@@ -22,7 +22,6 @@ typedef struct {
 	SDL_Rect hitbox_coup; //Hitbox pour la portée des coups de poing
   SDL_Rect hitbox_pied; //Hitbox pour la portée des coups de pieds
 	SDL_Texture * texture;
-  char * nom;
 } Joueur;
 
 bool estTropHaut(Joueur * joueur);
@@ -31,6 +30,6 @@ void direction(Joueur * j1, Joueur * j2);
 void hitbox(Joueur * joueur, SDL_Texture * texture,int coup);
 int checkPerdu(Joueur * j1, Joueur * j2);
 bool checkCollisions(Joueur * j1, Joueur * j2);
-void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * texture, Direction direction);
+void initJoueur(Joueur * joueur, float posX, SDL_Texture * texture, Direction direction);
 void initPerso(Joueur * j, int i);
 #endif

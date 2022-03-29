@@ -11,6 +11,11 @@
 #include "../include/animations.h"
 #include "../include/map.h"
 
+extern char *text;
+extern char *composition;
+extern Sint32 cursor;
+extern Sint32 selection_len;
+
 void aff_menu_selection(int carre,float pos_x){}
 
   SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, float x, float y, float w, float h){
@@ -83,8 +88,6 @@ void menu_selection(int drip, int ia){
 //fond des fonds d écran en preview
   SDL_Rect rect_bg_map_fond;
   SDL_Texture * texture_fond_bg_preview = creat_texture_rect("res/carre_perso.png",&rect_bg_map_fond, renderer,ecran.w/4.0-10.0, 250.0/1080.0*(ecran.h/4.5)-10.0, ecran.w/2.0+20.0, ecran.w/5.0+20.0);
-
-
 
   //preparation image des personnages
   //image de shrek
@@ -183,8 +186,6 @@ void menu_selection(int drip, int ia){
   rect_bg_map.y = 250/1080.0*(ecran.h/4.5);
   rect_bg_map.w = ecran.w/2;
   rect_bg_map.h = ecran.w/5.0;
-
-
 
   SDL_Rect rect_bouton_gauche;
   SDL_Texture * texture_bouton_gauche = creat_texture_rect("res/bouton_gauche.png", &rect_bouton_gauche, renderer, (rect_bg_map.x-ecran.w/14.0)-(ecran.w/100), 700.0/1080.0*(ecran.h/4.5), ecran.w/14.0, ecran.w/14.0);

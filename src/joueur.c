@@ -85,11 +85,10 @@ bool checkCollisions(Joueur * j1, Joueur * j2){
 	return collision==SDL_TRUE;
 }
 
-void initJoueur(Joueur * joueur, float posX, char * pseudo, SDL_Texture * texture, Direction direction){
+void initJoueur(Joueur * joueur, float posX, SDL_Texture * texture, Direction direction){
   joueur->vie=100;
   joueur->action=IDLE;
   joueur->sauter=false;
-  joueur->nom=pseudo;
   joueur->texture=texture;
   joueur->direction=direction;
   joueur->position.x=(posX/1280.0)*ecran.w;

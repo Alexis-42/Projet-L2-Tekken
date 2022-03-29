@@ -30,7 +30,6 @@ void initPerso(Joueur * j, int i){
 			j->perso.taille_perso.w=470.0*j->perso.taille_perso.mult;
 			j->perso.taille_perso.h=300.0*j->perso.taille_perso.mult;
 
-
 			j->perso.taille_hitbox.w=180*j->perso.taille_perso.mult;
 			j->perso.taille_hitbox.h=j->perso.taille_perso.h*j->perso.taille_perso.mult;
 

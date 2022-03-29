@@ -19,14 +19,14 @@
 #include "../include/options.h"
 
 int sec_deb_combat, temps_combat, ancien_temps=-1, temps_deb_pause, temps_fin_pause, temps_pause;
-bool quit=false;
+bool quit;
 bool pause=false;
 SDL_DisplayMode ecran;
 int flag_perdu=0;
 int numRound=0;
+SDL_Color blanc = {255, 255, 255};
 
 void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * font){
-  SDL_Color blanc = {255, 255, 255};
   SDL_Texture * texture = NULL;
   SDL_Rect rect;
   char texte[50];
@@ -38,8 +38,8 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
     snprintf(texte, sizeof(texte), "%s gagne le round %d !", joueurGagnant->perso.nom, numRound);
     
     flag_perdu=0;
-    initJoueur(joueurGagnant, 100.0, joueurGagnant->nom, joueurGagnant->texture, gauche);
-    initJoueur(joueurPerdant, 600.0, joueurPerdant->nom, joueurPerdant->texture, droite);
+    initJoueur(joueurGagnant, 100.0, joueurGagnant->texture, gauche);
+    initJoueur(joueurPerdant, 600.0, joueurPerdant->texture, droite);
     creerBouton(font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
     SDL_RenderFillRect(renderer, NULL);
     SDL_RenderCopy(renderer, texture, NULL, &rect);
@@ -62,6 +62,7 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
 }
 
 void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
+  quit=false;
   srand(time(NULL));
   temps_combat = 0;
   sec_deb_combat = 0;
@@ -83,15 +84,15 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   SDL_Texture * texture_nomj1 = NULL;
   SDL_Texture * texture_nomj2 = NULL;
   SDL_Texture * texture_temps = NULL;
-
+  SDL_Texture * j1Txt_texture = NULL, * j2Txt_texture = NULL;
   SDL_Rect srcBg, dstBg, rect_sprite_pv_j1, rect_sprite_pv_j2,rect_nom_j1, rect_nom_j2,rect_temps;
+  SDL_Rect j1Txt_rect, j2Txt_rect; //Rectangles des textes J1 et J2 au dessus des joueurs
 
   texture_hitbox_coupj1 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj1);
   texture_hitbox_coupj2 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_coupj2);
 
   texture_hitbox_piedj1 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_piedj1);
   texture_hitbox_piedj2 = SDL_CreateTextureFromSurface(renderer, surface_hitbox_piedj2);
-
 
   char j1sprite[50], j2sprite[50];
   snprintf(j1sprite, sizeof(j1sprite), "res/sprites/%s.png", j1->perso.nom);
@@ -109,8 +110,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
   TTF_Init();
 
-  initJoueur(j1, 100.0, "Shrekleouinouin", texture_joueur1, gauche);
-  initJoueur(j2, 600.0, "PINGU", texture_joueur2, droite);
+  initJoueur(j1, 100.0, texture_joueur1, gauche);
+  initJoueur(j2, 600.0, texture_joueur2, droite);
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0); //Couleur des hitboxes
 
   init_sprite_pv(&rect_sprite_pv_j1, 1);
@@ -124,7 +125,9 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
   init_afficher_nom_joueur(j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1,1);
   init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2,2);
-  
+  creerBouton(font, "J1", blanc, &j1Txt_rect, &j1Txt_texture, 0, 0);
+  creerBouton(font, "J2", blanc, &j2Txt_rect, &j2Txt_texture, 0, 0);
+
   initPause();
 
   int sec_anim;
@@ -138,6 +141,11 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
     sec_anim = SDL_GetTicks()/75;
     jouerAnimationBackground(&srcBg, &dstBg,1);
     
+    j1Txt_rect.x = j1->hitbox.x+j1->hitbox.w/2;
+    j1Txt_rect.y = j1->position.y;
+
+    j2Txt_rect.x = j2->hitbox.x+j2->hitbox.w/2;
+    j2Txt_rect.y = j2->position.y;
 
     switch (event.type) {
       case SDL_KEYDOWN:
@@ -148,7 +156,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
             }else if(pause){
               temps_fin_pause = (SDL_GetTicks());
               temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
-              printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
+              if(debug)
+                printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
             }
               pause = !pause;
             
@@ -158,18 +167,19 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
         if(event.button.x>=btn1.x && event.button.y>=btn1.y && event.button.x<=btn1.w+btn1.x && event.button.y<=btn1.y+btn1.h && pause){
           temps_fin_pause = (SDL_GetTicks());
           temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
-          printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
+          if(debug)
+            printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
           pause = !pause;
         }
     }
 
-    
     if(!pause)
       temps_combat = SDL_GetTicks()/1000 - temps_pause;
 
 
     if(temps_combat!=tmp){
-      printf("\ntemps du jeu : %d\ttemp en tick : %d",temps_combat,SDL_GetTicks()/1000);
+      if(debug)
+        printf("\ntemps du jeu : %d\ttemp en tick : %d",temps_combat,SDL_GetTicks()/1000);
       tmp=temps_combat;
     }
 
@@ -212,6 +222,11 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
     SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
     SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
+    SDL_RenderFillRect(renderer, &j1Txt_rect);
+    SDL_RenderFillRect(renderer, &j2Txt_rect);
+
+    SDL_RenderCopy(renderer, j1Txt_texture, NULL, &j1Txt_rect);
+    SDL_RenderCopy(renderer, j2Txt_texture, NULL, &j2Txt_rect);
 
     checkmort(j1,j2);
 
@@ -247,6 +262,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   SDL_DestroyTexture(tex_menu_Principal);
   SDL_DestroyTexture(texture_joueur1);
   SDL_DestroyTexture(texture_joueur2);
+  SDL_DestroyTexture(j1Txt_texture);
+  SDL_DestroyTexture(j2Txt_texture);
   SDL_FreeSurface(sprite_barre_de_vie);
   SDL_FreeSurface(surface_hitbox_coupj1);
   SDL_FreeSurface(surface_hitbox_coupj2);
