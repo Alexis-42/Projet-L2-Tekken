@@ -32,11 +32,10 @@ void sauvPreferences(FILE * fichier){
 }
 
 void chargerPreferences(FILE * fichier){
-  char * nothing = NULL;
-  fscanf(fichier, "%s:%d", nothing, &difficulte);
-  fscanf(fichier, "%s:%d", nothing, &debug);
-  fscanf(fichier, "%s:%d", nothing, &modeAffichage);
-  fscanf(fichier, "%s:%d", nothing, &nbreRoundsMax);
+  fscanf(fichier, "difficulte:%d", &difficulte);
+  fscanf(fichier, "debug:%d", &debug);
+  fscanf(fichier, "mode:%d", &modeAffichage);
+  fscanf(fichier, "nbrounds:%d", &nbreRoundsMax);
 }
 
 int getSelection3(int x_button, int y_button){
@@ -86,6 +85,7 @@ int getSelection3(int x_button, int y_button){
       printf("%s\n", pref_path);
 
     if(!(fichier_prefs = fopen(pref_path, "r"))){
+      fclose(fichier_prefs);
       fichier_prefs = fopen(pref_path, "w");
       sauvPreferences(fichier_prefs);
       printf("Fichier créé !");
