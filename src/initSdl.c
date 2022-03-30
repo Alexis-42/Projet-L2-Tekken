@@ -151,7 +151,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   initPause();
 
   int sec_anim;
-  sec_deb_combat = SDL_GetTicks();
+  sec_deb_combat = SDL_GetTicks()/1000;
   int tmp=-1;
 
   while (!quit) {
@@ -194,7 +194,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
     }
 
     if(!pause)
-      temps_combat = SDL_GetTicks()/1000 - temps_pause;
+      temps_combat = SDL_GetTicks()/1000 - temps_pause - sec_deb_combat;
 
 
     if(temps_combat!=tmp){
@@ -293,4 +293,9 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   TTF_Quit();
   IMG_Quit();
   SDL_Quit();
+  if(sortie==2){
+    lancerMenu(MENU_PRINCIPAL,drip,ia);
+  }else if(sortie == 3){
+    lancerMenu(MENU_OPTIONS,drip,ia);
+  }
 }

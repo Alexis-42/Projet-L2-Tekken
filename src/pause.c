@@ -56,8 +56,8 @@ void selectionPause(SDL_Event event, int drip, int ia){
           pause = false;
       } else if(sortie==2){
          quitterr();
-         lancerMenu(MENU_PRINCIPAL,drip,ia);
       }else if(sortie==3){
+        quitterr();
       } else if(sortie==4) {
         quitterr();
       };
