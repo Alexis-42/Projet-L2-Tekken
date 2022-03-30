@@ -1,5 +1,6 @@
 /**
  * @file gui.c
+ * @author Charly.P Alexis.G Léo.N
  * @brief Fonctions relatives au gui ( Graphical User Interface )
  * @date 2022-03-30
  * 
