@@ -31,7 +31,8 @@ debug: ${PROG}
 # compile la doc
 docs:
 	doxygen ./Doxyfile
-
+	firefox doc/html/index.html
+	
 # efface les .o et le programme
 clean:
 	rm -f ${PROG}
