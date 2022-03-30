@@ -1,0 +1,138 @@
+\hypertarget{animations_8c}{}\doxysection{Référence du fichier src/animations.c}
+\label{animations_8c}\index{src/animations.c@{src/animations.c}}
+
+
+Fonctions qui sont en relation avec les variables d\textquotesingle{}animations.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/animations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/joueur.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/jeu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/personnages.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/map.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{animations_8c_a1fffc0594d93a061f2f01d443d2a43a0}{render\+Animation}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur)
+\begin{DoxyCompactList}\small\item\em Anime un joueur grâce à ses données dans la structure qui lui correspond. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{animations_8c_a8b508aa5642eb3f675fc6414a5f5423c}{attaquer}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$j\+Attaquant, \mbox{\hyperlink{structJoueur}{Joueur}} $\ast$j2)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de voir si un joueur va mettre des dégats ( en fonction du coup donné ) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{animations_8c_a1b58c1a6c4b706b99758e73c76907baa}{jouer\+Animation}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur, int seconds, \mbox{\hyperlink{structJoueur}{Joueur}} $\ast$j2)
+\item 
+void \mbox{\hyperlink{animations_8c_a84bb6dd747576fd0d752b9eca7c20164}{jouer\+Animation\+Continu}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur, int seconds)
+\item 
+void \mbox{\hyperlink{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}{jouer\+Animation\+Background}} (SDL\+\_\+\+Rect $\ast$src\+Bg, SDL\+\_\+\+Rect $\ast$dst\+Bg, int flag\+\_\+bg)
+\begin{DoxyCompactList}\small\item\em Initialise les valeurs des rectangles afin d\textquotesingle{}animer un fond ( en mode preview ou en background ) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}\label{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}} 
+SDL\+\_\+\+Display\+Mode {\bfseries ecran}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fonctions qui sont en relation avec les variables d\textquotesingle{}animations. 
+
+\begin{DoxyAuthor}{Auteur}
+Charly.\+P Alexis.\+G Léo.\+N 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/03-\/22
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{animations_8c_a8b508aa5642eb3f675fc6414a5f5423c}\label{animations_8c_a8b508aa5642eb3f675fc6414a5f5423c}} 
+\index{animations.c@{animations.c}!attaquer@{attaquer}}
+\index{attaquer@{attaquer}!animations.c@{animations.c}}
+\doxysubsubsection{\texorpdfstring{attaquer()}{attaquer()}}
+{\footnotesize\ttfamily void attaquer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{j\+Attaquant,  }\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{j2 }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet de voir si un joueur va mettre des dégats ( en fonction du coup donné ) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em j\+Attaquant} & \mbox{\hyperlink{structJoueur}{Joueur}} qui attaque \\
+\hline
+{\em j2} & \mbox{\hyperlink{structJoueur}{Joueur}} attaqué \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{animations_8c_a1b58c1a6c4b706b99758e73c76907baa}\label{animations_8c_a1b58c1a6c4b706b99758e73c76907baa}} 
+\index{animations.c@{animations.c}!jouerAnimation@{jouerAnimation}}
+\index{jouerAnimation@{jouerAnimation}!animations.c@{animations.c}}
+\doxysubsubsection{\texorpdfstring{jouerAnimation()}{jouerAnimation()}}
+{\footnotesize\ttfamily void jouer\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur,  }\item[{int}]{seconds,  }\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{j2 }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \\
+\hline
+{\em seconds} & \\
+\hline
+{\em j2} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}\label{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}} 
+\index{animations.c@{animations.c}!jouerAnimationBackground@{jouerAnimationBackground}}
+\index{jouerAnimationBackground@{jouerAnimationBackground}!animations.c@{animations.c}}
+\doxysubsubsection{\texorpdfstring{jouerAnimationBackground()}{jouerAnimationBackground()}}
+{\footnotesize\ttfamily void jouer\+Animation\+Background (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect $\ast$}]{src\+Bg,  }\item[{SDL\+\_\+\+Rect $\ast$}]{dst\+Bg,  }\item[{int}]{flag\+\_\+bg }\end{DoxyParamCaption})}
+
+
+
+Initialise les valeurs des rectangles afin d\textquotesingle{}animer un fond ( en mode preview ou en background ) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em src\+Bg} & Rectangle qui va être utilisé pour lire une partie de sprite ( chargée dans une texture ) \\
+\hline
+{\em dst\+Bg} & Rectangle d\textquotesingle{}affichage sur l\textquotesingle{}écran \\
+\hline
+{\em flag\+\_\+bg} & \begin{DoxyItemize}
+\item = 1 si on veut animer un background \item = 2 si on veut animer une preview ( menu selection ) \end{DoxyItemize}
+\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{animations_8c_a84bb6dd747576fd0d752b9eca7c20164}\label{animations_8c_a84bb6dd747576fd0d752b9eca7c20164}} 
+\index{animations.c@{animations.c}!jouerAnimationContinu@{jouerAnimationContinu}}
+\index{jouerAnimationContinu@{jouerAnimationContinu}!animations.c@{animations.c}}
+\doxysubsubsection{\texorpdfstring{jouerAnimationContinu()}{jouerAnimationContinu()}}
+{\footnotesize\ttfamily void jouer\+Animation\+Continu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur,  }\item[{int}]{seconds }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \\
+\hline
+{\em seconds} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{animations_8c_a1fffc0594d93a061f2f01d443d2a43a0}\label{animations_8c_a1fffc0594d93a061f2f01d443d2a43a0}} 
+\index{animations.c@{animations.c}!renderAnimation@{renderAnimation}}
+\index{renderAnimation@{renderAnimation}!animations.c@{animations.c}}
+\doxysubsubsection{\texorpdfstring{renderAnimation()}{renderAnimation()}}
+{\footnotesize\ttfamily void render\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur }\end{DoxyParamCaption})}
+
+
+
+Anime un joueur grâce à ses données dans la structure qui lui correspond. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \mbox{\hyperlink{structJoueur}{Joueur}} qui va etre animé dans cette frame \\
+\hline
+\end{DoxyParams}

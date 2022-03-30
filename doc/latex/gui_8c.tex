@@ -1,0 +1,146 @@
+\hypertarget{gui_8c}{}\doxysection{Référence du fichier src/gui.c}
+\label{gui_8c}\index{src/gui.c@{src/gui.c}}
+
+
+Fonctions relatives au gui ( Graphical User Interface )  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/joueur.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/jeu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/gui.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{gui_8c_a21005f9f4e2ce7597c5eb4351816d7e2}\label{gui_8c_a21005f9f4e2ce7597c5eb4351816d7e2}} 
+\#define {\bfseries OFFSET}~26
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{gui_8c_ac8021ac4429dc7f71f05fa18b0f4cd56}\label{gui_8c_ac8021ac4429dc7f71f05fa18b0f4cd56}} 
+void {\bfseries init\+\_\+gui} (SDL\+\_\+\+Texture $\ast$$\ast$texture\+\_\+carre\+\_\+jaune, SDL\+\_\+\+Texture $\ast$$\ast$texture\+\_\+carre\+\_\+rouge, SDL\+\_\+\+Surface $\ast$sprite\+\_\+barre\+\_\+de\+\_\+vie, SDL\+\_\+\+Texture $\ast$$\ast$texture\+\_\+barre\+\_\+de\+\_\+vie)
+\item 
+void \mbox{\hyperlink{gui_8c_afc2c7c624384d8a03a5bc28851911419}{init\+\_\+affichage\+\_\+temps}} (int sec\+\_\+deb\+\_\+combat, TTF\+\_\+\+Font $\ast$font, SDL\+\_\+\+Rect $\ast$rect\+\_\+sprite\+\_\+pvj1, SDL\+\_\+\+Texture $\ast$$\ast$texture, SDL\+\_\+\+Rect $\ast$rect\+\_\+temps)
+\begin{DoxyCompactList}\small\item\em Fonction qui initialise les textures qui sont en relation avec le temps. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gui_8c_a4606adf5219d797789d4976d3b18a016}{init\+\_\+sprite\+\_\+pv}} (SDL\+\_\+\+Rect $\ast$rect\+\_\+sprite\+\_\+pv, int num\+\_\+joueur)
+\begin{DoxyCompactList}\small\item\em fonction qui permet l\textquotesingle{}init d\textquotesingle{}un sprite barre de vie en fonction du joueur \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gui_8c_aa14fc4ee8f36637b70b41c9e48bd61c6}{init\+\_\+afficher\+\_\+nom\+\_\+joueur}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur, TTF\+\_\+\+Font $\ast$font, SDL\+\_\+\+Rect $\ast$rect\+\_\+sprite\+\_\+pv, SDL\+\_\+\+Rect $\ast$rect\+\_\+nom\+\_\+joueur, SDL\+\_\+\+Texture $\ast$$\ast$texture, int num\+\_\+joueur)
+\begin{DoxyCompactList}\small\item\em Initialise les textures et rectangle qui sont en relation avec l\textquotesingle{}affichage du nom des joueurs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gui_8c_a377bcad63f823a03660d512263dfb739}{barre\+\_\+de\+\_\+vie}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur, SDL\+\_\+\+Rect $\ast$rect\+\_\+sprite\+\_\+pv, SDL\+\_\+\+Texture $\ast$texture\+\_\+barre\+\_\+de\+\_\+vie, SDL\+\_\+\+Texture $\ast$texture\+\_\+carre\+\_\+rouge, SDL\+\_\+\+Texture $\ast$texture\+\_\+carre\+\_\+jaune, TTF\+\_\+\+Font $\ast$font)
+\begin{DoxyCompactList}\small\item\em Fonction à appeler pour afficher les barres de vies apres l\textquotesingle{}init ( à utiliser pour redessiner la barre à chaque appel ) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fonctions relatives au gui ( Graphical User Interface ) 
+
+\begin{DoxyAuthor}{Auteur}
+Charly.\+P Alexis.\+G Léo.\+N 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2022-\/03-\/30
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{gui_8c_a377bcad63f823a03660d512263dfb739}\label{gui_8c_a377bcad63f823a03660d512263dfb739}} 
+\index{gui.c@{gui.c}!barre\_de\_vie@{barre\_de\_vie}}
+\index{barre\_de\_vie@{barre\_de\_vie}!gui.c@{gui.c}}
+\doxysubsubsection{\texorpdfstring{barre\_de\_vie()}{barre\_de\_vie()}}
+{\footnotesize\ttfamily void barre\+\_\+de\+\_\+vie (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+sprite\+\_\+pv,  }\item[{SDL\+\_\+\+Texture $\ast$}]{texture\+\_\+barre\+\_\+de\+\_\+vie,  }\item[{SDL\+\_\+\+Texture $\ast$}]{texture\+\_\+carre\+\_\+rouge,  }\item[{SDL\+\_\+\+Texture $\ast$}]{texture\+\_\+carre\+\_\+jaune,  }\item[{TTF\+\_\+\+Font $\ast$}]{font }\end{DoxyParamCaption})}
+
+
+
+Fonction à appeler pour afficher les barres de vies apres l\textquotesingle{}init ( à utiliser pour redessiner la barre à chaque appel ) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \mbox{\hyperlink{structJoueur}{Joueur}} auquel on va afficher le nom \\
+\hline
+{\em rect\+\_\+sprite\+\_\+pv} & Rectangle de la partie grise de la barre de vie \\
+\hline
+{\em texture\+\_\+barre\+\_\+de\+\_\+vie} & Texture de la partie grise de la barre de vie \\
+\hline
+{\em texture\+\_\+carre\+\_\+rouge} & Texture du carré rouge \\
+\hline
+{\em texture\+\_\+carre\+\_\+jaune} & Texture du carré jaune \\
+\hline
+{\em font} & Font à utiliser \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{gui_8c_afc2c7c624384d8a03a5bc28851911419}\label{gui_8c_afc2c7c624384d8a03a5bc28851911419}} 
+\index{gui.c@{gui.c}!init\_affichage\_temps@{init\_affichage\_temps}}
+\index{init\_affichage\_temps@{init\_affichage\_temps}!gui.c@{gui.c}}
+\doxysubsubsection{\texorpdfstring{init\_affichage\_temps()}{init\_affichage\_temps()}}
+{\footnotesize\ttfamily void init\+\_\+affichage\+\_\+temps (\begin{DoxyParamCaption}\item[{int}]{sec\+\_\+deb\+\_\+combat,  }\item[{TTF\+\_\+\+Font $\ast$}]{font,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+sprite\+\_\+pvj1,  }\item[{SDL\+\_\+\+Texture $\ast$$\ast$}]{texture,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+temps }\end{DoxyParamCaption})}
+
+
+
+Fonction qui initialise les textures qui sont en relation avec le temps. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em sec\+\_\+deb\+\_\+combat} & Le temps actuel du combat \\
+\hline
+{\em font} & La font que l\textquotesingle{}on veut \\
+\hline
+{\em rect\+\_\+sprite\+\_\+pvj1} & Rectangle qui sera utilisé pour afficher la vie du joueur \\
+\hline
+{\em texture} & texture à entrer afin de la créer \\
+\hline
+{\em rect\+\_\+temps} & Rectangle qui sera utilisé pour afficher le temps \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{gui_8c_aa14fc4ee8f36637b70b41c9e48bd61c6}\label{gui_8c_aa14fc4ee8f36637b70b41c9e48bd61c6}} 
+\index{gui.c@{gui.c}!init\_afficher\_nom\_joueur@{init\_afficher\_nom\_joueur}}
+\index{init\_afficher\_nom\_joueur@{init\_afficher\_nom\_joueur}!gui.c@{gui.c}}
+\doxysubsubsection{\texorpdfstring{init\_afficher\_nom\_joueur()}{init\_afficher\_nom\_joueur()}}
+{\footnotesize\ttfamily void init\+\_\+afficher\+\_\+nom\+\_\+joueur (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur,  }\item[{TTF\+\_\+\+Font $\ast$}]{font,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+sprite\+\_\+pv,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+nom\+\_\+joueur,  }\item[{SDL\+\_\+\+Texture $\ast$$\ast$}]{texture,  }\item[{int}]{num\+\_\+joueur }\end{DoxyParamCaption})}
+
+
+
+Initialise les textures et rectangle qui sont en relation avec l\textquotesingle{}affichage du nom des joueurs. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em joueur} & \mbox{\hyperlink{structJoueur}{Joueur}} auquel on va afficher le nom \\
+\hline
+{\em font} & Font à utiliser \\
+\hline
+{\em rect\+\_\+sprite\+\_\+pv} & Rectangle de la barre de vie afin d\textquotesingle{}avoir sa position \\
+\hline
+{\em rect\+\_\+nom\+\_\+joueur} & Rectangle dans lequel on va ecrire le nom du joueur ( en dessous de sa barre de vie ) \\
+\hline
+{\em texture} & Texture à initialiser \\
+\hline
+{\em num\+\_\+joueur} & Numero du joueur \+: \begin{DoxyItemize}
+\item 1 pour j1 \item 2 pour j2 \end{DoxyItemize}
+\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{gui_8c_a4606adf5219d797789d4976d3b18a016}\label{gui_8c_a4606adf5219d797789d4976d3b18a016}} 
+\index{gui.c@{gui.c}!init\_sprite\_pv@{init\_sprite\_pv}}
+\index{init\_sprite\_pv@{init\_sprite\_pv}!gui.c@{gui.c}}
+\doxysubsubsection{\texorpdfstring{init\_sprite\_pv()}{init\_sprite\_pv()}}
+{\footnotesize\ttfamily void init\+\_\+sprite\+\_\+pv (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+sprite\+\_\+pv,  }\item[{int}]{num\+\_\+joueur }\end{DoxyParamCaption})}
+
+
+
+fonction qui permet l\textquotesingle{}init d\textquotesingle{}un sprite barre de vie en fonction du joueur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em rect\+\_\+sprite\+\_\+pv} & Rectangle à initisialiser \\
+\hline
+{\em num\+\_\+joueur} & Numero du joueur \+: \begin{DoxyItemize}
+\item 1 pour j1 \item 2 pour j2 \end{DoxyItemize}
+\\
+\hline
+\end{DoxyParams}

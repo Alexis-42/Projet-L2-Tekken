@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet L2 Tekken:  Fichier source de include/gui.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet L2 Tekken
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('gui_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">gui.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;../include/joueur.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef GUI_H_INCLUDED__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define GUI_H_INCLUDED__</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8c.html#afc2c7c624384d8a03a5bc28851911419">init_affichage_temps</a>(<span class="keywordtype">int</span> sec_deb_combat, TTF_Font* font, SDL_Rect * rect_sprite_pvj1, SDL_Texture **texture,SDL_Rect * rect_temps);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8c.html#a4606adf5219d797789d4976d3b18a016">init_sprite_pv</a>(SDL_Rect * rect_sprite_pv,<span class="keywordtype">int</span> num_joueur);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8c.html#aa14fc4ee8f36637b70b41c9e48bd61c6">init_afficher_nom_joueur</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur, TTF_Font* font, SDL_Rect * rect_sprite_pv, SDL_Rect * rect_nom_joueur, SDL_Texture ** texture, <span class="keywordtype">int</span> num_joueur);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8c.html#a377bcad63f823a03660d512263dfb739">barre_de_vie</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * texture_barre_de_vie, SDL_Texture * texture_carre_rouge, SDL_Texture * texture_carre_jaune, TTF_Font* font);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> init_gui(SDL_Texture ** texture_carre_jaune, SDL_Texture ** texture_carre_rouge, SDL_Surface * sprite_barre_de_vie, SDL_Texture ** texture_barre_de_vie);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="agui_8c_html_a377bcad63f823a03660d512263dfb739"><div class="ttname"><a href="gui_8c.html#a377bcad63f823a03660d512263dfb739">barre_de_vie</a></div><div class="ttdeci">void barre_de_vie(Joueur *joueur, SDL_Rect *rect_sprite_pv, SDL_Texture *texture_barre_de_vie, SDL_Texture *texture_carre_rouge, SDL_Texture *texture_carre_jaune, TTF_Font *font)</div><div class="ttdoc">Fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barr...</div><div class="ttdef"><b>Definition:</b> gui.c:112</div></div>
+<div class="ttc" id="agui_8c_html_a4606adf5219d797789d4976d3b18a016"><div class="ttname"><a href="gui_8c.html#a4606adf5219d797789d4976d3b18a016">init_sprite_pv</a></div><div class="ttdeci">void init_sprite_pv(SDL_Rect *rect_sprite_pv, int num_joueur)</div><div class="ttdoc">fonction qui permet l'init d'un sprite barre de vie en fonction du joueur</div><div class="ttdef"><b>Definition:</b> gui.c:63</div></div>
+<div class="ttc" id="agui_8c_html_aa14fc4ee8f36637b70b41c9e48bd61c6"><div class="ttname"><a href="gui_8c.html#aa14fc4ee8f36637b70b41c9e48bd61c6">init_afficher_nom_joueur</a></div><div class="ttdeci">void init_afficher_nom_joueur(Joueur *joueur, TTF_Font *font, SDL_Rect *rect_sprite_pv, SDL_Rect *rect_nom_joueur, SDL_Texture **texture, int num_joueur)</div><div class="ttdoc">Initialise les textures et rectangle qui sont en relation avec l'affichage du nom des joueurs.</div><div class="ttdef"><b>Definition:</b> gui.c:84</div></div>
+<div class="ttc" id="agui_8c_html_afc2c7c624384d8a03a5bc28851911419"><div class="ttname"><a href="gui_8c.html#afc2c7c624384d8a03a5bc28851911419">init_affichage_temps</a></div><div class="ttdeci">void init_affichage_temps(int sec_deb_combat, TTF_Font *font, SDL_Rect *rect_sprite_pvj1, SDL_Texture **texture, SDL_Rect *rect_temps)</div><div class="ttdoc">Fonction qui initialise les textures qui sont en relation avec le temps.</div><div class="ttdef"><b>Definition:</b> gui.c:42</div></div>
+<div class="ttc" id="astructJoueur_html"><div class="ttname"><a href="structJoueur.html">Joueur</a></div><div class="ttdef"><b>Definition:</b> joueur.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>gui.h</b></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
+</body>
+</html>
