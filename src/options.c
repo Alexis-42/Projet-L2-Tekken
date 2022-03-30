@@ -84,8 +84,9 @@ int getSelection3(int x_button, int y_button){
     //if(debug)
       printf("%s\n", pref_path);
 
-    if(!(fichier_prefs = fopen(pref_path, "r"))){
+    if((fichier_prefs = fopen(pref_path, "r"))){
       fclose(fichier_prefs);
+    }else{
       fichier_prefs = fopen(pref_path, "w");
       sauvPreferences(fichier_prefs);
       printf("Fichier créé !");
