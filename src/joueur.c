@@ -15,7 +15,7 @@ bool estTropHaut(Joueur * joueur){
 }
 
 bool estAuSol(Joueur * joueur){
-  return joueur->position.y>=((spawnY - joueur->perso.taille_perso.h )/1080.0)*ecran.h;;
+  return joueur->position.y>=(((spawnY-2) - joueur->perso.taille_perso.h )/1080.0)*ecran.h;;
 }
 
 void direction(Joueur * j1, Joueur * j2){
