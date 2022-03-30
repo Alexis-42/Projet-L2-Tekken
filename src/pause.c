@@ -17,7 +17,6 @@ void renderPause(){
   SDL_RenderCopy(renderer, texBtn1, NULL, &btn1);
   SDL_RenderCopy(renderer, texBtn2, NULL, &btn2);
   SDL_RenderCopy(renderer, texBtn3, NULL, &btn3);
-  SDL_RenderCopy(renderer, texBtn4, NULL, &btn4);
 }
 
 int getSelection2(int x_button, int y_button){
@@ -27,8 +26,7 @@ int getSelection2(int x_button, int y_button){
     return 2;
   else if(x_button>btn3.x && y_button>btn3.y && x_button<btn3.x+600.0 && y_button<btn3.y+50.0)
     return 3;
-  else if(x_button>btn4.x && y_button>btn4.y && x_button<btn4.x+600.0 && y_button<btn4.y+50.0)
-    return 4;
+
 
   return 0;
 }
@@ -58,9 +56,7 @@ void selectionPause(SDL_Event event, int drip, int ia){
          quitterr();
       }else if(sortie==3){
         quitterr();
-      } else if(sortie==4) {
-        quitterr();
-      };
+      }
 }
 
 void initPause(){
@@ -82,6 +78,5 @@ void initPause(){
 
   creerBouton(font, "Retour au combat", ColorWhite, &btn1, &texBtn1, POSX_TEXTE/1920.0*ecran.w, 300/1920.0*ecran.w);
   creerBouton(font, "Retour au menu", ColorWhite, &btn2, &texBtn2, POSX_TEXTE/1920.0*ecran.w, 400/1920.0*ecran.w);
-  creerBouton(font, "Options", ColorWhite, &btn3, &texBtn3, POSX_TEXTE/1920.0*ecran.w, 500/1920.0*ecran.w);
-  creerBouton(font, "Quitter", ColorWhite, &btn4, &texBtn4, POSX_TEXTE/1920.0*ecran.w, 600/1920.0*ecran.w);
+  creerBouton(font, "Quitter", ColorWhite, &btn3, &texBtn3, POSX_TEXTE/1920.0*ecran.w, 500/1920.0*ecran.w);
 }

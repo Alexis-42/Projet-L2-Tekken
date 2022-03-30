@@ -14,7 +14,7 @@ void lancerMenu(int menu, int drip, int ia){
   switch (menu) {
     case MENU_PRINCIPAL: menu_principal(drip); break;
     case MENU_SELECTION: menu_selection(drip,ia); break;
-    case MENU_OPTIONS: menu_option(); break;
+    case MENU_OPTIONS: menu_option(drip); break;
   }
 }
 

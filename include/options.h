@@ -11,7 +11,7 @@ extern int modeAffichage;
 extern int nbreRoundsMax;
 
 void renderMenu2();
-void menu_option();
+void menu_option(int drip);
 
 
 #endif

@@ -62,7 +62,7 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
     SDL_Delay(5000);
     numRound=0;
     flag_perdu=0;
-    lancerMenu(MENU_PRINCIPAL, 0, 0);
+    sortie=2;
     quit=true;
   }
 
@@ -153,7 +153,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   int sec_anim;
   sec_deb_combat = SDL_GetTicks()/1000;
   int tmp=-1;
-
+//boucle du jeu
   while (!quit) {
     SDL_Event event;
 	  SDL_PollEvent(&event);
@@ -198,8 +198,10 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
 
     if(temps_combat!=tmp){
-      if(debug)
+      if(debug){
         printf("\ntemps du jeu : %d\ttemp en tick : %d",temps_combat,SDL_GetTicks()/1000);
+        printf("\npoint de vie j1 : %d\tpoint de vie j2 : %d",j1->vie,j2->vie);
+      }
       tmp=temps_combat;
     }
 
@@ -262,11 +264,21 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
     }
 
   if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
     roundSuivant(j2, j1, font);
-    sec_deb_combat=SDL_GetTicks();
   } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
     roundSuivant(j1, j2, font);
-    sec_deb_combat=SDL_GetTicks();
+  }else if(temps_combat>=60 && j1->vie > j2->vie){
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
+  }else if(temps_combat>=60 && j2->vie>j1->vie){
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j2, j1, font);
   }
     SDL_RenderPresent(renderer);
   }
@@ -295,7 +307,5 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   SDL_Quit();
   if(sortie==2){
     lancerMenu(MENU_PRINCIPAL,drip,ia);
-  }else if(sortie == 3){
-    lancerMenu(MENU_OPTIONS,drip,ia);
   }
 }
