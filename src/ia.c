@@ -26,7 +26,7 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
     int r = rand()%2000/(difficulte+1);
     int parer = rand()%800/(difficulte+1);
 
-  if(ia->action == COURIR || ia->action==DANSE)
+  if((ia->action == COURIR  && ia->action!=DEGAT )|| (ia->action==DANSE && ia->action!=DEGAT))
     ia->action=IDLE;
  // verifier qu'il ne sort pas du terrain
   if(j1->action==DANSE && ia->action==IDLE){
@@ -40,7 +40,7 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
   }else if(peut_parer(ia, j1)){
     if(parer == 3)
       ia->action=PARER;
-  }else if((j1->action!=POING && j1->action!=PIED ) && ia->action==PARER){
+  }else if((j1->action!=POING && j1->action!=PIED ) && ia->action==PARER  && ia->action!=DEGAT){
     ia->action=IDLE;
   }else if(r==1 && ia->action==IDLE && j1->action!=PARER){
     ia->action=POING;
