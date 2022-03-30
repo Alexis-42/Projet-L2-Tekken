@@ -134,15 +134,21 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
 	}
 	/* verif touches J1 */
 	if(j1->perso.frame==0 && j1->action!=MORT){
-		if (state[SDL_SCANCODE_A]) { //recule : touche q
-			if(j1->hitbox.x>0){
-				j1->position.x -= VITESSE;
+		if (state[SDL_SCANCODE_A] ) { //recule : touche q
+			if(j1->hitbox.x>0 && (( (j1->hitbox.x > j2->hitbox.x  + j2->hitbox.w && j2->direction==droite ) || (j2->hitbox.y > (j1->hitbox.y + 0.75*j1->hitbox.h)))|| j2->direction==gauche)){
+				if(!estAuSol(j1))
+					j1->position.x -= VITESSE+1;
+				else
+					j1->position.x -= VITESSE;
 				j1->action=COURIR;
 			}
 		}
 		if (state[SDL_SCANCODE_D]){ // avance
-			if(j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w){
-				j1->position.x += VITESSE;
+			if((j1->hitbox.x<ecran.w-j1->perso.taille_hitbox.w) && (( (j1->hitbox.x + j1->hitbox.w < j2->hitbox.x  && j2->direction==gauche ) || (j2->hitbox.y > (j1->hitbox.y + 0.75*j1->hitbox.h)))|| j2->direction==droite)){
+				if(!estAuSol(j1))
+					j1->position.x += VITESSE+1;
+				else
+					j1->position.x += VITESSE;
 				j1->action=COURIR;
 			}
 		}
@@ -161,14 +167,20 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
 	/* verif touches J2 */
 		if(j2->perso.frame==0 && j2->action!=MORT){
 			if (state[SDL_SCANCODE_LEFT]) {
-				if(j2->hitbox.x>0){
-					j2->position.x -= VITESSE;
+				if(j2->hitbox.x>0 && (( (j2->hitbox.x > j1->hitbox.x  + j1->hitbox.w && j1->direction==droite ) || (j1->hitbox.y > (j2->hitbox.y + 0.75*j2->hitbox.h)))|| j1->direction==gauche)){
+					if(!estAuSol(j2))
+						j2->position.x -= VITESSE+1;
+					else
+						j2->position.x -= VITESSE;
 					j2->action=COURIR;
-				}
+					}
 			}
 			if (state[SDL_SCANCODE_RIGHT]) {
-				if(j2->hitbox.x<ecran.w-j2->perso.taille_hitbox.w){
-					j2->position.x += VITESSE;
+				if(j2->hitbox.x>0 && (( (j2->hitbox.x +  j2->hitbox.w < j1->hitbox.x && j1->direction==gauche ) || (j1->hitbox.y > (j2->hitbox.y + 0.75*j2->hitbox.h)))|| j1->direction==droite)){
+					if(!estAuSol(j1))
+						j2->position.x += VITESSE+1;
+					else
+						j2->position.x += VITESSE;
 					j2->action=COURIR;
 				}
 			}
