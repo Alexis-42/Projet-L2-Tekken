@@ -44,7 +44,7 @@ Ainsi qu'une large sélection de cartes disponibles !
 
 <h3 id="Dépendances" style="font-size:20px;">Dépendances</h3>
 
-Dépendances requises : 
+Dépendances requises dans "$HOME/SDL2" : 
   * <a href="https://www.libsdl.org/download-2.0.php">SDL2</a>
   * <a href="https://www.libsdl.org/projects/SDL_image/">SDL2Image</a>
   * <a href="https://github.com/libsdl-org/SDL_ttf">SDL2TTF</a>
@@ -72,6 +72,8 @@ Dans un terminal à l'emplacement du dossier, exécutez : ```make all```
 make jouer    -> compile et lance le jeu
 
 make docs     -> créer la doc dans le répertoire doc/html
+
+make debug    -> compile et lance le jeu avec les hitbox
 
 make all      -> compile le jeu puis le lance & créer la doc
 
