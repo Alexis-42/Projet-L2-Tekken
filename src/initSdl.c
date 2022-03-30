@@ -26,6 +26,13 @@ int flag_perdu=0;
 int numRound=0;
 SDL_Color blanc = {255, 255, 255};
 
+/**
+ * @brief Fonction permettant d'assombrir l'écran et d'annoncer le joueur gagnant
+ * 
+ * @param joueurGagnant Joueur qui à gagné le round
+ * @param joueurPerdant Joueur qui à perdu le round
+ * @param font font passée en paramètre pour afficher le nom du joueur gagnant
+ */
 void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * font){
   SDL_Texture * texture = NULL;
   SDL_Rect rect;
@@ -61,6 +68,15 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
 
 }
 
+/**
+ * @brief Fonction qui boucle tant qu'un des deux joueurs n'a pas gagné le nombre de rounds suffisant
+ * 
+ * @param j1 Structure représentant le joueur 1
+ * @param j2 Structure représentant le joueur 2
+ * @param num_map entier représentant le numéro de la map choisie
+ * @param drip entier qui vaut 1 si secret activé et 2 si mode debug activé
+ * @param ia entier qui vaut 1 si le mode ia est activé ou 0 si en multi local
+ */
 void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   quit=false;
   srand(time(NULL));
@@ -126,7 +142,11 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   init_afficher_nom_joueur(j1, font, &rect_sprite_pv_j1, &rect_nom_j1, &texture_nomj1,1);
   init_afficher_nom_joueur(j2, font, &rect_sprite_pv_j2, &rect_nom_j2, &texture_nomj2,2);
   creerBouton(font, "J1", blanc, &j1Txt_rect, &j1Txt_texture, 0, 0);
+  if(ia){
+    creerBouton(font, "IA", blanc, &j2Txt_rect, &j2Txt_texture, 0, 0);
+  }else
   creerBouton(font, "J2", blanc, &j2Txt_rect, &j2Txt_texture, 0, 0);
+  
 
   initPause();
 
