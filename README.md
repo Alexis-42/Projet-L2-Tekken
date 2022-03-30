@@ -31,14 +31,15 @@ Ainsi qu'une large sélection de cartes disponibles !
 
 <details open="close">
   <summary>Images du jeu</summary>
+  Menu Principal
+  <img src="https://i.imgur.com/qOcWqAP.png">
+  Menu Selection
+  <img src="https://i.imgur.com/V0lWfN0.png">
   Shrek vs Pingu
   <img src="https://i.imgur.com/wGNt3LI.png">
   Goku vs Mickey
   <img src="https://i.imgur.com/TKdgWhJ.png">
-  Menu Selection
-  <img src="https://i.imgur.com/V0lWfN0.png">
-  Menu Principal
-  <img src="https://i.imgur.com/qOcWqAP.png">
+
 </details>
 
 <br>
