@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
@@ -11,6 +12,8 @@
 #include "../include/options.h"
 
 bool quitter;
+char pref_path[100];
+
 SDL_Surface * image_stage_menu;
 SDL_Surface * surface_jonathan;
 SDL_Rect srcBg, dstBg;
@@ -20,6 +23,21 @@ SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4, * texBtn5, * texture_jon
 
 SDL_Rect flamme1, flamme2, flamme3, flamme4, flamme5;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4, * texFlamme5;
+
+void sauvPreferences(FILE * fichier){
+  fprintf(fichier, "difficulte:%d\n", difficulte);
+  fprintf(fichier, "debug:%d\n", debug);
+  fprintf(fichier, "mode:%d\n", modeAffichage);
+  fprintf(fichier, "nbrounds:%d\n", nbreRoundsMax);
+}
+
+void chargerPreferences(FILE * fichier){
+  char * nothing = NULL;
+  fscanf(fichier, "%s:%d", nothing, &difficulte);
+  fscanf(fichier, "%s:%d", nothing, &debug);
+  fscanf(fichier, "%s:%d", nothing, &modeAffichage);
+  fscanf(fichier, "%s:%d", nothing, &nbreRoundsMax);
+}
 
 int getSelection3(int x_button, int y_button){
   if(x_button>btn1.x && y_button>btn1.y && x_button<btn1.x+600.0 && y_button<btn1.y+100.0)
@@ -54,12 +72,29 @@ int getSelection3(int x_button, int y_button){
     SDL_RenderCopy(renderer, texBtn3, NULL, &btn3);
     SDL_RenderCopy(renderer, texBtn4, NULL, &btn4);
     SDL_RenderCopy(renderer, texBtn5, NULL, &btn5);
-
     SDL_RenderPresent(renderer);
-    
+  }
+  
+  FILE * chargerFichierPref(char * nomFichier){
+    char *base_path = SDL_GetPrefPath("ProjetL2", "Tekken");
+    if (base_path) {
+        snprintf(pref_path, sizeof(pref_path), "%s%s", base_path, nomFichier);
+    }
+
+    FILE * fichier_prefs = NULL;
+    //if(debug)
+      printf("%s\n", pref_path);
+
+    if(!(fichier_prefs = fopen(pref_path, "r"))){
+      fichier_prefs = fopen(pref_path, "w");
+      sauvPreferences(fichier_prefs);
+      printf("Fichier créé !");
+    }
+    return fichier_prefs;
   }
 
   void menu_option(int drip){
+    char difficulteTexte[50], debugTexte[50], modeTexte[50], roundsTexte[50];
     char * listeDifficultes[] = {"Punching Ball", "Facile", "Normal", "Difficile", "Cauchemard", "Dieu"};
     char * listeDebug[] = {"Desactive", "Active"};
     char * listeModes[] = {"Fenetre", "Sans bordure", "Plein ecran"};
@@ -88,19 +123,26 @@ int getSelection3(int x_button, int y_button){
           exit(EXIT_FAILURE);
     }
 
+    FILE * fichier_prefs = chargerFichierPref("options");
+
+    snprintf(difficulteTexte, sizeof(difficulteTexte), "Difficulte : %s", listeDifficultes[difficulte]);
+    snprintf(debugTexte, sizeof(debugTexte), "Debug : %s", listeDebug[debug]);
+    snprintf(modeTexte, sizeof(modeTexte), "Mode : %s", listeModes[modeAffichage]);
+    snprintf(roundsTexte, sizeof(roundsTexte), "Nombre de rounds : %d", nbreRoundsMax);
+
     //création affichage jouer en multijoueur
-    creerBouton(font, "Difficulte : ", ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
-    creerBouton(font, "Debug : ", ColorWhite, &btn2, &texBtn2, 75.0, 150.0);
-    creerBouton(font, "Mode : ", ColorWhite, &btn3, &texBtn3, 75.0, 250.0);
-    creerBouton(font, "Nombre de rounds", ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
+    creerBouton(font, difficulteTexte, ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
+    creerBouton(font, debugTexte, ColorWhite, &btn2, &texBtn2, 75.0, 150.0);
+    creerBouton(font, modeTexte, ColorWhite, &btn3, &texBtn3, 75.0, 250.0);
+    creerBouton(font, roundsTexte, ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
     creerBouton(font, "Sauvegarder et quitter", ColorWhite, &btn5, &texBtn5, 75.0, 450.0);
 
+   
     //affichage du fond d'écran apres avoir néttoyer le renderer
    	int x_button;
   	int y_button;
     quitter=false;
     int sortie=1;
-    char difficulteTexte[50], debugTexte[50], modeTexte[50], roundsTexte[50];
 
   while (!quitter) {
   	SDL_Event event;
@@ -147,7 +189,10 @@ int getSelection3(int x_button, int y_button){
                     snprintf(roundsTexte, sizeof(roundsTexte), "Nombre de rounds : %d", nbreRoundsMax);
                     creerBouton(font, roundsTexte, ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
                     break;
-            case 5: quitter=true;
+            case 5: 
+                    freopen(pref_path, "w", fichier_prefs);
+                    sauvPreferences(fichier_prefs);
+                    quitter=true;
                     sortie=5;
                     break;
           }
@@ -217,6 +262,7 @@ int getSelection3(int x_button, int y_button){
   	}
   }
     //fin du menu principal, changement de fenetre
+    fclose(fichier_prefs);
     SDL_RenderClear(renderer);
     SDL_DestroyTexture(texFlamme1);
     SDL_DestroyTexture(texFlamme2);

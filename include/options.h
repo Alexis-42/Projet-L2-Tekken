@@ -5,13 +5,15 @@
 #define BORDERLESS 1
 #define FULLSCREEN 2
 
-extern bool debug;
+extern int debug;
 extern int difficulte;
 extern int modeAffichage;
 extern int nbreRoundsMax;
 
 void renderMenu2();
-void menu_option(int drip);
-
+void menu_option();
+void sauvPreferences(FILE * fichier);
+void chargerPreferences(FILE * fichier);
+FILE * chargerFichierPref(char * nomFichier);
 
 #endif

@@ -22,7 +22,7 @@ SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4, * texture_jonathan;
 SDL_Rect flamme1, flamme2, flamme3, flamme4;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4;
 
-bool debug;
+int debug;
 int difficulte;
 int modeAffichage = BORDERLESS;
 int nbreRoundsMax;
@@ -97,7 +97,7 @@ int getSelection(int x_button, int y_button){
   }
   renderer = SDL_CreateRenderer(window, -1, 0);
 
-    chargerMap(0, renderer,1,drip);
+  chargerMap(0, renderer,1,drip);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
     initFlammes(&flamme1, &texFlamme1, 75.0, 25.0);
@@ -114,6 +114,9 @@ int getSelection(int x_button, int y_button){
           printf("\n%s\n",TTF_GetError());
           exit(EXIT_FAILURE);
     }
+
+    FILE * fichier_prefs = chargerFichierPref("options");
+    chargerPreferences(fichier_prefs);
 
     //création affichage jouer en multijoueur
     creerBouton(font, "Jouer en multijoueur", ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
