@@ -69,8 +69,8 @@ void init_afficher_nom_joueur(Joueur * joueur, TTF_Font* font, SDL_Rect * rect_s
 // fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )
 void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * texture_barre_de_vie, SDL_Texture * texture_carre_rouge, SDL_Texture * texture_carre_jaune, TTF_Font* font){
     // SDL_rect de la barre de pv en fonction des pv
-    SDL_Rect rect_pv,rect_pv_rouge;
-    //destrect pv rouge
+    SDL_Rect rect_pv,rect_pv_rouge,srcrect_pv_jaune;
+    //destrect pv jaune
     rect_pv.y = rect_sprite_pv->y;
     if (joueur->vie != 0)
       rect_pv.w = (rect_sprite_pv->w/100.0)*joueur->vie;
@@ -79,16 +79,22 @@ void barre_de_vie(Joueur * joueur, SDL_Rect * rect_sprite_pv, SDL_Texture * text
 
     rect_pv.h = rect_sprite_pv->h ;
     rect_pv.x = rect_sprite_pv->x;
-    //destrect pv jaune
+    //destrect pv rouge
     rect_pv_rouge.x = rect_sprite_pv->x;
     rect_pv_rouge.y = rect_sprite_pv->y;
     rect_pv_rouge.w = rect_sprite_pv->w;
     rect_pv_rouge.h = rect_sprite_pv->h;
 
+    //srcrect pv jaune
+    srcrect_pv_jaune.x =0;
+    srcrect_pv_jaune.y =0;
+    srcrect_pv_jaune.w =(1847/100)*joueur->vie;
+    srcrect_pv_jaune.h =161;
+
     // creation rect rouge derriere le jaune
     SDL_RenderCopy(renderer, texture_carre_rouge, NULL ,&rect_pv_rouge );
     // creation rect jaune
-    SDL_RenderCopy(renderer, texture_carre_jaune, NULL ,&rect_pv );
+    SDL_RenderCopy(renderer, texture_carre_jaune, &srcrect_pv_jaune ,&rect_pv );
     // sprite apres les rect de couleurs
     SDL_RenderCopy(renderer, texture_barre_de_vie, NULL, rect_sprite_pv);
 }
