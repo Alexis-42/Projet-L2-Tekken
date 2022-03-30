@@ -1,7 +1,7 @@
 /**
  * @file animations.c
  * @author Charly.P Alexis.G Léo.N
- * @brief Fichier contenant les fonctions en relation avec les variables d'animations
+ * @brief Fonctions qui sont en relation avec les variables d'animations
  * @version 1.0
  * @date 2022-03-22
  * 
@@ -22,11 +22,21 @@
 
 SDL_DisplayMode ecran;
 
+/**
+ * @brief Anime un joueur grâce à ses données dans la structure qui lui correspond
+ * 
+ * @param joueur Joueur qui va etre animé dans cette frame
+ */
 void renderAnimation(Joueur * joueur){
   SDL_RenderCopyEx(renderer, (joueur->texture), &(joueur->perso.srcrect), &(joueur->perso.dstrect), 0, 0, joueur->direction);
 }
 
-
+/**
+ * @brief Fonction qui permet de voir si un joueur va mettre des dégats ( en fonction du coup donné )
+ * 
+ * @param jAttaquant Joueur qui attaque
+ * @param j2 Joueur attaqué
+ */
 void attaquer(Joueur * jAttaquant, Joueur * j2){
 	if(checkCollisions(jAttaquant, j2)){
 		if(j2->action!=PARER){
@@ -39,6 +49,13 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 	}
 }
 
+/**
+ * @brief 
+ * 
+ * @param joueur 
+ * @param seconds 
+ * @param j2 
+ */
 void jouerAnimation(Joueur * joueur,int seconds,Joueur * j2){
   int posYSprite;
   int anim=joueur->action;
@@ -99,7 +116,12 @@ if((joueur->perso.seconds)<seconds){
   }
 }
 
-
+/**
+ * @brief 
+ * 
+ * @param joueur 
+ * @param seconds 
+ */
 void jouerAnimationContinu(Joueur * joueur,int seconds){
   int posYSprite;
   int anim=joueur->action;
@@ -151,7 +173,13 @@ void jouerAnimationContinu(Joueur * joueur,int seconds){
 
 
 
-
+/**
+ * @brief Initialise les valeurs des rectangles afin d'animer un fond ( en mode preview ou en background )
+ * 
+ * @param srcBg Rectangle qui va être utilisé pour lire une partie de sprite ( chargée dans une texture )
+ * @param dstBg Rectangle d'affichage sur l'écran
+ * @param flag_bg @li = 1 si on veut animer un background @li = 2 si on veut animer une preview ( menu selection )
+ */
 void jouerAnimationBackground(SDL_Rect * srcBg, SDL_Rect * dstBg,int flag_bg){
   Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 100ms)
   Uint32 sprite = seconds % nbFramesMap;
