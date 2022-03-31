@@ -16,7 +16,7 @@ bool estTropHaut(Joueur * joueur){
 }
 
 bool estAuSol(Joueur * joueur){
-  if(strcmp(joueur->perso.nom,"Mickey2")==0)
+  if(strcmp(joueur->perso.nom,"Mickey")==0)
     return joueur->position.y>=(((spawnY-2) - (joueur->perso.taille_perso.h-85* joueur->perso.taille_perso.mult) )/1080.0)*ecran.h;
   return joueur->position.y>=(((spawnY-2) - (joueur->perso.taille_perso.h) )/1080.0)*ecran.h;
 }
