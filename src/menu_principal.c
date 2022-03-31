@@ -80,8 +80,11 @@ int getSelection(int x_button, int y_button){
       printf("librairie non initialisé");
       exit(EXIT_FAILURE);
     }
+  /* On charge les options */
+  FILE * fichier_prefs = chargerFichierPref("options");
+  chargerPreferences(fichier_prefs);
 
-   SDL_Init(SDL_INIT_VIDEO);
+  SDL_Init(SDL_INIT_VIDEO);
   IMG_Init(IMG_INIT_PNG);
   SDL_GetDesktopDisplayMode(0, &ecran);
 
@@ -114,9 +117,6 @@ int getSelection(int x_button, int y_button){
           printf("\n%s\n",TTF_GetError());
           exit(EXIT_FAILURE);
     }
-
-    FILE * fichier_prefs = chargerFichierPref("options");
-    chargerPreferences(fichier_prefs);
 
     //création affichage jouer en multijoueur
     creerBouton(font, "Jouer en multijoueur", ColorWhite, &btn1, &texBtn1, 75.0, 50.0);

@@ -32,10 +32,10 @@ void sauvPreferences(FILE * fichier){
 }
 
 void chargerPreferences(FILE * fichier){
-  fscanf(fichier, "difficulte:%d", &difficulte);
-  fscanf(fichier, "debug:%d", &debug);
-  fscanf(fichier, "mode:%d", &modeAffichage);
-  fscanf(fichier, "nbrounds:%d", &nbreRoundsMax);
+  fscanf(fichier, "difficulte:%d\n", &difficulte);
+  fscanf(fichier, "debug:%d\n", &debug);
+  fscanf(fichier, "mode:%d\n", &modeAffichage);
+  fscanf(fichier, "nbrounds:%d\n", &nbreRoundsMax);
 }
 
 int getSelection3(int x_button, int y_button){
