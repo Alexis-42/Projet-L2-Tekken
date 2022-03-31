@@ -138,17 +138,17 @@ void initPerso(Joueur * j, int i){
 					j->perso.taille_perso.h=300* j->perso.taille_perso.mult;
 					
 					j->perso.taille_hitbox.w=136.6;
-					j->perso.taille_hitbox.h=j->perso.taille_perso.h-150;
+					j->perso.taille_hitbox.h=j->perso.taille_perso.h-85* j->perso.taille_perso.mult;
 
 					j->hitbox_pied.y=j->hitbox.y;
 					j->hitbox_coup.x=j->perso.taille_hitbox.w-15*j->perso.taille_perso.mult;
 					j->hitbox_coup.w=j->perso.taille_hitbox.w+30*j->perso.taille_perso.mult;
-					j->hitbox_coup.h=j->perso.taille_perso.h-150;
+					j->hitbox_coup.h=j->perso.taille_perso.h-85* j->perso.taille_perso.mult;
 
 					j->hitbox_pied.y=j->hitbox.y;
 					j->hitbox_pied.x=j->perso.taille_hitbox.w-60*j->perso.taille_perso.mult;
 					j->hitbox_pied.w=j->perso.taille_hitbox.w+120*j->perso.taille_perso.mult;
-					j->hitbox_pied.h=j->perso.taille_perso.h-150;
+					j->hitbox_pied.h=j->perso.taille_perso.h-85* j->perso.taille_perso.mult;
 
 					j->perso.hitbox_offsetX=((j->perso.taille_perso.w-j->perso.taille_hitbox.w)/2.0)*j->perso.taille_perso.mult;
 					j->perso.hitbox_offsetY=57*j->perso.taille_perso.mult;

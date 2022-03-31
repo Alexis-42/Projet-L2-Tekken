@@ -17,7 +17,7 @@ bool estTropHaut(Joueur * joueur){
 
 bool estAuSol(Joueur * joueur){
   if(strcmp(joueur->perso.nom,"Mickey2")==0)
-    return joueur->position.y>=(((spawnY-2) - (joueur->perso.taille_perso.h-150) )/1080.0)*ecran.h;
+    return joueur->position.y>=(((spawnY-2) - (joueur->perso.taille_perso.h-85* joueur->perso.taille_perso.mult) )/1080.0)*ecran.h;
   return joueur->position.y>=(((spawnY-2) - (joueur->perso.taille_perso.h) )/1080.0)*ecran.h;
 }
 
@@ -96,7 +96,7 @@ void initJoueur(Joueur * joueur, float posX, SDL_Texture * texture, Direction di
   joueur->direction=direction;
   joueur->position.x=(posX/1280.0)*ecran.w;
   if(strcmp(joueur->perso.nom,"Mickey")==0)
-    joueur->position.y= ( (spawnY - (joueur->perso.taille_perso.h-150) )/1080.0)*ecran.h;
+    joueur->position.y= ( (spawnY - (joueur->perso.taille_perso.h-(85* joueur->perso.taille_perso.mult)) )/1080.0)*ecran.h;
   else
     joueur->position.y= ( (spawnY - joueur->perso.taille_perso.h )/1080.0)*ecran.h;
   joueur->perso.frame=0;
