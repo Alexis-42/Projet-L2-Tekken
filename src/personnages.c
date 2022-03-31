@@ -26,12 +26,12 @@ void initPerso(Joueur * j, int i){
 			j->perso.nb_frame[SAUTER]=4;
 			j->perso.nb_frame[PARER]=1;
 
-			j->perso.taille_perso.mult=1.75;
+			j->perso.taille_perso.mult=1.5;
 			j->perso.taille_perso.w=470.0*j->perso.taille_perso.mult;
 			j->perso.taille_perso.h=300.0*j->perso.taille_perso.mult;
 
 			j->perso.taille_hitbox.w=180*j->perso.taille_perso.mult;
-			j->perso.taille_hitbox.h=j->perso.taille_perso.h*j->perso.taille_perso.mult;
+			j->perso.taille_hitbox.h=j->perso.taille_perso.h;
 
 			j->hitbox_pied.y=j->hitbox.y;
 			j->hitbox_coup.x=j->perso.taille_hitbox.w-15*j->perso.taille_perso.mult;
