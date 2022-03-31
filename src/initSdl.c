@@ -299,6 +299,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   SDL_FreeSurface(sprite_barre_de_vie);
   SDL_FreeSurface(surface_hitbox_coupj1);
   SDL_FreeSurface(surface_hitbox_coupj2);
+  SDL_FreeSurface(surface_hitbox_piedj1);
+  SDL_FreeSurface(surface_hitbox_piedj2);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   TTF_CloseFont(font);
