@@ -10,8 +10,6 @@
 #include "../include/jeu.h"
 #include "../include/son.h"
 
-#define VITESSE 1
-
 bool monte=false;
 
 typedef struct {
@@ -36,14 +34,14 @@ void sauter(Joueur * joueur){
 			monte=true;
 
 		if(monte==true){
-			joueur->position.y-=2;
+			joueur->position.y-=12;
 			if(estTropHaut(joueur))
           		monte=false;
 
 		}
 		if(monte==false){
 			if(!estAuSol(joueur))
-				joueur->position.y+=4;
+				joueur->position.y+=24;
 			joueur->sauter=!estAuSol(joueur);
 		}
 	}

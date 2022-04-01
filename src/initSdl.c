@@ -155,135 +155,139 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   int tmp=-1;
 //boucle du jeu
   while (!quit) {
-    SDL_Event event;
-	  SDL_PollEvent(&event);
-    
-    sec_anim = SDL_GetTicks()/75;
-    jouerAnimationBackground(&srcBg, &dstBg,1);
-    
-    j1Txt_rect.x = j1->hitbox.x+j1->hitbox.w/2;
-    j1Txt_rect.y = j1->position.y;
+    if(SDL_GetTicks()%20==0){
+      SDL_Event event;
+      SDL_PollEvent(&event);
+      
+      sec_anim = SDL_GetTicks()/75;
+      jouerAnimationBackground(&srcBg, &dstBg,1);
+      
+      j1Txt_rect.x = j1->hitbox.x+j1->hitbox.w/2;
+      j1Txt_rect.y = j1->position.y;
 
-    j2Txt_rect.x = j2->hitbox.x+j2->hitbox.w/2;
-    j2Txt_rect.y = j2->position.y;
+      j2Txt_rect.x = j2->hitbox.x+j2->hitbox.w/2;
+      j2Txt_rect.y = j2->position.y;
 
-    switch (event.type) {
-      case SDL_KEYDOWN:
-        switch (event.key.keysym.sym) {
-          case SDLK_ESCAPE:
-            if(!pause){
-              temps_deb_pause = (SDL_GetTicks());
-            }else if(pause){
-              temps_fin_pause = (SDL_GetTicks());
-              temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
-              if(debug)
-                printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
-            }
-              pause = !pause;
-            
-          break;
+      switch (event.type) {
+        case SDL_KEYDOWN:
+          switch (event.key.keysym.sym) {
+            case SDLK_ESCAPE:
+              if(!pause){
+                temps_deb_pause = (SDL_GetTicks());
+              }else if(pause){
+                temps_fin_pause = (SDL_GetTicks());
+                temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
+                if(debug)
+                  printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
+              }
+                pause = !pause;
+              
+            break;
+          }
+        case SDL_MOUSEBUTTONDOWN:
+          if(event.button.x>=btn1.x && event.button.y>=btn1.y && event.button.x<=btn1.w+btn1.x && event.button.y<=btn1.y+btn1.h && pause){
+            temps_fin_pause = (SDL_GetTicks());
+            temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
+            if(debug)
+              printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
+            pause = !pause;
+          }
+      }
+
+      if(!pause)
+        temps_combat = SDL_GetTicks()/1000 - temps_pause - sec_deb_combat;
+
+
+      if(temps_combat!=tmp){
+        if(debug){
+          printf("\ntemps du jeu : %d\ttemp en tick : %d",temps_combat,SDL_GetTicks()/1000);
+          printf("\npoint de vie j1 : %d\tpoint de vie j2 : %d",j1->vie,j2->vie);
         }
-      case SDL_MOUSEBUTTONDOWN:
-        if(event.button.x>=btn1.x && event.button.y>=btn1.y && event.button.x<=btn1.w+btn1.x && event.button.y<=btn1.y+btn1.h && pause){
-          temps_fin_pause = (SDL_GetTicks());
-          temps_pause+=(temps_fin_pause - temps_deb_pause)/1000;
-          if(debug)
-            printf("\ntemps de la pause : %d\ttemps de la pause total : %d",(temps_fin_pause - temps_deb_pause)/1000,temps_pause);
-          pause = !pause;
-        }
-    }
+        tmp=temps_combat;
+      }
 
-    if(!pause)
-      temps_combat = SDL_GetTicks()/1000 - temps_pause - sec_deb_combat;
+      sauter(j1);
+      sauter(j2);
+      jouerAnimation(j1,sec_anim,j2);
+      jouerAnimation(j2,sec_anim,j1);
 
+      if(j1->perso.frame==0){
+        jouerAnimationContinu(j1,sec_anim);
+      }
+      if(j2->perso.frame==0){
+        jouerAnimationContinu(j2,sec_anim);
+      }
 
-    if(temps_combat!=tmp){
+      flag_perdu = checkPerdu(j1, j2);
+      if(!flag_perdu)
+        SDL_RenderClear(renderer);
+      renderMap(&srcBg, &dstBg, renderer);
+
+      hitbox(j1, texture_hitbox_coupj1,1);
+      hitbox(j2, texture_hitbox_coupj2,1);
+      hitbox(j1, texture_hitbox_piedj1,0);
+      hitbox(j2, texture_hitbox_piedj2,0);
+
       if(debug){
-        printf("\ntemps du jeu : %d\ttemp en tick : %d",temps_combat,SDL_GetTicks()/1000);
-        printf("\npoint de vie j1 : %d\tpoint de vie j2 : %d",j1->vie,j2->vie);
+        SDL_RenderFillRect(renderer, &(j1->hitbox));
+        SDL_RenderFillRect(renderer, &(j2->hitbox));
       }
-      tmp=temps_combat;
-    }
+      renderAnimation(j1);
+      renderAnimation(j2);
+      barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, font);
+      barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, font);
+      
+      init_affichage_temps(temps_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
 
-    sauter(j1);
-    sauter(j2);
-    jouerAnimation(j1,sec_anim,j2);
-    jouerAnimation(j2,sec_anim,j1);
+      SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
 
-    if(j1->perso.frame==0){
-      jouerAnimationContinu(j1,sec_anim);
-    }
-    if(j2->perso.frame==0){
-      jouerAnimationContinu(j2,sec_anim);
-    }
+      SDL_DestroyTexture(texture_temps);
 
-    flag_perdu = checkPerdu(j1, j2);
-    if(!flag_perdu)
-      SDL_RenderClear(renderer);
-    renderMap(&srcBg, &dstBg, renderer);
+      SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
+      SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
+      SDL_RenderFillRect(renderer, &j1Txt_rect);
+      SDL_RenderFillRect(renderer, &j2Txt_rect);
 
-    hitbox(j1, texture_hitbox_coupj1,1);
-	  hitbox(j2, texture_hitbox_coupj2,1);
-    hitbox(j1, texture_hitbox_piedj1,0);
-    hitbox(j2, texture_hitbox_piedj2,0);
+      SDL_RenderCopy(renderer, j1Txt_texture, NULL, &j1Txt_rect);
+      SDL_RenderCopy(renderer, j2Txt_texture, NULL, &j2Txt_rect);
 
-    if(debug){
-      SDL_RenderFillRect(renderer, &(j1->hitbox));
-      SDL_RenderFillRect(renderer, &(j2->hitbox));
-    }
-    renderAnimation(j1);
-    renderAnimation(j2);
-    barre_de_vie(j1, &rect_sprite_pv_j1, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, font);
-    barre_de_vie(j2, &rect_sprite_pv_j2, texture_barre_de_vie, texture_carre_rouge, texture_carre_jaune, font);
-    
-    init_affichage_temps(temps_combat, font, &rect_sprite_pv_j1, &texture_temps, &rect_temps);
+      checkmort(j1,j2);
 
-    SDL_RenderCopy(renderer, texture_temps, NULL ,&rect_temps);
-
-    SDL_DestroyTexture(texture_temps);
-
-    SDL_RenderCopy(renderer, texture_nomj1, NULL ,&rect_nom_j1);
-    SDL_RenderCopy(renderer, texture_nomj2, NULL ,&rect_nom_j2);
-    SDL_RenderFillRect(renderer, &j1Txt_rect);
-    SDL_RenderFillRect(renderer, &j2Txt_rect);
-
-    SDL_RenderCopy(renderer, j1Txt_texture, NULL, &j1Txt_rect);
-    SDL_RenderCopy(renderer, j2Txt_texture, NULL, &j2Txt_rect);
-
-    checkmort(j1,j2);
-
-    if(!pause){
-      deplacements(j1, j2, &event, ia);
-      if(ia){
-        deplacements_ia(j2,j1);
+      if(!pause){
+        deplacements(j1, j2, &event, ia);
+        if(ia){
+          deplacements_ia(j2,j1);
+        }
       }
-    }
-    else {
-      selectionPause(event, drip,ia);
-      renderPause();
-    }
+      else {
+        selectionPause(event, drip,ia);
+        renderPause();
+      }
 
-  if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
-    temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
-    roundSuivant(j2, j1, font);
-  } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
-    temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
-    roundSuivant(j1, j2, font);
-  }else if(temps_combat>=60 && j1->vie > j2->vie){
-    temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
-    roundSuivant(j1, j2, font);
-  }else if(temps_combat>=60 && j2->vie>j1->vie){
-    temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
-    roundSuivant(j2, j1, font);
-  }
-    SDL_RenderPresent(renderer);
+    if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
+      temps_pause=0;
+      sec_deb_combat = SDL_GetTicks()/1000;
+      roundSuivant(j2, j1, font);
+    } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
+      temps_pause=0;
+      sec_deb_combat = SDL_GetTicks()/1000;
+      roundSuivant(j1, j2, font);
+    }else if(temps_combat>=60 && j1->vie > j2->vie){
+      temps_pause=0;
+      sec_deb_combat = SDL_GetTicks()/1000;
+      roundSuivant(j1, j2, font);
+    }else if(temps_combat>=60 && j2->vie>j1->vie){
+      temps_pause=0;
+      sec_deb_combat = SDL_GetTicks()/1000;
+      roundSuivant(j2, j1, font);
+    }
+      SDL_RenderPresent(renderer);
+    }
   }
 
   SDL_RenderClear(renderer);
+  
+  /* free les textures */
   SDL_DestroyTexture(texture_hitbox_coupj1);
   SDL_DestroyTexture(texture_hitbox_coupj2);
   SDL_DestroyTexture(texture_nomj1);
@@ -296,11 +300,15 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   SDL_DestroyTexture(texture_joueur2);
   SDL_DestroyTexture(j1Txt_texture);
   SDL_DestroyTexture(j2Txt_texture);
+
+  /* free les surfaces */
   SDL_FreeSurface(sprite_barre_de_vie);
   SDL_FreeSurface(surface_hitbox_coupj1);
   SDL_FreeSurface(surface_hitbox_coupj2);
   SDL_FreeSurface(surface_hitbox_piedj1);
   SDL_FreeSurface(surface_hitbox_piedj2);
+
+  /* free le reste */
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   TTF_CloseFont(font);
