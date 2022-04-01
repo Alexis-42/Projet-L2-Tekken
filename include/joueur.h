@@ -14,6 +14,7 @@ typedef struct {
 typedef struct {
   coord position;
   int vie;
+  int roundsGagnes;
   int action;
   bool sauter;
   Direction direction;

@@ -345,9 +345,7 @@ void menu_selection(int drip, int ia){
 
     chargerMap(num_map, NULL,0,drip);
     jouerAnimationBackground(&srcBg,NULL,0);
-    if(drip==2)
-      SDL_RenderCopy(renderer, texture_preview[0], NULL, &rect_bg_map);
-    SDL_RenderCopy(renderer, texture_preview[0], NULL, &rect_bg_map); 
+    SDL_RenderCopy(renderer, texture_preview[num_map], NULL, &rect_bg_map); 
     SDL_RenderCopy(renderer, texture_bouton_gauche, NULL, &rect_bouton_gauche);
     SDL_RenderCopy(renderer, texture_bouton_droit, NULL, &rect_bouton_droit);
     SDL_RenderCopy(renderer, texture_fond_bg_preview,NULL, &rect_bg_map_fond);

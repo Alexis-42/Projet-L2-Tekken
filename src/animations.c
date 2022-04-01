@@ -109,6 +109,7 @@ if((joueur->perso.seconds)<seconds){
     if((joueur->action==POING || joueur->action==PIED) && joueur->perso.frame==(joueur->perso.nb_frame[anim]/2)){
         attaquer(joueur,j2);
       }
+
     if(joueur->perso.frame == joueur->perso.nb_frame[anim] ){
       joueur->perso.frame=0;
       joueur->action=IDLE;
@@ -170,6 +171,8 @@ void jouerAnimationContinu(Joueur * joueur,int seconds){
     joueur->perso.dstrect=dstrect;
 
     joueur->perso.frame=0;
+
+
 }
 
 

@@ -9,6 +9,7 @@
 void initPerso(Joueur * j, int i){
 	j->perso.frame=0;
 	j->perso.seconds=0;
+	j->roundsGagnes=0;
 	switch(i){
 		case PINGU:
 			// perso fait 180px en wide
