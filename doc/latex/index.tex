@@ -1,0 +1,105 @@
+\label{index_md_READMEDOXYGEN}%
+\Hypertarget{index_md_READMEDOXYGEN}%
+ Jeu vidéo réalisé dans le cadre des séances de projets en deuxième année de license informatique.
+
+~\newline
+ 
+\begin{DoxyEnumerate}
+\item \href{\#Description}{\texttt{ Description}} 
+\item \href{\#Getting Started}{\texttt{ Getting Started}} 
+\begin{DoxyItemize}
+\item \href{\#D\%C3\%A9pendances}{\texttt{ Dépendances}} 
+\item \href{\#Installation}{\texttt{ Installation}} 
+\item \href{\#Les commandes make}{\texttt{ Les commandes make}} 
+\end{DoxyItemize}~\newline
+  
+\item \href{\#Auteurs}{\texttt{ Auteurs}} 
+\end{DoxyEnumerate}~\newline
+
+
+\doxysubsection*{Description}
+
+Ce jeu est inspiré du jeu de combat Tekken. Le but est d\textquotesingle{}affronter un adversaire, contre l\textquotesingle{}ordinateur ou en local avec un deuxième joueur. Il y a le choix entre 4 personnages \+: Pingu, Shrek, Goku ou encore Mickey Ainsi qu\textquotesingle{}une large sélection de cartes disponibles !
+
+~\newline
+
+
+\doxysubsubsection*{Images du jeu}
+
+~\newline
+ Menu Principal  ~\newline
+ Menu Selection  ~\newline
+ Shrek vs Pingu  ~\newline
+ Goku vs Mickey 
+
+~\newline
+
+
+\doxysubsection*{Getting Started}
+
+~\newline
+
+
+\doxysubsubsection*{Dépendances}
+
+Dépendances requises dans \char`\"{}\$\+HOME/\+SDL2\char`\"{} \+:
+\begin{DoxyItemize}
+\item \href{https://www.libsdl.org/download-2.0.php}{\texttt{ SDL2}}
+\item \href{https://www.libsdl.org/projects/SDL_image/}{\texttt{ SDL2\+Image}}
+\item \href{https://github.com/libsdl-org/SDL_ttf}{\texttt{ SDL2\+TTF}}
+\end{DoxyItemize}
+
+~\newline
+
+
+Fonctionnement approuvé sur Ubuntu
+
+~\newline
+
+
+\doxysubsubsection*{Installation}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git clone https://github.com/Alexis-\/42/Projet-\/L2-\/Tekken}
+
+\end{DoxyCode}
+ Dans un terminal à l\textquotesingle{}emplacement du dossier, exécutez \+: {\ttfamily make all}
+
+~\newline
+
+
+\doxysubsubsection*{Les commandes make}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make jouer    -\/> compile et lance le jeu}
+\DoxyCodeLine{}
+\DoxyCodeLine{make docs     -\/> créer la doc dans le répertoire doc/html}
+\DoxyCodeLine{}
+\DoxyCodeLine{make debug    -\/> compile et lance le jeu avec les hitbox}
+\DoxyCodeLine{}
+\DoxyCodeLine{make all      -\/> compile le jeu puis le lance \& créer la doc}
+\DoxyCodeLine{}
+\DoxyCodeLine{make clean    -\/> enleve les .o \& l'executable du jeu}
+\DoxyCodeLine{}
+\DoxyCodeLine{make cleanall -\/> enleve les .o, l'executable du jeu \& la doc}
+\DoxyCodeLine{}
+\DoxyCodeLine{make ???????? -\/> secret}
+
+\end{DoxyCode}
+
+
+~\newline
+
+
+\doxysubsection*{Auteurs}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\href{https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Alexis-42}{\texttt{ \textsubscript{{\bfseries{🧂 Alexis Guimbert 🧂}}}}}~\newline
+ &\PBS\centering \href{https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Jck0day}{\texttt{ \textsubscript{{\bfseries{Charly P}}}}}~\newline
+ &\PBS\centering \href{https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=NoteletL}{\texttt{ \textsubscript{{\bfseries{Notelet Léo}}}}}~\newline
+  \\\cline{1-3}
+\end{longtabu}

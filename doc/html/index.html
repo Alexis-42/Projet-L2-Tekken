@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Projet L2 Tekken: Page principale</title>
+<title>Projet L2 Tekken: Projet L2 Tekken</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,10 +82,87 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Projet L2 Tekken Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Projet L2 Tekken </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p ><a class="anchor" id="md_READMEDOXYGEN"></a> Jeu vidéo réalisé dans le cadre des séances de projets en deuxième année de license informatique.</p>
+<p ><br  />
+ </p><ol>
+<li>
+<a href="#Description">Description</a> </li>
+<li>
+<a href="#Getting Started">Getting Started</a> <ul>
+<li>
+<a href="#Dépendances">Dépendances</a> </li>
+<li>
+<a href="#Installation">Installation</a> </li>
+<li>
+<a href="#Les commandes make">Les commandes make</a> </li>
+</ul>
+<br  />
+  </li>
+<li>
+<a href="#Auteurs">Auteurs</a> </li>
+</ol>
+<p><br  />
+</p>
+<h2 id="Description" style="font-size:30px;">Description</h2>
+<p >Ce jeu est inspiré du jeu de combat Tekken. Le but est d'affronter un adversaire, contre l'ordinateur ou en local avec un deuxième joueur. Il y a le choix entre 4 personnages : Pingu, Shrek, Goku ou encore Mickey Ainsi qu'une large sélection de cartes disponibles !</p>
+<p ><br  />
+</p>
+<h3 style="font-size:30px;">Images du jeu</h3>
+<p ><br  />
+ Menu Principal <img src="https://i.imgur.com/qOcWqAP.png" alt="" class="inline"/> <br  />
+ Menu Selection <img src="https://i.imgur.com/V0lWfN0.png" alt="" class="inline"/> <br  />
+ Shrek vs Pingu <img src="https://i.imgur.com/wGNt3LI.png" alt="" class="inline"/> <br  />
+ Goku vs Mickey <img src="https://i.imgur.com/TKdgWhJ.png" alt="" class="inline"/></p>
+<p ><br  />
+</p>
+<h2 id="Getting Started" style="font-size:30px;">Getting Started</h2>
+<p ><br  />
+</p>
+<h3 id="Dépendances" style="font-size:20px;">Dépendances</h3>
+<p >Dépendances requises dans "$HOME/SDL2" :</p><ul>
+<li><a href="https://www.libsdl.org/download-2.0.php">SDL2</a></li>
+<li><a href="https://www.libsdl.org/projects/SDL_image/">SDL2Image</a></li>
+<li><a href="https://github.com/libsdl-org/SDL_ttf">SDL2TTF</a></li>
+</ul>
+<p ><br  />
+</p>
+<p >Fonctionnement approuvé sur Ubuntu</p>
+<p ><br  />
+</p>
+<h3 id="Installation" style="font-size:20px;">Installation</h3>
+<div class="fragment"><div class="line">git clone https://github.com/Alexis-42/Projet-L2-Tekken</div>
+</div><!-- fragment --><p> Dans un terminal à l'emplacement du dossier, exécutez : <code>make all</code></p>
+<p ><br  />
+</p>
+<h3 id="Les commandes make" style="font-size:20px;">Les commandes make</h3>
+<div class="fragment"><div class="line">make jouer    -&gt; compile et lance le jeu</div>
+<div class="line"> </div>
+<div class="line">make docs     -&gt; créer la doc dans le répertoire doc/html</div>
+<div class="line"> </div>
+<div class="line">make debug    -&gt; compile et lance le jeu avec les hitbox</div>
+<div class="line"> </div>
+<div class="line">make all      -&gt; compile le jeu puis le lance &amp; créer la doc</div>
+<div class="line"> </div>
+<div class="line">make clean    -&gt; enleve les .o &amp; l&#39;executable du jeu</div>
+<div class="line"> </div>
+<div class="line">make cleanall -&gt; enleve les .o, l&#39;executable du jeu &amp; la doc</div>
+<div class="line"> </div>
+<div class="line">make ???????? -&gt; secret</div>
+</div><!-- fragment --><p ><br  />
+</p>
+<h2 style="font-size:30px;" align="center">Auteurs</h2>
+<table align="center">
+<tr align="center">
+<td><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Alexis-42"><img src="https://avatars.githubusercontent.com/u/97942917?v=4" alt="" width="175px;" class="inline"/><sub><b>🧂 Alexis Guimbert 🧂</b></sub></a><br  />
+ </td><td align="center"><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=Jck0day"><img src="https://avatars.githubusercontent.com/u/77964646?v=4" alt="" width="175px;" class="inline"/><sub><b>Charly P</b></sub></a><br  />
+ </td><td align="center"><a href="https://github.com/Alexis-42/Projet-L2-Tekken/commits?author=NoteletL"><img src="https://avatars.githubusercontent.com/u/97942901?v=4" alt="" width="175px;" class="inline"/><sub><b>Notelet Léo</b></sub></a><br  />
+  </td></tr>
+</table>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

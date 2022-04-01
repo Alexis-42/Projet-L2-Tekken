@@ -73,6 +73,7 @@ void menu_selection(int drip, int ia){
   }
 
   SDL_Texture ** texture_preview = malloc(sizeof(SDL_Texture *)*12);
+  texture_preview[0] = creat_texture_rect("res/secret.png", NULL, renderer, 0, 0, 0, 0);
   texture_preview[1] = creat_texture_rect("res/backgrounds/stage1.png", NULL, renderer, 0, 0, 0, 0);
   texture_preview[2] = creat_texture_rect("res/backgrounds/stage2.png", NULL, renderer, 0, 0, 0, 0);
   texture_preview[3] = creat_texture_rect("res/backgrounds/stage3.png", NULL, renderer, 0, 0, 0, 0);
@@ -344,13 +345,15 @@ void menu_selection(int drip, int ia){
 
     chargerMap(num_map, NULL,0,drip);
     jouerAnimationBackground(&srcBg,NULL,0);
-    SDL_RenderCopy(renderer, texture_preview[num_map], &srcBg, &rect_bg_map);
+    if(drip==2)
+      SDL_RenderCopy(renderer, texture_preview[0], NULL, &rect_bg_map);
+    SDL_RenderCopy(renderer, texture_preview[0], NULL, &rect_bg_map); 
     SDL_RenderCopy(renderer, texture_bouton_gauche, NULL, &rect_bouton_gauche);
     SDL_RenderCopy(renderer, texture_bouton_droit, NULL, &rect_bouton_droit);
     SDL_RenderCopy(renderer, texture_fond_bg_preview,NULL, &rect_bg_map_fond);
     SDL_RenderPresent(renderer);
   }
-  //sdl destroy texture
+  /* destruction des texture */
   SDL_DestroyTexture(texture_shrek);
   SDL_DestroyTexture(texture_pingu);
   SDL_DestroyTexture(texture_goku);
@@ -369,6 +372,10 @@ void menu_selection(int drip, int ia){
   SDL_DestroyTexture(texture_contour_tinky);
   SDL_DestroyTexture(texture_bouton_gauche);
   SDL_DestroyTexture(texture_bouton_droit);
+  SDL_DestroyTexture(texture_bg_shrek);
+  SDL_DestroyTexture(texture_bg_goku);
+  SDL_DestroyTexture(texture_bg_pingu);
+  SDL_DestroyTexture(texture_bg_tinky);
   //a voir
   SDL_DestroyTexture(texture_fond_bg_preview);
   int max=10;
@@ -378,10 +385,6 @@ void menu_selection(int drip, int ia){
       SDL_DestroyTexture(texture_preview[i]);
   free(texture_preview);
   //SDL_DestroyTexture();
-  SDL_DestroyTexture(texture_bg_shrek);
-  SDL_DestroyTexture(texture_bg_goku);
-  SDL_DestroyTexture(texture_bg_pingu);
-  SDL_DestroyTexture(texture_bg_tinky);
   TTF_Quit();
   if(sortie==1)
     initSdl(&j1, &j2, num_map,drip,ia);

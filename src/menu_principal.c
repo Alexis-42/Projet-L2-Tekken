@@ -30,7 +30,7 @@ int nbreRoundsMax;
 void renderjonathan(SDL_Renderer * renderer, int drip){
   if(drip){
     // photo jonathan
-    SDL_Rect rect_jonathan={ecran.w-213, 0, 213, 317};
+    SDL_Rect rect_jonathan={ecran.w-426, 0, 426, 634};
     surface_jonathan = IMG_Load("res/jonathan.png");
     texture_jonathan = SDL_CreateTextureFromSurface(renderer, surface_jonathan);
     SDL_FreeSurface(surface_jonathan);

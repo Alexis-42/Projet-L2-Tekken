@@ -7,8 +7,7 @@
 #include "../include/joueur.h"
 #include "../include/personnages.h"
 #include "../include/options.h"
-
-#define VITESSE 1
+#include "../include/mouvements.h"
 
 int peut_bouger_droite(Joueur * ia, Joueur * j1){
   return (j1->direction==droite && ( (j1->hitbox.x + j1->hitbox.w ) < ia->hitbox.x ) && ia->action==IDLE);
@@ -23,11 +22,12 @@ int peut_parer(Joueur * ia, Joueur * j1){
 }
 
 void deplacements_ia(Joueur * ia, Joueur * j1){
-    int r = rand()%2000/(difficulte+1);
-    int parer = rand()%800/(difficulte+1);
+    int r = rand()%2000/(difficulte*difficulte+1);
+    int parer = rand()%800/(difficulte*difficulte+1);
 
-  if((ia->action == COURIR  && ia->action!=DEGAT )|| (ia->action==DANSE && ia->action!=DEGAT))
+  if( ((ia->action == COURIR || (ia->action==DANSE )) && ia->action!=DEGAT) ){
     ia->action=IDLE;
+  }
  // verifier qu'il ne sort pas du terrain
   if(j1->action==DANSE && ia->action==IDLE){
     ia->action=DANSE;
@@ -42,9 +42,9 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
       ia->action=PARER;
   }else if((j1->action!=POING && j1->action!=PIED ) && ia->action==PARER  && ia->action!=DEGAT){
     ia->action=IDLE;
-  }else if(r==1 && ia->action==IDLE && j1->action!=PARER){
+  }else if(r==1 && ia->action==IDLE && j1->action!=PARER && ia->action!=DEGAT){
     ia->action=POING;
-  }else if(r==2 && ia->action==IDLE){
+  }else if(r==2 && ia->action==IDLE && ia->action!=DEGAT && j1->action!=PARER){
     ia->action=PIED;
   }
 
