@@ -33,20 +33,43 @@ SDL_Color blanc = {255, 255, 255};
  * @param joueurPerdant Joueur qui à perdu le round
  * @param font font passée en paramètre pour afficher le nom du joueur gagnant
  */
-void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * font){
+void roundSuivant(Joueur * j1, Joueur * j2 ,TTF_Font * font){
   SDL_Texture * texture = NULL;
   SDL_Rect rect;
   char texte[50];
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 125);
-  if(numRound<nbreRoundsMax){
+
+  Joueur * joueurGagnant = NULL; 
+  if(j1->vie > j2->vie){
+    j1->roundsGagnes++;
+    joueurGagnant=j1;
+  }else if(j1->vie < j2->vie){
+    j2->roundsGagnes++;
+    joueurGagnant=j2;
+  }
+
+  if(joueurGagnant == NULL){
+    snprintf(texte, sizeof(texte), "Egalite !");
+    flag_perdu=0;
+    initJoueur(j1, 100.0, j1->texture, gauche);
+    initJoueur(j2, 600.0, j2->texture, droite);
+    creerBouton(font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
+    SDL_RenderFillRect(renderer, NULL);
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(5000);
+    return;
+  }
+
+  if(joueurGagnant->roundsGagnes<nbreRoundsMax){
     numRound++;
 
     snprintf(texte, sizeof(texte), "%s gagne le round %d !", joueurGagnant->perso.nom, numRound);
     
     flag_perdu=0;
-    initJoueur(joueurGagnant, 100.0, joueurGagnant->texture, gauche);
-    initJoueur(joueurPerdant, 600.0, joueurPerdant->texture, droite);
+    initJoueur(j1, 100.0, j1->texture, gauche);
+    initJoueur(j2, 600.0, j2->texture, droite);
     creerBouton(font, texte, blanc, &rect, &texture, ecran.w/2-250, ecran.h/2-100);
     SDL_RenderFillRect(renderer, NULL);
     SDL_RenderCopy(renderer, texture, NULL, &rect);
@@ -65,7 +88,6 @@ void roundSuivant(Joueur * joueurGagnant, Joueur * joueurPerdant ,TTF_Font * fon
     sortie=2;
     quit=true;
   }
-
 }
 
 /**
@@ -265,24 +287,21 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
       }
 
     if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
-      temps_pause=0;
-      sec_deb_combat = SDL_GetTicks()/1000;
-      roundSuivant(j2, j1, font);
-    } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
-      temps_pause=0;
-      sec_deb_combat = SDL_GetTicks()/1000;
-      roundSuivant(j1, j2, font);
-    }else if(temps_combat>=60 && j1->vie > j2->vie){
-      temps_pause=0;
-      sec_deb_combat = SDL_GetTicks()/1000;
-      roundSuivant(j1, j2, font);
-    }else if(temps_combat>=60 && j2->vie>j1->vie){
-      temps_pause=0;
-      sec_deb_combat = SDL_GetTicks()/1000;
-      roundSuivant(j2, j1, font);
-    }
-      SDL_RenderPresent(renderer);
-    }
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
+  } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
+  }else if(temps_combat>=60){
+    temps_pause=0;
+    sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
+  }
+    SDL_RenderPresent(renderer);
+  }
+
   }
 
   SDL_RenderClear(renderer);
