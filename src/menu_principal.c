@@ -98,7 +98,7 @@ int getSelection(int x_button, int y_button){
     default: window = SDL_CreateWindow("SDL2 Tekken",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
-  renderer = SDL_CreateRenderer(window, -1, 0);
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
   chargerMap(0, renderer,1,drip);
   //preparation arriere plan texte
