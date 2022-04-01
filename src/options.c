@@ -126,7 +126,7 @@ int getSelection3(int x_button, int y_button){
     snprintf(difficulteTexte, sizeof(difficulteTexte), "Difficulte : %s", listeDifficultes[difficulte]);
     snprintf(debugTexte, sizeof(debugTexte), "Debug : %s", listeDebug[debug]);
     snprintf(modeTexte, sizeof(modeTexte), "Mode : %s", listeModes[modeAffichage]);
-    snprintf(roundsTexte, sizeof(roundsTexte), "Nombre de rounds : %d", nbreRoundsMax);
+    snprintf(roundsTexte, sizeof(roundsTexte), "Nombre de rounds a gagner : %d", nbreRoundsMax);
 
     //création affichage jouer en multijoueur
     creerBouton(font, difficulteTexte, ColorWhite, &btn1, &texBtn1, 75.0, 50.0);
@@ -274,7 +274,7 @@ int getSelection3(int x_button, int y_button){
     SDL_DestroyWindow(window);
     TTF_CloseFont(font);
     TTF_Quit();
-    lancerMenu(MENU_PRINCIPAL, 0, 0);
+    lancerMenu(MENU_PRINCIPAL, drip, 0);
     IMG_Quit();
     SDL_Quit();
     //redirection vers la sortie souhaité

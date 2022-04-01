@@ -44,8 +44,7 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
     ia->action=IDLE;
   }else if(r==1 && ia->action==IDLE && j1->action!=PARER && ia->action!=DEGAT){
     ia->action=POING;
-  }else if(r==2 && ia->action==IDLE && ia->action!=DEGAT && j1->action!=PARER){
+  }else if(r==2 && ia->action==IDLE && ia->action!=DEGAT){
     ia->action=PIED;
   }
-
 }

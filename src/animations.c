@@ -110,6 +110,11 @@ if((joueur->perso.seconds)<seconds){
         attaquer(joueur,j2);
       }
 
+      if(joueur->action==PIED && j2->action==PARER && joueur->perso.frame==(joueur->perso.nb_frame[anim]/2)){
+				j2->action=DEGAT;
+        j2->perso.frame = 0;
+    }
+
     if(joueur->perso.frame == joueur->perso.nb_frame[anim] ){
       joueur->perso.frame=0;
       joueur->action=IDLE;
