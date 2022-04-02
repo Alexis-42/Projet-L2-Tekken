@@ -1,27 +1,56 @@
-CC=gcc
+# Nom du projet ( change le nom de l'éxécutable)
+TARGET = ProjetTekken
+
+# Compilateur
+CC	= gcc
+
+# Flags de compilation
 FLAGS=-Wall -g -fcommon
+
+
+# Les dossiers
+
 SDL_DIR=${HOME}/SDL2
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
+SRCDIR	= src
+OBJDIR	= obj
+BINDIR	= bin
+HEADERDIR = include
+DOCDIR = doc
+
+
+# Fichiers
+
+.PHONY: $(OBJDIR) $(BINDIR) 
+all: $(OBJDIR) $(BINDIR) $(BINDIR)/$(TARGET)
+
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(HEADERDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-SOURCE = src/main.c src/initSdl.c src/mouvements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/map.c src/gui.c src/pause.c src/menu.c src/ia.c src/options.c src/audio.c
-PROG=jeu
+$(BINDIR)/$(TARGET): $(OBJECTS)
+	@$(CC) $(OBJECTS) $(FLAGS) -o $@ ${LIBS} ${INCS}
+	@echo "Link terminé!"
 
-${PROG}: ${SOURCE}
-	${CC} -o ${PROG} ${SOURCE} ${LIBS} ${INCS} ${FLAGS}
-	rm -f bin/*.o
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@$(CC) $(FLAGS) -c $< -o $@ ${LIBS} ${INCS}
+	@echo $<" Compilé !"
 
-# compile le code et les documents
-all :
-	${PROG}
-	${docs}
+
+# à voir
+.PHONY: remove
+remove: clean
+	@rm -f $(BINDIR)/$(TARGET)
+	@echo "Executable enlevés !"
+
 
 # compile le code
-jouer: ${PROG}
-	rm -f bin/*.o
-	./jeu
+jouer:$(BINDIR)/$(TARGET)
+	$(clean)
+	./$(BINDIR)/$(TARGET)
 
 
 # compile la doc
@@ -29,17 +58,19 @@ docs:
 	doxygen ./Doxyfile
 	firefox doc/html/index.html
 
-# efface les .o et le programme
+# efface les .o
+.PHONY: clean
 clean:
-	rm -f ${PROG}
-	rm -f bin/*.o
+	@rm -f $(OBJECTS)
+	@echo "Cleanup Terminé !"
 
-# efface les .o , le programme et la doc
+# efface la doc ( latex et html )
 cleanall:
 	${clean}
-	rm -f doc/html/search/*
-	rm -f doc/latex/*
+	rm -f $(DOCDIR)/html/search/*
+	rm -f $(DOCDIR)/latex/*
 
-jonathan:${PROG}
-	rm -f bin/*.o
-	./jeu drip
+jonathan:$(BINDIR)/$(TARGET)
+	rm -f $(BINDIR)/*.o
+	@echo "Oh, you're approaching me ?"
+	./$(BINDIR)/$(TARGET) drip
