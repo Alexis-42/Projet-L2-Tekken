@@ -8,7 +8,6 @@
 #include "../include/joueur.h"
 #include "../include/animations.h"
 #include "../include/jeu.h"
-#include "../include/son.h"
 
 bool monte=false;
 
@@ -55,37 +54,6 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 		quit = true;
 		break;
 		
-			case SDL_KEYDOWN:
-			if(j1->perso.frame==0 && j1->action==IDLE && j1->action!=MORT){
-				switch (event->key.keysym.sym) {
-					case SDLK_a:
-						if(!(event->key.repeat)){
-							j1->action=POING;
-						}
-						break;
-					case SDLK_z:
-					if(!event->key.repeat){
-						j1->action=PIED;
-					}
-					break;
-				}
-				if(j2->perso.frame==0 && j2->action==IDLE){
-					switch (event->key.keysym.sym) {
-						case SDLK_KP_1:
-							if(!(event->key.repeat)){
-								j2->action=PIED;
-							}
-							break;
-						case SDLK_KP_2:
-							if(!(event->key.repeat)){
-								j2->action=POING;
-							}
-							break;
-					}
-				}
-			}
-			break;
-		
 		case SDL_KEYUP:
 		if(j1->perso.frame==0 && j1->action!=MORT){
 			switch (event->key.keysym.sym) {
@@ -129,6 +97,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 			break;
 		}
 	}
+
 	/* verif touches J1 */
 	if(j1->perso.frame==0 && j1->action!=MORT){
 		if (state[SDL_SCANCODE_A] ) { //recule : touche q
@@ -149,7 +118,7 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 				j1->action=COURIR;
 			}
 		}
-		if (state[SDL_SCANCODE_E] && j1->action!=COURIR && (SDL_GetTicks() - *temps_parerJ1)>3000) {
+		if(state[SDL_SCANCODE_E] && j1->action!=COURIR && (SDL_GetTicks() - *temps_parerJ1)>3000) {
 			j1->action=PARER;
 			*temps_parerJ1=SDL_GetTicks();
 
@@ -161,6 +130,21 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 			j1->sauter=true;
 			j1->action=SAUTER;
 		}
+		if(state[SDL_SCANCODE_Q]) {
+			if(event->key.keysym.sym==SDLK_a) {
+				if(!(event->key.repeat)){
+						j1->action=POING;
+				}
+			}
+		}
+		if(state[SDL_SCANCODE_W]) {
+			if(event->key.keysym.sym==SDLK_z) {
+				if(!(event->key.repeat)){
+					j1->action=PIED;
+				}
+			}
+		}
+
 	}
 	if(!ia){
 	/* verif touches J2 */
@@ -196,7 +180,20 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 			if (state[SDL_SCANCODE_KP_5] && j2->action!=COURIR) {
 				j2->action=DANSE;
 			}
-			
+			if (state[SDL_SCANCODE_KP_1]){
+				if(event->key.keysym.sym==SDLK_KP_1) {
+					if(!(event->key.repeat)){
+						j2->action=PIED;
+					}
+				}
+			}
+			if (state[SDL_SCANCODE_KP_2]){
+				if(event->key.keysym.sym==SDLK_KP_2) {
+					if(!(event->key.repeat)){
+						j2->action=POING;
+					}
+				}
+			}
 		}
 	}
 }
