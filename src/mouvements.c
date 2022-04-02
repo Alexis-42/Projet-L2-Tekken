@@ -47,10 +47,9 @@ void sauter(Joueur * joueur){
 	}
 }
 
-void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
+void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temps_parerJ2, int * temps_parerJ1) {
 	direction(j1, j2);
 	const Uint8 * state = SDL_GetKeyboardState(NULL);
-	
 	switch (event->type) {
 		case SDL_QUIT:
 		quit = true;
@@ -150,8 +149,10 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
 				j1->action=COURIR;
 			}
 		}
-		if (state[SDL_SCANCODE_E] && j1->action!=COURIR) { // parer
+		if (state[SDL_SCANCODE_E] && j1->action!=COURIR && (SDL_GetTicks() - *temps_parerJ1)>3000) {
 			j1->action=PARER;
+			*temps_parerJ1=SDL_GetTicks();
+
 		}
 		if (state[SDL_SCANCODE_S] && j1->action!=COURIR) {
 			j1->action=DANSE;
@@ -182,8 +183,11 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia) {
 					j2->action=COURIR;
 				}
 			}
-			if (state[SDL_SCANCODE_KP_3] && j2->action!=COURIR) {
+			if (state[SDL_SCANCODE_KP_3] && j2->action!=COURIR && (SDL_GetTicks() - *temps_parerJ2)>3000) {
 				j2->action=PARER;
+				printf("\n\ntemps avant : %d",*temps_parerJ2);
+				*temps_parerJ2 = SDL_GetTicks();
+				printf("  temps apres : %d\n\n",*temps_parerJ2);
 			}
 			if (state[SDL_SCANCODE_KP_0]) {
 				j2->sauter=true;

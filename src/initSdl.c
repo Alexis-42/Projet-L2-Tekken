@@ -169,6 +169,8 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   }else
   creerBouton(font, "J2", blanc, &j2Txt_rect, &j2Txt_texture, 0, 0);
   
+  int temps_parerJ1=0;
+  int temps_parerJ2=0;
 
   initPause();
 
@@ -276,7 +278,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
       checkmort(j1,j2);
 
       if(!pause){
-        deplacements(j1, j2, &event, ia);
+        deplacements(j1, j2, &event, ia, &temps_parerJ2, &temps_parerJ1);
         if(ia){
           deplacements_ia(j2,j1);
         }
