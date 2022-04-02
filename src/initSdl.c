@@ -107,13 +107,13 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   temps_fin_pause = 0;
   temps_deb_pause = 0;
   temps_pause = 0;
-  SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/rectangle_bleu.png");
+  SDL_Surface * surface_hitbox_coupj1 = IMG_Load("res/selection/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj1;
-  SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/rectangle_bleu.png");
+  SDL_Surface * surface_hitbox_coupj2 = IMG_Load("res/selection/rectangle_bleu.png");
   SDL_Texture * texture_hitbox_coupj2;
-  SDL_Surface * surface_hitbox_piedj1 = IMG_Load("res/rectangle_rouge.png");
+  SDL_Surface * surface_hitbox_piedj1 = IMG_Load("res/selection/rectangle_rouge.png");
   SDL_Texture * texture_hitbox_piedj1;
-  SDL_Surface * surface_hitbox_piedj2 = IMG_Load("res/rectangle_rouge.png");
+  SDL_Surface * surface_hitbox_piedj2 = IMG_Load("res/selection/rectangle_rouge.png");
   SDL_Texture * texture_hitbox_piedj2;
   SDL_Texture * tex_menu_Principal = NULL;
   SDL_Texture * texture_carre_jaune = NULL;
@@ -290,16 +290,16 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
     if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
     temps_pause=0;
-    roundSuivant(j1, j2, font);
     sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
   } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
     temps_pause=0;
-    roundSuivant(j1, j2, font);
     sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
   }else if(temps_combat>=60){
     temps_pause=0;
-    roundSuivant(j1, j2, font);
     sec_deb_combat = SDL_GetTicks()/1000;
+    roundSuivant(j1, j2, font);
   }
     SDL_RenderPresent(renderer);
   }

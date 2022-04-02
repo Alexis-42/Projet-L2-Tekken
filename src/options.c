@@ -184,7 +184,7 @@ int getSelection3(int x_button, int y_button){
                     else
                         nbreRoundsMax=1;
                     sortie=4;
-                    snprintf(roundsTexte, sizeof(roundsTexte), "Nombre de rounds : %d", nbreRoundsMax);
+                    snprintf(roundsTexte, sizeof(roundsTexte), "Nombre de rounds a gagner : %d", nbreRoundsMax);
                     creerBouton(font, roundsTexte, ColorWhite, &btn4, &texBtn4, 75.0, 350.0);
                     break;
             case 5: 

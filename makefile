@@ -3,10 +3,10 @@ FLAGS=-Wall -g -fcommon
 SDL_DIR=${HOME}/SDL2
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
-LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
 
-SOURCE = src/main.c src/initSdl.c src/mouvements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/map.c src/gui.c src/pause.c src/menu.c src/ia.c src/options.c
+SOURCE = src/main.c src/initSdl.c src/mouvements.c src/menu_principal.c src/menu_selection.c src/animations.c src/personnages.c src/joueur.c src/map.c src/gui.c src/pause.c src/menu.c src/ia.c src/options.c src/audio.c
 PROG=jeu
 
 ${PROG}: ${SOURCE}
@@ -28,7 +28,7 @@ jouer: ${PROG}
 docs:
 	doxygen ./Doxyfile
 	firefox doc/html/index.html
-	
+
 # efface les .o et le programme
 clean:
 	rm -f ${PROG}
@@ -43,4 +43,3 @@ cleanall:
 jonathan:${PROG}
 	rm -f bin/*.o
 	./jeu drip
-

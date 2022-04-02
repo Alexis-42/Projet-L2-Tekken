@@ -36,7 +36,7 @@ void creerBouton(TTF_Font * font, char * texte, SDL_Color couleur, SDL_Rect * re
 }
 
   void initFlammes(SDL_Rect * rect, SDL_Texture ** texture, float x, float y){
-    SDL_Surface * image_flamme_multi = IMG_Load("res/flamme.png");
+    SDL_Surface * image_flamme_multi = IMG_Load("res/selection/flamme.png");
     *texture = SDL_CreateTextureFromSurface(renderer, image_flamme_multi);
     int text_width_flamme_multi = image_flamme_multi->w;
     int text_height_flamme_multi = image_flamme_multi->h;

@@ -10,6 +10,7 @@
 #include "../include/map.h"
 #include "../include/menu.h"
 #include "../include/options.h"
+#include "../include/audio.h"
 
 bool quitter;
 SDL_Surface * image_stage_menu;
@@ -85,6 +86,8 @@ int getSelection(int x_button, int y_button){
   chargerPreferences(fichier_prefs);
 
   SDL_Init(SDL_INIT_VIDEO);
+  SDL_Init(SDL_INIT_AUDIO);
+
   IMG_Init(IMG_INIT_PNG);
   SDL_GetDesktopDisplayMode(0, &ecran);
 
@@ -98,8 +101,12 @@ int getSelection(int x_button, int y_button){
     default: window = SDL_CreateWindow("SDL2 Tekken",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ecran.w / 2, ecran.h / 2, 0);
   }
-  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  initAudio();
+
+    /* Play music and a sound */
+  playMusic("res/sons/highlands.wav", SDL_MIX_MAXVOLUME);
   chargerMap(0, renderer,1,drip);
   //preparation arriere plan texte
     //fond texte flamme multijoueur
@@ -218,6 +225,8 @@ int getSelection(int x_button, int y_button){
   		}
   	}
   }
+    endAudio();
+
     //fin du menu principal, changement de fenetre
     SDL_RenderClear(renderer);
     SDL_DestroyTexture(texFlamme1);
