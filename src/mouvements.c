@@ -102,20 +102,22 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 	if(j1->perso.frame==0 && j1->action!=MORT){
 		if (state[SDL_SCANCODE_A] ) { //recule : touche q
 			if(j1->hitbox.x>0 && (( (j1->hitbox.x > j2->hitbox.x  + j2->hitbox.w && j2->direction==droite ) || (j2->hitbox.y > (j1->hitbox.y + 0.75*j1->hitbox.h)))|| j2->direction==gauche)){
-				if(estAuSol(j1))
+				if(estAuSol(j1)){
 					j1->position.x -= VITESSE;
-				else
+					j1->action=COURIR;
+
+				}else
 					j1->position.x -= VITESSE+1;
-				j1->action=COURIR;
 			}
 		}
 		if (state[SDL_SCANCODE_D]){ // avance
 			if((j1->hitbox.x<ecran.w-j1->hitbox.w) && (( (j1->hitbox.x + j1->hitbox.w < j2->hitbox.x  && j2->direction==gauche ) || (j2->hitbox.y > (j1->hitbox.y + 0.75*j1->hitbox.h)))|| j2->direction==droite)){
-				if(estAuSol(j1))
+				if(estAuSol(j1)){
 					j1->position.x += VITESSE;
-				else
+					j1->action=COURIR;
+				}else
 					j1->position.x += VITESSE+1;
-				j1->action=COURIR;
+				
 			}
 		}
 		if(state[SDL_SCANCODE_E] && j1->action!=COURIR && (SDL_GetTicks() - *temps_parerJ1)>3000) {
@@ -144,34 +146,35 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 				}
 			}
 		}
-
 	}
 	if(!ia){
 	/* verif touches J2 */
 		if(j2->perso.frame==0 && j2->action!=MORT){
 			if (state[SDL_SCANCODE_LEFT]) {
 				if(j2->hitbox.x>0 && (( (j2->hitbox.x > j1->hitbox.x  + j1->hitbox.w && j1->direction==droite ) || (j1->hitbox.y >= (j2->hitbox.y + 0.75*j2->hitbox.h)))|| j1->direction==gauche)){
-					if(estAuSol(j2))
+					if(estAuSol(j2)){
 						j2->position.x -= VITESSE;
-					else
+						j2->action=COURIR;
+					}else
 						j2->position.x -= VITESSE+1;
-					j2->action=COURIR;
+					
 					}
 			}
 			if (state[SDL_SCANCODE_RIGHT]) {
 				if((j2->hitbox.x<ecran.w-j2->hitbox.w) && (( (j2->hitbox.x + j2->hitbox.w < j1->hitbox.x  && j1->direction==gauche ) || (j1->hitbox.y > (j1->hitbox.y + 0.75*j2->hitbox.h)))|| j1->direction==droite)){
-					if(estAuSol(j2))
+					if(estAuSol(j2)){
 						j2->position.x += VITESSE;
-					else
+						j2->action=COURIR;
+					}else
 						j2->position.x += VITESSE+1;
-					j2->action=COURIR;
+					
 				}
 			}
 			if (state[SDL_SCANCODE_KP_3] && j2->action!=COURIR && (SDL_GetTicks() - *temps_parerJ2)>3000) {
 				j2->action=PARER;
-				printf("\n\ntemps avant : %d",*temps_parerJ2);
+				//printf("\n\ntemps avant : %d",*temps_parerJ2);
 				*temps_parerJ2 = SDL_GetTicks();
-				printf("  temps apres : %d\n\n",*temps_parerJ2);
+				//printf("  temps apres : %d\n\n",*temps_parerJ2);
 			}
 			if (state[SDL_SCANCODE_KP_0]) {
 				j2->sauter=true;
@@ -196,4 +199,18 @@ void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temp
 			}
 		}
 	}
+	if(estAuSol(j1) && j1->action==SAUTER){
+		j1->action=IDLE;
+		j1->perso.frame=0;
+	}if(estAuSol(j2) && j2->action==SAUTER){
+		j2->action=IDLE;
+		j2->perso.frame=0;
+	}
+	
+	if(j1->sauter){
+		j1->action=SAUTER;
+	}if(j2->sauter){
+		j2->action=SAUTER;
+	}
+
 }
