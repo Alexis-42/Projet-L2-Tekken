@@ -290,16 +290,16 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
 
     if(flag_perdu == 1 && j1->perso.frame+1>=j1->perso.nb_frame[MORT]){
     temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
     roundSuivant(j1, j2, font);
+    sec_deb_combat = SDL_GetTicks()/1000;
   } else if(flag_perdu == 2 && j2->perso.frame+1>=j2->perso.nb_frame[MORT]){
     temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
     roundSuivant(j1, j2, font);
+    sec_deb_combat = SDL_GetTicks()/1000;
   }else if(temps_combat>=60){
     temps_pause=0;
-    sec_deb_combat = SDL_GetTicks()/1000;
     roundSuivant(j1, j2, font);
+    sec_deb_combat = SDL_GetTicks()/1000;
   }
     SDL_RenderPresent(renderer);
   }
