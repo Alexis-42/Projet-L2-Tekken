@@ -157,9 +157,14 @@ void jouerAnimationContinu(Joueur * joueur,int seconds){
   }
 
   //Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
-  
+    int posXSprite;
+    if(!estAuSol(joueur) && (joueur->position.y < spawnY-(500.0/1080*ecran.h))){
+      posXSprite=3;
+    }else{
+      posXSprite=seconds%joueur->perso.nb_frame[anim];
+    }
     SDL_Rect srcrect = {
-    (seconds%joueur->perso.nb_frame[anim]) * 540, //Pas
+    posXSprite * 540, //Pas
     posYSprite,
     joueur->perso.taille_perso.w/joueur->perso.taille_perso.mult,
     joueur->perso.taille_perso.h/joueur->perso.taille_perso.mult
@@ -176,7 +181,6 @@ void jouerAnimationContinu(Joueur * joueur,int seconds){
     joueur->perso.dstrect=dstrect;
 
     joueur->perso.frame=0;
-
 
 }
 
