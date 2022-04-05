@@ -1,7 +1,7 @@
 /**
  * @file animations.c
  * @author Charly.P Alexis.G Léo.N
- * @brief Fonctions qui sont en relation avec les variables d'animations
+ * @brief Fichier contenant les fonction d'affichage du jeu \li Jouer animation perso \li Attaquer un joueur \li Jouer animation background
  * @version 1.0
  * @date 2022-03-22
  * 

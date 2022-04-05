@@ -1,8 +1,10 @@
 /**
  * @file animations.h
  * @author Charly.P Alexis.G Léo.N
- * @brief Header des fonctions qui sont en relation avec les variables d'animations
- * @date 2022-03-30
+ * @brief Fichier contenant les fonction header d'affichage du jeu \li Jouer animation perso \li Attaquer un joueur \li Jouer animation background
+ * \n ainsi que la structure background
+ * @version 1.0
+ * @date 2022-03-22
  * 
  * @copyright Copyright (c) 2022
  * 

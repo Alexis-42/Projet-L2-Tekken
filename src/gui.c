@@ -1,7 +1,7 @@
 /**
  * @file gui.c
  * @author Charly.P Alexis.G Léo.N
- * @brief Fonctions relatives au gui ( Graphical User Interface )
+ * @brief Fichier contenant les fonction d'affichage de l'interface utilisateur et l'initialisation des valeurs importantes à cet affichage
  * @date 2022-03-30
  * 
  * @copyright Copyright (c) 2022
@@ -18,6 +18,14 @@
 
 #define OFFSET 26
 
+/**
+ * @brief Fonction qui va initialiser les textures d'une barre de vie
+ * 
+ * @param texture_carre_jaune texture du carée jaune à initialiser
+ * @param texture_carre_rouge texture du carée rouge à initialiser
+ * @param sprite_barre_de_vie surface entrée en paramètre du contour gris
+ * @param texture_barre_de_vie texture du contour gris à initialiser
+ */
 void init_gui(SDL_Texture ** texture_carre_jaune, SDL_Texture ** texture_carre_rouge, SDL_Surface * sprite_barre_de_vie, SDL_Texture ** texture_barre_de_vie){
   SDL_Surface * image_carre_jaune = IMG_Load("res/barre_jaune.png");
   *texture_carre_jaune = SDL_CreateTextureFromSurface(renderer, image_carre_jaune);
@@ -33,13 +41,13 @@ void init_gui(SDL_Texture ** texture_carre_jaune, SDL_Texture ** texture_carre_r
 /**
  * @brief Fonction qui initialise les textures qui sont en relation avec le temps
  * 
- * @param sec_deb_combat Le temps actuel du combat
+ * @param temps_combat Le temps actuel du combat
  * @param font La font que l'on veut
  * @param rect_sprite_pvj1 Rectangle qui sera utilisé pour afficher la vie du joueur
  * @param texture texture à entrer afin de la créer
  * @param rect_temps Rectangle qui sera utilisé pour afficher le temps
  */
-void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Rect * rect_sprite_pvj1, SDL_Texture **texture,SDL_Rect * rect_temps){
+void init_affichage_temps(int temps_combat,TTF_Font* font, SDL_Rect * rect_sprite_pvj1, SDL_Texture **texture,SDL_Rect * rect_temps){
  // sachant que ces deux temps sont en secondes on regenere les textures que si la seconde est differente
   char str_temps[3];
   SDL_Color textColor = {255, 255, 255, 0};
@@ -47,7 +55,7 @@ void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Rect * rect_spr
   rect_temps->y = rect_sprite_pvj1->y;
   rect_temps->w = ecran.w-(2*rect_sprite_pvj1->w);
   rect_temps->h = rect_sprite_pvj1->h;
-  snprintf(str_temps, sizeof(str_temps), "%i", 60-sec_deb_combat);
+  snprintf(str_temps, sizeof(str_temps), "%i", 60-temps_combat);
 
   SDL_Surface * surface = TTF_RenderText_Solid(font, str_temps, textColor);
   *texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -55,7 +63,7 @@ void init_affichage_temps(int sec_deb_combat,TTF_Font* font, SDL_Rect * rect_spr
 }
 
 /**
- * @brief fonction qui permet l'init d'un sprite barre de vie en fonction du joueur
+ * @brief fonction qui permet d'initialiser les valeurs du réctangle d'un sprite barre de vie en fonction du joueur
  * 
  * @param rect_sprite_pv Rectangle à initisialiser
  * @param num_joueur Numero du joueur : @li 1 pour j1 @li 2 pour j2
@@ -72,7 +80,7 @@ void init_sprite_pv(SDL_Rect * rect_sprite_pv, int num_joueur){
 }
 
 /**
- * @brief Initialise les textures et rectangle qui sont en relation avec l'affichage du nom des joueurs
+ * @brief Initialise les textures et rectangles qui sont en relation avec l'affichage du nom des joueurs
  * 
  * @param joueur Joueur auquel on va afficher le nom
  * @param font Font à utiliser

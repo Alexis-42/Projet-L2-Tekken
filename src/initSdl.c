@@ -1,3 +1,13 @@
+/**
+ * @file initSdl.c
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier contenant les fonction en rapport avec le combat ( Round / Boucle principale de combat)
+ * @version 1.0
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <string.h>
 #include <SDL2/SDL.h>

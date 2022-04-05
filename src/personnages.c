@@ -1,3 +1,14 @@
+/**
+ * @file personnages.c
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier des fonctions portants sur le joueur ( initialisation )
+ * @version 0.1
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -5,7 +16,12 @@
 #include "../include/personnages.h"
 #include "../include/animations.h"
 
-
+/**
+ * @brief Fonction affectant un personnage à un joueur
+ * 
+ * @param j Structure du joueur à laquelle on affecte le perso
+ * @param i numero du perso à affecter
+ */
 void initPerso(Joueur * j, int i){
 	j->perso.frame=0;
 	j->perso.seconds=0;
