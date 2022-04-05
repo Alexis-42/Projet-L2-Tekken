@@ -48,7 +48,7 @@ remove: clean
 
 
 # compile le code
-jouer:/$(TARGET)
+jouer:$(TARGET)
 	$(clean)
 	./$(TARGET)
 
