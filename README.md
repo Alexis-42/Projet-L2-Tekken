@@ -82,7 +82,7 @@ make docs     -> créer la doc dans le répertoire doc/html
 
 make debug    -> compile et lance le jeu avec les hitbox
 
-make all      -> compile le jeu puis le lance & créer la doc
+make all      -> compile le jeu & créer la doc
 
 make clean    -> enleve les .o & l'executable du jeu
 

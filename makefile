@@ -23,6 +23,7 @@ DOCDIR = doc
 
 .PHONY: $(OBJDIR)
 all: $(OBJDIR) $(TARGET)
+	doxygen ./Doxyfile
 
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
