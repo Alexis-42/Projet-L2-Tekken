@@ -315,7 +315,7 @@ void initSdl(Joueur * j1, Joueur * j2, int num_map, int drip, int ia) {
   }
 
   }
-
+  numRound=0;
   SDL_RenderClear(renderer);
   
   /* free les textures */

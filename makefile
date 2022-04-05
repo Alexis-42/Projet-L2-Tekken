@@ -23,7 +23,7 @@ DOCDIR = doc
 # Fichiers
 
 .PHONY: $(OBJDIR) $(BINDIR) 
-all: $(OBJDIR) $(BINDIR) $(BINDIR)/$(TARGET)
+all: $(OBJDIR) $(TARGET)
 
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
@@ -31,7 +31,7 @@ SOURCES  := $(wildcard $(SRCDIR)/*.c)
 INCLUDES := $(wildcard $(HEADERDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-$(BINDIR)/$(TARGET): $(OBJECTS)
+$(TARGET): $(OBJECTS)
 	@$(CC) $(OBJECTS) $(FLAGS) -o $@ ${LIBS} ${INCS}
 	@echo "Link terminé!"
 
@@ -43,14 +43,14 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 # à voir
 .PHONY: remove
 remove: clean
-	@rm -f $(BINDIR)/$(TARGET)
+	@rm -f $(TARGET)
 	@echo "Executable enlevés !"
 
 
 # compile le code
-jouer:$(BINDIR)/$(TARGET)
+jouer:/$(TARGET)
 	$(clean)
-	./$(BINDIR)/$(TARGET)
+	./$(TARGET)
 
 
 # compile la doc

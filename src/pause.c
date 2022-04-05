@@ -27,11 +27,10 @@ int getSelection2(int x_button, int y_button){
   else if(x_button>btn3.x && y_button>btn3.y && x_button<btn3.x+600.0 && y_button<btn3.y+50.0)
     return 3;
 
-
   return 0;
 }
 
-void quitterr(){
+void quitter2(){
   SDL_DestroyTexture(texBtn1);
   SDL_DestroyTexture(texBtn2);
   SDL_DestroyTexture(texBtn3);
@@ -53,9 +52,9 @@ void selectionPause(SDL_Event event, int drip, int ia){
           sortie = 0;
           pause = false;
       } else if(sortie==2){
-         quitterr();
+         quitter2();
       }else if(sortie==3){
-        quitterr();
+        quitter2();
       }
 }
 

@@ -59,12 +59,13 @@ int peut_parer(Joueur * ia, Joueur * j1){
  * @param j1 Structure Joueur du joueur
  */
 void deplacements_ia(Joueur * ia, Joueur * j1){
-    int r = rand()%2000/(difficulte*difficulte+1);
-    int parer = rand()%800/(difficulte*difficulte+1);
+    int r = rand()%1000/(difficulte*difficulte+1);
+    int parer = rand()%400/(difficulte*difficulte+1);
 
   if( ((ia->action == COURIR || (ia->action==DANSE )) && ia->action!=DEGAT) ){
     ia->action=IDLE;
   }
+  if(difficulte!=0){
  // verifier qu'il ne sort pas du terrain
   if(j1->action==DANSE && ia->action==IDLE){
     ia->action=DANSE;
@@ -83,5 +84,6 @@ void deplacements_ia(Joueur * ia, Joueur * j1){
     ia->action=POING;
   }else if(r==2 && ia->action==IDLE && ia->action!=DEGAT){
     ia->action=PIED;
+  }
   }
 }

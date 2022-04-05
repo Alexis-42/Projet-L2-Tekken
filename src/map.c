@@ -70,7 +70,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 h_map2 = 336;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage1.png");
-            spawnY=  1040.0;
+            spawnY=  (1097.0/1080.0)*ecran.h;
             break;
     case 2: nbFramesMap=4;
             if(flag_bg){
@@ -81,7 +81,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 pas2=(2928/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage2.png");
-            spawnY=1040.0;
+            spawnY=(1070.0/1080.0)*ecran.h;
             break;
     case 3: nbFramesMap=14;
             if(flag_bg){
@@ -92,7 +92,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 pas2=(11200/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage3.png");
-            spawnY=1040.0;
+            spawnY=(1070.0/1080.0)*ecran.h;
             break;
     case 4: nbFramesMap=16;
             if(flag_bg){
@@ -103,7 +103,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 h_map2 = 336;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage4.png");
-            spawnY=1040.0;
+            spawnY=(1040.0/1080.0)*ecran.h;
             break;
     case 5: nbFramesMap=7;
             if(flag_bg){
@@ -114,7 +114,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 pas2=(5124/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage5.png");
-            spawnY=1040.0;
+            spawnY=(1040.0/1080.0)*ecran.h;
             break;
     case 6: nbFramesMap=8;
             if(flag_bg){
@@ -125,7 +125,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 pas2=(6144/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage6.png");
-            spawnY=1040.0;
+            spawnY=(1040.0/1080.0)*ecran.h;
             break;
     case 7: nbFramesMap=7; // moche
             if(flag_bg){
@@ -136,7 +136,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 pas2=(5264/nbFramesMap);
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage7.png");
-            spawnY=1040.0;
+            spawnY=(1040.0/1080.0)*ecran.h;
 
             break;
     case 8: nbFramesMap=20; // à voir avec charly
@@ -148,7 +148,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 h_map2 = 480;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage8.png");
-            spawnY=1040.0;
+            spawnY=(1099.0/1080.0)*ecran.h;
             break;
     case 9: nbFramesMap=8;
             if(flag_bg){
@@ -159,7 +159,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 h_map2 = 336;
             }
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage9.png");
-            spawnY=1040.0;
+            spawnY=(1065.0/1080.0)*ecran.h;
             break;
     case 10: nbFramesMap=8;
             if(flag_bg){
@@ -170,7 +170,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 h_map2 = 384;
             }
 
-            spawnY=1040.0;
+            spawnY=(1060.0/1080.0)*ecran.h;
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage10.png");
             break;
     case 11:nbFramesMap=1;
@@ -182,7 +182,7 @@ void chargerMap(int map, SDL_Renderer * renderer, int flag_bg, int drip){ // à 
                 h_map2 = 1080;
             }
 
-            spawnY=1040.0;
+            spawnY=(1070.0/1080.0)*ecran.h;
             snprintf(cheminMap, sizeof(cheminMap), "res/backgrounds/stage11.png");
             break;
   }

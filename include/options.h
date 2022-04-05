@@ -10,7 +10,7 @@ extern int difficulte;
 extern int modeAffichage;
 extern int nbreRoundsMax;
 
-void renderMenu2();
+void renderMenu();
 void menu_option();
 void sauvPreferences(FILE * fichier);
 void chargerPreferences(FILE * fichier);

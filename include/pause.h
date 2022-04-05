@@ -1,5 +1,6 @@
 #ifndef PAUSE_H_INCLUDED__
 #define PAUSE_H_INCLUDED__
+#include <SDL2/SDL.h>
 
 void renderPause();
 void initPause();

@@ -152,6 +152,7 @@ bool checkCollisions(Joueur * j1, Joueur * j2){
 void initJoueur(Joueur * joueur, float posX, SDL_Texture * texture, Direction direction){
   joueur->vie=100;
   joueur->action=IDLE;
+  joueur->roundsGagnes=0;
   joueur->sauter=false;
   joueur->texture=texture;
   joueur->direction=direction;
