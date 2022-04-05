@@ -51,11 +51,11 @@ void attaquer(Joueur * jAttaquant, Joueur * j2){
 }
 
 /**
- * @brief 
+ * @brief fonction permettant de modifier les informations d'affichage du personnage pour une animation qui doit être affiché entierement et qui ne doit pas se joué en boucle
  * 
- * @param joueur 
- * @param seconds 
- * @param j2 
+ * @param joueur structure des informations du joueur à qui l'on veut modifié ses paramètre d'affichage
+ * @param seconds temps zn seconde depuis le lancement du jeu
+ * @param j2 structure des informations du joueur adverse
  */
 void jouerAnimation(Joueur * joueur,int seconds,Joueur * j2){
   int posYSprite;
@@ -124,10 +124,10 @@ if((joueur->perso.seconds)<seconds){
 }
 
 /**
- * @brief 
+ * @brief fonction permettant de modifier les informations d'affichage du personnage pour une animation qui n'a pas à être affiché entierement et qui doit se joué en boucle tant que la touche est appuyé
  * 
- * @param joueur 
- * @param seconds 
+ * @param joueur structure des informations du joueur à qui l'on veut modifié ses paramètre d'affichage
+ * @param seconds temps zn seconde depuis le lancement du jeu
  */
 void jouerAnimationContinu(Joueur * joueur,int seconds){
   int posYSprite;
@@ -156,7 +156,6 @@ void jouerAnimationContinu(Joueur * joueur,int seconds){
     break;
   }
 
-  //Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
     int posXSprite;
     if(!estAuSol(joueur) && (joueur->position.y < spawnY-(500.0/1080*ecran.h))){
       posXSprite=3;

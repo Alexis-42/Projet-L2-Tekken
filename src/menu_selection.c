@@ -1,3 +1,13 @@
+/**
+ * @file menu_selection.c
+ * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
+ * @brief fichier qui gère le menu de sélection
+ * @version 0.1
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -16,8 +26,19 @@ extern char *composition;
 extern Sint32 cursor;
 extern Sint32 selection_len;
 
-void aff_menu_selection(int carre,float pos_x){}
 
+/**
+ * @brief 
+ * 
+ * @param chemin_img 
+ * @param rect 
+ * @param renderer 
+ * @param x 
+ * @param y 
+ * @param w 
+ * @param h 
+ * @return SDL_Texture* 
+ */
   SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, float x, float y, float w, float h){
   /* creation de la texture */
   SDL_Surface * img = IMG_Load(chemin_img);
@@ -33,7 +54,13 @@ void aff_menu_selection(int carre,float pos_x){}
   return texture;
 }
 
-void jouerAnimationPersoMenu(Joueur * joueur, int tour, double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
+/**
+ * @brief fonction qui permet d'afficher le personnage que l'on a choisi dans le menu, celui ci danse
+ * 
+ * @param joueur structure du personnage choisi
+ * @param tour variable permettant de savoir si le personnage appartient au joueur 1 ou 2
+ */
+void jouerAnimationPersoMenu(Joueur * joueur, int tour){ //Pour freezer l'anim il faut anuller le getTick
 Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 Uint32 sprite = seconds % 15;
 float posx;
@@ -45,8 +72,6 @@ if(tour){
 SDL_Rect srcrect;
 SDL_Rect dstrect;
 
-//shrek
-//  if(cord_perso==200.0/1920.0*ecran.w){
 srcrect.x = sprite * 540;
 srcrect.y = 0;
 srcrect.w = joueur->perso.taille_perso.w/joueur->perso.taille_perso.mult;
@@ -59,9 +84,14 @@ dstrect.h = joueur->perso.taille_perso.h/joueur->perso.taille_perso.mult;
 
 joueur->perso.srcrect=srcrect;
 joueur->perso.dstrect=dstrect;
-//}
 }
 
+/**
+ * @brief fonction qui gère le menu de sélection des personnages et des cartes
+ * 
+ * @param drip option d'affichage
+ * @param ia variable qui vérifie si l'on est en joueur contre joueur ou joueur contre IA
+ */
 void menu_selection(int drip, int ia){
   int num_map=1;
   SDL_Rect srcBg;

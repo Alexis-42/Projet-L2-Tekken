@@ -1,3 +1,13 @@
+/**
+ * @file mouvements.c
+ * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
+ * @brief fichier qui gère les informations du clavier lors du combat
+ * @version 0.1
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -11,11 +21,13 @@
 
 bool monte=false;
 
-typedef struct {
-	Joueur * joueur;
-	int anim;
-} params;
-
+/**
+ * @brief fonction qui vérifie si un des personnages est mort
+ * 
+ * @param j1 structure du joueur 1
+ * @param j2 structure du joueur 1
+ * @return int retourne 1 si un des personnages est mort, 0 sinon
+ */
 int checkmort(Joueur * j1,Joueur * j2){
 	if(j1->vie<=0){
 		j1->action = MORT;
@@ -27,6 +39,11 @@ int checkmort(Joueur * j1,Joueur * j2){
 	return 0;
 }
 
+/**
+ * @brief fonction qui gère le déplacement vertical lors d'un saut
+ * 
+ * @param joueur structure du joueur
+ */
 void sauter(Joueur * joueur){
 	if(joueur->sauter){
 		if(monte==false && estAuSol(joueur))
@@ -46,6 +63,16 @@ void sauter(Joueur * joueur){
 	}
 }
 
+/**
+ * @brief fonction qui vérifie les touches pressés et qui attribue aux joueurs l'action lié à la touche
+ * 
+ * @param j1 structure du joueur 1
+ * @param j2 structure du joueur 2
+ * @param event pointeur sur une structure des évenements du clavier
+ * @param ia variable qui vérifie si l'on est en joueur contre joueur ou en  joueur contre IA
+ * @param temps_parerJ2 temps depuis que le personnages 2 a paré
+ * @param temps_parerJ1 temps depuis que le personnages 1 a paré
+ */
 void deplacements(Joueur * j1, Joueur * j2, SDL_Event * event,int ia, int * temps_parerJ2, int * temps_parerJ1) {
 	direction(j1, j2);
 	const Uint8 * state = SDL_GetKeyboardState(NULL);

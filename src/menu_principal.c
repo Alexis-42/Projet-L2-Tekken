@@ -1,3 +1,13 @@
+/**
+ * @file menu_principal.c
+ * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
+ * @brief menu qui gère le menu principal
+ * @version 0.1
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -28,6 +38,12 @@ int difficulte;
 int modeAffichage = BORDERLESS;
 int nbreRoundsMax;
 
+/**
+ * @brief affichage du jeu avec les modifications lié au parametre d'entré jonathan
+ * 
+ * @param renderer stocke les texture
+ * @param drip variable lié au parametre d'entré du jeu
+ */
 void renderjonathan(SDL_Renderer * renderer, int drip){
   if(drip){
     // photo jonathan
@@ -39,7 +55,13 @@ void renderjonathan(SDL_Renderer * renderer, int drip){
     SDL_DestroyTexture(texture_jonathan);
   }
 }
-
+/**
+ * @brief vérifie l'emplacement de la souris et retourne une valeur en fonction de cette emplacement
+ * 
+ * @param x_button coordonée x de la souris
+ * @param y_button coordonée y de la souris
+ * @return int valeur de l'emplacement de la souris
+ */
 int getSelection(int x_button, int y_button){
   if(x_button>btn1.x && y_button>btn1.y && x_button<btn1.x+600.0 && y_button<btn1.y+100.0)
     return 1;
@@ -52,7 +74,12 @@ int getSelection(int x_button, int y_button){
 
   return 0;
 }
-
+/**
+ * @brief affiche du menu principal
+ * 
+ * @param sortie variable de l'emplacement des flammes d'arriere plan du texte
+ * @param drip option d'affichage
+ */
   void renderMenu(int sortie, int drip){
     SDL_RenderClear(renderer);
     
@@ -76,6 +103,11 @@ int getSelection(int x_button, int y_button){
     SDL_RenderPresent(renderer);
   }
 
+/**
+ * @brief fonction qui gère le menu principale 
+ * 
+ * @param drip parametre d'affichage
+ */
   void menu_principal(int drip){
     if(TTF_Init()==-1){
       printf("librairie non initialisé");
