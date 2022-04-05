@@ -30,13 +30,13 @@ extern Sint32 selection_len;
 /**
  * @brief 
  * 
- * @param chemin_img 
- * @param rect 
- * @param renderer 
- * @param x 
- * @param y 
- * @param w 
- * @param h 
+ * @param chemin_img chemin de l'image
+ * @param rect rectangle de la texture
+ * @param renderer stocke les textures
+ * @param x coordonée x du rectangle
+ * @param y coordonée y du rectangle
+ * @param w largeur du rectangle
+ * @param h hauteur du rectangle
  * @return SDL_Texture* 
  */
   SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, float x, float y, float w, float h){
