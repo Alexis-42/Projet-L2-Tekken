@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Projet L2 Tekken:  Fichier source de include/joueur.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -34,10 +34,10 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.9.2 -->
+<!-- Généré par Doxygen 1.8.17 -->
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 /* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
@@ -48,8 +48,7 @@ $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */
-</script>
+/* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -83,54 +82,75 @@ $(document).ready(function(){initNavTree('joueur_8h_source.html',''); initResiza
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">joueur.h</div></div>
+  <div class="headertitle">
+<div class="title">joueur.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* complex.h */</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef COMPLEX_H_INCLUDED__</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define COMPLEX_H_INCLUDED__</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;../include/personnages.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {gauche, droite} Direction;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structcoord.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">float</span> x, y;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;} <a class="code" href="structcoord.html">coord</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structJoueur.html">   14</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <a class="code" href="structcoord.html">coord</a> position;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordtype">int</span> vie;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">int</span> action;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">bool</span> sauter;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  Direction direction;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="structPersonnage.html">Personnage</a> perso;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    SDL_Rect hitbox; <span class="comment">//Hitbox pour recevoir des degats et le reste</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    SDL_Rect hitbox_coup; <span class="comment">//Hitbox pour la portée des coups de poing</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  SDL_Rect hitbox_pied; <span class="comment">//Hitbox pour la portée des coups de pieds</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    SDL_Texture * texture;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <a class="code" href="structJoueur.html">Joueur</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">bool</span> estTropHaut(<a class="code" href="structJoueur.html">Joueur</a> * joueur);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">bool</span> estAuSol(<a class="code" href="structJoueur.html">Joueur</a> * joueur);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> direction(<a class="code" href="structJoueur.html">Joueur</a> * j1, <a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> hitbox(<a class="code" href="structJoueur.html">Joueur</a> * joueur, SDL_Texture * texture,<span class="keywordtype">int</span> coup);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">int</span> checkPerdu(<a class="code" href="structJoueur.html">Joueur</a> * j1, <a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">bool</span> checkCollisions(<a class="code" href="structJoueur.html">Joueur</a> * j1, <a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> initJoueur(<a class="code" href="structJoueur.html">Joueur</a> * joueur, <span class="keywordtype">float</span> posX, SDL_Texture * texture, Direction direction);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> initPerso(<a class="code" href="structJoueur.html">Joueur</a> * j, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astructJoueur_html"><div class="ttname"><a href="structJoueur.html">Joueur</a></div><div class="ttdef"><b>Definition:</b> joueur.h:14</div></div>
-<div class="ttc" id="astructPersonnage_html"><div class="ttname"><a href="structPersonnage.html">Personnage</a></div><div class="ttdef"><b>Definition:</b> personnages.h:17</div></div>
-<div class="ttc" id="astructcoord_html"><div class="ttname"><a href="structcoord.html">coord</a></div><div class="ttdef"><b>Definition:</b> joueur.h:10</div></div>
+<a href="joueur_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/* complex.h */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef COMPLEX_H_INCLUDED__</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define COMPLEX_H_INCLUDED__</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;../include/personnages.h&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {gauche, droite} Direction;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structcoord.html">   20</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">float</span> x, y;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;} <a class="code" href="structcoord.html">coord</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structJoueur.html">   24</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="structcoord.html">coord</a> position;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">int</span> vie;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">int</span> roundsGagnes;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">int</span> action;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="mouvements_8c.html#a168e7c5e3c88ac528b370a375dedaa7e">sauter</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  Direction <a class="code" href="joueur_8h.html#aa58db563f7404a47627fdcdc527d3318">direction</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="structPersonnage.html">Personnage</a> perso;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    SDL_Rect <a class="code" href="joueur_8h.html#a580bb254b4248b2fe0571cbd51e96836">hitbox</a>; <span class="comment">//Hitbox pour recevoir des degats et le reste</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    SDL_Rect hitbox_coup; <span class="comment">//Hitbox pour la portée des coups de poing</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  SDL_Rect hitbox_pied; <span class="comment">//Hitbox pour la portée des coups de pieds</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    SDL_Texture * texture;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <a class="code" href="structJoueur.html">Joueur</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="joueur_8h.html#a5788cc2bbdd5b4637233d9ad4df9510f">estTropHaut</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="joueur_8h.html#a2a296f69d999d5ecd03dcb2333fe43d9">estAuSol</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> <a class="code" href="joueur_8h.html#aa58db563f7404a47627fdcdc527d3318">direction</a>(<a class="code" href="structJoueur.html">Joueur</a> * j1, <a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="joueur_8h.html#a580bb254b4248b2fe0571cbd51e96836">hitbox</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur, SDL_Texture * texture,<span class="keywordtype">int</span> coup);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">int</span> <a class="code" href="joueur_8h.html#a32b9f60ac63812021fb2e578e4c594f6">checkPerdu</a>(<a class="code" href="structJoueur.html">Joueur</a> * j1, <a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="joueur_8h.html#aa59e370850a41ab041fae4c9f3cee99f">checkCollisions</a>(<a class="code" href="structJoueur.html">Joueur</a> * j1, <a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> <a class="code" href="joueur_8h.html#a2aada298f853a574bff1d653627003ff">initJoueur</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur, <span class="keywordtype">float</span> posX, SDL_Texture * texture, Direction <a class="code" href="joueur_8h.html#aa58db563f7404a47627fdcdc527d3318">direction</a>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">void</span> <a class="code" href="joueur_8h.html#a2d937d4a89e8db658c3f9fc96f4b7580">initPerso</a>(<a class="code" href="structJoueur.html">Joueur</a> * j, <span class="keywordtype">int</span> i);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="ajoueur_8h_html_a2aada298f853a574bff1d653627003ff"><div class="ttname"><a href="joueur_8h.html#a2aada298f853a574bff1d653627003ff">initJoueur</a></div><div class="ttdeci">void initJoueur(Joueur *joueur, float posX, SDL_Texture *texture, Direction direction)</div><div class="ttdoc">Fonction qui initialise les valeurs d'un joueur ( vie / position / direction / texture)</div><div class="ttdef"><b>Definition:</b> joueur.c:152</div></div>
+<div class="ttc" id="ajoueur_8h_html_a580bb254b4248b2fe0571cbd51e96836"><div class="ttname"><a href="joueur_8h.html#a580bb254b4248b2fe0571cbd51e96836">hitbox</a></div><div class="ttdeci">void hitbox(Joueur *joueur, SDL_Texture *texture, int coup)</div><div class="ttdoc">Fonction de création des hitbox du coup de pied ou poing et les affiche si extern debug = vrai.</div><div class="ttdef"><b>Definition:</b> joueur.c:67</div></div>
+<div class="ttc" id="astructJoueur_html"><div class="ttname"><a href="structJoueur.html">Joueur</a></div><div class="ttdef"><b>Definition:</b> joueur.h:24</div></div>
+<div class="ttc" id="ajoueur_8h_html_a2d937d4a89e8db658c3f9fc96f4b7580"><div class="ttname"><a href="joueur_8h.html#a2d937d4a89e8db658c3f9fc96f4b7580">initPerso</a></div><div class="ttdeci">void initPerso(Joueur *j, int i)</div><div class="ttdoc">Fonction affectant un personnage à un joueur.</div><div class="ttdef"><b>Definition:</b> personnages.c:25</div></div>
+<div class="ttc" id="ajoueur_8h_html_aa58db563f7404a47627fdcdc527d3318"><div class="ttname"><a href="joueur_8h.html#aa58db563f7404a47627fdcdc527d3318">direction</a></div><div class="ttdeci">void direction(Joueur *j1, Joueur *j2)</div><div class="ttdoc">Fonction qui retourne les joueurs en fonction de leur position respectives.</div><div class="ttdef"><b>Definition:</b> joueur.c:55</div></div>
+<div class="ttc" id="ajoueur_8h_html_aa59e370850a41ab041fae4c9f3cee99f"><div class="ttname"><a href="joueur_8h.html#aa59e370850a41ab041fae4c9f3cee99f">checkCollisions</a></div><div class="ttdeci">bool checkCollisions(Joueur *j1, Joueur *j2)</div><div class="ttdoc">Fonction qui teste la collision de la hitbox de coup ( pied ou poing en fonction de l'action ) de hit...</div><div class="ttdef"><b>Definition:</b> joueur.c:133</div></div>
+<div class="ttc" id="ajoueur_8h_html_a2a296f69d999d5ecd03dcb2333fe43d9"><div class="ttname"><a href="joueur_8h.html#a2a296f69d999d5ecd03dcb2333fe43d9">estAuSol</a></div><div class="ttdeci">bool estAuSol(Joueur *joueur)</div><div class="ttdoc">Fonction pour savoir si le joueur est au sol.</div><div class="ttdef"><b>Definition:</b> joueur.c:42</div></div>
+<div class="ttc" id="ajoueur_8h_html_a32b9f60ac63812021fb2e578e4c594f6"><div class="ttname"><a href="joueur_8h.html#a32b9f60ac63812021fb2e578e4c594f6">checkPerdu</a></div><div class="ttdeci">int checkPerdu(Joueur *j1, Joueur *j2)</div><div class="ttdoc">Fonction qui teste si l'un des deux joueurs à perdu.</div><div class="ttdef"><b>Definition:</b> joueur.c:117</div></div>
+<div class="ttc" id="amouvements_8c_html_a168e7c5e3c88ac528b370a375dedaa7e"><div class="ttname"><a href="mouvements_8c.html#a168e7c5e3c88ac528b370a375dedaa7e">sauter</a></div><div class="ttdeci">void sauter(Joueur *joueur)</div><div class="ttdoc">fonction qui gère le déplacement vertical lors d'un saut</div><div class="ttdef"><b>Definition:</b> mouvements.c:47</div></div>
+<div class="ttc" id="astructcoord_html"><div class="ttname"><a href="structcoord.html">coord</a></div><div class="ttdef"><b>Definition:</b> joueur.h:20</div></div>
+<div class="ttc" id="ajoueur_8h_html_a5788cc2bbdd5b4637233d9ad4df9510f"><div class="ttname"><a href="joueur_8h.html#a5788cc2bbdd5b4637233d9ad4df9510f">estTropHaut</a></div><div class="ttdeci">bool estTropHaut(Joueur *joueur)</div><div class="ttdoc">Fonction pour savoir si le joueur dépasse la hauteur maximale.</div><div class="ttdef"><b>Definition:</b> joueur.c:31</div></div>
+<div class="ttc" id="astructPersonnage_html"><div class="ttname"><a href="structPersonnage.html">Personnage</a></div><div class="ttdoc">struct qui représente un personnage</div><div class="ttdef"><b>Definition:</b> personnages.h:36</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>joueur.h</b></li>
-    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="joueur_8h.html">joueur.h</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
 </div>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Projet L2 Tekken: Référence du fichier include/animations.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -34,10 +34,10 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.9.2 -->
+<!-- Généré par Doxygen 1.8.17 -->
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 /* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
@@ -48,8 +48,7 @@ $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */
-</script>
+/* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -87,13 +86,14 @@ $(document).ready(function(){initNavTree('animations_8h.html',''); initResizable
 <a href="#nested-classes">Structures de données</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
-  <div class="headertitle"><div class="title">Référence du fichier animations.h</div></div>
+  <div class="headertitle">
+<div class="title">Référence du fichier animations.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header des fonctions qui sont en relation avec les variables d'animations.  
+<p>Fichier contenant les fonction header d'affichage du jeu.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &quot;../include/joueur.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="joueur_8h_source.html">../include/joueur.h</a>&quot;</code><br />
 </div>
 <p><a href="animations_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
@@ -138,17 +138,26 @@ Fonctions</h2></td></tr>
 <tr class="memdesc:a1fffc0594d93a061f2f01d443d2a43a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anime un joueur grâce à ses données dans la structure qui lui correspond.  <a href="animations_8h.html#a1fffc0594d93a061f2f01d443d2a43a0">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1fffc0594d93a061f2f01d443d2a43a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b58c1a6c4b706b99758e73c76907baa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa">jouerAnimation</a> (<a class="el" href="structJoueur.html">Joueur</a> *joueur, int seconds, <a class="el" href="structJoueur.html">Joueur</a> *j2)</td></tr>
+<tr class="memdesc:a1b58c1a6c4b706b99758e73c76907baa"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction permettant de modifier les informations d'affichage du personnage pour une animation qui doit être affiché entierement et qui ne doit pas se joué en boucle  <a href="animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1b58c1a6c4b706b99758e73c76907baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84bb6dd747576fd0d752b9eca7c20164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164">jouerAnimationContinu</a> (<a class="el" href="structJoueur.html">Joueur</a> *joueur, int seconds)</td></tr>
+<tr class="memdesc:a84bb6dd747576fd0d752b9eca7c20164"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction permettant de modifier les informations d'affichage du personnage pour une animation qui n'a pas à être affiché entierement et qui doit se joué en boucle tant que la touche est appuyé  <a href="animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a84bb6dd747576fd0d752b9eca7c20164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03e5648b988f70da6bd9ed2bc16fd3a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3">jouerAnimationBackground</a> (SDL_Rect *srcBg, SDL_Rect *dstBg, int flag_bg)</td></tr>
 <tr class="memdesc:a03e5648b988f70da6bd9ed2bc16fd3a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les valeurs des rectangles afin d'animer un fond ( en mode preview ou en background )  <a href="animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a03e5648b988f70da6bd9ed2bc16fd3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p >Header des fonctions qui sont en relation avec les variables d'animations. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Charly.P Alexis.G Léo.N </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-03-30</dd></dl>
+<div class="textblock"><p>Fichier contenant les fonction header d'affichage du jeu. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Charly.P Alexis.G Léo.N <ul>
+<li>Jouer animation perso </li>
+<li>Attaquer un joueur </li>
+<li>Jouer animation background <br  />
+ ainsi que la structure background </li>
+</ul>
+</dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-03-22</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
 <a id="a1b58c1a6c4b706b99758e73c76907baa"></a>
@@ -182,11 +191,16 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>fonction permettant de modifier les informations d'affichage du personnage pour une animation qui doit être affiché entierement et qui ne doit pas se joué en boucle </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">joueur</td><td></td></tr>
     <tr><td class="paramname">seconds</td><td></td></tr>
     <tr><td class="paramname">j2</td><td></td></tr>
+    <tr><td class="paramname">joueur</td><td>structure des informations du joueur à qui l'on veut modifié ses paramètre d'affichage </td></tr>
+    <tr><td class="paramname">seconds</td><td>temps zn seconde depuis le lancement du jeu </td></tr>
+    <tr><td class="paramname">j2</td><td>structure des informations du joueur adverse </td></tr>
   </table>
   </dd>
 </dl>
@@ -266,10 +280,14 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>fonction permettant de modifier les informations d'affichage du personnage pour une animation qui n'a pas à être affiché entierement et qui doit se joué en boucle tant que la touche est appuyé </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">joueur</td><td></td></tr>
     <tr><td class="paramname">seconds</td><td></td></tr>
+    <tr><td class="paramname">joueur</td><td>structure des informations du joueur à qui l'on veut modifié ses paramètre d'affichage </td></tr>
+    <tr><td class="paramname">seconds</td><td>temps zn seconde depuis le lancement du jeu </td></tr>
   </table>
   </dd>
 </dl>
@@ -308,7 +326,9 @@ Fonctions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="animations_8h.html">animations.h</a></li>
-    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
 </div>
 </body>

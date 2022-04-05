@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Projet L2 Tekken: Référence du fichier src/gui.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -34,10 +34,10 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.9.2 -->
+<!-- Généré par Doxygen 1.8.17 -->
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 /* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
@@ -48,8 +48,7 @@ $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */
-</script>
+/* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -86,20 +85,21 @@ $(document).ready(function(){initNavTree('gui_8c.html',''); initResizable(); });
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
-  <div class="headertitle"><div class="title">Référence du fichier gui.c</div></div>
+  <div class="headertitle">
+<div class="title">Référence du fichier gui.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Fonctions relatives au gui ( Graphical User Interface )  
+<p>Fichier contenant les fonction d'affichage de l'interface utilisateur et l'initialisation des valeurs importantes à cet affichage.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
-<code>#include &quot;../include/joueur.h&quot;</code><br />
-<code>#include &quot;../include/jeu.h&quot;</code><br />
-<code>#include &quot;../include/gui.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="joueur_8h_source.html">../include/joueur.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="jeu_8h_source.html">../include/jeu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gui_8h_source.html">../include/gui.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -109,24 +109,24 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:ac8021ac4429dc7f71f05fa18b0f4cd56"><td class="memItemLeft" align="right" valign="top"><a id="ac8021ac4429dc7f71f05fa18b0f4cd56"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Texture **texture_carre_jaune, SDL_Texture **texture_carre_rouge, SDL_Surface *sprite_barre_de_vie, SDL_Texture **texture_barre_de_vie)</td></tr>
+<tr class="memitem:ac8021ac4429dc7f71f05fa18b0f4cd56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#ac8021ac4429dc7f71f05fa18b0f4cd56">init_gui</a> (SDL_Texture **texture_carre_jaune, SDL_Texture **texture_carre_rouge, SDL_Surface *sprite_barre_de_vie, SDL_Texture **texture_barre_de_vie)</td></tr>
+<tr class="memdesc:ac8021ac4429dc7f71f05fa18b0f4cd56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui va initialiser les textures d'une barre de vie.  <a href="gui_8c.html#ac8021ac4429dc7f71f05fa18b0f4cd56">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac8021ac4429dc7f71f05fa18b0f4cd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc2c7c624384d8a03a5bc28851911419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#afc2c7c624384d8a03a5bc28851911419">init_affichage_temps</a> (int sec_deb_combat, TTF_Font *font, SDL_Rect *rect_sprite_pvj1, SDL_Texture **texture, SDL_Rect *rect_temps)</td></tr>
-<tr class="memdesc:afc2c7c624384d8a03a5bc28851911419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui initialise les textures qui sont en relation avec le temps.  <a href="gui_8c.html#afc2c7c624384d8a03a5bc28851911419">Plus de détails...</a><br /></td></tr>
-<tr class="separator:afc2c7c624384d8a03a5bc28851911419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2782e76241fa774ad21ba728fa4a443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#ae2782e76241fa774ad21ba728fa4a443">init_affichage_temps</a> (int temps_combat, TTF_Font *font, SDL_Rect *rect_sprite_pvj1, SDL_Texture **texture, SDL_Rect *rect_temps)</td></tr>
+<tr class="memdesc:ae2782e76241fa774ad21ba728fa4a443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui initialise les textures qui sont en relation avec le temps.  <a href="gui_8c.html#ae2782e76241fa774ad21ba728fa4a443">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae2782e76241fa774ad21ba728fa4a443"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4606adf5219d797789d4976d3b18a016"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a4606adf5219d797789d4976d3b18a016">init_sprite_pv</a> (SDL_Rect *rect_sprite_pv, int num_joueur)</td></tr>
-<tr class="memdesc:a4606adf5219d797789d4976d3b18a016"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction qui permet l'init d'un sprite barre de vie en fonction du joueur  <a href="gui_8c.html#a4606adf5219d797789d4976d3b18a016">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a4606adf5219d797789d4976d3b18a016"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction qui permet d'initialiser les valeurs du réctangle d'un sprite barre de vie en fonction du joueur  <a href="gui_8c.html#a4606adf5219d797789d4976d3b18a016">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a4606adf5219d797789d4976d3b18a016"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa14fc4ee8f36637b70b41c9e48bd61c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#aa14fc4ee8f36637b70b41c9e48bd61c6">init_afficher_nom_joueur</a> (<a class="el" href="structJoueur.html">Joueur</a> *joueur, TTF_Font *font, SDL_Rect *rect_sprite_pv, SDL_Rect *rect_nom_joueur, SDL_Texture **texture, int num_joueur)</td></tr>
-<tr class="memdesc:aa14fc4ee8f36637b70b41c9e48bd61c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les textures et rectangle qui sont en relation avec l'affichage du nom des joueurs.  <a href="gui_8c.html#aa14fc4ee8f36637b70b41c9e48bd61c6">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:aa14fc4ee8f36637b70b41c9e48bd61c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les textures et rectangles qui sont en relation avec l'affichage du nom des joueurs.  <a href="gui_8c.html#aa14fc4ee8f36637b70b41c9e48bd61c6">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aa14fc4ee8f36637b70b41c9e48bd61c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a377bcad63f823a03660d512263dfb739"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8c.html#a377bcad63f823a03660d512263dfb739">barre_de_vie</a> (<a class="el" href="structJoueur.html">Joueur</a> *joueur, SDL_Rect *rect_sprite_pv, SDL_Texture *texture_barre_de_vie, SDL_Texture *texture_carre_rouge, SDL_Texture *texture_carre_jaune, TTF_Font *font)</td></tr>
 <tr class="memdesc:a377bcad63f823a03660d512263dfb739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction à appeler pour afficher les barres de vies apres l'init ( à utiliser pour redessiner la barre à chaque appel )  <a href="gui_8c.html#a377bcad63f823a03660d512263dfb739">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a377bcad63f823a03660d512263dfb739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p >Fonctions relatives au gui ( Graphical User Interface ) </p>
+<div class="textblock"><p>Fichier contenant les fonction d'affichage de l'interface utilisateur et l'initialisation des valeurs importantes à cet affichage. </p>
 <dl class="section author"><dt>Auteur</dt><dd>Charly.P Alexis.G Léo.N </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-03-30</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
@@ -196,8 +196,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
 
 </div>
 </div>
-<a id="afc2c7c624384d8a03a5bc28851911419"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc2c7c624384d8a03a5bc28851911419">&#9670;&nbsp;</a></span>init_affichage_temps()</h2>
+<a id="ae2782e76241fa774ad21ba728fa4a443"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2782e76241fa774ad21ba728fa4a443">&#9670;&nbsp;</a></span>init_affichage_temps()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +206,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
           <td class="memname">void init_affichage_temps </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sec_deb_combat</em>, </td>
+          <td class="paramname"><em>temps_combat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -243,7 +243,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
 <p>Fonction qui initialise les textures qui sont en relation avec le temps. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sec_deb_combat</td><td>Le temps actuel du combat </td></tr>
+    <tr><td class="paramname">temps_combat</td><td>Le temps actuel du combat </td></tr>
     <tr><td class="paramname">font</td><td>La font que l'on veut </td></tr>
     <tr><td class="paramname">rect_sprite_pvj1</td><td>Rectangle qui sera utilisé pour afficher la vie du joueur </td></tr>
     <tr><td class="paramname">texture</td><td>texture à entrer afin de la créer </td></tr>
@@ -304,7 +304,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
       </table>
 </div><div class="memdoc">
 
-<p>Initialise les textures et rectangle qui sont en relation avec l'affichage du nom des joueurs. </p>
+<p>Initialise les textures et rectangles qui sont en relation avec l'affichage du nom des joueurs. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">joueur</td><td><a class="el" href="structJoueur.html">Joueur</a> auquel on va afficher le nom </td></tr>
@@ -317,6 +317,57 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
 <li>2 pour j2 </li>
 </ul>
 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac8021ac4429dc7f71f05fa18b0f4cd56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8021ac4429dc7f71f05fa18b0f4cd56">&#9670;&nbsp;</a></span>init_gui()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_gui </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Texture **&#160;</td>
+          <td class="paramname"><em>texture_carre_jaune</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture **&#160;</td>
+          <td class="paramname"><em>texture_carre_rouge</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>sprite_barre_de_vie</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture **&#160;</td>
+          <td class="paramname"><em>texture_barre_de_vie</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui va initialiser les textures d'une barre de vie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">texture_carre_jaune</td><td>texture du carée jaune à initialiser </td></tr>
+    <tr><td class="paramname">texture_carre_rouge</td><td>texture du carée rouge à initialiser </td></tr>
+    <tr><td class="paramname">sprite_barre_de_vie</td><td>surface entrée en paramètre du contour gris </td></tr>
+    <tr><td class="paramname">texture_barre_de_vie</td><td>texture du contour gris à initialiser </td></tr>
   </table>
   </dd>
 </dl>
@@ -349,7 +400,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
       </table>
 </div><div class="memdoc">
 
-<p>fonction qui permet l'init d'un sprite barre de vie en fonction du joueur </p>
+<p>fonction qui permet d'initialiser les valeurs du réctangle d'un sprite barre de vie en fonction du joueur </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">rect_sprite_pv</td><td>Rectangle à initisialiser </td></tr>
@@ -370,7 +421,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_gui</b> (SDL_Tex
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gui_8c.html">gui.c</a></li>
-    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
 </div>
 </body>

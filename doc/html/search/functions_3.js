@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['joueranimation_33',['jouerAnimation',['../animations_8c.html#a1b58c1a6c4b706b99758e73c76907baa',1,'jouerAnimation(Joueur *joueur, int seconds, Joueur *j2):&#160;animations.c'],['../animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa',1,'jouerAnimation(Joueur *joueur, int seconds, Joueur *j2):&#160;animations.c']]],
-  ['joueranimationbackground_34',['jouerAnimationBackground',['../animations_8c.html#a03e5648b988f70da6bd9ed2bc16fd3a3',1,'jouerAnimationBackground(SDL_Rect *srcBg, SDL_Rect *dstBg, int flag_bg):&#160;animations.c'],['../animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3',1,'jouerAnimationBackground(SDL_Rect *srcBg, SDL_Rect *dstBg, int flag_bg):&#160;animations.c']]],
-  ['joueranimationcontinu_35',['jouerAnimationContinu',['../animations_8c.html#a84bb6dd747576fd0d752b9eca7c20164',1,'jouerAnimationContinu(Joueur *joueur, int seconds):&#160;animations.c'],['../animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164',1,'jouerAnimationContinu(Joueur *joueur, int seconds):&#160;animations.c']]]
+  ['deplacements_138',['deplacements',['../mouvements_8c.html#a60de8b462a239e7d13170867893afb3f',1,'deplacements(Joueur *j1, Joueur *j2, SDL_Event *event, int ia, int *temps_parerJ2, int *temps_parerJ1):&#160;mouvements.c'],['../mouvements_8h.html#a60de8b462a239e7d13170867893afb3f',1,'deplacements(Joueur *j1, Joueur *j2, SDL_Event *event, int ia, int *temps_parerJ2, int *temps_parerJ1):&#160;mouvements.c']]],
+  ['deplacements_5fia_139',['deplacements_ia',['../ia_8c.html#a77f57c573f928743cdfab9b7899eb706',1,'deplacements_ia(Joueur *ia, Joueur *j1):&#160;ia.c'],['../ia_8h.html#a77f57c573f928743cdfab9b7899eb706',1,'deplacements_ia(Joueur *ia, Joueur *j1):&#160;ia.c']]],
+  ['direction_140',['direction',['../joueur_8c.html#aa58db563f7404a47627fdcdc527d3318',1,'direction(Joueur *j1, Joueur *j2):&#160;joueur.c'],['../joueur_8h.html#aa58db563f7404a47627fdcdc527d3318',1,'direction(Joueur *j1, Joueur *j2):&#160;joueur.c']]]
 ];

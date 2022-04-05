@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['params_14',['params',['../structparams.html',1,'']]],
-  ['personnage_15',['Personnage',['../structPersonnage.html',1,'']]],
-  ['projet_20l2_20tekken_16',['Projet L2 Tekken',['../index.html',1,'']]]
+  ['hitbox_27',['hitbox',['../joueur_8c.html#a580bb254b4248b2fe0571cbd51e96836',1,'hitbox(Joueur *joueur, SDL_Texture *texture, int coup):&#160;joueur.c'],['../joueur_8h.html#a580bb254b4248b2fe0571cbd51e96836',1,'hitbox(Joueur *joueur, SDL_Texture *texture, int coup):&#160;joueur.c']]]
 ];

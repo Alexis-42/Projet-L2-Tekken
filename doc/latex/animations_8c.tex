@@ -2,15 +2,15 @@
 \label{animations_8c}\index{src/animations.c@{src/animations.c}}
 
 
-Fonctions qui sont en relation avec les variables d\textquotesingle{}animations.  
+Fichier contenant les fonction d\textquotesingle{}affichage du jeu.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
-{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+image.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../include/animations.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/joueur.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/jeu.\+h\char`\"{}}\newline
@@ -24,24 +24,25 @@ void \mbox{\hyperlink{animations_8c_a1fffc0594d93a061f2f01d443d2a43a0}{render\+A
 void \mbox{\hyperlink{animations_8c_a8b508aa5642eb3f675fc6414a5f5423c}{attaquer}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$j\+Attaquant, \mbox{\hyperlink{structJoueur}{Joueur}} $\ast$j2)
 \begin{DoxyCompactList}\small\item\em Fonction qui permet de voir si un joueur va mettre des dégats ( en fonction du coup donné ) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{animations_8c_a1b58c1a6c4b706b99758e73c76907baa}{jouer\+Animation}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur, int seconds, \mbox{\hyperlink{structJoueur}{Joueur}} $\ast$j2)
-\item 
+\begin{DoxyCompactList}\small\item\em fonction permettant de modifier les informations d\textquotesingle{}affichage du personnage pour une animation qui doit être affiché entierement et qui ne doit pas se joué en boucle \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{animations_8c_a84bb6dd747576fd0d752b9eca7c20164}{jouer\+Animation\+Continu}} (\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$joueur, int seconds)
-\item 
-void \mbox{\hyperlink{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}{jouer\+Animation\+Background}} (SDL\+\_\+\+Rect $\ast$src\+Bg, SDL\+\_\+\+Rect $\ast$dst\+Bg, int flag\+\_\+bg)
+\begin{DoxyCompactList}\small\item\em fonction permettant de modifier les informations d\textquotesingle{}affichage du personnage pour une animation qui n\textquotesingle{}a pas à être affiché entierement et qui doit se joué en boucle tant que la touche est appuyé \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}{jouer\+Animation\+Background}} (S\+D\+L\+\_\+\+Rect $\ast$src\+Bg, S\+D\+L\+\_\+\+Rect $\ast$dst\+Bg, int flag\+\_\+bg)
 \begin{DoxyCompactList}\small\item\em Initialise les valeurs des rectangles afin d\textquotesingle{}animer un fond ( en mode preview ou en background ) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}\label{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}} 
-SDL\+\_\+\+Display\+Mode {\bfseries ecran}
+S\+D\+L\+\_\+\+Display\+Mode \mbox{\hyperlink{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}{ecran}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
-Fonctions qui sont en relation avec les variables d\textquotesingle{}animations. 
+Fichier contenant les fonction d\textquotesingle{}affichage du jeu. 
 
 \begin{DoxyAuthor}{Auteur}
-Charly.\+P Alexis.\+G Léo.\+N 
+Charly.\+P Alexis.\+G Léo.\+N \begin{DoxyItemize}
+\item Jouer animation perso \item Attaquer un joueur \item Jouer animation background \end{DoxyItemize}
+
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
 1.\+0 
@@ -79,19 +80,23 @@ Fonction qui permet de voir si un joueur va mettre des dégats ( en fonction du 
 {\footnotesize\ttfamily void jouer\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur,  }\item[{int}]{seconds,  }\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{j2 }\end{DoxyParamCaption})}
 
 
+
+fonction permettant de modifier les informations d\textquotesingle{}affichage du personnage pour une animation qui doit être affiché entierement et qui ne doit pas se joué en boucle 
+
+
 \begin{DoxyParams}{Paramètres}
-{\em joueur} & \\
+{\em joueur} & structure des informations du joueur à qui l\textquotesingle{}on veut modifié ses paramètre d\textquotesingle{}affichage \\
 \hline
-{\em seconds} & \\
+{\em seconds} & temps zn seconde depuis le lancement du jeu \\
 \hline
-{\em j2} & \\
+{\em j2} & structure des informations du joueur adverse \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}\label{animations_8c_a03e5648b988f70da6bd9ed2bc16fd3a3}} 
 \index{animations.c@{animations.c}!jouerAnimationBackground@{jouerAnimationBackground}}
 \index{jouerAnimationBackground@{jouerAnimationBackground}!animations.c@{animations.c}}
 \doxysubsubsection{\texorpdfstring{jouerAnimationBackground()}{jouerAnimationBackground()}}
-{\footnotesize\ttfamily void jouer\+Animation\+Background (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect $\ast$}]{src\+Bg,  }\item[{SDL\+\_\+\+Rect $\ast$}]{dst\+Bg,  }\item[{int}]{flag\+\_\+bg }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void jouer\+Animation\+Background (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Rect $\ast$}]{src\+Bg,  }\item[{S\+D\+L\+\_\+\+Rect $\ast$}]{dst\+Bg,  }\item[{int}]{flag\+\_\+bg }\end{DoxyParamCaption})}
 
 
 
@@ -115,10 +120,14 @@ Initialise les valeurs des rectangles afin d\textquotesingle{}animer un fond ( e
 {\footnotesize\ttfamily void jouer\+Animation\+Continu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJoueur}{Joueur}} $\ast$}]{joueur,  }\item[{int}]{seconds }\end{DoxyParamCaption})}
 
 
+
+fonction permettant de modifier les informations d\textquotesingle{}affichage du personnage pour une animation qui n\textquotesingle{}a pas à être affiché entierement et qui doit se joué en boucle tant que la touche est appuyé 
+
+
 \begin{DoxyParams}{Paramètres}
-{\em joueur} & \\
+{\em joueur} & structure des informations du joueur à qui l\textquotesingle{}on veut modifié ses paramètre d\textquotesingle{}affichage \\
 \hline
-{\em seconds} & \\
+{\em seconds} & temps zn seconde depuis le lancement du jeu \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{animations_8c_a1fffc0594d93a061f2f01d443d2a43a0}\label{animations_8c_a1fffc0594d93a061f2f01d443d2a43a0}} 
@@ -136,3 +145,13 @@ Anime un joueur grâce à ses données dans la structure qui lui correspond.
 {\em joueur} & \mbox{\hyperlink{structJoueur}{Joueur}} qui va etre animé dans cette frame \\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Documentation des variables}
+\mbox{\Hypertarget{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}\label{animations_8c_a92a7d5ce6264fcee4055335c8a0bbd7d}} 
+\index{animations.c@{animations.c}!ecran@{ecran}}
+\index{ecran@{ecran}!animations.c@{animations.c}}
+\doxysubsubsection{\texorpdfstring{ecran}{ecran}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Display\+Mode ecran}
+
+Variable représentant l\textquotesingle{}ecran ( ecran.\+w et .h disponible avec celle-\/ci ) 

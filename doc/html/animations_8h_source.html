@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Projet L2 Tekken:  Fichier source de include/animations.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -34,10 +34,10 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.9.2 -->
+<!-- Généré par Doxygen 1.8.17 -->
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 /* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
@@ -48,8 +48,7 @@ $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */
-</script>
+/* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -83,50 +82,54 @@ $(document).ready(function(){initNavTree('animations_8h_source.html',''); initRe
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">animations.h</div></div>
+  <div class="headertitle">
+<div class="title">animations.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="animations_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../include/joueur.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef ANIM_H_INCLUDED__</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define ANIM_H_INCLUDED__</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define DANSE 0</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define DEGAT 1</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define IDLE 2</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define MORT 3</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define PIED 4</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define POING 5</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define COURIR 6</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define SAUTER 7</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define PARER 8</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a1fffc0594d93a061f2f01d443d2a43a0">renderAnimation</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa">jouerAnimation</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur,<span class="keywordtype">int</span> seconds,<a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164">jouerAnimationContinu</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur,<span class="keywordtype">int</span> seconds);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3">jouerAnimationBackground</a>(SDL_Rect * srcBg, SDL_Rect * dstBg,<span class="keywordtype">int</span> flag_bg);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structBackground.html">   61</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">int</span> posY;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">int</span> nb_frames;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">char</span> * chemin_sprite;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;} <a class="code" href="structBackground.html">Background</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aanimations_8h_html_a03e5648b988f70da6bd9ed2bc16fd3a3"><div class="ttname"><a href="animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3">jouerAnimationBackground</a></div><div class="ttdeci">void jouerAnimationBackground(SDL_Rect *srcBg, SDL_Rect *dstBg, int flag_bg)</div><div class="ttdoc">Initialise les valeurs des rectangles afin d'animer un fond ( en mode preview ou en background )</div><div class="ttdef"><b>Definition:</b> animations.c:184</div></div>
-<div class="ttc" id="aanimations_8h_html_a1b58c1a6c4b706b99758e73c76907baa"><div class="ttname"><a href="animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa">jouerAnimation</a></div><div class="ttdeci">void jouerAnimation(Joueur *joueur, int seconds, Joueur *j2)</div><div class="ttdef"><b>Definition:</b> animations.c:60</div></div>
-<div class="ttc" id="aanimations_8h_html_a1fffc0594d93a061f2f01d443d2a43a0"><div class="ttname"><a href="animations_8h.html#a1fffc0594d93a061f2f01d443d2a43a0">renderAnimation</a></div><div class="ttdeci">void renderAnimation(Joueur *joueur)</div><div class="ttdoc">Anime un joueur grâce à ses données dans la structure qui lui correspond.</div><div class="ttdef"><b>Definition:</b> animations.c:30</div></div>
-<div class="ttc" id="aanimations_8h_html_a84bb6dd747576fd0d752b9eca7c20164"><div class="ttname"><a href="animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164">jouerAnimationContinu</a></div><div class="ttdeci">void jouerAnimationContinu(Joueur *joueur, int seconds)</div><div class="ttdef"><b>Definition:</b> animations.c:126</div></div>
-<div class="ttc" id="astructBackground_html"><div class="ttname"><a href="structBackground.html">Background</a></div><div class="ttdef"><b>Definition:</b> animations.h:61</div></div>
-<div class="ttc" id="astructJoueur_html"><div class="ttname"><a href="structJoueur.html">Joueur</a></div><div class="ttdef"><b>Definition:</b> joueur.h:14</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../include/joueur.h&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef ANIM_H_INCLUDED__</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define ANIM_H_INCLUDED__</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define DANSE 0</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define DEGAT 1</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define IDLE 2</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define MORT 3</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define PIED 4</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define POING 5</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define COURIR 6</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define SAUTER 7</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define PARER 8</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a1fffc0594d93a061f2f01d443d2a43a0">renderAnimation</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa">jouerAnimation</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur,<span class="keywordtype">int</span> seconds,<a class="code" href="structJoueur.html">Joueur</a> * j2);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164">jouerAnimationContinu</a>(<a class="code" href="structJoueur.html">Joueur</a> * joueur,<span class="keywordtype">int</span> seconds);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3">jouerAnimationBackground</a>(SDL_Rect * srcBg, SDL_Rect * dstBg,<span class="keywordtype">int</span> flag_bg);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structBackground.html">   63</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">int</span> posY;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">int</span> nb_frames;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">char</span> * chemin_sprite;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <a class="code" href="structBackground.html">Background</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aanimations_8h_html_a1fffc0594d93a061f2f01d443d2a43a0"><div class="ttname"><a href="animations_8h.html#a1fffc0594d93a061f2f01d443d2a43a0">renderAnimation</a></div><div class="ttdeci">void renderAnimation(Joueur *joueur)</div><div class="ttdoc">Anime un joueur grâce à ses données dans la structure qui lui correspond.</div><div class="ttdef"><b>Definition:</b> animations.c:33</div></div>
+<div class="ttc" id="astructJoueur_html"><div class="ttname"><a href="structJoueur.html">Joueur</a></div><div class="ttdef"><b>Definition:</b> joueur.h:24</div></div>
+<div class="ttc" id="aanimations_8h_html_a03e5648b988f70da6bd9ed2bc16fd3a3"><div class="ttname"><a href="animations_8h.html#a03e5648b988f70da6bd9ed2bc16fd3a3">jouerAnimationBackground</a></div><div class="ttdeci">void jouerAnimationBackground(SDL_Rect *srcBg, SDL_Rect *dstBg, int flag_bg)</div><div class="ttdoc">Initialise les valeurs des rectangles afin d'animer un fond ( en mode preview ou en background )</div><div class="ttdef"><b>Definition:</b> animations.c:198</div></div>
+<div class="ttc" id="astructBackground_html"><div class="ttname"><a href="structBackground.html">Background</a></div><div class="ttdef"><b>Definition:</b> animations.h:63</div></div>
+<div class="ttc" id="aanimations_8h_html_a84bb6dd747576fd0d752b9eca7c20164"><div class="ttname"><a href="animations_8h.html#a84bb6dd747576fd0d752b9eca7c20164">jouerAnimationContinu</a></div><div class="ttdeci">void jouerAnimationContinu(Joueur *joueur, int seconds)</div><div class="ttdoc">fonction permettant de modifier les informations d'affichage du personnage pour une animation qui n'a...</div><div class="ttdef"><b>Definition:</b> animations.c:135</div></div>
+<div class="ttc" id="aanimations_8h_html_a1b58c1a6c4b706b99758e73c76907baa"><div class="ttname"><a href="animations_8h.html#a1b58c1a6c4b706b99758e73c76907baa">jouerAnimation</a></div><div class="ttdeci">void jouerAnimation(Joueur *joueur, int seconds, Joueur *j2)</div><div class="ttdoc">fonction permettant de modifier les informations d'affichage du personnage pour une animation qui doi...</div><div class="ttdef"><b>Definition:</b> animations.c:63</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="animations_8h.html">animations.h</a></li>
-    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
 </div>
 </body>
