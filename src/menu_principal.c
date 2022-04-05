@@ -1,8 +1,8 @@
 /**
  * @file menu_principal.c
- * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
- * @brief menu qui gère le menu principal
- * @version 0.1
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier des fonctions utilisés dans le menu principal
+ * @version 1.0
  * @date 2022-04-05
  * 
  * @copyright Copyright (c) 2022
@@ -55,6 +55,7 @@ void renderjonathan(SDL_Renderer * renderer, int drip){
     SDL_DestroyTexture(texture_jonathan);
   }
 }
+
 /**
  * @brief vérifie l'emplacement de la souris et retourne une valeur en fonction de cette emplacement
  * 
@@ -74,6 +75,7 @@ int getSelection(int x_button, int y_button){
 
   return 0;
 }
+
 /**
  * @brief affiche du menu principal
  * 

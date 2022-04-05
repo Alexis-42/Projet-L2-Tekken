@@ -1,3 +1,14 @@
+/**
+ * @file audio.h
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier header des fonctions pour jouer le son
+ * @version 1.0
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 /*
  * Simple-SDL2-Audio
  *

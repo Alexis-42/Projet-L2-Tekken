@@ -1,3 +1,14 @@
+/**
+ * @file audio.c
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier des fonctions pour jouer le son
+ * @version 1.0
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 /*
  * Simple-SDL2-Audio
  *
@@ -82,7 +93,7 @@ static uint32_t gSoundCount;
 /*
  * Add a music to the queue, addAudio wrapper for music due to fade
  *
- * @param newAudio       New Audio to add
+ * @param newAudio       Nouveau audio à ajouter
  *
  */
 static void addMusic(Audio * root, Audio * newAudio);

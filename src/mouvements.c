@@ -1,8 +1,8 @@
 /**
  * @file mouvements.c
- * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
- * @brief fichier qui gère les informations du clavier lors du combat
- * @version 0.1
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier qui contient les fonctions qui permettent à un joueur de faire une action
+ * @version 1.0
  * @date 2022-04-05
  * 
  * @copyright Copyright (c) 2022

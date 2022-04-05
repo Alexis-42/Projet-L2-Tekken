@@ -20,6 +20,9 @@
 #include "../include/personnages.h"
 #include "../include/map.h"
 
+/**
+ *  Variable représentant l'ecran ( ecran.w et .h disponible avec celle-ci )
+ */
 SDL_DisplayMode ecran;
 
 /**

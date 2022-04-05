@@ -1,3 +1,13 @@
+/**
+ * @file options.c
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier header des fonctions qui permettent l'affichage de la pause & sauvegarde / chargement des options
+ * @version 1.0
+ * @date 2022-04-05
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <string.h>
 #include <SDL2/SDL.h>
@@ -24,6 +34,11 @@ SDL_Texture * texBtn1, * texBtn2, * texBtn3, * texBtn4, * texBtn5, * texture_jon
 SDL_Rect flamme1, flamme2, flamme3, flamme4, flamme5;
 SDL_Texture * texFlamme1, * texFlamme2, * texFlamme3, * texFlamme4, * texFlamme5;
 
+/**
+ * @brief Fonction qui sauvegarde les options actuelles du joueur
+ * 
+ * @param fichier Pointeur vers l'ouverture du fichier
+ */
 void sauvPreferences(FILE * fichier){
   fprintf(fichier, "difficulte:%d\n", difficulte);
   fprintf(fichier, "debug:%d\n", debug);
@@ -31,6 +46,11 @@ void sauvPreferences(FILE * fichier){
   fprintf(fichier, "nbrounds:%d\n", nbreRoundsMax);
 }
 
+/**
+ * @brief Fonction qui charges les options sauvegardées du joueur
+ * 
+ * @param fichier Pointeur vers l'ouverture du fichier
+ */
 void chargerPreferences(FILE * fichier){
   fscanf(fichier, "difficulte:%d\n", &difficulte);
   fscanf(fichier, "debug:%d\n", &debug);
@@ -38,6 +58,13 @@ void chargerPreferences(FILE * fichier){
   fscanf(fichier, "nbrounds:%d\n", &nbreRoundsMax);
 }
 
+/**
+ * @brief Fonction qui verifie la position de la souris du joueur en fonction des boutons du menu pause
+ * 
+ * @param x_button position X de la souris
+ * @param y_button position Y de la souris
+ * @return int Numero du bouton sélectionné
+ */
 int getSelection3(int x_button, int y_button){
   if(x_button>btn1.x && y_button>btn1.y && x_button<btn1.x+600.0 && y_button<btn1.y+100.0)
     return 1;
@@ -52,45 +79,62 @@ int getSelection3(int x_button, int y_button){
   return 0;
 }
 
-  void renderMenu2(int sortie, int drip){
-    SDL_RenderClear(renderer);
-    
-    jouerAnimationBackground(&srcBg, &dstBg,1);
-    renderMap(&srcBg, &dstBg, renderer);
-
-    switch (sortie) {
-      case 1: SDL_RenderCopy(renderer, texFlamme1, NULL, &flamme1); break;
-      case 2: SDL_RenderCopy(renderer, texFlamme2, NULL, &flamme2); break;
-      case 3: SDL_RenderCopy(renderer, texFlamme3, NULL, &flamme3); break;
-      case 4: SDL_RenderCopy(renderer, texFlamme4, NULL, &flamme4); break;
-      case 5: SDL_RenderCopy(renderer, texFlamme5, NULL, &flamme5); break;
-    }
-
-    SDL_RenderCopy(renderer, texBtn1, NULL, &btn1);
-    SDL_RenderCopy(renderer, texBtn2, NULL, &btn2);
-    SDL_RenderCopy(renderer, texBtn3, NULL, &btn3);
-    SDL_RenderCopy(renderer, texBtn4, NULL, &btn4);
-    SDL_RenderCopy(renderer, texBtn5, NULL, &btn5);
-    SDL_RenderPresent(renderer);
-  }
+/**
+ * @brief render le menu option en fonctione de la selection du joueur
+ * 
+ * @param sortie numéro du bouton préssé
+ * @param drip flag du secret
+ */
+void renderMenu2(int sortie, int drip){
+  SDL_RenderClear(renderer);
   
-  FILE * chargerFichierPref(char * nomFichier){
-    char *base_path = SDL_GetPrefPath("ProjetL2", "Tekken");
-    if (base_path) {
-        snprintf(pref_path, sizeof(pref_path), "%s%s", base_path, nomFichier);
-    }
+  jouerAnimationBackground(&srcBg, &dstBg,1);
+  renderMap(&srcBg, &dstBg, renderer);
 
-    FILE * fichier_prefs = NULL;
-    printf("%s\n", pref_path);
-
-    if(!(fichier_prefs = fopen(pref_path, "r"))){
-      fichier_prefs = fopen(pref_path, "w");
-      printf("Fichier créé !");
-      sauvPreferences(fichier_prefs);
-    }
-    return fichier_prefs;
+  switch (sortie) {
+    case 1: SDL_RenderCopy(renderer, texFlamme1, NULL, &flamme1); break;
+    case 2: SDL_RenderCopy(renderer, texFlamme2, NULL, &flamme2); break;
+    case 3: SDL_RenderCopy(renderer, texFlamme3, NULL, &flamme3); break;
+    case 4: SDL_RenderCopy(renderer, texFlamme4, NULL, &flamme4); break;
+    case 5: SDL_RenderCopy(renderer, texFlamme5, NULL, &flamme5); break;
   }
 
+  SDL_RenderCopy(renderer, texBtn1, NULL, &btn1);
+  SDL_RenderCopy(renderer, texBtn2, NULL, &btn2);
+  SDL_RenderCopy(renderer, texBtn3, NULL, &btn3);
+  SDL_RenderCopy(renderer, texBtn4, NULL, &btn4);
+  SDL_RenderCopy(renderer, texBtn5, NULL, &btn5);
+  SDL_RenderPresent(renderer);
+}
+  
+/**
+ * @brief Ouvre un fichier pour lire les options
+ * 
+ * @param nomFichier nom du fichier à ouvrir
+ * @return FILE* lien du fichier ouvert
+ */
+FILE * chargerFichierPref(char * nomFichier){
+  char *base_path = SDL_GetPrefPath("ProjetL2", "Tekken");
+  if (base_path) {
+      snprintf(pref_path, sizeof(pref_path), "%s%s", base_path, nomFichier);
+  }
+
+  FILE * fichier_prefs = NULL;
+  printf("%s\n", pref_path);
+
+  if(!(fichier_prefs = fopen(pref_path, "r"))){
+    fichier_prefs = fopen(pref_path, "w");
+    printf("Fichier créé !");
+    sauvPreferences(fichier_prefs);
+  }
+  return fichier_prefs;
+}
+
+/**
+ * @brief affiche le menu option qui va renvoyer sur d'autre menus
+ * 
+ * @param drip flag du secret
+ */
   void menu_option(int drip){
     char difficulteTexte[50], debugTexte[50], modeTexte[50], roundsTexte[50];
     char * listeDifficultes[] = {"Punching Ball", "Facile", "Normal", "Difficile", "Cauchemard", "Dieu"};

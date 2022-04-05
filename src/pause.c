@@ -1,8 +1,8 @@
 /**
  * @file pause.c
- * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
- * @brief fichier qui gère le menu pause
- * @version 0.1
+ * @author Charly.P Alexis.G Léo.N
+ * @brief fichier qui possède les fonctions en relation avec le menu pause
+ * @version 1.0
  * @date 2022-04-05
  * 
  * @copyright Copyright (c) 2022

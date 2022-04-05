@@ -1,13 +1,14 @@
 /**
  * @file menu_selection.c
- * @author Notelet Léo, Pecquery Charly, Guimbert Alexis
- * @brief fichier qui gère le menu de sélection
- * @version 0.1
+ * @author Charly.P Alexis.G Léo.N
+ * @brief Fichier des fonctions utilisés dans le menu selection
+ * @version 1.0
  * @date 2022-04-05
  * 
  * @copyright Copyright (c) 2022
  * 
  */
+
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -28,16 +29,16 @@ extern Sint32 selection_len;
 
 
 /**
- * @brief 
+ * @brief Fonction qui initialise les valeurs textures et rectangles ( utilisée pour afficher des images rapidement )
  * 
- * @param chemin_img 
- * @param rect 
- * @param renderer 
- * @param x 
- * @param y 
- * @param w 
- * @param h 
- * @return SDL_Texture* 
+ * @param chemin_img Chemin de l'image à charger en texture
+ * @param rect Rectangle à initialiser afin d'afficher la texture
+ * @param renderer Renderer à utiliser
+ * @param x Position X du rectangle passé en paramètre ( à initialiser )
+ * @param y Position Y du rectangle passé en paramètre ( à initialiser )
+ * @param w Taille en W du rectangle passé en paramètre ( à initialiser )
+ * @param h Taille en H du rectangle passé en paramètre ( à initialiser )
+ * @return SDL_Texture* Pointeur vers la texture crée afin de la free
  */
   SDL_Texture * creat_texture_rect(char * chemin_img, SDL_Rect * rect, SDL_Renderer * renderer, float x, float y, float w, float h){
   /* creation de la texture */
@@ -60,7 +61,7 @@ extern Sint32 selection_len;
  * @param joueur structure du personnage choisi
  * @param tour variable permettant de savoir si le personnage appartient au joueur 1 ou 2
  */
-void jouerAnimationPersoMenu(Joueur * joueur, int tour){ //Pour freezer l'anim il faut anuller le getTick
+void jouerAnimationPersoMenu(Joueur * joueur, int tour, double cord_perso){ //Pour freezer l'anim il faut anuller le getTick
 Uint32 seconds = SDL_GetTicks() / 100; //Fréquence (toutes les 30ms)
 Uint32 sprite = seconds % 15;
 float posx;
