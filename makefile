@@ -15,14 +15,13 @@ SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
 SRCDIR	= src
 OBJDIR	= obj
-BINDIR	= bin
 HEADERDIR = include
 DOCDIR = doc
 
 
 # Fichiers
 
-.PHONY: $(OBJDIR) $(BINDIR) 
+.PHONY: $(OBJDIR)
 all: $(OBJDIR) $(TARGET)
 
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
@@ -70,7 +69,6 @@ cleanall:
 	rm -f $(DOCDIR)/html/search/*
 	rm -f $(DOCDIR)/latex/*
 
-jonathan:$(BINDIR)/$(TARGET)
-	rm -f $(BINDIR)/*.o
+jonathan:$(TARGET)
 	@echo "Oh, you're approaching me ?"
-	./$(BINDIR)/$(TARGET) drip
+	./$(TARGET) drip
