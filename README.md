@@ -39,6 +39,9 @@ Ainsi qu'une large sélection de cartes disponibles !
   <img src="https://i.imgur.com/wGNt3LI.png">
   Goku vs Mickey
   <img src="https://i.imgur.com/TKdgWhJ.png">
+  Touches :
+  <img src="https://i.imgur.com/anrgVds.png">
+
 
 </details>
 
@@ -55,7 +58,6 @@ Dépendances requises dans "$HOME/SDL2" :
   * <a href="https://www.libsdl.org/download-2.0.php">SDL2</a>
   * <a href="https://www.libsdl.org/projects/SDL_image/">SDL2Image</a>
   * <a href="https://github.com/libsdl-org/SDL_ttf">SDL2TTF</a>
-
 <br>
 
 Fonctionnement approuvé sur Ubuntu
