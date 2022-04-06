@@ -45,12 +45,12 @@ void initPerso(Joueur * j, int i){
 
 			j->perso.taille_perso.mult=1.5;
 			j->perso.taille_perso.w=470.0*j->perso.taille_perso.mult;
-			j->perso.taille_perso.h=300.0*j->perso.taille_perso.mult;
+			j->perso.taille_perso.h=300*j->perso.taille_perso.mult;
 
 			j->perso.taille_hitbox.w=180*j->perso.taille_perso.mult;
-			j->perso.taille_hitbox.h=j->perso.taille_perso.h;
+			j->perso.taille_hitbox.h=j->perso.taille_perso.h/2;
 
-			j->hitbox_pied.y=j->hitbox.y;
+			j->hitbox_coup.y=j->hitbox.y;
 			j->hitbox_coup.x=j->perso.taille_hitbox.w-15*j->perso.taille_perso.mult;
 			j->hitbox_coup.w=j->perso.taille_hitbox.w+30*j->perso.taille_perso.mult;
 			j->hitbox_coup.h=j->perso.taille_perso.h;
@@ -84,9 +84,9 @@ void initPerso(Joueur * j, int i){
 			j->perso.taille_perso.h=300*j->perso.taille_perso.mult;
 
 			j->perso.taille_hitbox.w=180*j->perso.taille_perso.mult;
-			j->perso.taille_hitbox.h=j->perso.taille_perso.h;
+			j->perso.taille_hitbox.h=j->perso.taille_perso.h/2;
 
-			j->hitbox_pied.y=j->hitbox.y;
+			j->hitbox_coup.y=j->hitbox.y;
 			j->hitbox_coup.x=j->perso.taille_hitbox.w-35*j->perso.taille_perso.mult;
 			j->hitbox_coup.w=j->perso.taille_hitbox.w+70*j->perso.taille_perso.mult;
 			j->hitbox_coup.h=j->perso.taille_perso.h;
@@ -120,9 +120,9 @@ void initPerso(Joueur * j, int i){
 				
 
 				j->perso.taille_hitbox.w=190 * j->perso.taille_perso.mult;
-				j->perso.taille_hitbox.h=j->perso.taille_perso.h;
+				j->perso.taille_hitbox.h=j->perso.taille_perso.h/2;
 
-				j->hitbox_pied.y=j->hitbox.y;
+				j->hitbox_coup.y=j->hitbox.y;
 				j->hitbox_coup.x=j->perso.taille_hitbox.w-15*j->perso.taille_perso.mult;
 				j->hitbox_coup.w=j->perso.taille_hitbox.w+30*j->perso.taille_perso.mult;
 				j->hitbox_coup.h=j->perso.taille_perso.h;
@@ -155,9 +155,9 @@ void initPerso(Joueur * j, int i){
 					j->perso.taille_perso.h=300* j->perso.taille_perso.mult;
 					
 					j->perso.taille_hitbox.w=136.6;
-					j->perso.taille_hitbox.h=j->perso.taille_perso.h-85* j->perso.taille_perso.mult;
+					j->perso.taille_hitbox.h=j->perso.taille_perso.h/3;
 
-					j->hitbox_pied.y=j->hitbox.y;
+					j->hitbox_coup.y=j->hitbox.y;
 					j->hitbox_coup.x=j->perso.taille_hitbox.w-15*j->perso.taille_perso.mult;
 					j->hitbox_coup.w=j->perso.taille_hitbox.w+30*j->perso.taille_perso.mult;
 					j->hitbox_coup.h=j->perso.taille_perso.h-85* j->perso.taille_perso.mult;
